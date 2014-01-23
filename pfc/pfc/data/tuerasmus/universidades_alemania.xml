@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "Alemania" >
+<!-- uni 1 -->
+<university>
+	<noun>Hochschule Amberg-Weiden</noun>
+        <!--<city>Amberg</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Technische Universität Dortmund</noun>
+        <!--<city>Dortmund</city>-->
+</university>
+<!-- uni 3 -->
+<university>
+	<noun>Friedrich-Schiller-Universität Jena</noun>
+        <!--<city>Jena</city>-->
+</university>
+<!-- uni 4 -->
+<university>
+	<noun>Technische Universität Kaiserslautern</noun>
+        <!--<city>Kaiserslautern</city>-->
+</university>
+<!-- uni 5 -->
+<university>
+	<noun>Universität Kassel</noun>
+        <!--<city>Kassel</city>-->
+</university>
+<!-- uni 6 -->
+<university>
+	<noun>Universität Potsdam</noun>
+        <!--<city>Potsdam</city>-->
+</university>
+</contents>

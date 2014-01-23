@@ -1,0 +1,26 @@
+Hola a todos:
+Quiero hacer una web, pero la idea que tengo es muy específica. No me he puesto todavía en serio con los tutoriales de CCTW, pero me gustaría que me dijerais si con esos tutos valdría para lo que quiero, si necesito aprender algo más o si es demasiado complicado.
+A ver, ¿conocéis Google sites? Si no, no pasa nada, seguro que sí conocéis Wikipedia, os vale para entender lo que quiero: una web colaborativa. Lo que quiero es poder hacer una web privada, que sólo puedan acceder usuarios registrados, pero que esos usuarios puedan editar algunas partes de la web. Pero tampoco quiero que sea exactamente un wiki... no se podrían crear páginas como en un wiki, me gustaría que el tema de la edición fuera más al estilo de google sites (me parece mucho más intuitivo). Y bueno, si se pudieran guardar ediciones antiguas de las páginas "por si acaso"... sería genial!
+Por otra parte, no necesito que el diseño sea nada especial...
+¿Podría llegar a aprender esto?
+
+Hola, claro que podrías aprender a hacer eso, pero en Como Crear tu Web te enseñan lo básico para hacerlo, o sea, al terminar el curso no saldrás haciendo eso. Primero que nada tienes que aprender a utilizar HTML (siguiendo el curso de HTML de Cómo Crear Tu Web), luego tienes que aprender un lenguaje de programación del lenguaje de programación (del lado del servidor) y también SQL (lenguaje estructurado utilizado en las bases de datos). Este último también se puede aprender de manera básica en Cómo Crear Tu Web, pero considero que debes tener una noción de lo que es programar para entender muchas partes del curso.
+
+Saludos.
+
+
+WEB COLABORATIVA
+
+
+Web Social y Web Colaborativa
+
+Hemos escrito y comentado en diferentes paginas o post de este Blog lo que significa Web 2.0, como paso intermedio entre la Web 1.0 ( caracterizada por su fuerte dependencia, estática, demasiado técnica, poco integradora y participativa ( salvo excepciones – grupos de software libre o grupos generalmente muy jóvenes fuertemente involucrados en asuntos varios)  y la web 3.0, que se intuye ( comienzan a aparecer servicios específicos) como un web semántica y de los microformatos ( El término web 3.0 es asociado por la prensa generalista (léase New York Times o en España El País) al concepto de web semántica que se está desarrollando bajo la tutela de Tim Berners-Lee, el mismo que inventó la web a principios de los 90.
+
+Avancemos que la web semántica sería aquella que permitiría que se formularan consultas como “busco un lugar para pasar las vacaciones con mi mujer y mis dos hijos de 5 y 2 años, que sea cálido y con un presupuesto máximo de 2000 euros”. El sistema devolvería un paquete de vacaciones tan detallado como los que vende una agencia de viajes pero sin la necesidad de que el usuario pase horas y horas localizando ofertas en Internet.
+
+Pero, no nos adelantamos y volvamos al asunto, ¿que significa Web Social y Colaborativa?.
+
+El termino viene porque prácticamente todos los servicios que estamos viendo ( Compartición recursos, videos, presentaciones, fotografías, documentos, wikis, blog, portales elearnig, cms, etc) propician el que los usuarios clasifiquen y etiqueten las cosas ( Tag ), cooperen con comentarios que a su vez pueden ser sugerencias o mensaje de ánimo, felicitación y apoyo para que los autores de dichos recursos se ven gratificados ( no siempre las gratificaciones son monetarias, aunque no hay que desdeñarlas ni olvidarlas ), y en general instrumentalicen de diferentes formas y diversas metodologías la cooperación y el trabajo se comparta.
+Esto esta propiciando que servicios como el de marcadores sociales ( favoritos en la red ) tipo http://www.del.icio.us, http://www.gennio.com , http://www.11870.com , etc buscan que individualmente cada uno realicemos una selección de las direcciones de Internet mas interesantes para nosotros y que las etiquetemos ( tag) , que consultemos las direcciones mas interesantes que usuarios del servicio hayan seleccionado y que creemos redes de amigos, colaboradores para compartir nuestras direcciones ya que si tenemos intereses comunues seguro que direcciones tambien las tenemos y podremos complementarlas.
+Igualmente se esta propiciando que en nuestro servicio de lectores de RSS y servicios relacionados, seleccionemos canales de noticias, blogs, etc , que por un lado nos facilita el seguimiento sobre estos ( canales de noticias, blogs, etc) y que sean sean de nuestro interes y de otra forma al igual que en el caso anterior podamos compartir y crear redes de personas con interés comunes y compartir noticias o entradas a blogs, etc, de las cuales nosostros estemos haciendo un seguimiento. Recordemos algunos servicios de lectores mas usados: http://www.bloglines.com , http://www.feedburner.com, google reader, etc.
+La web 2.0 esta propiciando también servicios de creación compartida de documentos compartidos ( aplicaciones en línea) , servicios que a un mismo tiempo, ordenadamente, podamos trabajar sobre una hoja de calculo, un documento, una presentación, etc.  Diferentes empresas e instituciones suministran estos servicios debiendo elegir el mas adecuado a nuestras necesides, por ejemplo Google Docs,

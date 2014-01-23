@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "Corea, República de" >
+<!-- uni 1 -->
+<university>
+	<noun>Hanyang University</noun>
+        <!--<city>Seoul</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Soongsil University</noun>
+        <!--<city>Seoul</city>-->
+</university>
+<!-- uni 3 -->
+<university>
+	<noun>Ajou University</noun>
+        <!--<city>Suwon</city>-->
+</university>
+</contents>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "México" >
+<!-- uni 1 -->
+<university>
+	<noun>Universidad de Colima</noun>
+        <!--<city>Colima</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Instituto Tecnológico y de Estudios Superiores de Monterrey</noun>
+        <!--<city>Monterrey</city>-->
+</university>
+<!-- uni 3 -->
+<university>
+	<noun>Universidad Autónoma del Estado de Hidalgo</noun>
+        <!--<city>Pachuca</city>-->
+</university>
+<!-- uni 4 -->
+<university>
+	<noun>Universidad Popular Autónoma del Estado de Puebla</noun>
+        <!--<city>Puebla</city>-->
+</university>
+</contents>

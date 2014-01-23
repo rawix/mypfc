@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Bienvenido a TuErasmus</title> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/tuerasmus">Inicio</a></li>
+            <li><a href="/tuerasmus/works">¿Qué es?</a></li>
+            <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html" target="_blank">Erasmus URJC</a></li>
+            <li><a href="/contact">Contacto</a></li>
+          </ul>
+          
+          <!-- Login user -->
+          <form class="navbar-form navbar-right" action="/accounts/profile/" method="post"> {% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Usuario" class="form-control" value="" id="username">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Contraseña" class="form-control" value="" id="password">
+            </div>
+            <button type="submit" class="btn btn-warning" value="login">Iniciar sesión</button>
+
+          {% if alertlogin %}
+	    <div class="alert alert-danger">
+	      <center><strong>Error, vuelve a revisar tus datos!!</strong></center>
+	    </div>
+          {% endif %}
+
+          </form>
+    
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Bienvenido a TuErasmus</h1>
+        <p>¡¡Con TuErasmus te resultará mucho más fácil compartir ideas, experiencias!!  </p>
+        <p><a class="btn btn-success btn-lg" href="/accounts/register">Registrar &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Row 1 of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <a href="/accounts/register" target="_blank" color="#424242"><img src="data:image/jpeg;base64,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" class="img-thumbnail img-responsive"></a>
+        </div>
+       
+        <div class="col-lg-4">
+          <a href="/accounts/register" target="_blank" color="#424242"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS0xI2Fx7PydXcBfIukMCT3Irccdw9Ie14FxnfUI0DTxzoX-qMXog" class="img-thumbnail img-responsive"></a>
+        </div>
+
+        <div class="col-lg-4">
+          <a href="/accounts/register" target="_blank" color="#424242"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd6nhY9ksw1wjBqgyg4o_c9T8qlfX-TeGA642UzrKptM8PhJf7" class="img-thumbnail img-responsive"></a>
+        </div>
+      </div>
+
+      <br><br>
+
+      <h1 color="#2E2E2E"> ¡¡Visita estás webs!! ¡¡Harás que tu erasmus sea mucho mejor!!!</h1>
+
+      <!-- Row 2 of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>¿Has decidido ya tu destino?</h2> 
+          <p>Decidiste tu destino, pero ¿no sabes dónde residir durante tu estancia? Entra en Airbnb y podrás buscar alojamientos a tu gusto y de la forma más fácil. ¡¡Airbnb se hará cargo del resto!! </p>
+          <p><a class="btn btn-primary" href="https://www.airbnb.com/" target="_blank">Airbnb &raquo;</a></p>
+       </div>
+       
+        <div class="col-lg-4">
+          <h2>¿Viajar ahorrando en alojamiento?</h2>
+          <p>Tienes ganas de viajar pero no de gastar mucho dinero, ahor apuedes ahorrar el gasto del alojamiento mientras lo haces. Entra en "couch surfing" y verás nuevas maneras de viajar y ahorrar compartiendo!!!</p>
+          <p><a class="btn btn-primary" href="https://www.couchsurfing.org/" target="_blank">Couch Surfing &raquo;</a></p>
+        </div>
+
+        <div class="col-lg-4">
+          <h2>Desplazarte cómodamente</h2>
+          <p>Cada vez recurrimos más y más a esta nueva red social para realizar nuestros desplazamientos de una manera mucho más cómoda. Entr ay regístrate para poder organizar y planificar mejor tus viajes. </p>
+          <p><a class="btn btn-primary" href="http://www.blablacar.com/" target="_blank">BlaBlaCar &raquo;</a></p>
+        </div>
+      </div>
+
+      </div><!-- /container -->
+
+      <hr color="#FF0000">
+
+      <footer>
+        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
+        <p><center>&copy; ETSIT-URJC 2013</center></p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/assets/js/jquery.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

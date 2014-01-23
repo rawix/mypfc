@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "Francia" >
+<!-- uni 1 -->
+<university>
+	<noun>TELECOM ParisTech</noun>
+        <!--<city>Paris</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Université de Lorraine</noun>
+        <!--<city>Nancy</city>-->
+</university>
+</contents>

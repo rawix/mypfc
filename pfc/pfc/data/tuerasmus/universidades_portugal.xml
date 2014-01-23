@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "Portugal" >
+<!-- uni 1 -->
+<university>
+	<noun>Universidade do Minho</noun>
+        <!--<city>Braga</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Instituto Politécnico de Coimbra</noun>
+        <!--<city>Coimbra</city>-->
+</university>
+<!-- uni 3 -->
+<university>
+	<noun>Universidade Nova de Lisboa</noun>
+        <!--<city>Lisboa</city>-->
+</university>
+</contents>

@@ -1,0 +1,222 @@
+#!/usr/bin/python
+
+##########################################################################
+# Modified by: Rawan Nazmi-Issa Khozouz                                  #
+# @Date : 13/10/2013.                                                    #
+# @Description : Handle the vocabulary words                             #
+##########################################################################
+
+from xml.sax.handler import ContentHandler
+from xml.sax import make_parser
+
+# Libraries
+import os        
+# System library.
+from datetime import datetime
+
+#Vocabulary app
+from tuerasmus.models import University
+
+# Handler
+class myContentHandler(ContentHandler):
+
+    ## 
+    # Method that is called when the object is created.
+    ##
+    def __init__ (self):
+
+        #General variables.
+        self.DEBUG = True
+
+        # Create the sax parser.
+        self.theParser = make_parser()
+        self.theParser.setContentHandler(self)
+
+	# Folder where the university are stored
+        self.tuerasmusFolder = '/data/tuerasmus'
+
+        # Getting paths.  
+        self.filePath = os.path.abspath(__file__)
+        self.rootPath = "/".join(self.filePath.split("/")[0:-1])
+        self.tuerasmusPath = self.rootPath + self.tuerasmusFolder
+
+        # Print information
+        if self.DEBUG:
+            print("The absolute path for tuerasmus is " + self.tuerasmusPath)
+    
+        # University's variables.    
+        self.noun = ""
+        self.in_noun = False
+
+        self.acronym = ""
+        self.in_acronym = False
+
+        self.country = ""
+        self.in_country = False
+
+        self.description = ""
+        self.in_description = False
+
+        self.location = ""
+        self.in_location = False
+
+        self.link = ""
+        self.in_link = False
+
+        self.image = ""
+        self.in_image = False
+
+        #In 'University' it means inside an university element
+        self.in_university = False        
+
+    ##
+    # Method called when an element starts.
+    ##
+    def startElement (self, name, attrs):
+                
+       # University
+        if name == 'contents':
+            self.typescholarship = attrs["type"]
+
+        if name == 'university':
+            self.in_university = True
+
+        elif self.in_university:
+            if name == "noun": 
+                self.in_noun = True
+            elif name == "acronym":
+                self.in_acronym = True
+            elif name == "country":
+                self.in_country = True
+            elif name == "description":   
+                self.in_description = True
+            elif name == "location":
+                self.in_location = True
+            elif name == "link":   
+                self.in_link = True
+            elif name == "image":   
+                self.in_image = True
+
+    ##
+    # Method called when an element ends.
+    ##
+    def endElement (self, name):
+
+        # University
+        if name == "university":
+            self.in_university = False
+      
+            # Add the new to the database.
+            self.addUniversity()
+
+            # Reset the values.
+            self.noun = ""            # Noun.
+            self.acronym = ""         # Acronym.
+            self.country = ""         # Country.
+            self.description = ""     # Description.
+            self.location = ""        # Location.
+            self.link = ""            # Link.
+            self.image = ""           # Image.
+
+        elif self.in_university:
+            if name == "noun":
+                self.in_noun = False
+            elif name == "acronym":
+                self.in_acronym = False
+            elif name == "country":
+                self.in_country = False
+            elif name == "description":
+                self.in_description = False
+            elif name == "location":
+                self.in_location = False
+            elif name == "link":
+                self.in_link = False
+            elif name == "image":
+                self.in_image = False
+
+    ##
+    # Method called when we are inside an element.
+    ##
+    def characters (self, chars):
+        
+        # University.
+        if self.in_noun:
+            self.noun = self.noun + chars
+
+        if self.in_acronym:
+            self.acronym = self.acronym + chars
+ 
+        if self.in_country:
+            self.country = self.country + chars
+       
+        if self.in_description:
+            self.description = self.description + chars
+
+        if self.in_location:
+            self.location = self.location + chars
+
+        if self.in_link:
+            self.link = self.link + chars
+
+        if self.in_image:
+            self.image = self.image + chars
+
+    ##
+    # Method that parse the university.
+    ##
+    def parseUniversity(self):
+
+        # Print information.
+        if self.DEBUG:
+            print ("Parsing File")
+        
+        # Parse forlder recursively.
+        self.parseFolder(self.tuerasmusPath)
+
+    ##
+    # Method that list the content of the folder.
+    ##
+    def parseFolder(self, path):
+
+        # List files in root.
+        filesList = os.listdir(path)
+
+        # Check if is a file or a directory
+        for file in filesList:
+            abspath = path + "/" + file
+
+            if (os.path.isdir(abspath) == True):
+                self.parseFolder(abspath)
+            else:
+                self.parseFile(abspath)
+
+    ##
+    # Method that parse one file.
+    ##
+    def parseFile(self, path):
+
+        #Print nformation.
+        if self.DEBUG:
+            print(path)
+
+        self.theParser.parse(path)
+
+    ##
+    # Add University
+    ##
+    def addUniversity(self):
+        record = University(scholarship=self.typescholarship, \
+                            noun=self.noun, \
+                            acronym=self.acronym, \
+                            country=self.country, \
+                            description=self.description, \
+                            location=self.location, \
+                            link=self.link, \
+                            image=self.image)
+        try:
+            n = University.objects.get(noun=self.noun)    
+            print "University: " + self.noun + " is duplicated."
+            # record.save()  	
+        except University.DoesNotExist:
+            record.save()
+

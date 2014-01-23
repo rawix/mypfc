@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Entra en Tuerasmus</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/examples/signin/signin.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+   
+     <div class="masthead">
+        <h1 class="text-danger">TuErasmus</h1>
+        <!-- <img src="images.jpg" width="64px" height="64px" alt="erasmus"> -->  
+        <ul class="nav nav-justified">
+          <li class="active"><a href="#">Inicio</a></li>
+          <li><a href="#">Destinos</a></li>
+          <li><a href="#">Residencias</a></li>
+          <li><a href="#">Consultas</a></li>
+          <li><a href="#">Primeras nociones</a></li>
+          <li><a href="#">Cómo llegar</a></li>
+        </ul>
+      </div>
+
+      <!-- Sign in -->
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="form-control" placeholder="Email address" autofocus>
+        <input type="password" class="form-control" placeholder="Password">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>¿Te apuntas a un erasmus?</h2>
+          <p>¿Te vas a quedar sin vivir un erasmus? Entra en la web de la universidad en la sección de relaciones internacionales y pide ya tu plaza erasmus.</p>
+          <p><a class="btn btn-primary" href="http://www.urjc.es/">URJC &raquo;</a></p>
+       </div>
+       
+        <div class="col-lg-4">
+          <h2>¿Dónde se encuentra tu ciudad?</h2>
+          <p>¿Quieres saber a qué punto del mundo viajarás? ¿Necesitas conocer más acerca de tu nueva ciudad? ¿Estarás cerca o lejos de casa?  </p>
+          <p><a class="btn btn-primary" href="https://maps.google.es/">Google Maps &raquo;</a></p>
+        </div>
+
+        <div class="col-lg-4">
+          <h2>¿Quieres conocer algunas historias?</h2>
+          <p>Un gran porcentaje de alumnos han tenido sus meses académicos erasmus en ciudades europeas. Entra y descrube algunas de sus experiencias.</p>
+          <p><a class="btn btn-primary" href="#">TuHistoria &raquo;</a></p>
+        </div>
+      </div>
+
+
+    </div> <!-- /container -->
+
+      <hr color="#FF0000">
+
+      <footer>
+        <div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div> 
+      </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

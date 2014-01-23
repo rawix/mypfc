@@ -1,0 +1,9 @@
+
+{% block content %} 
+
+  <h2>Tus datos de usuario son incorrectos</h2>
+  <p> Click <a href="/accounts/login/">aquí</a> para iniciar sesión de nuevo.</p>
+
+  <h2> 
+	
+{% endblock %}

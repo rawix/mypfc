@@ -1,0 +1,6 @@
+
+{% block content %} 
+<h2>Gracias por registrarte</h2>
+<a href="/accounts/login" class="btn btn-primary"> Iniciar sesión </a>
+
+{% endblock %}

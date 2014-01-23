@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "Italia" >
+<!-- uni 1 -->
+<university>
+	<noun>Università degli Studi di Cagliari</noun>
+        <!--<city>Cagliari</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Università degli Studi di Firenze</noun>
+        <!--<city>Firenze</city>-->
+</university>
+<!-- uni 3 -->
+<university>
+	<noun>Università degli Studi di Genova</noun>
+        <!--<city>Genova</city>-->
+</university>
+<!-- uni 4 -->
+<university>
+	<noun>Università degli Studi di Perugia</noun>
+        <!--<city>Perugia</city>-->
+</university>
+<!-- uni 5 -->
+<university>
+	<noun>Università degli Studi di Pisa</noun>
+        <!--<city>Pisa</city>-->
+</university>
+</contents>

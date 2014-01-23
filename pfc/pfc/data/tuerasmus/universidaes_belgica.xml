@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "Bélgica" >
+<!-- uni 1 -->
+<university>
+	<noun>European University College Brussels</noun>
+        <!--<city>Brussel</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Universiteit Gent</noun>
+        <!--<city>Gent</city>-->
+</university>
+<!-- uni 3 -->
+<university>
+	<noun>Katholieke Universiteit Leuven</noun>
+        <!--<city>Leuven</city>-->
+</university>
+</contents>

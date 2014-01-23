@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Bienvenido a TuErasmus</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <link href="/static/examples/signin/signin.css" rel="stylesheet">
+
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Inicio</a></li>
+            <li><a href="/tuerasmus/works">Cómo funciona</a></li>
+            <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html">Acerca de</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Bienvenido a TuErasmus</h1>
+        <p>¡¡Adéntrate y comienza a compartir y a descubrir experiencias, lugares que visitar, cosas que hacer!! </p>
+        <p>¿Aún no te has registrado? ¿A qué esperas?</p>
+        <p><a class="btn btn-success btn-lg" href="/accounts/register">Registrar &raquo;</a></p>
+      </div>
+    </div>
+
+   
+      <div class="container">  
+      <!-- Sign in -->
+      <form class="form-signin" action="/accounts/profile/" method="post"> {% csrf_token %}
+        <h2 class="form-signin-heading"><center>Entra y comienza a disfrutar de <strong>TuErasmus</strong></center></h2>
+        <input type="text" name="username" class="form-control" placeholder="Usuario" value="" id="username" autofocus>
+        <input type="password" name="password" class="form-control" placeholder="Contraseña" value="" id="password">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Recuérdame
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Iniciar sesión</button>
+      </form>
+      </div>
+ 
+
+
+      <hr color="#FF0000">
+
+      <footer>
+        <div><span style="float:right"></span> PFC - GSyC 2013 <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div> 
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/assets/js/jquery.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

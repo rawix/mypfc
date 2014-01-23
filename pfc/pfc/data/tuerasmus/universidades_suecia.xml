@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<contents country = "Suecia" >
+<!-- uni 1 -->
+<university>
+	<noun>Karlstads universitet </noun>
+        <!--<city>Karlstad</city>-->
+</university>
+<!-- uni 2 -->
+<university>
+	<noun>Blekinge tekniska högskola</noun>
+        <!--<city>Karlskrona</city>-->
+</university>
+<!-- uni 3 -->
+<university>
+	<noun>Högskolan i Skövde</noun>
+        <!--<city>Skövde</city>-->
+</university>
+</contents>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Bienvenido a TuErasmus</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">TuErasmus</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Inicio</a></li>
+            <li><a href="#about">Acerca de</a></li>
+            <li><a href="#contact">Contacto</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contenido <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/universities">Universidades</a></li>
+                <li><a href="#">Asignaturas</a></li>
+                <li><a href="#">Residencias</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Otros</li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Descubre más</a></li>
+              </ul>
+            </li>
+          </ul>
+          
+        </div> 
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    
+    <div class="jumbotron">
+      <div class="container">
+        <h1>TuErasmus</h1>
+        <p>¿¡Estás listo para comenzar a descubrir todo lo que te espera!? </p>
+        <p><a class="btn btn-success btn-lg" href="/accounts/login">Iniciar sesión &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-5">
+          <h1>Introduce tus datos</h1>
+            <form action="" method='post'>{% csrf_token %}
+              {{ form.as_p }}
+              <button class="btn btn-primary" type="submit"> Registrar </button>
+            </form>
+        </div>
+
+        <div class="col-lg-7">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh" height="400px" width="600px" onmouseover="this.src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSCMdRe-PdSUx-pc1autZy2whosh-LTx681uhxY1UHNQ0ogjTeeXA';" height="400px" width="600px" onmouseout="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh';" height="400px" width="600px" class="img-responsive" alt="" />
+        </div>
+       </div>    
+      </div>
+
+      <hr>
+
+      <footer>
+        <div><span style="float:right"><a href="/admin" target="_blank" style="color: #424242">Admin login</a></span>&copy; Company 2013</div>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/assets/js/jquery.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
