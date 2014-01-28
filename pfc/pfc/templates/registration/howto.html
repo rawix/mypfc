@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    {% if not user.is_authenticated %}
+      <title>Bienvenido a TuErasmus</title> 
+    {% else %}
+      <title>{{username}} | TuErasmus</title>
+    {% endif %}
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/tuerasmus">Inicio</a></li>
+            <li class="active"><a href="#">¿Qué es?</a></li>
+            <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html" target="_blank">Erasmus URJC</a></li>
+            <li><a href="/contact">Contacto</a></li>
+          </ul>
+          
+          <!-- Login user -->
+          <form class="navbar-form navbar-right" action="/accounts/profile/" method="post"> {% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Usuario" class="form-control" value="" id="username">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Contraseña" class="form-control" value="" id="password">
+            </div>
+            <button type="submit" class="btn btn-warning" value="login">Entrar</button>
+          </form>
+        </div>  
+      </div><!--/.navbar-collapse -->
+    </div>
+          
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1> ¿Qué es <strong>TuErasmus?</strong></h1>
+        <h2><u><strong>Web colaborativa</strong></u></h2>
+      </div>
+    </div>
+
+    <!-- Main text-->
+    <div class="container">
+      <h3><p>Red social dónde los que os registreis podreis modificar, editar, comentar la información de las universidades erasmus con las que la URJC tiene convenios. El objetivo de esta web es ofrecer un apoyo a aquellos que estén preparando su erasmus para el próximo curso, y hacer más fácil todo lo que conlleva preparar el curso erasmus.</p></h3>
+
+      <h3><p>TuErasmus les ayudará para que les resulte mucho más fácil informarse acerca de las universidades, asignaturas, alojamientos, planes y excursi0ones turísticas en las distintas ciudades europeas, incluso tener un contacto directo con aquellas personas que ya han vivido su experiencia erasmus en las universidades europeas.</p></h3>
+
+      <h3><p>Para poder disfrutar de lo que ofrece la web sólo será necesario que te registres y comenzar a aportar vivencias, experiencias, opiniones, e ir poco a poco adentrándote en el mundo erasmus, incluso sin haberte ido aún!!!</p></h3> 
+
+    {% if not user.is_authenticated %}
+      <center><p><a class="btn btn-warning btn-lg" href="/accounts/register">QUIERO REGISTRARME</a></p></center>
+    {% else %}
+      <center><p><a class="btn btn-danger btn-lg" href="/tuerasmus">IR A HOME</a></p></center>
+    {% endif %}
+ 
+    <hr color="#FF0000">
+
+    <footer>
+      <p><center>&copy; ETSIT-URJC 2013</center></p>
+    </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/assets/js/jquery.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

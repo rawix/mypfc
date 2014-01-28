@@ -29,7 +29,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 # HTML rendering libraries.
 from django.template import RequestContext, loader
-from django.core.mail import EmailMessage, EmailMultiAlternatives # Sending HTML
+# Sending HTML
+from django.core.mail import EmailMessage, EmailMultiAlternatives 
 
 # Database tables.  
 from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
@@ -41,9 +42,9 @@ import parserXML
 # Create the XML parser.
 parser = parserXML.myContentHandler();
 
-
 #Desactivation of CSRF
 @csrf_exempt
+
  
 # =======================================================================
 #                       LOADING DATA METHODS
@@ -62,7 +63,6 @@ def loadUniversity(request):
     parser.parseUniversity()
 
     #Return the template
-    #return index(request)
     return HttpResponseRedirect('/tuerasmus')
 
 
@@ -72,12 +72,13 @@ def loadUniversity(request):
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
+
 # Name: INDEX
 # The main method 
 def index(request):
     if request.user.is_authenticated():
         print "INDEX: usuario logueado " + request.user.username
-        ur = '/tuerasmus/home/' + request.user.username
+        ur = '/tuerasmus/' + request.user.username
         print "LOGGEDIN: " + ur
         return HttpResponseRedirect(ur)
     else:
@@ -85,7 +86,6 @@ def index(request):
         c.update(csrf(request))
         print "INDEX: usuario no logueado"
         return render_to_response('registration/index.html', c, context_instance=RequestContext(request))
-
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
@@ -110,16 +110,14 @@ def auth_view(request):
             print "No ha sido autenticado"
             return HttpResponseRedirect('/accounts/invalid')
             
-
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: LOGGEDIN 
 # The user is logged in.
 def loggedin(request):
-    ur = '/tuerasmus/home/' + request.user.username
+    ur = '/tuerasmus/' + request.user.username
     print "LOGGEDIN: " + ur
     return HttpResponseRedirect(ur)
-
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
@@ -130,7 +128,6 @@ def invalid_login(request):
     ctx = {'alertlogin': alertlogin}
     return render_to_response('registration/index.html', ctx, context_instance=RequestContext(request))
 
-
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: LOGOUT
@@ -139,15 +136,13 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/tuerasmus') 
 
-
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: REGISTER
 def register(request):
-    print "Estoy en register!!!!!!!!!!!!"
     # User registered
     if request.user.is_authenticated():
-        print "REGISTER: ya hay un usuario logueado " + request.user.username
+        print "REGISTER: usuario logueado " + request.user.username
         return HttpResponseRedirect('/tuerasmus')
 
     # User not registered
@@ -155,77 +150,76 @@ def register(request):
         alerterror=""
         alertdone=""
         form = RegisterForm()
+
         if request.method=="POST":
-            # Form with our information
             form = RegisterForm(request.POST)
             
             if form.is_valid():
+                # Valid form
                 username = form.cleaned_data['username']
                 if (" " in username) or (username==""):
                     error_msg = "Nombre de usuario no puede tener espacios"
                     return render_to_response('registration/register.html', {'msg':True, 'error_msg':error_msg, 'form':form}, context_instance=RequestContext(request))
 
-#               name = form.cleaned_data['name']
-#               lastname = form.cleaned_data['lastname']
-#               if (name=="") or (lastname==""):
-#                   return HttpResponseRedirect('/accounts/invalid')
-
                 email = form.cleaned_data['email']
-
-#               description = form.cleaned_data['description']
-#               university = form.cleaned_data['university']
-#               photo = form.cleaned_data['photo']
-
                 type_user = request.POST['type_user']
       
                 password_one = form.cleaned_data['password_one']
-                if (" " in password_one) or (password_one==""):
-                    return HttpResponseRedirect('/accounts/register')
-
                 password_two = form.cleaned_data['password_two']
                 day = form.cleaned_data['day']
 
-                u = User.objects.create_user(username=username, password=password_one)
-                u.save()
+                
+                if (" " in password_one) or (password_one==""):
+                    return HttpResponseRedirect('/accounts/register')
+                elif (len(password_one)<6):
+                    ctx = {'form': form, 'msg':True, 'error_msg':"La contraseña debe tener 6 caracteres"}
+                    return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
+                else:
+                    # OK, we can save in DBs
+                    u = User.objects.create_user(username=username, password=password_one)
+                    u.save()
 
-                us = Users(username=u, email=email, type_user=type_user, day=day)
-                us.save()
+                    us = Users(username=u, email=email, type_user=type_user, day=day)
+                    us.save()
 
-                up = UserProfile(username=u)
-                up.save()
+                    up = UserProfile(username=u)
+                    up.save()
 
-#               up = UserProfile(username=u, name=name, lastname=lastname, image=photo, university=university)
-#               up.save()
+                    form = RegisterForm()
+                    ctx = {'form': form, 'alertdone':True, 'usu': username}
+                    return render_to_response('registration/register.html', ctx, context_instance = RequestContext(request))
 
-                form = RegisterForm()
-                ctx = {'form': form, 'alertdone':True, 'usu': username}
-                return render_to_response('registration/register.html', ctx, context_instance = RequestContext(request))
             else:
-                alerterror = True
-                ctx = {'form': form, 'alerterror': alerterror }
+                # Form not valid
+                ctx = {'form': form, 'alerterror': True }
                 return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
-  
-#    else: method GET
-#        form = RegisterForm()
-#        ctx = {'form': form, 'username':username, 'email':email, 'password_one':password_one, 'password_two':password_two}  
-  
-#        if request.method=="GET":
-#            print "ahora tengo un GET, y le paso la info vacia!!!!!!!!!!!!!!!!!!!"
-#            form = RegisterForm()
-#            ctx = {'form': form, 'username':'', 'email':'', 'password':''}
-#            return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
-
+          
         ctx = {'form': form }
         return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
 
+#----------------------------------------------------------------------
+#----------------------------------------------------------------------
+# Name: HOWTO
+# How to work the website
+def howto(request):
+    if request.user.is_authenticated():
+        print "HOWTO: usuario logueado " + request.user.username
+        return HttpResponseRedirect('/tuerasmus')
+    else:
+        c = {}
+        c.update(csrf(request))
+        print "HOWTO: usuario no logueado"
+        return render_to_response('registration/howto.html', c, context_instance=RequestContext(request))
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: CONTACT 
 def contact(request):
     print "CONTACT: Contactar con el desarrollador"
+
     type_user=""
     try:
+        # Getting if user is student or professor
         t = User.objects.get(username=request.user.username)
         tt = t.username
         tu = Users.objects.all()

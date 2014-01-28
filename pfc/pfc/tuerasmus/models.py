@@ -105,12 +105,26 @@ class UserProfile(models.Model):
      
 
 # ------------------------------------------------------------------------------
-#                               UsersUniversity class.
+#                               UserUniversity class.
 # ------------------------------------------------------------------------------
 class UsersUniversity(models.Model):
     uni = models.OneToOneField(University);
     nusers = models.IntegerField(default=0);
     useuni = models.ManyToManyField(User);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # ------------------------------------------------------------------------------

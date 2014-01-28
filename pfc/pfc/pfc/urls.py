@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-
 # Enable the admin:
 from django.contrib import admin
 
@@ -7,14 +6,13 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    #url(r'^accounts/login', 'django.contrib.auth.views.login'),
-    #url(r'^accounts/logout','django.contrib.auth.views.logout'),
-    #url(r'^accounts/login/$', 'pfc.views.login', name='login'),
+    # Loading url
+    url(r'^loadUniversity/$', 'pfc.views.loadUniversity', name='loadUniversity'),
 
     # Main url
     url(r'^tuerasmus/$', 'pfc.views.index', name='index'),
     url(r'^contact/$', 'pfc.views.contact', name='contact'),
-    url(r'^loadUniversity/$', 'pfc.views.loadUniversity', name='loadUniversity'),
+    url(r'^howto/$', 'pfc.views.howto', name='howto'),
 
     # User auth urls
     url(r'^accounts/logout/$', 'pfc.views.logout', name='logout'),
@@ -31,4 +29,4 @@ urlpatterns = patterns('',
     
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-) 
+)

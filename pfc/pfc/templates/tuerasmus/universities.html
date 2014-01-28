@@ -21,9 +21,6 @@
     <link href="/static/examples/theme/theme.css" rel="stylesheet">
 
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -83,7 +80,7 @@
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/home/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
+              <a class="navbar-brand" href="/tuerasmus/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
             </div>
             <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
@@ -109,32 +106,49 @@
         <h1>Pincha sobre la universidad que desees conocer</h1>
       </div>
         <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-          {% if uniserasmus %}
+
+          {% if uems_ %}
             <h3>Universidades destino beca erasmus:</h3>
-            <select class="form-control" name="unies_selected">
-              {% for u in ue %}
+            <select class="form-control" name="uniems_selected">
+              {% for u in uems %}
 	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>-->
                 <option> {{ u.uni }} </option>
               {% endfor %}
             </select>
           {% else %}
-            <h3>NO HAY UNIS ERASMUS</h3>
-          {% endif %}        
+            <h3> {{ uems_msg }} </h3>
+          {% endif %} 
+
+
+          <!--{% if uniserasmus %}
+            <h3>Universidades destino beca erasmus:</h3>
+            <select class="form-control" name="uniems_selected">
+              {% for u in ue %}
+	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>
+                <option> {{ u.uni }} </option>
+              {% endfor %}
+            </select>
+          {% else %}
+	    <div class="alert alert-danger">
+	      <center><strong><h3>NO HAY UNIS ERASMUS</h3></strong></center>
+	    </div>
+            
+          {% endif %}  -->      
 
 
           <br><br>
 
-          {% if unismundus %}
+          <!--{% if unismundus %}
             <h3>Universidades destino beca munde:</h3>
             <select class="form-control" name="unims_selected">  
               {% for u in um %}
-	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>-->
+	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option> ESTA LINEA YA ESTABA COMENTADA
                 <option> {{ u.uni }} </option>
               {% endfor %}
             </select>
           {% else %}
             <h3>NO HAY UNIS MUNDUS</h3>
-          {% endif %}
+          {% endif %}-->
 
           {% if unisempty %}
 	      <div class="alert alert-danger">
@@ -144,7 +158,13 @@
 
           <br><br>
 
-          <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
+          
+          {% ifequal uniuser user.username %}
+            <center><button class="btn btn-success btn-lg" type="submit"> EDITAR UNIVERSIDAD </button><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
+          {% else %}
+            <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
+          {% endifequal %}
+          
         </form>
 
 <!-- TODAS ESTAS LINEAS LAS PUEDO MODIFICAR MAS ADELANTE, Y SERÍAN CÓMO MOSTRAR LAS DISTINTAS UNIVERSIDADES Y SUS INFORMACIONES

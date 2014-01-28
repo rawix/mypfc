@@ -6,10 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
-
-    
-    <title>Bienvenido a TuErasmus</title> 
-    
+ 
+    <title>Bienvenido a TuErasmus</title>  
 
     <!-- Bootstrap core CSS -->
     <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
@@ -25,8 +23,6 @@
   </head>
 
   <body>
-
-
     
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -41,42 +37,34 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/tuerasmus">Inicio</a></li>
-            <li><a href="/tuerasmus/works">¿Qué es?</a></li>
+            <li><a href="/howto">¿Qué es?</a></li>
             <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html" target="_blank">Erasmus URJC</a></li>
             <li><a href="/contact">Contacto</a></li>
           </ul>
-          
-          
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    
     <div class="jumbotron">
       <div class="container">
         <h1>TuErasmus</h1>
         <p>¿¡Estás listo para comenzar a descubrir todo lo que te espera!? </p>
-        <p><a class="btn btn-warning btn-lg" href="/tuerasmus">Iniciar sesión &raquo;</a></p>
+        <p><a class="btn btn-warning btn-lg" href="/tuerasmus">Iniciar sesión</a></p>
       </div>
     </div>
 
+    <!-- Content web -->
     <div class="container">
 
-      <!-- Example row of columns -->
+      <!-- Row 1 of columns -->
       <div class="row">
         <div class="col-lg-5">
-
-
           <h1>Introduce tus datos</h1>
 
           {% if msg %}
             <ul><li><h5>{{error_msg}}</h5></li></ul>
-          {% endif %}
-
-          {% if msg2 %}
-            <ul><li><h5>{{error_msg2}}</h5></li></ul>
           {% endif %}
 
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
@@ -105,7 +93,7 @@
 
               {% if alertdone %}
 	      <div class="alert alert-success">
-	        <center><strong>Enhorabuena {{usu}}, ¡ya estás registrado!</strong></center>
+	        <center><strong>Enhorabuena <big>{{usu}}</big>, ¡ya estás registrado!</strong></center>
 	      </div>
               {% endif %}
 
@@ -113,16 +101,17 @@
               <br>
             </form> 
         </div>
+
+
         <div class="col-lg-7">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh" height="400px" width="600px" onmouseover="this.src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSCMdRe-PdSUx-pc1autZy2whosh-LTx681uhxY1UHNQ0ogjTeeXA';" height="400px" width="600px" onmouseout="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh';" height="400px" width="600px" class="img-responsive" alt="" />
         </div>
-       </div>    
+       </div> 
       </div>
 
       <hr>
 
       <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
         <p><center>&copy; ETSIT-URJC 2013</center></p>
       </footer>
 

@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
     {% if user.is_authenticated %}
-      <title>{{username}} | Home</title>
+      <title> {{username}} | Home</title>
     {% endif %}
 
     <!-- Bootstrap core CSS -->
@@ -37,7 +37,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/tuerasmus">Inicio</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="/tuerasmus/{{username}}/myprofile">Mi perfil</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
@@ -76,7 +76,7 @@
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/home/{{username}}"><strong><em>¡¡ Hola {{type_user}} {{username}} !!</em></strong></a>
+              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡ Hola {{type_user}} {{username}} !!</em></strong></a>
             </div>
             <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
@@ -97,22 +97,22 @@
           </p>
           <div class="jumbotron">
             <!--<img src ="/tuerasmus{{MEDIA_URL}}profiles/{{username}}.jpg" weidth="50px" heigth="50px"/>-->
-            <img src="http://placehold.it/150x150"/> <br> <br>
-            <p>Versión de prueba: Registra la universidad y comienza a completar la información sobre tu universidad erasmus.</p>
+            <img src="http://placehold.it/150x150"/> 
+            <br><br>
+            <p>Ya estás en la página de inicio de tu cuenta TuErasmus. Ahora registra tu universidad erasmus para comenzar a completar la información acerca de la misma.</p>
           </div>
-          <h2>Por dónde empezar: </h2>
+          <h2>Sigue los pasos siguientes:</h2>
           <div class="row">
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>1.Tu universidad</h2>
               <h5>Es posible que te hayan concedido una beca Erasmus y otra Munde, así que en ese caso registra ambas universidades</h5>
-              <!--<p>Registra la universidad donde cursaste tu año erasmus.</p>-->
-              <p><a class="btn btn-default" href="/tuerasmus/uniregister">Mi uni &raquo;</a></p>
+              <p><a class="btn btn-default" href="/tuerasmus/uniregister">UniErasmus</a></p>
             </div><!--/span-->
 
-            <!--<div class="col-6 col-sm-6 col-lg-4">
-              <h2>2.Tu aporte de información</h2>
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>2.Completa la información</h2>
               <p>Rellena la información de la universidad</p>
-              <p><a class="btn btn-default" href="/tuerasmus/university">Perfil universidad &raquo;</a></p>
+              <p><a class="btn btn-default" href="/tuerasmus/university">InfoUniversidad</a></p>
             </div><!--/span-->
 
 
@@ -125,10 +125,8 @@
       <hr>
 
       <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
         <p><center>&copy; ETSIT-URJC 2013</center></p>
       </footer>
-
 
     </div><!--/.container-->
 

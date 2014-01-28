@@ -10,7 +10,7 @@
     {% if not user.is_authenticated %}
       <title>Bienvenido a TuErasmus</title> 
     {% else %}
-      <title> {{username}} | TuErasmus</title>
+      <title>{{username}} | TuErasmus</title>
     {% endif %}
 
     <!-- Bootstrap core CSS -->
@@ -29,6 +29,7 @@
   <body>
 
     {% if not user.is_authenticated %}
+
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -42,9 +43,9 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/tuerasmus">Inicio</a></li>
-            <li><a href="/tuerasmus/works">¿Qué es?</a></li>
+            <li><a href="/howto">¿Qué es?</a></li>
             <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html" target="_blank">Erasmus URJC</a></li>
-            <li class="active"><a href="/contact">Contacto</a></li>
+            <li class="active"><a href="#">Contacto</a></li>
           </ul>
           
           <!-- Login user -->
@@ -117,18 +118,14 @@
             <div class="form-group">
               <a class="navbar-brand" href="/tuerasmus/home/{{username}}"><strong><em>¡¡Hola {{type_user}} {{username}}!!</em></strong></a>
             </div>
-            <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>
-
-
      
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 
     {% endif %}
-
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
@@ -137,12 +134,10 @@
         <p style="float:right"><a class="btn btn-info btn-lg" href="http://gmail.com" target="_blank"> rawankho@gmail.com </a></p>
       </div>
     </div>
-
  
       <hr color="#FF0000">
 
       <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
         <p><center>&copy; ETSIT-URJC 2013</center></p>
       </footer>
 
