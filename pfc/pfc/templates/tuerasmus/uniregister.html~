@@ -69,6 +69,7 @@
 
               </ul>
             </li>
+            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
 
             <li><a href="/contact">Contacto</a></li>
           </ul>
@@ -76,7 +77,7 @@
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/home/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
+              <a class="navbar-brand" href="/tuerasmus/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
             </div>
             <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
@@ -108,9 +109,6 @@
           {% if alertdone %}
 	    <div class="alert alert-success">
 	      <center><strong>¡¡REGISTRADA!!</strong>, vuelve a registrar si te han concedido otra beca (erasmus/munde)</center>
-
-	      <!--<center><strong>¡¡REGISTRADA!!</strong>, vuelve a registrar si te han concedido otra beca (erasmus/munde), y si no vuelve al <big><strong><a href="/tuerasmus/home/{{user.username}}" style="color: #04B431">inicio</a></strong></big> para seguir creando el perfil de la universidad</center>-->
-
 	    </div>
           {% endif %}
 
@@ -119,14 +117,10 @@
             <ul><li><h5>{{error_msg}}</h5></li></ul>
           {% endif %}
 
-	  <!--<select class="" name="c_pk">
-            {% for c in countries %}
-	      <option> {{ c.country }} </option>
-            {% endfor %}
-	  </select>-->
 
           <h3>Busca tu universidad en el listado, e introdúcela en el recuadro correspondiente!!! </h3>
-	  <select class="form-control" name="uni_selected">  
+          <label for="selected">Selecciona una universidad</label>
+	  <select id="selected" class="form-control" name="uni_selected">  
             {% for u in unis %}
 	      <option> {{ u.country }} - {{ u.noun }} </option>
             {% endfor %}

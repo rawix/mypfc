@@ -110,32 +110,31 @@ class UserProfile(models.Model):
 class UsersUniversity(models.Model):
     uni = models.OneToOneField(University);
     nusers = models.IntegerField(default=0);
-    username = models.ManyToManyField(User);
-
-
-
-
-
-
-
-
-
-
-
-
-
+    useuni = models.ManyToManyField(User);
 
 
 
 # ------------------------------------------------------------------------------
-#                               UniversityInfo class.
+#                               Comments class.
 # ------------------------------------------------------------------------------
+class Comments(models.Model):
+    username = models.OneToOneField(User);
+    comment = models.CharField(max_length=200);
+    day = models.DateField();
 
-#class UniversityInfo(models.Model):
-    #uni = models.OneToOneField(University);
-    #nuser = models.IntegerField();
-    #ncomments = models.IntegerField();
-    #score = models.IntegerField();
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Comments'
+        ordering = ['day']
+
+    def __unicode__(self):
+        return self.comment;
+
+
+
+
+
+
 
 
 # ------------------------------------------------------------------------------
@@ -155,6 +154,25 @@ class UsersUniversity(models.Model):
 #class Comment(models.Model):
     #comment = models.TextField(help_text='Comenta sobre la universidad...', null=True, blank=True);
     #categories = models.ManyToManyField(Category, null=True, blank=True);
+
+
+
+
+
+
+
+# ------------------------------------------------------------------------------
+#                               UniversityInfo class.
+# ------------------------------------------------------------------------------
+
+#class UniversityInfo(models.Model):
+    #uni = models.OneToOneField(University);
+    #nuser = models.IntegerField();
+    #ncomments = models.IntegerField();
+    #score = models.IntegerField();
+
+
+
 
 
 # ------------------------------------------------------------------------------

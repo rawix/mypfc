@@ -37,7 +37,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/tuerasmus">Inicio</a></li>
+            <li><a href="/tuerasmus">Inicio</a></li>
             <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
@@ -69,7 +69,7 @@
 
               </ul>
             </li>
-            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
+            <li class="active"><a href="#">TusComentarios</a></li>
 
             <li><a href="/contact">Contacto</a></li>
           </ul>
@@ -90,104 +90,58 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-lg-6">
-        <h1>Registra tu universidad erasmus</h1><br><br><br>
+        <div class="col-lg-12">
+        <h1>Pon algún comentario sobre la web!!! Cosas que se podrían cambiar, cosas que dejarías, que te gusta, que no te gusta!!!</h1><br><br><br>
+
         <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
 
-          {% if alerterror %}
-	    <div class="alert alert-danger">
-	      <center><strong>¡¡ERROR!!</strong>, asegúrate de elegir una universidad de la lista</center>
-	    </div>
-          {% endif %}
-
-          {% if alertwarning %}
-	    <div class="alert alert-warning">
-	      <center><strong>¡¡CUIDADO!!</strong>, la universidad ya está resgistrada</center>
-	    </div>
-          {% endif %}
-
-          {% if alertdone %}
-	    <div class="alert alert-success">
-	      <center><strong>¡¡REGISTRADA!!</strong>, vuelve a registrar si te han concedido otra beca (erasmus/munde)</center>
-	    </div>
-          {% endif %}
-
-
-          {% if msg %}
-            <ul><li><h5>{{error_msg}}</h5></li></ul>
-          {% endif %}
-
-
-          <h3>Busca tu universidad en el listado, e introdúcela en el recuadro correspondiente!!! </h3>
-          <label for="selected">Selecciona una universidad</label>
-	  <select id="selected" class="form-control" name="uni_selected">  
-            {% for u in unis %}
-	      <option> {{ u.country }} - {{ u.noun }} </option>
-            {% endfor %}
-	  </select>
-
-
-          <br>
-          <!--{{ form.as_p }}-->
-
-          <div class="radio-inline">
-            <label>
-              <input type="radio" name="scholarship" id="optA" value="erasmus" checked>
-              Erasmus
-            </label>
-          </div>
-          <div class="radio-inline">
-            <label>
-              <input type="radio" name="scholarship" id="optP" value="mundus">
-              Munde
-            </label>
-          </div>
-          <br>
-          <button class="btn btn-primary" type="submit"> Registrar </button>
+          <textarea class="form-control" rows="3" name="comment"></textarea>
 
           <br><br>
 
-          {% if info %}
-            {% if alertamax %}
-	      <div class="alert alert-danger">
-	        <center><strong>¡¡LLEGASTE AL LÍMITE!!</strong>, ya registraste el tope de universidades</center>
-	      </div>
-            {% endif %}
+          <button class="btn btn-primary" type="submit"> Subir Comentario </button>
 
-            {% if alertaerasmus %}
-	      <div class="alert alert-info">
-	        <center><strong>¡¡Ya tienes tu universidad erasmus registrada!!</strong></center>
-	      </div>
-            {% endif %}
+        {% if alertsubmit %}
+	  <div class="alert alert-success">
+	    <center><strong>¡¡Bien!!</strong>, comentario guardado correctamente</center>
+	  </div>
+        {% endif %}
 
-            {% if alertamundus %}
-	      <div class="alert alert-info">
-	        <center><strong>¡¡Ya tienes tu universidad munde registrada!!</strong></center>
-	      </div>
-            {% endif %}
-          {% endif %}
+        {% if alerterror %}
+	  <div class="alert alert-danger">
+	    <center><strong>No has comentado nada</strong>, no se guardó el comentario</center>
+	  </div>
+        {% endif %}
 
-
-          {% if saved %}
-            <center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>
-            <center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{ uni_id }}"> {{ uni_name }} </a></center>
-          {% endif %}
-
-          {% if botuni %}
-            <center><strong>¡¡AHORA!!</strong>, pincha abajo y comienza a ver las universidades</center>
-            <center><a class="btn btn-success btn-lg" href="/tuerasmus/universities/"> UNIVERSIDADES </a></center>
-          {% endif %}
-
-          <br><br>
+        <br><br>
 
         </form>
+
+
+        {% if cmts %}
+
+          <div class="col-lg-12">
+            <h1>Lo que habeis ido comentando: </h1>
+            <br><br><br>
+
+            {% for c in comments %}
+
+              <li> {{ c.username }} el {{ c.day }} </li>
+	      <li> {{ c.comments }} </li>
+
+              <br>
+            {% endfor %}
+
+	  </div>
+        {% endif %}
+
+
         </div><!-- /.col-lg-6 -->
       </div><!-- /.row -->
 
       <hr>
 
       <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
         <p><center>&copy; ETSIT-URJC 2013</center></p>
       </footer>
 

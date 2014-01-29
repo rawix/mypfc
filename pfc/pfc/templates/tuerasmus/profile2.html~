@@ -112,7 +112,7 @@
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>2.Completa la información</h2>
               <p>Rellena la información de la universidad</p>
-              <p><a class="btn btn-default" href="/tuerasmus/university">InfoUniversidad &raquo;</a></p>
+              <p><a class="btn btn-default" href="/tuerasmus/university">InfoUniversidad</a></p>
             </div><!--/span-->
 
 

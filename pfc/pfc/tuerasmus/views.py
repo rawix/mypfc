@@ -33,8 +33,11 @@ from django.template import RequestContext, loader
 # Sending HTML
 from django.core.mail import EmailMessage, EmailMultiAlternatives 
 
+# Date
+from datetime import datetime
+
 # Database tables.  
-from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
+from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries, Comments
 from tuerasmus.forms import ProfileForm, UniversityForm, UniProfileForm
 
 
@@ -618,9 +621,40 @@ def comments(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        ctx = {'username':request.user.username, 'type_user': type_user}
-        #en este metodo debo sacar toda la informacion de las universidades que se vayan editando
-        return render_to_response('tuerasmus/foro.html', ctx, context_instance=RequestContext(request))
+        print "veamos si es método GET o POST"
+
+        if request.method=="POST":
+            print "método POST"
+            comment = request.POST['comment']
+            print "El comentario que acaban de escribir es: " +  comment
+            print "FECHA DE HOY: " + str(datetime.now())
+
+            if not comment=="":
+
+                try:
+                    u = Users.objects.get(username=request.user.username)
+                except User.DoesNotExist:
+                    ctx = {'alerterror':True, 'username':request.user.username, 'type_user': type_user}
+
+                record = Comments(username=u, comment=comment, day=datetime.now())
+                record.save()
+                ctx = {'alertsubmit':True, 'username':request.user.username, 'type_user': type_user}
+
+            else:
+                ctx = {'alerterror':True, 'username':request.user.username, 'type_user': type_user}       
+
+            return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
+
+        else:
+            print "metodo GET"
+            comments = Comments.objects.all()
+            if not comments.count()==0:
+                ctx = {'cmts': True, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
+            else:
+                ctx = {'comments':comments, 'username':request.user.username, 'type_user': type_user}
+
+            return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
+            
 
     else:
         print "el usuario no esta logueado"
