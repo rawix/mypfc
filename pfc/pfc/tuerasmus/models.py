@@ -118,7 +118,7 @@ class UsersUniversity(models.Model):
 #                               Comments class.
 # ------------------------------------------------------------------------------
 class Comments(models.Model):
-    username = models.OneToOneField(User);
+    username = models.CharField(max_length=30);
     comment = models.CharField(max_length=200);
     day = models.DateField();
 

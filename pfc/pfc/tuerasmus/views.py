@@ -622,7 +622,8 @@ def comments(request):
                 type_user = str(i.type_user)
 
         print "veamos si es método GET o POST"
-
+        alertsubmit=""
+        alerterror=""
         if request.method=="POST":
             print "método POST"
             comment = request.POST['comment']
@@ -631,29 +632,22 @@ def comments(request):
 
             if not comment=="":
 
-                try:
-                    u = Users.objects.get(username=request.user.username)
-                except User.DoesNotExist:
-                    ctx = {'alerterror':True, 'username':request.user.username, 'type_user': type_user}
-
-                record = Comments(username=u, comment=comment, day=datetime.now())
+                record = Comments(username=request.user.username, comment=comment, day=datetime.now())
                 record.save()
-                ctx = {'alertsubmit':True, 'username':request.user.username, 'type_user': type_user}
+                alertsubmit=True
 
             else:
-                ctx = {'alerterror':True, 'username':request.user.username, 'type_user': type_user}       
+                alerterror=True       
 
-            return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
+            
 
+        comments = Comments.objects.all()
+        if not comments.count()==0:
+            ctx = {'alertsubmit':alertsubmit, 'alerterror':alerterror, 'cmts': True, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
         else:
-            print "metodo GET"
-            comments = Comments.objects.all()
-            if not comments.count()==0:
-                ctx = {'cmts': True, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
-            else:
-                ctx = {'comments':comments, 'username':request.user.username, 'type_user': type_user}
+            ctx = {'alertsubmit':alertsubmit, 'alerterror':alerterror, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
 
-            return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
             
 
     else:

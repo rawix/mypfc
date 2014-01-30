@@ -91,7 +91,7 @@
 
       <div class="row">
         <div class="col-lg-12">
-        <h1>Pon algún comentario sobre la web!!! Cosas que se podrían cambiar, cosas que dejarías, que te gusta, que no te gusta!!!</h1><br><br><br>
+        <h1>Pon algún comentario sobre la web!!! Cosas que se podrían cambiar, cosas que dejarías, qué te gusta, qué no te gusta!!!</h1><br><br><br>
 
         <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
 
@@ -100,6 +100,10 @@
           <br><br>
 
           <button class="btn btn-primary" type="submit"> Subir Comentario </button>
+
+        <br><br><br><br>
+
+
 
         {% if alertsubmit %}
 	  <div class="alert alert-success">
@@ -126,8 +130,9 @@
 
             {% for c in comments %}
 
-              <li> {{ c.username }} el {{ c.day }} </li>
-	      <li> {{ c.comments }} </li>
+              <li> {{ c.username }} el {{ c.day }} 
+	           <p>{{ c.comment }}</p>
+              </li>
 
               <br>
             {% endfor %}
