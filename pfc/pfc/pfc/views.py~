@@ -42,9 +42,6 @@ import parserXML
 # Create the XML parser.
 parser = parserXML.myContentHandler();
 
-#Desactivation of CSRF
-@csrf_exempt
-
  
 # =======================================================================
 #                       LOADING DATA METHODS
@@ -72,6 +69,8 @@ def loadUniversity(request):
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
+#Desactivation of CSRF
+@csrf_exempt
 
 # Name: INDEX
 # The main method 

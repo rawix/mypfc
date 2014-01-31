@@ -12,7 +12,6 @@ class Users(models.Model):
     type_user = models.CharField(max_length=1);
     day = models.DateField();
 
-
 # ------------------------------------------------------------------------------
 #                               Universities class.
 # ------------------------------------------------------------------------------
@@ -29,7 +28,6 @@ class Universities(models.Model):
     def __unicode__(self):
         return self.country + " - " + self.noun;
 
-
 # ------------------------------------------------------------------------------
 #                               Countries class.
 # ------------------------------------------------------------------------------
@@ -43,7 +41,6 @@ class Countries(models.Model):
 
     def __unicode__(self):
         return self.country;
-
 
 # ------------------------------------------------------------------------------
 #                               University class.
@@ -68,7 +65,6 @@ class University(models.Model):
     def __unicode__(self):
         return self.uni;  
 
-
 # ------------------------------------------------------------------------------
 #                               UniErasmus class.
 # ------------------------------------------------------------------------------
@@ -85,7 +81,6 @@ class UniErasmus(models.Model):
     def __unicode__(self):
         return self.uni;
 
-
 # ------------------------------------------------------------------------------
 #                               UserProfile class.
 # ------------------------------------------------------------------------------
@@ -97,13 +92,14 @@ class UserProfile(models.Model):
     n_university = models.IntegerField(default=0);
     # Image data is stored in the profiles folder, title: Image
     image = models.ImageField(upload_to='profiles', verbose_name='Image',blank=True, null=True)
+    uni1 = models.CharField(max_length=30, null=True, blank=True);
+    uni2 = models.CharField(max_length=30, null=True, blank=True);
     university = models.ManyToManyField(University, blank=True, null=True);
     # Scholarship Erasmus
     sserasmus = models.CharField(max_length=10, null=True, blank=True);
     # Scholarship Mundus
     ssmundus = models.CharField(max_length=10, null=True, blank=True);
      
-
 # ------------------------------------------------------------------------------
 #                               UserUniversity class.
 # ------------------------------------------------------------------------------
@@ -111,8 +107,6 @@ class UsersUniversity(models.Model):
     uni = models.OneToOneField(University);
     nusers = models.IntegerField(default=0);
     useuni = models.ManyToManyField(User);
-
-
 
 # ------------------------------------------------------------------------------
 #                               Comments class.
@@ -128,7 +122,10 @@ class Comments(models.Model):
         ordering = ['day']
 
     def __unicode__(self):
-        return self.comment;
+        return str(self.day) + " - " + self.username;
+
+
+
 
 
 

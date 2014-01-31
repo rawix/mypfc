@@ -108,30 +108,6 @@ def edit_profile(request, user):
 
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-# Name: MYUNIVERSITY
-# User university
-def myuniversity(request):
-
-
-    if request.user.is_authenticated():
-        print "MYUNIVERSITY: el usuario esta logueado " +  request.user.username
-
-#        u = ""
-#        try:
-#            u = University.objects.(username=use)
-#        except User.DoesNotExist:
-#            print "quiero imprimir el campo universidad!!!! " + u.university
-#            return username
-             
-        ctx = {'username': request.user.username}
-        print "render al template de myuniversity!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))
-    else:
-        print "MYUNIVERSITY: el usuario no esta logueado"
-        return HttpResponseRedirect('/tuerasmus')
-
-# ----------------------------------------------------------------------
-#-----------------------------------------------------------------------
 # Name: UNIREGISTER
 # Register new university
 def uniregister(request):
@@ -224,12 +200,17 @@ def uniregister(request):
                         if not warning:
                             print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
                             un = University(uni=uni, scholarship=scholarship)
-                            un.save()
+                            un.save()       
                             print "un.save()"
                             une = UniErasmus(uni=uni, scholarship=scholarship) 
                             une.save()
                             print "une.save()"
                             
+
+
+                            #i.university.add(uni)
+                            #print "i.university.add(un.uni)"
+
 
                             # Incrementamos el número de usuarios de esa universidad
                             nusers += 1
@@ -277,7 +258,10 @@ def uniregister(request):
                             if str(k.uni)==(unu.uni):
                                 k.useuni.add(i.username)
                                 print "useu.useuni.add"
-
+                        
+                        print "Guardo en la base de datos el valor de uni1"
+                        i.uni1 = uni
+                        i.save()
                            
                         
                         print "sin incrementarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: " + str(n_university)
@@ -321,6 +305,7 @@ def uniregister(request):
                                 ctx = {'info':True, 'alertamundus':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
                                 return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
 
+
                         nusers = 0
                         # Es una universidad nueva
                         if not warning:
@@ -331,6 +316,8 @@ def uniregister(request):
                             une = UniErasmus(uni=uni, scholarship=scholarship) 
                             une.save()
                             print "une.save()"
+                            #i.university.add(uni)
+                            #print "i.university.add(un.uni)"
 
 
                             # Incrementamos el número de usuarios de esa universidad
@@ -382,7 +369,10 @@ def uniregister(request):
                                 k.useuni.add(i.username)
                                 print "useu.useuni.add"
                              
-                        
+                        print "Guardo en la base de datos el valor de uni2"
+                        i.uni2 = uni
+                        i.save()
+   
                         print "sin incrementarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: " + str(n_university)
                         
                         if es and save:
@@ -577,7 +567,45 @@ def university(request, uni_name):
         print "UNIVERSITY: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
 
+# ----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Name: MYUNIVERSITY
+# User university/s
+def myuniversity(request, user):
 
+
+    if request.user.is_authenticated():
+        print "MYUNIVERSITY: el usuario esta logueado " +  user
+
+        # User is student or professor
+        t = User.objects.get(username=request.user.username)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+
+        
+        print "Vamos a hacer un try para ver como conseguimos los datos que queremos de user"
+        try:
+            u = User.objects.get(username=user)
+            record = UserProfile.objects.get(username=u)
+             
+            print record.uni1
+            print record.uni2
+            
+                            
+
+        except UserProfile.DoesNotExist:
+            print "universidades uni1 y uni2 están vacías!!!!!!!!1"
+       
+        ctx = {'uni1':record.uni1, 'uni2':record.uni1, 'type_user':type_user, 'username': request.user.username}
+        print "render al template de myuniversity!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))
+
+    else:
+        print "MYUNIVERSITY: el usuario no esta logueado"
+        return HttpResponseRedirect('/tuerasmus')
 
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
@@ -602,7 +630,6 @@ def uniedit(request):
     else:
         print "UNIVERSITY: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
-
 
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
@@ -630,8 +657,8 @@ def comments(request):
             print "El comentario que acaban de escribir es: " +  comment
             print "FECHA DE HOY: " + str(datetime.now())
 
+            # Saving comment
             if not comment=="":
-
                 record = Comments(username=request.user.username, comment=comment, day=datetime.now())
                 record.save()
                 alertsubmit=True
@@ -640,7 +667,7 @@ def comments(request):
                 alerterror=True       
 
             
-
+        # To show all the comments
         comments = Comments.objects.all()
         if not comments.count()==0:
             ctx = {'alertsubmit':alertsubmit, 'alerterror':alerterror, 'cmts': True, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
@@ -649,9 +676,9 @@ def comments(request):
 
         return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
             
-
+    # User not authenticated
     else:
-        print "el usuario no esta logueado"
+        print "COMMENTS: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
 
 
