@@ -55,6 +55,7 @@ def home(request, user):
     
     if request.user.is_authenticated():
         print "HOME USER: Usuario logueado: " + user
+
         # User is professor or student
         type_user=""
 
@@ -65,27 +66,39 @@ def home(request, user):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
+        # Return the template
         ctx = {'username': user, 'type_user':type_user}
         return render_to_response('tuerasmus/profile2.html', ctx, context_instance=RequestContext(request))
 
     else:
+        # User no authenticated
         print "el usuario no esta logueado"
+        # Return the template
         return HttpResponseRedirect('/tuerasmus')
 
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 # Name : MYPROFILE
 def myprofile(request, user):
+
     if request.user.is_authenticated():
         print "MYPROFILE: usuario logueado " + user
+
+        # Concatenate URL with username
         ur = '/tuerasmus/' + user + '/edit_profile'
         print "MYPROFILE: " + ur
+
+        # Redirect url
         return HttpResponseRedirect(ur)
 #       return render_to_response('tuerasmus/edit_profile.html', context_instance=RequestContext(request))
+
     else:
+        # User no authenticated
 #        c = {}
 #        c.update(csrf(request))
         print "MYPROFILE: usuario no logueado"
+
+        # Return the template
         return HttpResponseRedirect('/tuerasmus')
 #        return render_to_response('registration/index.html', c, context_instance=RequestContext(request))
 
@@ -93,16 +106,22 @@ def myprofile(request, user):
 # ----------------------------------------------------------------------
 # Name : EDIT_PROFILE
 def edit_profile(request, user):
+
     if request.user.is_authenticated():
-        print "EDIT_PROFILE: usuario logueado " + user
+        print "EDIT_PROFILE: usuario logueado " + user  
+        # Concatenate the URL with username
         ur = '/tuerasmus/' + user + 'edit_profile/'
         print "EDIT_PROFILE: " + ur
         ctx = {'username': user}
+        # Return the template
         return render_to_response('tuerasmus/edit_profile.html', ctx, context_instance=RequestContext(request))
+
     else:
+        # User no authenticated
 #        c = {}
 #        c.update(csrf(request))
         print "EDIT_PROFILE: usuario no logueado"
+        # Return the template
         return HttpResponseRedirect('/tuerasmus')
 #        return render_to_response('registration/index.html', c, context_instance=RequestContext(request))
 
@@ -400,7 +419,9 @@ def uniregister(request):
             ctx = {'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
             return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
     else:
+        # User no authenticated
         print "UNIREGISTER: el usuario no esta logueado"
+        # Return the template
         return HttpResponseRedirect('/tuerasmus')
 
 # ----------------------------------------------------------------------
@@ -602,6 +623,7 @@ def myuniversity(request, user):
         ctx = {'uni1':record.uni1, 'uni2':record.uni1, 'type_user':type_user, 'username': request.user.username}
         print "render al template de myuniversity!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))
+
     else:
         print "MYUNIVERSITY: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
@@ -679,9 +701,5 @@ def comments(request):
     else:
         print "COMMENTS: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
-
-
-
-
 
 
