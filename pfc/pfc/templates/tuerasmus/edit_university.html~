@@ -66,6 +66,7 @@ tylesheet">
 
               </ul>
             </li>
+            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
 
             <li><a href="/contact">Contacto</a></li>
           </ul>
@@ -293,7 +294,6 @@ tylesheet">
       </div>
 
       <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
         <p><center>&copy; ETSIT-URJC 2013</center></p>
       </footer>
 

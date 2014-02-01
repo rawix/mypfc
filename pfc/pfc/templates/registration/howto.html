@@ -72,14 +72,12 @@
     <div class="container">
       <h3><p>Red social dónde los que os registreis podreis modificar, editar, comentar la información de las universidades erasmus con las que la URJC tiene convenios. El objetivo de esta web es ofrecer un apoyo a aquellos que estén preparando su erasmus para el próximo curso, y hacer más fácil todo lo que conlleva preparar el curso erasmus.</p></h3>
 
-      <h3><p>TuErasmus les ayudará para que les resulte mucho más fácil informarse acerca de las universidades, asignaturas, alojamientos, planes y excursi0ones turísticas en las distintas ciudades europeas, incluso tener un contacto directo con aquellas personas que ya han vivido su experiencia erasmus en las universidades europeas.</p></h3>
+      <h3><p>TuErasmus les ayudará para que les resulte mucho más fácil informarse acerca de las universidades, asignaturas, alojamientos, planes y excursiones turísticas en las distintas ciudades europeas, incluso tener un contacto directo con aquellas personas que ya han vivido su experiencia erasmus en las universidades europeas.</p></h3>
 
       <h3><p>Para poder disfrutar de lo que ofrece la web sólo será necesario que te registres y comenzar a aportar vivencias, experiencias, opiniones, e ir poco a poco adentrándote en el mundo erasmus, incluso sin haberte ido aún!!!</p></h3> 
 
     {% if not user.is_authenticated %}
       <center><p><a class="btn btn-warning btn-lg" href="/accounts/register">QUIERO REGISTRARME</a></p></center>
-    {% else %}
-      <center><p><a class="btn btn-danger btn-lg" href="/tuerasmus">IR A HOME</a></p></center>
     {% endif %}
  
     <hr color="#FF0000">

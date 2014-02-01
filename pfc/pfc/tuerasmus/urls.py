@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 
     # Universities urls
     url(r'^uniregister/$', 'tuerasmus.views.uniregister', name='uniregister'),
-    url(r'^uniedit/$', 'tuerasmus.views.uniedit', name='uniedit'),
+    url(r'^uniedit/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.uniedit', name='uniedit'),
     url(r'^university/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.university', name='university'),
     url(r'^universities/$', 'tuerasmus.views.universities', name='universities'),
 

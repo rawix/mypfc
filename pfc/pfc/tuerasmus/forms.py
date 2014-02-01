@@ -11,7 +11,7 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
 
-import datetime
+#import datetime
 
 #----------------------------------------------------------------------------
 #            Class RegisterForm: to register the user  
@@ -21,7 +21,7 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(label="Correo electrónico (gmail)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un correo electrónico', 'invalid':u'Introduce un correo válido'})
     password_one = forms.CharField(label="Contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes introducir una contraseña'})
     password_two = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes volver a introducir la contraseña'})
-    day = forms.DateField(label="Fecha de registro", widget=forms.TextInput(), initial=datetime.date.today)
+    #day = forms.DateField(label="Fecha de registro", widget=forms.TextInput(), initial=datetime.date.today)
 
     # Data validation
     def clean_username(self):

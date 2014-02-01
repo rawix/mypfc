@@ -37,7 +37,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/tuerasmus">Inicio</a></li>
+            <li><a href="/tuerasmus">Home</a></li>
             <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
@@ -91,19 +91,14 @@
 
       <div class="row">
         <div class="col-lg-12">
-        <h1>Pon algún comentario sobre la web!!! Cosas que se podrían cambiar, cosas que dejarías, qué te gusta, qué no te gusta!!!</h1><br><br><br>
+        <h1>Haz comentarios sobre la web!!! Cosas que se podrían cambiar, cosas que dejarías, qué te gusta, qué no te gusta!!!</h1>
+        <br><br><br>
 
         <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-
-          <textarea class="form-control" rows="3" name="comment"></textarea>
-
+          <textarea class="form-control" col="2" rows="2" name="comment"></textarea>
           <br><br>
-
           <button class="btn btn-primary" type="submit"> Subir Comentario </button>
-
-        <br><br><br><br>
-
-
+        <br><br>
 
         {% if alertsubmit %}
 	  <div class="alert alert-success">
@@ -117,16 +112,17 @@
 	  </div>
         {% endif %}
 
-        <br><br>
+        <br>
 
         </form>
-
+        <h3>Lo que habeis ido comentando: </h3>
+        <br>
 
         {% if cmts %}
 
-          <div class="col-lg-12">
-            <h1>Lo que habeis ido comentando: </h1>
-            <br><br><br>
+          <div class="col-lg-9">
+            
+            <br>
 
             {% for c in comments %}
 
@@ -136,11 +132,8 @@
 
               <br>
             {% endfor %}
-
 	  </div>
         {% endif %}
-
-
         </div><!-- /.col-lg-12 -->
       </div><!-- /.row -->
 

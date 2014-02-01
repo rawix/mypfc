@@ -41,12 +41,12 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/tuerasmus">Inicio</a></li>
+            <li><a href="/tuerasmus">Home</a></li>
             <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
             <li class="active" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Mi universidad</a></li>
+                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
                 <li><a href="/tuerasmus/universities">Las universidades</a></li>
                
              
@@ -105,13 +105,14 @@
 
 
       <div class="page-header">
-        <h1>Pincha sobre la universidad que desees conocer</h1>
+        <h1>Universidades que puedes encontrar en TuErasmus:</h1>
       </div>
         <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
 
           {% if uems_ %}
-            <h3>Universidades destino beca erasmus:</h3>
-            <select class="form-control" name="uniems_selected">
+            <h3></h3>
+            <label for="selected">Selecciona una universidad</label>
+            <select id="selected" class="form-control" name="uniems_selected">
               {% for u in uems %}
 	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>-->
                 <option> {{ u.uni }} </option>

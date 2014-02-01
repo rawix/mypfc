@@ -6,7 +6,7 @@
 
 # Import objects
 from django.contrib import admin
-from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries 
+from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries, Comments
 
 #--------------------------------------
 #--------------------------------------

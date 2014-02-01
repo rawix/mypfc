@@ -583,7 +583,7 @@ def university(request, uni_name):
             return HttpResponseRedirect('/tuerasmus/universities')
 
 
-        ctx = {'uniname':uniname, 'type_user': type_user}
+        ctx = {'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
         #en este metodo debo sacar toda la informacion de las universidades que se vayan editando
         return render_to_response('tuerasmus/university.html', ctx, context_instance=RequestContext(request))
     else:
@@ -613,17 +613,52 @@ def myuniversity(request, user):
         try:
             u = User.objects.get(username=user)
             record = UserProfile.objects.get(username=u)
-             
+            
+
+            try:
+                rec1 = University.objects.get(uni=record.uni1)
+            
+                print "rec1.id: " + str(rec1.id)
+            except University.DoesNotExist:
+                print "no hay id1"
+
+
+            try:
+                rec2 = University.objects.get(uni=record.uni2)
+            
+                print "rec2.id: " + str(rec2.id)
+            except University.DoesNotExist:
+                print "no hay id2"
+
+
+
+            print record.uni1
+            record.uni1=record.uni1.split(" - ")[1]
             print record.uni1
             print record.uni2
+            record.uni2=record.uni2.split(" - ")[1]
+            print record.uni2      
+                
+            ctx = {'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
             
-                            
+                
 
         except UserProfile.DoesNotExist:
             print "universidades uni1 y uni2 están vacías!!!!!!!!1"
-       
-        ctx = {'uni1':record.uni1, 'uni2':record.uni1, 'type_user':type_user, 'username': request.user.username}
-        print "render al template de myuniversity!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            ctx = {'type_user':type_user, 'username': request.user.username}
+
+
+#        if request.method=="POST":
+#            uniems = request.POST['uni_selected']
+            # Necesito obtener el id de esa universidad para la url de la universidaden concreto
+
+#            if not (uniems==""):
+#                print "HEMOS ELEGIDO UNA UNIVERSIDAD ERASMUS"
+#                uni_id = University.objects.get(uni=uniems)
+#                ctx = {'uni1':record.uni1, 'uni2':record.uni2, 'uni_id':uni_id.id, 'type_user':type_user, 'username': request.user.username}
+        
+
+
         return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))
 
     else:
@@ -634,7 +669,7 @@ def myuniversity(request, user):
 #-----------------------------------------------------------------------
 # Name: UNIEDIT
 # Edit the information of universities
-def uniedit(request):
+def uniedit(request, uni_name):
     if request.user.is_authenticated():
       
         print "UNIEDIT: usuario logueado" + request.user.username
@@ -647,7 +682,20 @@ def uniedit(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        ctx = {'username':request.user.username, 'type_user': type_user}
+        print "uni_name: " + str(uni_name)
+
+        # With uni id we can get the name
+        try:
+            uniname = University.objects.get(id=uni_name)
+            print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
+            
+        except University.DoesNotExist:
+            print "No se han encontrado ningun objecto con ese id"  
+            ur = "/tuerasmus" + tt + "/myuniversity" 
+            return HttpResponseRedirect(ur)
+
+
+        ctx = {'uniname':uniname, 'type_user': type_user, 'username':request.user.username, }
         return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
 
     else:
@@ -674,6 +722,8 @@ def comments(request):
         print "veamos si es método GET o POST"
         alertsubmit=""
         alerterror=""
+        date=""
+        time=""
         if request.method=="POST":
             print "método POST"
             comment = request.POST['comment']

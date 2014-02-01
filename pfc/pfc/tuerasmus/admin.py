@@ -18,11 +18,11 @@ from tuerasmus.models import Users, UniErasmus, University, Universities, UserPr
 admin.site.register(Users)
 # Signed universities
 admin.site.register(UniErasmus)
-# University profile
+# University's profile
 admin.site.register(University)
 # European universities
 admin.site.register(Universities)
-# User profile
+# User's profile
 admin.site.register(UserProfile)
 # Users that belong to the university
 admin.site.register(UsersUniversity)

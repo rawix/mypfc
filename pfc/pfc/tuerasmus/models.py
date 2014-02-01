@@ -10,7 +10,7 @@ class Users(models.Model):
     email = models.CharField(max_length=30);
     # Professor or student (the colour of the main page is different)
     type_user = models.CharField(max_length=1);
-    day = models.DateField();
+    day = models.DateField(auto_now=True);
 
 # ------------------------------------------------------------------------------
 #                               Universities class.
@@ -115,11 +115,12 @@ class Comments(models.Model):
     username = models.CharField(max_length=30);
     comment = models.CharField(max_length=200);
     day = models.DateField();
+    time = models.DateTimeField(auto_now=True);
 
     # Alphabetical Order  
     class Meta:
         verbose_name_plural = u'Comments'
-        ordering = ['day']
+        ordering = ['-time']
 
     def __unicode__(self):
         return str(self.day) + " - " + self.username;

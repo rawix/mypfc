@@ -21,7 +21,7 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(label="Correo electrónico (gmail)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un correo electrónico', 'invalid':u'Introduce un correo válido'})
     password_one = forms.CharField(label="Contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes introducir una contraseña'})
     password_two = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes volver a introducir la contraseña'})
-    day = forms.DateField(label="Fecha de registro", widget=forms.TextInput(), initial=datetime.date.today)
+    #day = forms.DateField(label="Fecha de registro", widget=forms.TextInput(), initial=datetime.date.today)
 
     # Data validation
     def clean_username(self):
@@ -49,6 +49,8 @@ class RegisterForm(forms.Form):
         elif (not password_two):
             error_msg = u'Debes introducir una contraseña'
             self._errors['password_two'] = self.error_class([error_msg])
+        elif (len(password_one) < 6):
+            error_msg = u'La contraseña debe tener 6 caracteres'
         elif password_one and password_two and (password_one == password_two):
             pass
         else:
