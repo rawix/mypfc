@@ -51,7 +51,7 @@
       <div class="container">
         <h1>TuErasmus</h1>
         <p>¿¡Estás listo para comenzar a descubrir todo lo que te espera!? </p>
-        <p><a class="btn btn-warning btn-lg" href="/tuerasmus">Iniciar sesión</a></p>
+        <!--<p><a class="btn btn-warning btn-lg" href="/tuerasmus">Iniciar sesión</a></p>-->
       </div>
     </div>
 
@@ -116,7 +116,6 @@
       </footer>
 
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

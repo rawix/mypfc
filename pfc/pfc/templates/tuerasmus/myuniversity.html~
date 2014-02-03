@@ -57,8 +57,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">MisErasmus</a></li>
-                <li><a href="#">TusErasmus</a></li>
+                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+                <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
                
              
                 <!--<li class="divider"></li>-->
@@ -96,7 +96,7 @@
       </div>
 
       <div class="page-header">
-        <h1>Pincha para editar la informacón de la universidad o para ver qué se comenta sobre ella</h1>
+        <h1>Pincha para editar la información de la universidad o para ver qué se comenta sobre ella</h1>
       </div>
 
 
@@ -105,36 +105,36 @@
         <div class="row">
           <div class="col-lg-6">
 
-            {% ifnotequal uni1 "" %}
+            {% if reco1 %}
               
               <h3><strong><center>{{ uni1 }}</center></strong></h3>
               
-              <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni1.id}}" name="uni_selected" value={{uni1}}>EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni1.id}}" name="uni_selected" value={{uni1}}>VER UNIVERSIDAD</a></p></center> 
+              <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni1id}}" name="uni_selected" value={{uni1}}>EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni1id}}" name="uni_selected" value={{uni1}}>VER UNIVERSIDAD</a></p></center> 
               </select>
             {% else %}
 
-              <h3>Registra tu/s universidad/s</h3>
+              <h3>Registra tu universidad erasmus</h3>
 
               <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
 
-            {% endifnotequal %}
+            {% endif %}
 
           </div><!-- /.col-lg-6 -->
 
 
-            {% ifnotequal uni2 "" %}
+            {% if reco2 %}
 
               <h3><strong><center>{{ uni2 }}</center></strong></h3>
 
-              <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni2.id}}">EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni2.id}}" type="submit">VER UNIVERSIDAD</a></p></center>
+              <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni2id}}">EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni2id}}" type="submit">VER UNIVERSIDAD</a></p></center>
          
             {% else %}
 
-              <h3>Registra tu/s universidad/s</h3>
+              <h3>Registra tu universidad munde</h3>
 
               <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
 
-            {% endifnotequal %}
+            {% endif %}
 
           </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->

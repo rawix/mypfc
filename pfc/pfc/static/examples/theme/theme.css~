@@ -3,7 +3,7 @@ body {
   padding-bottom: 30px;
 }
 
-/* ESTAS SON LAS LINEAS PARA GOOGLE MAPS 
+/* ESTAS SON LAS LINEAS PARA GOOGLE MAPS */
 html, body, .row, .col-xs-6 { #map-canvas }
 
 #map_canvas {
@@ -11,7 +11,7 @@ html, body, .row, .col-xs-6 { #map-canvas }
     height: 300px;
 }
 
-/* ESTAS SON LAS LINEAS PARA GOOGLE MAPS 
+/* ESTAS SON LAS LINEAS PARA GOOGLE MAPS */
 map-canvas{
   max-width: none;
 }
@@ -23,17 +23,17 @@ html, body, .row, .col-xs-6 {
 	
 }
 
-
-.row, .col-xs-6 { height: 100% }
+/* ----- */
+/*.row, .col-xs-6 { height: 100% }
 
 #map-canvas {
 	width:100%;
  	height:100%;
-}
+}*/
 
 #map_canvas img {
   max-width: none;
-}*/
+}
 
 .theme-dropdown .dropdown-menu {
   display: block;

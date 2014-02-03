@@ -16,9 +16,13 @@ urlpatterns = patterns('',
 
     # Universities urls
     url(r'^uniregister/$', 'tuerasmus.views.uniregister', name='uniregister'),
-    url(r'^uniedit/$', 'tuerasmus.views.uniedit', name='uniedit'),
+    url(r'^uniedit/(?P<uni_name>[\S]+)/(?P<type_form>[\S]+)/$', 'tuerasmus.views.unieditform', name='unieditform'),
+    url(r'^uniedit/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.uniedit', name='uniedit'),
     url(r'^university/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.university', name='university'),
     url(r'^universities/$', 'tuerasmus.views.universities', name='universities'),
+
+    # All users
+    url(r'^urerasmus/$', 'tuerasmus.views.urerasmus', name='urerasmus'),
 
     # Comments urls
     url(r'^comments/$', 'tuerasmus.views.comments', name='comments'),
@@ -27,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^(?P<user>[\S]+)/myprofile/$', 'tuerasmus.views.myprofile', name='myprofile'), 
     url(r'^(?P<user>[\S]+)/edit_profile/$', 'tuerasmus.views.edit_profile', name='edit_profile'), 
     url(r'^(?P<user>[\S]+)/myuniversity/$', 'tuerasmus.views.myuniversity', name='myuniversity'),
+    url(r'^(?P<user>[\S]+)/myerasmus/$', 'tuerasmus.views.myerasmus', name='myerasmus'),
     url(r'^(?P<user>[\S]+)/$', 'tuerasmus.views.home', name='home'),
     
     # URLs enabled to view images

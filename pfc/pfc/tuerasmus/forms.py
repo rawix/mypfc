@@ -9,7 +9,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
+from tuerasmus.models import Users, UniErasmus, University, Info, Subjects, Universities, UserProfile, UsersUniversity, Countries
 
 #import datetime
 
@@ -56,7 +56,6 @@ class RegisterForm(forms.Form):
         else:
             raise forms.ValidationError('Contraseñas no coinciden')
 
-
 #----------------------------------------------------------------------------
 #            Class ProfileForm: to change the user profile 
 #----------------------------------------------------------------------------
@@ -68,69 +67,24 @@ class ProfileForm(forms.Form):
     uni_reg = forms.BooleanField(required=False)
     photo = forms.ImageField(label="Imagen de perfil", required=False)
 
-
-#----------------------------------------------------------------------------
-#            Class UniversityForm: to register the university  
-#----------------------------------------------------------------------------
-class UniversityForm(forms.Form):
-    acronym = forms.CharField(label="Siglas de la universidad", widget=forms.TextInput(), error_messages={'required': 'Introduce las siglas de la universidad'})
-    city = forms.CharField(label="Ciudad de la universidad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
-    country = forms.CharField(label="País de la universidad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir país'})
-    description = forms.CharField(label="Descripción breve sobre la universidad", error_messages={'required': 'Escribe una breve introducción acerca de la universidad'})
-    #Revisar como se ponen los link en un formulario!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    location = forms.URLField(label='Coordenadas de su localización', required=False);
-    link = forms.URLField(label='Web oficial de la universidad', required=False);
-    image = forms.URLField(label='Alguna imagen de la universidad', required=False);
-
-
-#----------------------------------------------------------------------------
-#            Class UniProfileForm: to change the university profile   
-#----------------------------------------------------------------------------
-
-class UniProfileForm(forms.Form):
-    uni = forms.CharField(label="Nombre de la universidad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el nombre de la universidad'})
-    scholarship = forms.CharField(label="Erasmus/Munde", widget=forms.TextInput(), error_messages={'required': 'Debes especificar el tipo de beca'})
-    acronym = forms.CharField(label="Siglas de la universidad", widget=forms.TextInput())
-    city = forms.CharField(label="Ciudad de la universidad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
-    country = forms.CharField(label="País de la universidad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir país'})
-    description = forms.CharField(label="Descripción breve sobre la universidad")
-    #Revisar como se ponen los link en un formulario!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    location = forms.URLField(label='Coordenadas de su locaclización', required=False);
-    link = forms.URLField(label='Web oficial de la universidad', required=False);
-    image = forms.URLField(label='Alguna imagen de la universidad', required=False);
-
-    # Data validation
-    def clean_uni(self):
-        uni = self.cleaned_data['uni']
-        try:
-            u = University.objects.get(uni=uni)
-        except University.DoesNotExist:
-            return uni
-        raise forms.ValidationError('Universidad registrada')
-
-    def clean_acronym(self):
-        acronym = self.cleaned_data['acronym']
-        try:
-            a = University.objects.get(acronym=acronym)
-        except University.DoesNotExist:
-            return acronym
-        raise forms.ValidationError('Siglas registrada')
-
-
 #----------------------------------------------------------------------------
 #            Class BasicForm: to change the university profile   
 #----------------------------------------------------------------------------
 class BasicForm(forms.Form):
-    address = forms.CharField(label="Dirección", widget=forms.TextInput(), required=False)
     acronym = forms.CharField(label="Siglas de la universidad", widget=forms.TextInput(), required=False)
+    address = forms.CharField(label="Dirección", widget=forms.TextInput(), required=False)
     city = forms.CharField(label="Ciudad de la universidad", widget=forms.TextInput(), required=False)
     country = forms.CharField(label="País de la universidad", widget=forms.TextInput(), required=False)
 
     #Revisar como se ponen los link en un formulario!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    location = forms.URLField(label='Coordenadas de su locaclización', required=False);
-    link = forms.URLField(label='Web oficial de la universidad', required=False);
-    image = forms.URLField(label='Alguna imagen de la universidad', required=False);
-    
+    # MEter las coordenadas para GOOGLE MAPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    #location = forms.URLField(label='Coordenadas de su localización', required=False)
+    latitud = forms.DecimalField(label='Coordenadas de latitud', required=False)
+    longitud = forms.DecimalField(label='Coordenadas de longitud', required=False)
+    link = forms.URLField(label='Web oficial de la universidad', required=False)
+    image = forms.URLField(label='Alguna imagen de la universidad', required=False)
+
+    description = forms.CharField(label="Descripción breve sobre la universidad", widget=forms.TextInput(), required=False)
     qualification = forms.CharField(label="Titulación impartida", widget=forms.TextInput(), required=False)
 
     specialty = forms.CharField(label="Especialidades", widget=forms.TextInput(), required=False)
@@ -141,7 +95,7 @@ class BasicForm(forms.Form):
     lab = forms.CharField(label="Laboratorios", widget=forms.TextInput(), required=False)
     computerequipment = forms.CharField(label="Equipos informáticos", widget=forms.TextInput(), required=False) 
 
-    Others = forms.CharField(label="Especialidades", widget=forms.TextInput(), required=False)
+    others = forms.CharField(label="Especialidades", widget=forms.TextInput(), required=False)
     # SubMenu
     dinningroom = forms.CharField(label="Comedores universitarios", widget=forms.TextInput(), required=False)
     cafeteria = forms.CharField(label="Cafeterías", widget=forms.TextInput(), required=False)
@@ -157,7 +111,6 @@ class BasicForm(forms.Form):
     teaching = forms.CharField(label="Calidad global de la enseñanza", widget=forms.TextInput(), required=False)
     studies = forms.CharField(label="Nivel de exigencia de los estudios", widget=forms.TextInput(), required=False)
   
-
 #----------------------------------------------------------------------------
 #            Class CostumerServiceForm: to change the university profile   
 #----------------------------------------------------------------------------
@@ -166,6 +119,16 @@ class CostumeServiceForm(forms.Form):
     # SubMenu
     meetings = forms.CharField(label="Reuniones para Erasmus", widget=forms.TextInput(), required=False)
     offices = forms.CharField(label="Oficinas de Asuntos Extranjeros", widget=forms.TextInput(), required=False)
+
+#----------------------------------------------------------------------------
+#            Class DocumentationForm: to change the university profile   
+#----------------------------------------------------------------------------
+class DocumentationForm(forms.Form):
+    unidoc = forms.CharField(label="Documentación necesaria en la universidad", widget=forms.TextInput(), required=False)
+    residencelicence = forms.CharField(label="Obtener permiso de residencia", widget=forms.TextInput(), required=False)
+    getresidence = forms.CharField(label="Obtener alojamiento", widget=forms.TextInput(), required=False)
+    economicaid = forms.CharField(label="Obtener ayudas económicas", widget=forms.TextInput(), required=False)
+    bankaccount = forms.CharField(label="Abrir cuenta bancaria", widget=forms.TextInput(), required=False)
 
 #----------------------------------------------------------------------------
 #            Class AccommodationForm: to change the university profile   
@@ -184,7 +147,7 @@ class SubjectsForm(forms.Form):
 #            Class WorkForm: to change the university profile   
 #----------------------------------------------------------------------------
 class WorkForm(forms.Form):
-    scholarship = forms.CharField(label="Becas", widget=forms.TextInput(), required=False)
+    scholarships = forms.CharField(label="Becas", widget=forms.TextInput(), required=False)
     practices = forms.CharField(label="Trabajo", widget=forms.TextInput(), required=False)
     contact = forms.CharField(label="Contacto con empresas", widget=forms.TextInput(), required=False)
 
@@ -203,16 +166,6 @@ class CityForm(forms.Form):
     shopping = forms.CharField(label="De compras", widget=forms.TextInput(), required=False)
     erasmuslife = forms.CharField(label="Ambiente erasmus", widget=forms.TextInput(), required=False)
     more = forms.CharField(label="Más cosas", widget=forms.TextInput(), required=False)
-
-#----------------------------------------------------------------------------
-#            Class DocumentationForm: to change the university profile   
-#----------------------------------------------------------------------------
-class DocumentationForm(forms.Form):
-    unidoc = forms.CharField(label="En la universidad", widget=forms.TextInput(), required=False)
-    residencelicence = forms.CharField(label="Obtener permiso de residencia", widget=forms.TextInput(), required=False)
-    getresidence = forms.CharField(label="Obtener alojamiento", widget=forms.TextInput(), required=False)
-    economicaid = forms.CharField(label="Obtener ayudas económicas", widget=forms.TextInput(), required=False)
-    bankaccount = forms.CharField(label="Abrir cuenta bancaria", widget=forms.TextInput(), required=False)
 
 #----------------------------------------------------------------------------
 #            Class OthersForm: to change the university profile   

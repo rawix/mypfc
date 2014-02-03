@@ -34,11 +34,12 @@ from django.template import RequestContext, loader
 from django.core.mail import EmailMessage, EmailMultiAlternatives 
 
 # Date
-from datetime import datetime
+from datetime import datetime, date
 
 # Database tables.  
-from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries, Comments
-from tuerasmus.forms import ProfileForm, UniversityForm, UniProfileForm
+from tuerasmus.models import Users, UniErasmus, University, Info, Subjects, Universities, UserProfile, UsersUniversity, Countries, Comments
+
+from tuerasmus.forms import ProfileForm, BasicForm, CostumeServiceForm, DocumentationForm, AccommodationForm, SubjectsForm, WorkForm, CityForm, OthersForm
 
 
 
@@ -561,7 +562,7 @@ def universities(request):
 # Edit information about universities
 def university(request, uni_name):
     if request.user.is_authenticated():
-        print "UNIVERSITY: usuario logueado" + request.user.username
+        print "UNIVERSITY: usuario logueado: " + request.user.username
         print "me han pasado UNI_NAME: " + uni_name
 
         # User is student or professor
@@ -585,7 +586,10 @@ def university(request, uni_name):
 
         ctx = {'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
         #en este metodo debo sacar toda la informacion de las universidades que se vayan editando
-        return render_to_response('tuerasmus/university.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/google_maps.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/geolocalizacion.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('tuerasmus/googlemaps.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/university.html', ctx, context_instance=RequestContext(request))
     else:
         print "UNIVERSITY: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
@@ -611,6 +615,8 @@ def myuniversity(request, user):
         
         print "Vamos a hacer un try para ver como conseguimos los datos que queremos de user"
         try:
+            reco1=""
+            reco2=""
             u = User.objects.get(username=user)
             record = UserProfile.objects.get(username=u)
             
@@ -619,44 +625,42 @@ def myuniversity(request, user):
                 rec1 = University.objects.get(uni=record.uni1)
             
                 print "rec1.id: " + str(rec1.id)
-            except University.DoesNotExist:
-                print "no hay id1"
 
+                print record.uni1
+                record.uni1=record.uni1.split(" - ")[1]
+                print record.uni1
+                reco1 = True
+ 
+            except University.DoesNotExist:
+                pass
+               
 
             try:
                 rec2 = University.objects.get(uni=record.uni2)
-            
                 print "rec2.id: " + str(rec2.id)
+
+                print record.uni2
+                record.uni2=record.uni2.split(" - ")[1]
+                print record.uni2      
+
+                reco2 = True
             except University.DoesNotExist:
-                print "no hay id2"
+                pass
 
-
-
-            print record.uni1
-            record.uni1=record.uni1.split(" - ")[1]
-            print record.uni1
-            print record.uni2
-            record.uni2=record.uni2.split(" - ")[1]
-            print record.uni2      
-                
-            ctx = {'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+            if reco1:                
+                ctx = {'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'type_user':type_user, 'username': request.user.username}
+            elif reco2:
+                ctx = {'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+            elif reco1 and reco2:
+                ctx = {'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+            else:
+                ctx = {'type_user':type_user, 'username': request.user.username}
             
                 
 
         except UserProfile.DoesNotExist:
             print "universidades uni1 y uni2 están vacías!!!!!!!!1"
-            ctx = {'type_user':type_user, 'username': request.user.username}
-
-
-#        if request.method=="POST":
-#            uniems = request.POST['uni_selected']
-            # Necesito obtener el id de esa universidad para la url de la universidaden concreto
-
-#            if not (uniems==""):
-#                print "HEMOS ELEGIDO UNA UNIVERSIDAD ERASMUS"
-#                uni_id = University.objects.get(uni=uniems)
-#                ctx = {'uni1':record.uni1, 'uni2':record.uni2, 'uni_id':uni_id.id, 'type_user':type_user, 'username': request.user.username}
-        
+            ctx = {'type_user':type_user, 'username': request.user.username}    
 
 
         return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))
@@ -672,7 +676,7 @@ def myuniversity(request, user):
 def uniedit(request, uni_name):
     if request.user.is_authenticated():
       
-        print "UNIEDIT: usuario logueado" + request.user.username
+        print "UNIEDIT: usuario logueado " + request.user.username
         
         # User is student or professor
         t = User.objects.get(username=request.user.username)
@@ -687,6 +691,43 @@ def uniedit(request, uni_name):
         # With uni id we can get the name
         try:
             uniname = University.objects.get(id=uni_name)
+            print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)  
+        except University.DoesNotExist:
+            print "No se han encontrado ningun objecto con ese id"  
+            ur = "/tuerasmus" + tt + "/myuniversity" 
+            return HttpResponseRedirect(ur)
+        
+        ctx = {'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+        return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+    else:
+        print "UNIVERSITY: el usuario no esta logueado"
+        return HttpResponseRedirect('/tuerasmus')
+
+# ----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Name: UNIEDITFORM
+# To complete all the forms of the uni
+def unieditform(request, uni_name, type_form):
+    if request.user.is_authenticated():
+      
+        print "UNIEDITFORM: usuario logueado: " + request.user.username
+        
+        # User is student or professor
+        t = User.objects.get(username=request.user.username)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+
+        print "uni_name: " + str(uni_name)
+
+        print "type_form: " + str(type_form)
+
+        # With uni id we can get the name
+        try:
+            uniname = University.objects.get(id=uni_name)
             print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
             
         except University.DoesNotExist:
@@ -694,9 +735,276 @@ def uniedit(request, uni_name):
             ur = "/tuerasmus" + tt + "/myuniversity" 
             return HttpResponseRedirect(ur)
 
+        # MÉTODO GET
+        if request.method=="GET":
+            if type_form=="basic":
+                print "type_form es basic!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                form = BasicForm(request.POST)
+                ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
 
-        ctx = {'uniname':uniname, 'type_user': type_user, 'username':request.user.username, }
-        return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+            elif type_form=="doc":
+                form1 = CostumeServiceForm(request.POST)
+                form2 = DocumentationForm(request.POST)
+                ctx = {'form1':form1, 'form2':form2, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                 
+            elif type_form=="hotel":
+                form = AccommodationForm(request.POST)
+                ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+
+            elif type_form=="subjects":
+                form1 = SubjectsForm(request.POST)
+                form2 = WorkForm(request.POST)
+                ctx = {'form1':form1, 'form2':form2, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+
+            elif type_form=="city":
+                form = CityForm(request.POST)
+                ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+
+            elif type_form=="others":
+                form = OthersForm(request.POST)
+                ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+
+
+
+
+        # MÉTODO POST
+        if request.method=="POST":
+            
+            if type_form=="basic":
+                print "type_form es basic!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                form = BasicForm(request.POST)
+                if form.is_valid(): 
+                    # Valid form
+                    uni = uniname
+                    print "uni: " + str(uni)
+                    acronym = form.cleaned_data['acronym']
+                    address = form.cleaned_data['address']
+                    city = form.cleaned_data['city']
+                    print "city: " + str(city)
+                    country = form.cleaned_data['country']
+
+                    # URLs 
+                    #location = form.cleaned_data['location']
+                    latitud = form.cleaned_data['latitud']
+                    longitud = form.cleaned_data['longitud']
+                    link = form.cleaned_data['link']
+                    image = form.cleaned_data['image']
+
+                    description = form.cleaned_data['description']
+                    qualification = form.cleaned_data['qualification']
+                    specialty = form.cleaned_data['specialty']
+                    teachingequipment = form.cleaned_data['teachingequipment']
+
+                    librariy = form.cleaned_data['librariy']
+                    lab = form.cleaned_data['lab']
+                    computerequipment = form.cleaned_data['computerequipment']
+
+                    others = form.cleaned_data['others']
+
+                    dinningroom = form.cleaned_data['dinningroom']
+                    cafeteria = form.cleaned_data['cafeteria']
+                    sportactivities = form.cleaned_data['sportactivities']
+                    asociation = form.cleaned_data['asociation']
+                    languagecourse = form.cleaned_data['languagecourse']
+                    schoolyear = form.cleaned_data['schoolyear']
+                    vacations = form.cleaned_data['vacations']
+                    compteleco = form.cleaned_data['compteleco']
+                    teachers = form.cleaned_data['teachers']
+                    teaching = form.cleaned_data['teaching']
+                    studies = form.cleaned_data['studies']
+                    
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
+                    uni_data = Info(uni=uni, acronym=acronym, city=city, address=address, country=country, link=link, image=image, description=description, latitud=latitud, longitud=longitud)
+                    
+                    #uni_data = UniversityInfo(uni=uni, acronym=acronym, address=address, city=city, country=country, link=link, image=image, description=description, qualification=qualification, specialty, specialty, teachingequipment=teachingequipment, library=library, lab=lab, computerequipment=computerequipment, others=others, dinningroom=dinningroom, cafeteria=cafeteria, sportactivities=sportactivities, asociation=asociation, languagecourse=languagecourse, schoolyear=schoolyear, vacations=vacations, compteleco=compteleco, teachers=teachers, teaching=teaching, studies=studies)
+
+                    uni_data.save()
+
+                    ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'alertdone':True, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+
+                else:
+                    # Form not valid
+                    ctx = {'form': form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_form':type_form, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+
+            elif type_form=="doc":
+
+                form1 = CostumeServiceForm(request.POST)
+                form2 = DocumentationForm(request.POST)
+                if form1.is_valid(): 
+                    # Valid form
+                    unidoc = form1.cleaned_data['unidoc']
+                    residencelicence = form1.cleaned_data['residencelicence']
+                    getresidence = form1.cleaned_data['getresidence']
+                    economicaid = form1.cleaned_data['economicaid']
+                    bankaccount = form1.cleaned_data['bankaccount']
+
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO DOCUMENTACION"
+                else:
+                    # Form not valid
+                    ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+                if form2.is_valid():
+                    # Valid form
+                    costume = form2.cleaned_data['costume']
+                    meetings = form2.cleaned_data['meetings']
+                    offices = form2.cleaned_data['offices']
+
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO ATENCION"
+                else:
+                    # Form not valid
+                    ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+              
+
+            elif type_form=="hotel":
+
+                form = AccommodationForm(request.POST)
+                if form.is_valid():
+                    # Valid form
+                    residencehall = form.cleaned_data['residencehall']
+                    flatshare = form.cleaned_data['flatshare']
+
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO Residencia"
+
+                else:
+                    # Form not valid
+                    ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+            elif type_form=="subjects":
+                form1 = SubjectsForm(request.POST)
+                form2 = WorkForm(request.POST)
+                if form1.is_valid(): 
+                    # Valid form
+                    subjects = form1.cleaned_data['subjects']
+
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO ASIGNATURAS"
+                else:
+                    # Form not valid
+                    ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+                if form2.is_valid():
+                    # Valid form
+                    scholarships = form2.cleaned_data['scholarships']
+                    practices = form2.cleaned_data['practices']
+                    contact = form2.cleaned_data['contact']
+
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BECAS"
+                else:
+                    # Form not valid
+                    ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+            elif type_form=="city":
+                form = CityForm(request.POST)
+                if form.is_valid():
+                    # Valid form
+                    general = form.cleaned_data['general']
+                    prices = form.cleaned_data['prices']
+                    theuniversity = form.cleaned_data['theuniversity']
+                    studentlife = form.cleaned_data['studentlife']
+                    turism = form.cleaned_data['turism']
+                    goingout = form.cleaned_data['goingout']
+                    culture = form.cleaned_data['culture']
+                    crime = form.cleaned_data['crime']
+                    shopping = form.cleaned_data['shopping']
+                    erasmuslife = form.cleaned_data['erasmuslife']
+                    more = form.cleaned_data['more']
+
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO CIUDAD"
+
+                else:
+                    # Form not valid
+                    ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+            elif type_form=="others":
+                form = OthersForm(request.POST)
+                if form.is_valid():
+                    # Valid form
+                    others = form.cleaned_data['general']
+
+                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO VARIOS"
+
+                else:
+                    # Form not valid
+                    ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+
+
+        # With uni id we can get the name
+        try:
+            uniname = University.objects.get(id=uni_name)
+            print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
+            
+        except University.DoesNotExist:
+            print "No se han encontrado ningun objecto con ese id"  
+            ur = "/tuerasmus" + tt + "/myuniversity" 
+            return HttpResponseRedirect(ur)
+
+        
+        ctx = {'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+        return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+
+    else:
+        print "UNIVERSITY: el usuario no esta logueado"
+        return HttpResponseRedirect('/tuerasmus')
+
+# ----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Name: MYERASMUS
+# Users of your university
+def myerasmus(request, user):
+    if request.user.is_authenticated():
+      
+        print "URERASMUS: usuario logueado" + user
+        
+        # User is student or professor
+        t = User.objects.get(username=user)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+
+        ctx = {'type_user': type_user, 'username':user}
+        return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
+
+    else:
+        print "UNIVERSITY: el usuario no esta logueado"
+        return HttpResponseRedirect('/tuerasmus')
+
+# ----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Name: URERASMUS
+# All the users of the website
+def urerasmus(request):
+    if request.user.is_authenticated():
+      
+        print "URERASMUS: usuario logueado" + request.user.username
+        
+        # User is student or professor
+        t = User.objects.get(username=request.user.username)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+
+        ctx = {'type_user': type_user, 'username':request.user.username}
+        return render_to_response('tuerasmus/urerasmus.html', ctx, context_instance=RequestContext(request))
 
     else:
         print "UNIVERSITY: el usuario no esta logueado"

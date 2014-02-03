@@ -6,7 +6,7 @@
 
 # Import objects
 from django.contrib import admin
-from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries, Comments
+from tuerasmus.models import Users, UniErasmus, University, Info, Subjects, Universities, UserProfile, UsersUniversity, Countries, Comments
 
 #--------------------------------------
 #--------------------------------------
@@ -20,6 +20,8 @@ admin.site.register(Users)
 admin.site.register(UniErasmus)
 # University's profile
 admin.site.register(University)
+admin.site.register(Info)
+admin.site.register(Subjects)
 # European universities
 admin.site.register(Universities)
 # User's profile
@@ -38,5 +40,4 @@ admin.site.register(Comments)
 #admin.site.register(Comment)
 #admin.site.register(UniversityComment)
 #admin.site.register(City)
-#admin.site.register(Subjects)
-#admin.site.register(UniversityInfo)
+

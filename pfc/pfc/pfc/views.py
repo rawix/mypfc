@@ -34,7 +34,7 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 
 # Database tables.  
 from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
-from tuerasmus.forms import RegisterForm, ProfileForm, UniversityForm
+from tuerasmus.forms import RegisterForm
 
 # Own libraries.
 import parserXML

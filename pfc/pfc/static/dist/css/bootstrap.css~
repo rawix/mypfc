@@ -50,6 +50,17 @@ body {
   margin: 0;
 }
 
+/* ESTAS SON LAS LINEAS PARA GOOGLE MAPS */
+html, body, .row, .col-xs-6 { 
+
+	map_canvas:
+	    width: 400px;
+	    height: 300px;
+	
+}
+
+/* ----- */
+
 a:focus {
   outline: thin dotted;
 }
@@ -380,7 +391,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #000000;
+  border-top: 1px solid #eeeeee;
 }
 
 .sr-only {

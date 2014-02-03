@@ -57,7 +57,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">MisErasmus</a></li>
+                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
                 <li><a href="#">TusErasmus</a></li>
                
              
@@ -112,7 +112,7 @@
 	  </div>
         {% endif %}
 
-        <br>
+        <br><br>
 
         </form>
         <h3>Lo que habeis ido comentando: </h3>
