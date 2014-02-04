@@ -588,8 +588,10 @@ def university(request, uni_name):
         #en este metodo debo sacar toda la informacion de las universidades que se vayan editando
         #return render_to_response('tuerasmus/google_maps.html', ctx, context_instance=RequestContext(request))
         #return render_to_response('tuerasmus/geolocalizacion.html', ctx, context_instance=RequestContext(request))
-        return render_to_response('tuerasmus/googlemaps.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/googlemaps.html', ctx, context_instance=RequestContext(request))
         #return render_to_response('tuerasmus/university.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/googleprueba.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('tuerasmus/googleversionprueba.html', ctx, context_instance=RequestContext(request))
     else:
         print "UNIVERSITY: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
@@ -820,7 +822,7 @@ def unieditform(request, uni_name, type_form):
                     studies = form.cleaned_data['studies']
                     
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
-                    uni_data = Info(uni=uni, acronym=acronym, city=city, address=address, country=country, link=link, image=image, description=description)
+                    uni_data = Info(uni=uni, acronym=acronym, city=city, address=address, country=country, link=link, image=image, description=description, latitud=latitud, longitud=longitud)
                     
                     #uni_data = UniversityInfo(uni=uni, acronym=acronym, address=address, city=city, country=country, link=link, image=image, description=description, qualification=qualification, specialty, specialty, teachingequipment=teachingequipment, library=library, lab=lab, computerequipment=computerequipment, others=others, dinningroom=dinningroom, cafeteria=cafeteria, sportactivities=sportactivities, asociation=asociation, languagecourse=languagecourse, schoolyear=schoolyear, vacations=vacations, compteleco=compteleco, teachers=teachers, teaching=teaching, studies=studies)
 

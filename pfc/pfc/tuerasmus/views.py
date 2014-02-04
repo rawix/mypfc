@@ -587,9 +587,11 @@ def university(request, uni_name):
         ctx = {'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
         #en este metodo debo sacar toda la informacion de las universidades que se vayan editando
         #return render_to_response('tuerasmus/google_maps.html', ctx, context_instance=RequestContext(request))
-        #return render_to_response('tuerasmus/geolocalizacion.html', ctx, context_instance=RequestContext(request))
-        return render_to_response('tuerasmus/googlemaps.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('tuerasmus/geolocalizacion.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/googlemaps.html', ctx, context_instance=RequestContext(request))
         #return render_to_response('tuerasmus/university.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/googleprueba.html', ctx, context_instance=RequestContext(request))
+        #return render_to_response('tuerasmus/googleversionprueba.html', ctx, context_instance=RequestContext(request))
     else:
         print "UNIVERSITY: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
