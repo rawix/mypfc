@@ -112,11 +112,9 @@
 	    </div>
           {% endif %}
 
-
           {% if msg %}
             <ul><li><h5>{{error_msg}}</h5></li></ul>
           {% endif %}
-
 
           <h3>Busca tu universidad en el listado, e introdúcela en el recuadro correspondiente!!! </h3>
           <label for="selected">Selecciona una universidad</label>
@@ -125,7 +123,9 @@
 	      <option> {{ u.country }} - {{ u.noun }} </option>
             {% endfor %}
 	  </select>
-
+          <br><br>
+          <label for="selected">Escribe tu universidad</label>
+	  <input id="selected" type="text" class="form-control" name="uni_written">  
 
           <br>
           <!--{{ form.as_p }}-->

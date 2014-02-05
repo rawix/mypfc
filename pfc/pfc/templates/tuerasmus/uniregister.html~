@@ -58,7 +58,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-                <li><a href="#">TusErasmus</a></li>
+                <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
                
              
                 <!--<li class="divider"></li>-->
@@ -125,7 +125,9 @@
 	      <option> {{ u.country }} - {{ u.noun }} </option>
             {% endfor %}
 	  </select>
-
+          <br><br>
+          <label for="selected">Escribe tu universidad</label>
+	  <input id="selected" type="text" class="form-control" name="uni_written">  
 
           <br>
           <!--{{ form.as_p }}-->

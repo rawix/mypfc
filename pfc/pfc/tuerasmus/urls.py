@@ -17,9 +17,10 @@ urlpatterns = patterns('',
     # Universities urls
     url(r'^uniregister/$', 'tuerasmus.views.uniregister', name='uniregister'),
     url(r'^uniedit/(?P<uni_name>[\S]+)/(?P<type_form>[\S]+)/$', 'tuerasmus.views.unieditform', name='unieditform'),
-    url(r'^university/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.university', name='university'),
+    url(r'^university/(?P<uni_name>[\S]+)/(?P<type_info>[\S]+)/$', 'tuerasmus.views.uninfo', name='uninfo'),
     url(r'^universities/$', 'tuerasmus.views.universities', name='universities'),
     url(r'^uniedit/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.uniedit', name='uniedit'),
+    url(r'^university/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.university', name='university'),
 
     # All users
     url(r'^urerasmus/$', 'tuerasmus.views.urerasmus', name='urerasmus'),

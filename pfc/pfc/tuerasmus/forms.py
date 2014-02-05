@@ -9,7 +9,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from tuerasmus.models import Users, UniErasmus, University, Info, Subjects, Universities, UserProfile, UsersUniversity, Countries
+from tuerasmus.models import City, Comment, Countries, Info, ResiComment, Residences, Subjects, UniComment, UniErasmus, Universities, University, UserProfile, Users, UsersUniversity
 
 #import datetime
 
@@ -19,7 +19,7 @@ from tuerasmus.models import Users, UniErasmus, University, Info, Subjects, Univ
 class RegisterForm(forms.Form):
     username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un nombre de usuario'})
     email = forms.EmailField(label="Correo electrónico (gmail)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un correo electrónico', 'invalid':u'Introduce un correo válido'})
-    password_one = forms.CharField(label="Contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes introducir una contraseña'})
+    password_one = forms.CharField(label="Contraseña (6 caracteres)", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes introducir una contraseña'})
     password_two = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes volver a introducir la contraseña'})
     #day = forms.DateField(label="Fecha de registro", widget=forms.TextInput(), initial=datetime.date.today)
 
@@ -49,8 +49,6 @@ class RegisterForm(forms.Form):
         elif (not password_two):
             error_msg = u'Debes introducir una contraseña'
             self._errors['password_two'] = self.error_class([error_msg])
-        elif (len(password_one) < 6):
-            error_msg = u'La contraseña debe tener 6 caracteres'
         elif password_one and password_two and (password_one == password_two):
             pass
         else:

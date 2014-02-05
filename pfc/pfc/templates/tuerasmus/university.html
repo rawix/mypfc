@@ -98,20 +98,23 @@
 
 
       <div class="page-header">
-        <h1>Haz click en los distintos botones según la información que desees añadir</h1>
+        <h1>¡Elige qué tipo de información quieres conocer de la siguiente universidad!</h1>
       </div>
       <p>
         <!--<button type="button" class="btn btn-lg" style="background:white">Básica</button>-->
-        <button type="button" class="btn btn-lg btn-danger">Básica</button>
-        <button type="button" class="btn btn-lg btn-primary">Documentación y atención</button>
-        <button type="button" class="btn btn-lg btn-info">Alojamientos</button>
-        <button type="button" class="btn btn-lg btn-success">Asignaturas y Prácticas</button>
-        <button type="button" class="btn btn-lg btn-warning">La ciudad</button>
-        <button type="button" class="btn btn-lg btn-default">Varios</button> 
+        <a href="/tuerasmus/university/{{uni_name}}/basic" class="btn btn-lg btn-danger" type="submit">Básica</a>
+        <!--<button type="button" class="btn btn-lg btn-danger" name="basic">Básica</button>-->
+        <a href="/tuerasmus/university/{{uni_name}}/doc" class="btn btn-lg btn-primary" type="submit">Documentación y atención</a>
+        <!--<button type="button" class="btn btn-lg btn-primary" name="doc">Documentación y atención</button>-->
+        <a href="/tuerasmus/university/{{uni_name}}/hotel" class="btn btn-lg btn-info" type="submit">Alojamientos</a>
+        <!--<button type="button" class="btn btn-lg btn-info" name="hotel">Alojamientos</button>-->
+        <a href="/tuerasmus/university/{{uni_name}}/subjects" class="btn btn-lg btn-success" type="submit">Asignaturas y prácticas</a>
+        <!--<button type="button" class="btn btn-lg btn-success" name="subjects">Asignaturas y Prácticas</button>-->
+        <a href="/tuerasmus/university/{{uni_name}}/city" class="btn btn-lg btn-warning" type="submit">La ciudad</a>
+        <!--<button type="button" class="btn btn-lg btn-warning" name="city">La ciudad</button>-->
+        <a href="/tuerasmus/university/{{uni_name}}/others" class="btn btn-lg btn-default" type="submit">Varios</a>
+        <!--<button type="button" class="btn btn-lg btn-default" name="others">Varios</button>-->
       </p>
-
-
-
 
       {% block on_geolocalize %}
       {% endblock %}

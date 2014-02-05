@@ -1,153 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+{% extends "registration/base.html" %}
 
-    {% if not user.is_authenticated %}
-      <title>Bienvenido a TuErasmus</title> 
-    {% else %}
-      <title>{{username}} | TuErasmus</title>
-    {% endif %}
+{% block link_content %}
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+    <li><a href="/tuerasmus">Inicio</a></li>
+    <li><a href="/howto">¿Qué es?</a></li>
+    <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html" target="_blank">Erasmus URJC</a></li>
+    <li class="active"><a href="/contact">Contacto</a></li>
 
-    <!-- Custom styles for this template -->
-    <link href="/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
+{% endblock %}
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
+{% block content %}
 
-  <body>
-
-    {% if not user.is_authenticated %}
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/tuerasmus">Inicio</a></li>
-            <li><a href="/howto">¿Qué es?</a></li>
-            <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html" target="_blank">Erasmus URJC</a></li>
-            <li class="active"><a href="#">Contacto</a></li>
-          </ul>
-          
-          <!-- Login user -->
-          <form class="navbar-form navbar-right" action="/accounts/profile/" method="post"> {% csrf_token %}
-            <div class="form-group">
-              <input type="text" name="username" placeholder="Usuario" class="form-control" value="" id="username">
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" placeholder="Contraseña" class="form-control" value="" id="password">
-            </div>
-            <button type="submit" class="btn btn-warning" value="login">Entrar</button>
-          </form>
-          
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-
-    {% else %}
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/tuerasmus">Home</a></li>
-            <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Universidades<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
-                <li><a href="/tuerasmus/universities">Las universidades</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">MisErasmus</a></li>
-                <li><a href="#">TusErasmus</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
-              </ul>
-            </li>
-            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-
-            <li class="active"><a href="/contact">Contacto</a></li>
-          </ul>
-          
-          <!-- Logout user -->
-          <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡Hola {{type_user}} {{username}}!!</em></strong></a>
-            </div>
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
-          </form>
-     
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-
-    {% endif %}
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <!-- Main jumbotron -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Contacta para cualquier consulta con: </h1>
+        <h1>Para cualquier consulta contactar con: </h1>
         <p style="float:right"><a class="btn btn-info btn-lg" href="http://gmail.com" target="_blank"> rawankho@gmail.com </a></p>
       </div>
     </div>
- 
-      <hr color="#FF0000">
 
-      <footer>
-        <p><center>&copy; ETSIT-URJC 2013</center></p>
-      </footer>
-
-    </div> <!-- /container -->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
-  </body>
-</html>
+{% endblock %}

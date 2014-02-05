@@ -14,68 +14,71 @@
 		<!--Plugin GMaps-->
 		<script type="text/javascript" src="/static/js/gmaps.js"></script>
 
-		<script>
+		<!--<script>
 			function initialize()
 			{
 			var mapProp = {
 			  center:new google.maps.LatLng(40.28296,-3.82101),
-			  zoom:5,
-			  mapTypeId:google.maps.MapTypeId.ROADMAP
+			  zoom:14,
+			  mapTyId:google.maps.MapTypeId.ROADMAP
 			  };
 			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 			}
 
 			google.maps.event.addDomListener(window, 'load', initialize);
 
-			var marcador = new google.maps.Marker({
-			  /*Creamos un marcador*/
-			  position: coorMarcador, /*Lo situamos en nuestro punto */
-			  map: map, /* Lo vinculamos a nuestro mapa */
-			  title: "Dónde estoy?" 
-			});
 
-		
-			var map;
+		</script>-->
 
-			$(document).ready(function(){
-				map = new GMaps({
-				div: '#mapa',
-				lat: 38.90893579999999,
-				lng: 1.428022000000055,
-				zoom: 10,
-				zoomControl : true,
-				zoomControlOpt: {
-				    style : 'SMALL',
-				    position: 'TOP_RIGHT'
-			},
+		<script type="text/javascript">
+                        function marcando()
+			{
+			var map = new google.maps.Map(
+				document.getElementById("googleMap"), 
+				{ zoom: 14,
+				center: new google.maps.LatLng(40.28296, -3.82101),
+				mapTypeId: google.maps.MapTypeId.ROADMAP }),
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(40.28296, -3.82101),
+				draggable: true,
+				title: 'URJC' }),
+			infoWindow = new google.maps.InfoWindow({content: 'Universidad Rey Juan Carlos'});
 
-				panControl : true,
-				streetViewControl : true,
-				mapTypeControl : false
-
-			});
-
-			map.addMarker({
-				lat: 38.88993579999999,
-				lng: 1.478022000000055,
-				title: 'Ibiza',
-				infoWindow: {
-				  content: '<strong>!Agua!</strong>
-				Pero estás a un paso de IBIZA
+			marker.setMap(map);
+			infoWindow.open(map, marker);
 			}
-
-			});
-			});
+			google.maps.event.addDomListener(window, 'load', marcando);
 		</script>
 
-
-
-		</script>
 
 	{% endblock %}
 
 	{% block on_geolocalize %}
 	
-		<div id="googleMap" style="width:500px;height:380px;"></div>
+
+		<div class="row">
+
+			<div class="col-xs-9">
+				<h2> contact form goes here</h2>
+				<div id="googleMap" style="width:700px;height:500px;"></div>
+				<!--<div id="googleMap" style="width:500px;height:380px;"></div>-->
+
+			</div>
+
+			<div class="col-xs-3">
+				<h2>Hong Kong</h2>
+				<address>
+					<strong>HK Business Address</strong><br>
+					100 Business Address<br>
+					Kowloon<br>
+					Hong Kong<br>
+					Hong Kong<br>
+					Zip Code N/A<br>
+					<abbr title="Phone">P:</abbr> 01234 567 890
+				</address>
+
+			</div>
+		</div>
 
 	{% endblock %}
+

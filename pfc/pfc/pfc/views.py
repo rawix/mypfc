@@ -29,11 +29,14 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 # HTML rendering libraries.
 from django.template import RequestContext, loader
+
 # Sending HTML
 from django.core.mail import EmailMessage, EmailMultiAlternatives 
 
 # Database tables.  
 from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
+
+# Forms
 from tuerasmus.forms import RegisterForm
 
 # Own libraries.
@@ -56,13 +59,13 @@ parser = parserXML.myContentHandler();
 
 def loadUniversity(request):
 
-    #Remove all the universities.
+    # Remove all the universities.
     Universities.objects.all().delete()
 
-    #Parse the universities
+    # Parse the universities
     parser.parseUniversity()
 
-    #Return the template
+    # Return the template
     return HttpResponseRedirect('/tuerasmus')
 
 
@@ -124,15 +127,16 @@ def loggedin(request):
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: INVALID_LOGIN
+# Login was invalid
 def invalid_login(request):
     print "INVALID: los datos introducidos son incorrectos"
-    alertlogin = True
-    ctx = {'alertlogin': alertlogin}
+    ctx = {'alertlogin': True}   
     return render_to_response('registration/index.html', ctx, context_instance=RequestContext(request))
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: LOGOUT
+# User is logged out
 def logout(request):
     print "LOGOUT: Logout del usuario"
     auth.logout(request)
@@ -141,6 +145,7 @@ def logout(request):
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: REGISTER
+# Registering user
 def register(request):
     # User registered
     if request.user.is_authenticated():
@@ -151,34 +156,39 @@ def register(request):
     else:
         alerterror=""
         alertdone=""
+        usu=""
+        error_username=""
+        error_password=""
+        msg_username=""
+        msg_password=""
         form = RegisterForm()
 
+        # Method request POST
         if request.method=="POST":
             form = RegisterForm(request.POST)
-            
-            if form.is_valid():
-                # Valid form
-                username = form.cleaned_data['username']
-                if (" " in username) or (username==""):
-                    error_msg = "Nombre de usuario no puede tener espacios"
-                    return render_to_response('registration/register.html', {'msg':True, 'error_msg':error_msg, 'form':form}, context_instance=RequestContext(request))
 
+            # Valid form
+            if form.is_valid():
+                # Get the information form
+                username = form.cleaned_data['username']
                 email = form.cleaned_data['email']
                 type_user = request.POST['type_user']
-      
                 password_one = form.cleaned_data['password_one']
                 password_two = form.cleaned_data['password_two']
-                #day = form.cleaned_data['day']
+                # Take the time automatically
                 day = datetime.now()
-                print "DAY: " + str(day)
-                
-                if (" " in password_one) or (password_one==""):
-                    return HttpResponseRedirect('/accounts/register')
-                elif (len(password_one)<6):
-                    ctx = {'form': form, 'msg':True, 'error_msg':"La contraseña debe tener 6 caracteres"}
-                    return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
+                       
+                # Cheking the information
+                if (" " in username) or (username==""):
+                    error_username = "Nombre de usuario no puede tener espacios"
+                    msg_username = True
+                    alerterror= True
+                elif (" " in password_one) or (password_one=="") or (len(password_one)<6):
+                    error_password = "La contraseña no es válida"
+                    msg_password = True
+                    alerterror= True
                 else:
-                    # OK, we can save in DBs
+                    # Saving data in DB
                     u = User.objects.create_user(username=username, password=password_one)
                     u.save()
 
@@ -189,21 +199,28 @@ def register(request):
                     up.save()
 
                     form = RegisterForm()
-                    ctx = {'form': form, 'alertdone':True, 'usu': username}
-                    return render_to_response('registration/register.html', ctx, context_instance = RequestContext(request))
+                    alertdone = True
+                    usu = username
+                
+                # Return the template                                 
+                ctx = {'form': form, 'error_username':error_username, 'error_password':error_password, 'msg_username':msg_username, 'msg_password':msg_password, 'alertdone':alertdone, 'alerterror': alerterror, 'usu':usu}
+                return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
+    
 
             else:
                 # Form not valid
                 ctx = {'form': form, 'alerterror': True }
                 return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
-          
-        ctx = {'form': form }
-        return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
+
+        # Method request not POST
+        else:
+            ctx = {'form': form }
+            return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
 # Name: HOWTO
-# How to work the website
+# How the website works
 def howto(request):
     if request.user.is_authenticated():
         print "HOWTO: usuario logueado " + request.user.username
@@ -216,7 +233,8 @@ def howto(request):
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
-# Name: CONTACT 
+# Name: CONTACT
+# How to contact the browser 
 def contact(request):
     print "CONTACT: Contactar con el desarrollador"
 
@@ -233,6 +251,7 @@ def contact(request):
     except User.DoesNotExist:
         u=""
     
+    # Return the template
     ctx = {'username': u, 'type_user':type_user}
     return render_to_response('registration/contact.html', ctx, context_instance=RequestContext(request))
 
