@@ -1,9 +1,9 @@
-{% extends "tuerasmus/university.html" %}
+{% extends "university/university.html" %}
 
 
 
 	{% block java_script %}
-
+  
 		<script
 		  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVhEUFDeVH_RZKiww16p2NC4afR5O70to&sensor=false">
 		</script>
@@ -51,7 +51,6 @@
 
 /*var point = new GPoint (latitud, longitud); var marker = new GMarker(point); map.addOverlay(marker); map.centerAndZoom(point, 3);*/
 		</script>
-
 
 	{% endblock %}
 

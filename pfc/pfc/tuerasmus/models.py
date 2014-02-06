@@ -60,8 +60,8 @@ class Info(models.Model):
     
     #MEter las coordenadas para GOOGLE MAPS!!!!!!!!!!!!!!!!!!!!!
     #location = models.URLField(null=True, blank=True);
-    latitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
-    longitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
+    latitud = models.DecimalField(default=0, max_digits=10, decimal_places=8);
+    longitud = models.DecimalField(default=0, max_digits=10, decimal_places=8);
     link = models.URLField(null=True, blank=True);
     image = models.URLField(null=True, blank=True);
 

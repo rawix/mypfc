@@ -38,15 +38,3 @@ admin.site.register(Users)
 admin.site.register(UserProfile)
 # Users that belong to the university
 admin.site.register(UsersUniversity)
-
-
-
-
-
-
-
-#admin.site.register(Category)
-#admin.site.register(Comment)
-#admin.site.register(UniversityComment)
-#admin.site.register(City)
-

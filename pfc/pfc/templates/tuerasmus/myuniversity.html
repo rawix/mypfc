@@ -1,57 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+{% extends "tuerasmus/base.html" %}
 
-    {% if user.is_authenticated %}
-      <title> {{user.username}} | TuErasmus</title>
-    {% endif %}
+{% block link_content%}
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
             <li><a href="/tuerasmus">Home</a></li>
-            <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
-            <li  class="active" class="dropdown">
+            <li><a href="/tuerasmus/{{username}}/myprofile">Mi perfil</a></li>
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Mi universidad</a></li>
+                <li class="active"><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
                 <li><a href="/tuerasmus/universities">Las universidades</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <li><a href="/tuerasmus/uniregister">Registrar</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -59,100 +19,52 @@
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
                 <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
               </ul>
             </li>
             <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-
             <li><a href="/contact">Contacto</a></li>
-          </ul>
-          
-          <!-- Logout user -->
-          <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
-            </div>
-            <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
-          </form>
+            
+{% endblock %}
 
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+{% block content %}
 
-
-    <div class="container theme-showcase">
-
-      <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="col-xs-12 col-sm-9">
+    
+      <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p>
+      
       <div class="jumbotron">
-        <h1>Estas son tus universidades</h1>
+        <h1>Tu estuviste en...</h1>
       </div>
 
       <div class="page-header">
-        <h1>Pincha para editar la información de la universidad o para ver qué se comenta sobre ella</h1>
+        <h1>¿Qué se ha escrito sobre tu universidad? ¿Qué quieres escribir sobre tu universidad?</h1>
       </div>
 
+      <div class="row">
+      
+        <div class="col-lg-6">
+          {% if reco1 %}
+            <h3><strong><center>{{ uni1 }}</center></strong></h3>
+            <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni1id}}" name="uni_selected" value={{uni1}}>EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni1id}}" name="uni_selected" value={{uni1}}>VER UNIVERSIDAD</a></p></center> 
+            </select>
+          {% else %}
+            <h3>Registra tu universidad erasmus</h3>
+            <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
+          {% endif %}
+        </div><!-- /.col-lg-6 -->
 
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-6">
-
-            {% if reco1 %}
-              
-              <h3><strong><center>{{ uni1 }}</center></strong></h3>
-              
-              <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni1id}}" name="uni_selected" value={{uni1}}>EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni1id}}" name="uni_selected" value={{uni1}}>VER UNIVERSIDAD</a></p></center> 
-              </select>
-            {% else %}
-
-              <h3>Registra tu universidad erasmus</h3>
-
-              <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
-
-            {% endif %}
-
-          </div><!-- /.col-lg-6 -->
-
-
-            {% if reco2 %}
-
-              <h3><strong><center>{{ uni2 }}</center></strong></h3>
-
-              <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni2id}}">EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni2id}}" type="submit">VER UNIVERSIDAD</a></p></center>
-         
-            {% else %}
-
-              <h3>Registra tu universidad munde</h3>
-
-              <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
-
-            {% endif %}
-
-          </div><!-- /.col-lg-6 -->
-        </div><!-- /.row -->
-
-      <hr>
-
-      <footer>
-        <p><center>&copy; ETSIT-URJC 2013</center></p>
-      </footer>
-
-    </div><!--/.container-->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
-    <script src="/static/examples/offcanvas/offcanvas.js"></script>
-  </body>
-</html>
-
+        <div class="col-lg-6">
+          {% if reco2 %}
+            <h3><strong><center>{{ uni2 }}</center></strong></h3>
+            <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni2id}}">EDITAR UNIVERSIDAD</a><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni2id}}" type="submit">VER UNIVERSIDAD</a></p></center>
+          {% else %}
+            <h3>Registra tu universidad munde</h3>
+            <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
+          {% endif %}
+        </div><!-- /.col-lg-6 -->
+        
+      </div><!-- /.row -->
+     </div><!--/span-->
+{% endblock %}

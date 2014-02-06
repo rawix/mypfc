@@ -75,8 +75,7 @@ class BasicForm(forms.Form):
     country = forms.CharField(label="País de la universidad", widget=forms.TextInput(), required=False)
 
     #Revisar como se ponen los link en un formulario!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # MEter las coordenadas para GOOGLE MAPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    #location = forms.URLField(label='Coordenadas de su localización', required=False)
+
     latitud = forms.DecimalField(label='Coordenadas de latitud', required=False)
     longitud = forms.DecimalField(label='Coordenadas de longitud', required=False)
     link = forms.URLField(label='Web oficial de la universidad', required=False)

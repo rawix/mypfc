@@ -1,0 +1,91 @@
+{% extends "tuerasmus/base.html" %}
+
+{% block link_content%}
+
+            <li class="active"><a href="/tuerasmus">Home</a></li>
+            <li><a href="/tuerasmus/{{username}}/myprofile">Mi perfil</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+                <li><a href="/tuerasmus/universities">Las universidades</a></li>
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <li class="active"><a href="/tuerasmus/uniregister">Registrar</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+                <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
+              </ul>
+            </li>
+            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
+            <li><a href="/contact">Contacto</a></li>
+
+{% endblock %}
+
+{% block content %}
+
+        <div class="col-xs-12 col-sm-9">
+        
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">    
+            <!--<img src ="/tuerasmus{{MEDIA_URL}}profiles/{{user.username}}.jpg" weidth="50px" heigth="50px"/>-->
+            <img src="http://placehold.it/150x150"/> 
+            <br>
+            <p>Este espacio es para que aparezca una breve descripción de cada usuario!!! o frases célebres o lo que quieran ellos.</p>
+          </div><!--./jumbotron-->
+
+          <h2>¿Qué quieres hacer?</h2>
+
+          <div class="row">
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>1.Tu universidad</h2>
+              <p>Es posible que te hayan concedido una beca Erasmus y otra Munde, así que en ese caso registra ambas universidades.</p>
+              <p><a class="btn btn-default" href="/tuerasmus/uniregister">UniErasmus &raquo;</a></p>
+            </div><!--/span-->
+
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>2.Tu información</h2>
+              <p>Rellena la información de la universidad.</p>
+              <p><a class="btn btn-default" href="/tuerasmus/{{username}}/myuniversity">MiUniversidad &raquo;</a></p>
+            </div><!--/span-->              
+
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>Residencias</h2>
+              <p>Entra en la sección de las residencias y mira cuál te conviene más.</p>
+              <p><a class="btn btn-default" href="#">Residencias &raquo;</a></p>
+            </div><!--/span-->
+
+          </div><!--/row1-->
+          
+          <div class="row">
+          
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>Convenios</h2>
+              <p>Sabemos que lo que más cuesta cuando nos vamos de erasmus son los convenios que nos conceden tanto la universidad destino como la de origen. En esta sección podrás conocer las asignaturas que han podido cursar otros compañeros tuyos fuera de la URJC.</p>
+              <p><a class="btn btn-default" href="#">Asignaturas &raquo;</a></p>
+            </div><!--/span-->
+
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>Quiénes</h2>
+              <p>Seguramente no eres el primero en irte a la universidad que te ha tocado, entra aquí y descubre qué otros alumnos han ido y qué han contado sobre sus experiencias.</p>
+              <p><a class="btn btn-default" href="#">Las universidades &raquo;</a></p>
+            </div><!--/span-->
+            
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>Curiosidades</h2>
+              <p>A todos nos gusta saber algo más que asignaturas, residencias, todos queremos saber qué sitios son los mejores para las fiestas erasmus, dónde ponen las cervezas más baratas, las cafeterías más de moda.</p>
+              <p><a class="btn btn-default" href="#">Tuerasmus Deluxe &raquo;</a></p>
+            </div><!--/span-->
+            
+          </div><!--/row2-->
+          
+        </div><!--/span-->
+
+{% endblock %}
+

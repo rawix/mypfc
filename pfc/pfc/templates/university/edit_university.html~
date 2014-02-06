@@ -1,0 +1,57 @@
+{% extends "university/base.html" %}
+
+{% block link_content %}
+            <li><a href="/tuerasmus">Home</a></li>
+            <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
+            <li class="active" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+                <li><a href="/tuerasmus/universities">Las universidades</a></li>
+         
+                <li class="divider"></li>
+                <li class="dropdown-header">Más</li>
+                <li><a href="/tuerasmus/uniregister">Registrar</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+                <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
+              </ul>
+            </li>
+            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
+            <li><a href="/contact">Contacto</a></li>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+      <h1> {{ uniname }} </h1>
+    </div>
+    
+
+    <div class="page-header">
+      <h1>Elige el tema de información que desees completar.</h1>
+      <p>
+        <!--<button type="button" class="btn btn-lg" style="background:white">Básica</button>-->
+        <a href="/tuerasmus/uniedit/{{uni_name}}/basic" class="btn btn-lg btn-danger" type="submit">Básica</a>
+        <!--<button type="button" class="btn btn-lg btn-danger" name="basic">Básica</button>-->
+        <a href="/tuerasmus/uniedit/{{uni_name}}/doc" class="btn btn-lg btn-primary" type="submit">Documentación y atención</a>
+        <!--<button type="button" class="btn btn-lg btn-primary" name="doc">Documentación y atención</button>-->
+        <a href="/tuerasmus/uniedit/{{uni_name}}/hotel" class="btn btn-lg btn-info" type="submit">Alojamientos</a>
+        <!--<button type="button" class="btn btn-lg btn-info" name="hotel">Alojamientos</button>-->
+        <a href="/tuerasmus/uniedit/{{uni_name}}/subjects" class="btn btn-lg btn-success" type="submit">Asignaturas y prácticas</a>
+        <!--<button type="button" class="btn btn-lg btn-success" name="subjects">Asignaturas y Prácticas</button>-->
+        <a href="/tuerasmus/uniedit/{{uni_name}}/city" class="btn btn-lg btn-warning" type="submit">La ciudad</a>
+        <!--<button type="button" class="btn btn-lg btn-warning" name="city">La ciudad</button>-->
+        <a href="/tuerasmus/uniedit/{{uni_name}}/others" class="btn btn-lg btn-default" type="submit">Varios</a>
+        <!--<button type="button" class="btn btn-lg btn-default" name="others">Varios</button>-->
+      </p>
+
+      {% block uni_form %}
+      {% endblock %}
+
+{% endblock %}

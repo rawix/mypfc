@@ -75,6 +75,7 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
@@ -82,9 +83,11 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
+        </div><!--/.navbar-header -->
+
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+
             <li><a href="/tuerasmus">Home</a></li>
             <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
             <li class="dropdown">
@@ -110,7 +113,6 @@
               </ul>
             </li>
             <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-
             <li><a href="/contact">Contacto</a></li>
           </ul>
           
@@ -123,8 +125,8 @@
           </form>
      
         </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+      </div><!--/.container -->
+    </div><!--/.navbar -->
 
     {% endif %}
 

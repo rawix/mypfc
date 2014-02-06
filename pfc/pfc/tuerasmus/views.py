@@ -54,6 +54,7 @@ from tuerasmus.forms import ProfileForm, BasicForm, CostumeServiceForm, Document
 # ----------------------------------------------------------------------
 #Desactivation of CSRF
 @csrf_exempt
+
 # Name : HOME USER
 def home(request, user):
     
@@ -62,7 +63,6 @@ def home(request, user):
 
         # User is professor or student
         type_user=""
-
         t = User.objects.get(username=user)
         tt = t.username
         tu = Users.objects.all()
@@ -72,11 +72,11 @@ def home(request, user):
 
         # Return the template
         ctx = {'username': user, 'type_user':type_user}
-        return render_to_response('tuerasmus/profile2.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated
-        print "el usuario no esta logueado"
+        print "HOME USER: el usuario no esta logueado"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
 
@@ -88,23 +88,17 @@ def myprofile(request, user):
     if request.user.is_authenticated():
         print "MYPROFILE: usuario logueado " + user
 
-        # Concatenate URL with username
+        # Concatenate URL + username
         ur = '/tuerasmus/' + user + '/edit_profile'
         print "MYPROFILE: " + ur
-
         # Redirect url
         return HttpResponseRedirect(ur)
-#       return render_to_response('tuerasmus/edit_profile.html', context_instance=RequestContext(request))
 
     else:
         # User no authenticated
-#        c = {}
-#        c.update(csrf(request))
         print "MYPROFILE: usuario no logueado"
-
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
-#        return render_to_response('registration/index.html', c, context_instance=RequestContext(request))
 
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
@@ -112,49 +106,43 @@ def myprofile(request, user):
 def edit_profile(request, user):
 
     if request.user.is_authenticated():
-        print "EDIT_PROFILE: usuario logueado " + user  
+        print "EDIT_PROFILE: usuario logueado " + user 
+ 
         # Concatenate the URL with username
         ur = '/tuerasmus/' + user + 'edit_profile/'
         print "EDIT_PROFILE: " + ur
-        ctx = {'username': user}
+
         # Return the template
+        ctx = {'username': user}
         return render_to_response('tuerasmus/edit_profile.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated
-#        c = {}
-#        c.update(csrf(request))
         print "EDIT_PROFILE: usuario no logueado"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
-#        return render_to_response('registration/index.html', c, context_instance=RequestContext(request))
 
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # Name: UNIREGISTER
 # Register new university
 def uniregister(request):
-    
-    ctx={}
-    ctx.update(csrf(request))
-    uni=""
 
     if request.user.is_authenticated():
         user = request.user.username
         print "UNIREGISTER: el usuario esta logueado: " + user
 
-        ### User is student or professor
+        # User is student or professor
+        type_user=""
         t = User.objects.get(username=user)
         tt = t.username
         tu = Users.objects.all()
-
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        ### Variable 'unis' is all the universities
+        # Variable 'unis' is all the universities
         unis = Universities.objects.all()
-        #unis = unis.extra(order_by=['noun'])
         unis = unis.extra(order_by=['country'])
                 
         countries = Countries.objects.all()
@@ -162,14 +150,16 @@ def uniregister(request):
 
         print "Veamos si es metodo POST o GET"
 #       form = UniRegisterForm()
-        if request.method=="POST":              
+        
+        if request.method=="POST":        
+            uni=""
             print "METODO POST"
 
             ### We get uni and scholarship
             unimenu = request.POST['uni_selected'] 
             unitext = request.POST['uni_written']
 
-            print "UNI_SELECTED: " + str(unimenu)
+            print "UNI_SELECTED: " + unimenu
             print "UNI_WRITTEN: " + unitext
 
             if unitext=="":
@@ -178,7 +168,7 @@ def uniregister(request):
                 uni=unitext
 
             scholarship = request.POST['scholarship']
- 
+                                   
             print "LA OPCION DE SCHOLARSHIP HA SIDO LA SIGUIENTE: " + scholarship
             es=""
             ms=""
@@ -540,7 +530,7 @@ def universities(request):
                 ctx = {'unisempty':True, 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': user, 'type_user': type_user}
 #            return render_to_response('tuerasmus/universities.html', ctx, context_instance=RequestContext(request))    
 
-            return render_to_response('tuerasmus/universities.html', ctx, context_instance=RequestContext(request))  
+            return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))  
 
         if request.method=="POST":              
             print "METODO POST"
@@ -600,7 +590,7 @@ def university(request, uni_name):
         ctx = {'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
         #en este metodo debo sacar toda la informacion de las universidades que se vayan editando
         #return render_to_response('tuerasmus/google_maps.html', ctx, context_instance=RequestContext(request))
-        return render_to_response('tuerasmus/geolocalizacion.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('university/geouniversity.html', ctx, context_instance=RequestContext(request))
         #return render_to_response('tuerasmus/googlemaps.html', ctx, context_instance=RequestContext(request))
         #return render_to_response('tuerasmus/university.html', ctx, context_instance=RequestContext(request))
         #return render_to_response('tuerasmus/googleprueba.html', ctx, context_instance=RequestContext(request))
@@ -666,7 +656,7 @@ def uninfo(request, uni_name, type_info):
                 print "muestro la info others"
                 ctx = {'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
             # EStamos probando, pero será uni_info.html el template que se muestre y heredará de university.html!!!
-            return render_to_response('tuerasmus/university.html', ctx, context_instance=RequestContext(request))
+            return render_to_response('university/university.html', ctx, context_instance=RequestContext(request))
 
 # AQUI DEBERIA HACER EL QUE PINCHASEN A UN BOTON PARQA EDITAR LA INFORMACION QUE DESEEN EN ESE MOMENTO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         # MÉTODO POST
@@ -723,12 +713,12 @@ def uninfo(request, uni_name, type_info):
                     uni_data.save()
 
                     ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'alertdone':True, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
                 else:
                     # Form not valid
                     ctx = {'form': form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_form':type_form, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
 
             elif type_form=="doc":
@@ -747,7 +737,7 @@ def uninfo(request, uni_name, type_info):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
                 if form2.is_valid():
                     # Valid form
@@ -759,7 +749,7 @@ def uninfo(request, uni_name, type_info):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
               
 
@@ -776,7 +766,7 @@ def uninfo(request, uni_name, type_info):
                 else:
                     # Form not valid
                     ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="subjects":
                 form1 = SubjectsForm(request.POST)
@@ -789,7 +779,7 @@ def uninfo(request, uni_name, type_info):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
                 if form2.is_valid():
                     # Valid form
@@ -801,7 +791,7 @@ def uninfo(request, uni_name, type_info):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="city":
                 form = CityForm(request.POST)
@@ -824,7 +814,7 @@ def uninfo(request, uni_name, type_info):
                 else:
                     # Form not valid
                     ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="others":
                 form = OthersForm(request.POST)
@@ -837,7 +827,7 @@ def uninfo(request, uni_name, type_info):
                 else:
                     # Form not valid
                     ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
 
         # With uni id we can get the name
@@ -852,7 +842,7 @@ def uninfo(request, uni_name, type_info):
 
         
         ctx = {'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-        return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
     else:
         print "UNIVERSITY: el usuario no esta logueado"
@@ -908,13 +898,14 @@ def myuniversity(request, user):
                 rec2 = University.objects.get(uni=record.uni2)
                 print "rec2.id: " + str(rec2.id)
 
-                print "sin el split " + str(record.uni2)
+                print record.uni2
+                
                 if ("-" in record.uni2):
                     record.uni2=record.uni2.split(" - ")[1]
                 else:
                     record.uni2=record.uni2
 
-                print "con  el split " + str(record.uni2)     
+                print record.uni2
                 reco2 = True
 
             except University.DoesNotExist:
@@ -971,7 +962,7 @@ def uniedit(request, uni_name):
             return HttpResponseRedirect(ur)
         
         ctx = {'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-        return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
     else:
         print "UNIVERSITY: el usuario no esta logueado"
@@ -1014,34 +1005,34 @@ def unieditform(request, uni_name, type_form):
                 print "type_form es basic!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                 form = BasicForm(request.POST)
                 ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="doc":
                 form1 = CostumeServiceForm(request.POST)
                 form2 = DocumentationForm(request.POST)
                 ctx = {'form1':form1, 'form2':form2, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
                  
             elif type_form=="hotel":
                 form = AccommodationForm(request.POST)
                 ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="subjects":
                 form1 = SubjectsForm(request.POST)
                 form2 = WorkForm(request.POST)
                 ctx = {'form1':form1, 'form2':form2, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="city":
                 form = CityForm(request.POST)
                 ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="others":
                 form = OthersForm(request.POST)
                 ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
 
 
@@ -1100,12 +1091,12 @@ def unieditform(request, uni_name, type_form):
                     uni_data.save()
 
                     ctx = {'form':form, 'uniname':uniname, 'uni_name':uni_name, 'alertdone':True, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
                 else:
                     # Form not valid
                     ctx = {'form': form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_form':type_form, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
 
             elif type_form=="doc":
@@ -1124,7 +1115,7 @@ def unieditform(request, uni_name, type_form):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
                 if form2.is_valid():
                     # Valid form
@@ -1136,7 +1127,7 @@ def unieditform(request, uni_name, type_form):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
               
 
@@ -1153,7 +1144,7 @@ def unieditform(request, uni_name, type_form):
                 else:
                     # Form not valid
                     ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="subjects":
                 form1 = SubjectsForm(request.POST)
@@ -1166,7 +1157,7 @@ def unieditform(request, uni_name, type_form):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
                 if form2.is_valid():
                     # Valid form
@@ -1178,7 +1169,7 @@ def unieditform(request, uni_name, type_form):
                 else:
                     # Form not valid
                     ctx = {'form1':form1, 'form2':form2, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="city":
                 form = CityForm(request.POST)
@@ -1201,7 +1192,7 @@ def unieditform(request, uni_name, type_form):
                 else:
                     # Form not valid
                     ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
             elif type_form=="others":
                 form = OthersForm(request.POST)
@@ -1214,7 +1205,7 @@ def unieditform(request, uni_name, type_form):
                 else:
                     # Form not valid
                     ctx = {'form':form, 'alerterror': True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-                    return render_to_response('tuerasmus/edit_university.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/edit_university.html', ctx, context_instance=RequestContext(request))
 
 
         # With uni id we can get the name
@@ -1229,7 +1220,7 @@ def unieditform(request, uni_name, type_form):
 
         
         ctx = {'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
-        return render_to_response('tuerasmus/uni_form.html', ctx, context_instance=RequestContext(request))
+        return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
 
     else:
         print "UNIVERSITY: el usuario no esta logueado"

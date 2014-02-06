@@ -1,57 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+{% extends "tuerasmus/base.html" %}
 
-    {% if user.is_authenticated %}
-      <title> {{user.username}} | TuErasmus</title>
-    {% endif %}
+{% block link_content%}
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/tuerasmus">Home</a></li>
-            <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
+            <li><a href="/tuerasmus">Home</a></li>
+            <li><a href="/tuerasmus/{{username}}/myprofile">Mi perfil</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
                 <li><a href="/tuerasmus/universities">Las universidades</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <li class="active"><a href="/tuerasmus/uniregister">Registrar</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -59,145 +19,117 @@
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
                 <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
               </ul>
             </li>
             <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-
             <li><a href="/contact">Contacto</a></li>
-          </ul>
-          
-          <!-- Logout user -->
-          <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
-            </div>
-            <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
-          </form>
 
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+{% endblock %}
 
-    <div class="container">
+{% block content %}
+    <div class="col-xs-12 col-sm-9">
+
+      <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p>
+      
+      <div class="jumbotron">
+        <h1>¿Cuál fue tu universidad?</h1>
+      </div><!--./jumbotron-->
 
       <div class="row">
-        <div class="col-lg-6">
-        <h1>Registra tu universidad erasmus</h1><br><br><br>
-        <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+        <div class="col-lg-9">
+          <h1>Registra tu universidad erasmus</h1><br><br><br>
+          <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
 
-          {% if alerterror %}
-	    <div class="alert alert-danger">
-	      <center><strong>¡¡ERROR!!</strong>, asegúrate de elegir una universidad de la lista</center>
-	    </div>
-          {% endif %}
-
-          {% if alertwarning %}
-	    <div class="alert alert-warning">
-	      <center><strong>¡¡CUIDADO!!</strong>, la universidad ya está resgistrada</center>
-	    </div>
-          {% endif %}
-
-          {% if alertdone %}
-	    <div class="alert alert-success">
-	      <center><strong>¡¡REGISTRADA!!</strong>, vuelve a registrar si te han concedido otra beca (erasmus/munde)</center>
-	    </div>
-          {% endif %}
-
-          {% if msg %}
-            <ul><li><h5>{{error_msg}}</h5></li></ul>
-          {% endif %}
-
-          <h3>Busca tu universidad en el listado, e introdúcela en el recuadro correspondiente!!! </h3>
-          <label for="selected">Selecciona una universidad</label>
-	  <select id="selected" class="form-control" name="uni_selected">  
-            {% for u in unis %}
-	      <option> {{ u.country }} - {{ u.noun }} </option>
-            {% endfor %}
-	  </select>
-          <br><br>
-          <label for="selected">Escribe tu universidad</label>
-	  <input id="selected" type="text" class="form-control" name="uni_written">  
-
-          <br>
-          <!--{{ form.as_p }}-->
-
-          <div class="radio-inline">
-            <label>
-              <input type="radio" name="scholarship" id="optA" value="erasmus" checked>
-              Erasmus
-            </label>
-          </div>
-          <div class="radio-inline">
-            <label>
-              <input type="radio" name="scholarship" id="optP" value="mundus">
-              Munde
-            </label>
-          </div>
-          <br>
-          <button class="btn btn-primary" type="submit"> Registrar </button>
-
-          <br><br>
-
-          {% if info %}
-            {% if alertamax %}
-	      <div class="alert alert-danger">
-	        <center><strong>¡¡LLEGASTE AL LÍMITE!!</strong>, ya registraste el tope de universidades</center>
-	      </div>
+            {% if alerterror %}
+	          <div class="alert alert-danger">
+	            <center><strong>¡¡ERROR!!</strong>, asegúrate de elegir una universidad de la lista</center>
+	          </div><!--./alerterror-->
             {% endif %}
 
-            {% if alertaerasmus %}
-	      <div class="alert alert-info">
-	        <center><strong>¡¡Ya tienes tu universidad erasmus registrada!!</strong></center>
-	      </div>
+            {% if alertwarning %}
+	          <div class="alert alert-warning">
+	            <center><strong>¡¡CUIDADO!!</strong>, la universidad ya está resgistrada</center>
+	          </div><!--./alertwarning-->
             {% endif %}
 
-            {% if alertamundus %}
-	      <div class="alert alert-info">
-	        <center><strong>¡¡Ya tienes tu universidad munde registrada!!</strong></center>
-	      </div>
+            {% if alertdone %}
+	          <div class="alert alert-success">
+	            <center><strong>¡¡REGISTRADA!!</strong>, vuelve a registrar si te han concedido otra beca (erasmus/munde)</center>
+	          </div><!--./alertdone-->
             {% endif %}
-          {% endif %}
+
+            {% if msg %}
+              <ul><li><h5>{{error_msg}}</h5></li></ul>
+            {% endif %}
+
+            <h3>Busca tu universidad en el listado, e introdúcela en el recuadro correspondiente!!! </h3>
+            <label for="selected">Selecciona una universidad</label>
+	        <select id="selected" class="form-control" name="uni_selected">  
+              {% for u in unis %}
+	            <option> {{ u.country }} - {{ u.noun }} </option>
+              {% endfor %}
+	        </select>
+            <br><br>
+            <label for="selected">Escribe tu universidad</label>
+	        <input id="selected" type="text" class="form-control" name="uni_written">  
+            <br>
+
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="scholarship" id="optA" value="erasmus" checked>
+                Erasmus
+              </label>
+            </div><!--/radio-inline-->
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="scholarship" id="optP" value="mundus">
+                Munde
+              </label>
+            </div><!--/radio-inline-->
+            <br>
+            <button class="btn btn-primary" type="submit"> Registrar </button>
+
+            <br><br>
+
+            {% if info %}
+              {% if alertamax %}
+	            <div class="alert alert-danger">
+	              <center><strong>¡¡LLEGASTE AL LÍMITE!!</strong>, ya registraste el tope de universidades</center>
+	            </div>
+              {% endif %}
+
+              {% if alertaerasmus %}
+	            <div class="alert alert-info">
+	              <center><strong>¡¡Ya tienes tu universidad erasmus registrada!!</strong></center>
+	            </div>
+              {% endif %}
+
+              {% if alertamundus %}
+	            <div class="alert alert-info">
+	              <center><strong>¡¡Ya tienes tu universidad munde registrada!!</strong></center>
+	            </div>
+              {% endif %}
+            {% endif %}
 
 
-          {% if saved %}
-            <center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>
-            <center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{ uni_id }}"> {{ uni_name }} </a></center>
-          {% endif %}
+            {% if saved %}
+              <center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>
+              <center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{ uni_id }}"> {{ uni_name }} </a></center>
+            {% endif %}
 
-          {% if botuni %}
-            <center><strong>¡¡AHORA!!</strong>, pincha abajo y comienza a ver las universidades</center>
-            <center><a class="btn btn-success btn-lg" href="/tuerasmus/universities/"> UNIVERSIDADES </a></center>
-          {% endif %}
+            {% if botuni %}
+              <center><strong>¡¡AHORA!!</strong>, pincha abajo y comienza a ver las universidades</center>
+              <center><a class="btn btn-success btn-lg" href="/tuerasmus/universities/"> UNIVERSIDADES </a></center>
+            {% endif %}
 
-          <br><br>
+            <br><br>
+          </form>
+          
+        </div><!--./col-lg-6 -->
+      </div><!--./row -->
 
-        </form>
-        </div><!-- /.col-lg-6 -->
-      </div><!-- /.row -->
-
-      <hr>
-
-      <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
-        <p><center>&copy; ETSIT-URJC 2013</center></p>
-      </footer>
-
-    </div><!--/.container-->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
-    <script src="/static/examples/offcanvas/offcanvas.js"></script>
-  </body>
-</html>
+    </div><!--./span-->
+     
+{% endblock %}

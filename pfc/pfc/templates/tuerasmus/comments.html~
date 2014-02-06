@@ -1,57 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+{% extends "tuerasmus/base.html" %}
 
-    {% if user.is_authenticated %}
-      <title> {{user.username}} | TuErasmus</title>
-    {% endif %}
+{% block link_content%}
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
             <li><a href="/tuerasmus">Home</a></li>
-            <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
+            <li><a href="/tuerasmus/{{username}}/myprofile">Mi perfil</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
                 <li><a href="/tuerasmus/universities">Las universidades</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <li class="active"><a href="/tuerasmus/uniregister">Registrar</a></li>
+                  <li><a href="/tuerasmus/uniedit/{{uni_name}}">Editar</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -59,97 +20,63 @@
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
                 <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
               </ul>
             </li>
-            <li class="active"><a href="#">TusComentarios</a></li>
-
+            <li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>
             <li><a href="/contact">Contacto</a></li>
-          </ul>
+
+{% endblock %}
+
+{% block content %}
           
-          <!-- Logout user -->
-          <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
-            </div>
-            <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
-          </form>
+        <div class="col-xs-12 col-sm-9">
+            <p class="pull-right visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+            </p>
+            <div class="jumbotron">    
+                <p><h2><strong>TuErasmus me gusta porque... pero creo que le faltaría...</strong></h2></p>                
+            </div><!--./jumbotron-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Escribe en el recuadro el comentario que quieras publicar.</h1>
+                    <h3>Comenta sobre aquello que te ha gustado, aquello que no te ha gustado, qué cosas cambiarías, que no cambiarías... </h3>
+                    <br><br><br>
+                    <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+                        <textarea class="form-control" col="2" rows="2" name="comment"></textarea>
+                        <br><br>
+                        <button class="btn btn-primary" type="submit"> Publicar comentario </button>
+                        <br><br>
 
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+                        {% if alertsubmit %}
+	                    <div class="alert alert-success">
+	                        <center><strong>¡¡Bien!!</strong>, comentario publicado</center>
+	                    </div>
+                        {% endif %}
 
-    <div class="container">
+                        {% if alerterror %}
+	                    <div class="alert alert-danger">
+	                        <center><strong>Oops!!</strong>, comentario fallido</center>
+	                    </div>
+                        {% endif %}
 
-      <div class="row">
-        <div class="col-lg-12">
-        <h1>Haz comentarios sobre la web!!! Cosas que se podrían cambiar, cosas que dejarías, qué te gusta, qué no te gusta!!!</h1>
-        <br><br><br>
+                        <br><br>
+                    </form>
+                    {% if cmts %}
+                    <h3>Vuestros comentarios: </h3>
+                    <br>
+                        <div class="col-lg-9">
+                            <br>
+                            {% for c in comments %}
+                                <li> {{ c.username }} el {{ c.day }} 
+	                                <p>{{ c.comment }}</p>
+                                </li>
+                                <br>
+                            {% endfor %}
+	                    </div><!-- /.col-lg-9 -->
+                    {% endif %}
+                </div><!-- /.col-lg-12 --> 
+            </div><!--/row-->
+        </div><!--/span-->
+        
+{% endblock %}
 
-        <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-          <textarea class="form-control" col="2" rows="2" name="comment"></textarea>
-          <br><br>
-          <button class="btn btn-primary" type="submit"> Subir Comentario </button>
-        <br><br>
-
-        {% if alertsubmit %}
-	  <div class="alert alert-success">
-	    <center><strong>¡¡Bien!!</strong>, comentario guardado correctamente</center>
-	  </div>
-        {% endif %}
-
-        {% if alerterror %}
-	  <div class="alert alert-danger">
-	    <center><strong>No has comentado nada</strong>, no se guardó el comentario</center>
-	  </div>
-        {% endif %}
-
-        <br><br>
-
-        </form>
-        <h3>Vuestros comentarios: </h3>
-        <br>
-
-        {% if cmts %}
-
-          <div class="col-lg-9">
-            
-            <br>
-
-            {% for c in comments %}
-
-              <li> {{ c.username }} el {{ c.day }} 
-	           <p>{{ c.comment }}</p>
-              </li>
-
-              <br>
-            {% endfor %}
-	  </div>
-        {% endif %}
-        </div><!-- /.col-lg-12 -->
-      </div><!-- /.row -->
-
-      <hr>
-
-      <footer>
-        <p><center>&copy; ETSIT-URJC 2013</center></p>
-      </footer>
-
-    </div><!--/.container-->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
-    <script src="/static/examples/offcanvas/offcanvas.js"></script>
-  </body>
-</html>

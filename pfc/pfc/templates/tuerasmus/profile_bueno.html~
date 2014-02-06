@@ -1,49 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+{% extends "tuerasmus/base.html" %}
 
-    {% if user.is_authenticated %}
-      <title> {{username}} | Home</title>
-    {% endif %}
+{% block link_content%}
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/tuerasmus">Inicio</a></li>
+            <li class="active"><a href="/tuerasmus">Home</a></li>
             <li><a href="/tuerasmus/{{username}}/myprofile">Mi perfil</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Universidades<b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Mi universidad</a></li>
-                <li><a href="#">Tu universidad</a></li>
+                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+                <li><a href="/tuerasmus/universities">Las universidades</a></li>
                
              
                 <!--<li class="divider"></li>-->
@@ -57,72 +22,56 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">MisErasmus</a></li>
-                <li><a href="#">TusErasmus</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
+                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+                <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
               </ul>
             </li>
-
+            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
             <li><a href="/contact">Contacto</a></li>
-          </ul>
-          
-          <!-- Logout user -->
-          <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/home/{{username}}"><strong><em>¡¡Hola {{type_user}} {{username}}!!</em></strong></a>
-            </div>
-            <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
-          </form>
 
+{% endblock %}
 
-     
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-
-    <div class="container">
+{% block content %}
 
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-12 col-sm-9">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
-          <div class="jumbotron">
-            
-            
-            <img src ="/tuerasmus{{MEDIA_URL}}profiles/{{user.username}}.jpg" weidth="50px" heigth="50px"/>
-            <h3> muestra la foto aki!!!!! </h3>
-            <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
-          </div>
+          <div class="jumbotron">    
+            <!--<img src ="/tuerasmus{{MEDIA_URL}}profiles/{{user.username}}.jpg" weidth="50px" heigth="50px"/>-->
+            <img src="http://placehold.it/150x150"/> 
+            <br>
+            <p>Ya estás en la página de inicio de tu cuenta TuErasmus. Ahora registra tu universidad erasmus para comenzar a completar la información acerca de la misma.</p>
+          </div><!--./jumbotron-->
+
+          <h2>Sigue los pasos siguientes:</h2>
+
           <div class="row">
             <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Tu universidad Erasmus</h2>
-              <p>Registra la universidad donde se te concedió la beca erasmus y comienza a compartir experiencias con otros estudiantes TuErasmus</p>
-              <p><a class="btn btn-default" href="/tuerasmus/uniregister">Registrar universidad erasmus &raquo;</a></p>
+              <h2>1.Tu universidad</h2>
+              <h5>Es posible que te hayan concedido una beca Erasmus y otra Munde, así que en ese caso registra ambas universidades</h5>
+              <p><a class="btn btn-default" href="/tuerasmus/uniregister">UniErasmus</a></p>
             </div><!--/span-->
+
+            <div class="col-6 col-sm-6 col-lg-4">
+              <h2>2.Tu información</h2>
+              <p>Rellena la información de la universidad</p>
+              <p><a class="btn btn-default" href="/tuerasmus/{{username}}/myuniversity">MiUniversidad</a></p>
+            </div><!--/span-->              
+
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>Heading</h2>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
               <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
             </div><!--/span-->
+
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>Heading</h2>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
               <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
             </div><!--/span-->
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
+
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>Heading</h2>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -155,22 +104,4 @@
         </div><!--/span-->
       </div><!--/row-->
 
-      <hr>
-
-      <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
-        <p><center>&copy; ETSIT-URJC 2013</center></p>
-      </footer>
-
-    </div><!--/.container-->
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
-    <script src="/static/examples/offcanvas/offcanvas.js"></script>
-  </body>
-</html>
+{% endblock %}

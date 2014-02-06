@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">-->
+
+    {% if user.is_authenticated %}
+      <title> {{username}} | Home</title>
+    {% endif %}
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
+        </div><!--/.navbar-header -->
+
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            {% block link_content %}
+            {% endblock %}
+          </ul>
+          
+          <!-- Logout user -->
+          <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
+            <div class="form-group">
+              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡ Hola {{type_user}} {{username}} !!</em></strong></a>
+            </div>
+            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
+          </form>
+
+        </div><!--/.navbar-collapse -->
+      </div><!--/.container -->
+    </div><!--/.navbar -->
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        {% block content %}
+        {% endblock %}
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="well sidebar-nav">
+            <ul class="nav">
+              <li>Universidades</li>
+              <li class="active"><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li>Usuarios</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li>Curiosidades</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+
+      </div><!--/row-offcanvas-->
+
+      <hr>
+
+      <footer>
+        <p><center>&copy; ETSIT-URJC 2013</center></p>
+      </footer>
+
+    </div><!--/.container-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/assets/js/jquery.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+    <script src="/static/examples/offcanvas/offcanvas.js"></script>
+  </body>
+</html>
+
