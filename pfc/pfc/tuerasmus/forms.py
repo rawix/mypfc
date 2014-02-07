@@ -9,7 +9,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from tuerasmus.models import City, Comment, Countries, Info, ResiComment, Residences, Subjects, UniComment, UniErasmus, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistics, Residence, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 #import datetime
 

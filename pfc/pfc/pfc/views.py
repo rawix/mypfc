@@ -34,7 +34,7 @@ from django.template import RequestContext, loader
 from django.core.mail import EmailMessage, EmailMultiAlternatives 
 
 # Database tables.  
-from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
+from tuerasmus.models import Users, Universities, UserProfile, Countries
 
 # Forms
 from tuerasmus.forms import RegisterForm

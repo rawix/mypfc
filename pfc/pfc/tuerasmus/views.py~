@@ -141,9 +141,8 @@ def uniregister(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        ### Variable 'unis' is all the universities
+        # Variable 'unis' is all the universities
         unis = Universities.objects.all()
-        #unis = unis.extra(order_by=['noun'])
         unis = unis.extra(order_by=['country'])
                 
         countries = Countries.objects.all()

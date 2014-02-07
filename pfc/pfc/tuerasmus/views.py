@@ -39,7 +39,7 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 from datetime import datetime, date
 
 # Database tables.  
-from tuerasmus.models import City, Comment, Countries, Info, ResiComment, Residences, Subjects, UniComment, UniErasmus, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistics, Residence, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 # Forms
 from tuerasmus.forms import ProfileForm, BasicForm, CostumeServiceForm, DocumentationForm, AccommodationForm, SubjectsForm, WorkForm, CityForm, OthersForm

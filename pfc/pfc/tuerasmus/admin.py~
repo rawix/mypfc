@@ -14,27 +14,32 @@ from tuerasmus.models import City, Comment, Countries, Info, ResiComment, Reside
 #--------------------------------------
 #--------------------------------------
 
-# City
+# Cities
 admin.site.register(City)
-# University's comments 
+
+# Comment
 admin.site.register(Comment)
-# University's countries
+
+# Countries
 admin.site.register(Countries)
-# Residence's comments
-admin.site.register(ResiComment)
-# Residences
-admin.site.register(Residences)
-# University's profile
-admin.site.register(Info)
+
+# Info
+admin.site.register(InfoBasic)
+admin.site.register(InfoGeneral)
+admin.site.register(InfoResidence)
+admin.site.register(InfoStadistics)
+admin.site.register(Residence)
 admin.site.register(Subjects)
-admin.site.register(University)
-# Signed universities
-admin.site.register(UniErasmus)
-# European universities
+
+# Universities
 admin.site.register(Universities)
-# Signed users
+admin.site.register(University)
+
+# Signed up users
 admin.site.register(Users)
+
 # User's profile
 admin.site.register(UserProfile)
+
 # Users that belong to the university
 admin.site.register(UsersUniversity)

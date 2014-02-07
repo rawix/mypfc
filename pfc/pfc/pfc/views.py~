@@ -34,7 +34,7 @@ from django.template import RequestContext, loader
 from django.core.mail import EmailMessage, EmailMultiAlternatives 
 
 # Database tables.  
-from tuerasmus.models import Users, UniErasmus, University, Universities, UserProfile, UsersUniversity, Countries
+from tuerasmus.models import Users, University, Universities, UserProfile, UsersUniversity, Countries
 
 # Forms
 from tuerasmus.forms import RegisterForm
@@ -233,7 +233,8 @@ def howto(request):
 
 #----------------------------------------------------------------------
 #----------------------------------------------------------------------
-# Name: CONTACT 
+# Name: CONTACT
+# How to contact the browser 
 def contact(request):
     print "CONTACT: Contactar con el desarrollador"
 
