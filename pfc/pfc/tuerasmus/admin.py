@@ -6,16 +6,13 @@
 
 # Import objects
 from django.contrib import admin
-from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistics, Residence, Subjects, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 #--------------------------------------
 #--------------------------------------
 #      Objects editable by admin      #
 #--------------------------------------
 #--------------------------------------
-
-# Cities
-admin.site.register(City)
 
 # Comment
 admin.site.register(Comment)
@@ -27,8 +24,9 @@ admin.site.register(Countries)
 admin.site.register(InfoBasic)
 admin.site.register(InfoGeneral)
 admin.site.register(InfoResidence)
-admin.site.register(InfoStadistics)
-admin.site.register(Residence)
+admin.site.register(InfoStadistic)
+admin.site.register(Place)
+admin.site.register(Score)
 admin.site.register(Subjects)
 
 # Universities

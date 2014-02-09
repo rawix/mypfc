@@ -95,24 +95,19 @@
 
             {% if info %}
               {% if alertamax %}
-	            <div class="alert alert-danger">
-	              <center><strong>¡¡LLEGASTE AL LÍMITE!!</strong>, ya registraste el tope de universidades</center>
-	            </div>
-              {% endif %}
-
-              {% if alertaerasmus %}
-	            <div class="alert alert-info">
-	              <center><strong>¡¡Ya tienes tu universidad erasmus registrada!!</strong></center>
-	            </div>
-              {% endif %}
-
-              {% if alertamundus %}
-	            <div class="alert alert-info">
-	              <center><strong>¡¡Ya tienes tu universidad munde registrada!!</strong></center>
-	            </div>
+	              <div class="alert alert-danger">
+	                <center><strong>¡¡LLEGASTE AL LÍMITE!!</strong>, ya registraste el tope de universidades</center>
+	              </div>
+              {% elif alertaerasmus %}
+	              <div class="alert alert-info">
+	                <center><strong>¡¡Ya tienes tu universidad erasmus registrada!!</strong></center>
+	              </div>
+              {% elif alertamundus %}
+	              <div class="alert alert-info">
+	                <center><strong>¡¡Ya tienes tu universidad munde registrada!!</strong></center>
+	              </div>
               {% endif %}
             {% endif %}
-
 
             {% if saved %}
               <center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>

@@ -147,12 +147,9 @@ def logout(request):
 # Name: REGISTER
 # Registering user
 def register(request):
-    # User registered
     if request.user.is_authenticated():
         print "REGISTER: usuario logueado " + request.user.username
         return HttpResponseRedirect('/tuerasmus')
-
-    # User not registered
     else:
         alerterror=""
         alertdone=""
@@ -177,6 +174,7 @@ def register(request):
                 password_two = form.cleaned_data['password_two']
                 # Take the time automatically
                 day = datetime.now()
+                print "day " + str(day)
                        
                 # Cheking the information
                 if (" " in username) or (username==""):
@@ -206,9 +204,8 @@ def register(request):
                 ctx = {'form': form, 'error_username':error_username, 'error_password':error_password, 'msg_username':msg_username, 'msg_password':msg_password, 'alertdone':alertdone, 'alerterror': alerterror, 'usu':usu}
                 return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
     
-
+            # Form not valid
             else:
-                # Form not valid
                 ctx = {'form': form, 'alerterror': True }
                 return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
 
