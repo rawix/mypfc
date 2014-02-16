@@ -109,7 +109,6 @@
               {% endif %}
             {% endif %}
 
-
             {% if saved %}
               <center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>
               <center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{ uni_id }}"> {{ uni_name }} </a></center>

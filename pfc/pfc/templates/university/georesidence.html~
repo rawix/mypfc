@@ -62,6 +62,24 @@
 			        draggable: true,
 			        title: '{{i.name}}' }),
 	            infoWindow = new google.maps.InfoWindow({content: '{{i.name}}'});
+	          markers.push(marker);
+
+
+
+
+function inicializaGoogleMaps() {
+    // Coordenadas del centro de nuestro recuadro principal
+    var x =41.389624;
+    var y = 2.15988563537;
+
+    var mapOptions = {
+        zoom: 13,
+        center: new google.maps.LatLng(x, y),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+
+
 
 	    
 

@@ -36,6 +36,6 @@ urlpatterns = patterns('',
     url(r'^(?P<user>[\S]+)/$', 'tuerasmus.views.home', name='home'),
     
     # URLs enabled to view images
-    #url(r'^media/(?P<path>.*)/$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
+    url(r'^media/(?P<path>.*)/$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
 
 )

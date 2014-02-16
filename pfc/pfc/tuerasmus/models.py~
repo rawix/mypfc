@@ -14,7 +14,7 @@ class Users(models.Model):
     day = models.DateField(auto_now=False);
         
     def __str__(self):
-        return str(self.username);
+        return self.username;
         
 # ------------------------------------------------------------------------------
 #                               Universities class.
@@ -95,7 +95,8 @@ class Score(models.Model):
 #                               Place class.
 # ------------------------------------------------------------------------------
 class Place(models.Model):
-    name= models.CharField(max_length=40);
+    uni = models.CharField(max_length=50);
+    name = models.CharField(max_length=40);
     image = models.URLField(null=True, blank=True);
     # Using Google Maps
     address = models.CharField(max_length=40);
@@ -110,13 +111,16 @@ class Place(models.Model):
 
     def __unicode__(self):
         return self.name;
+        
+    def __str__(self):
+        return self.name;
 
 # ------------------------------------------------------------------------------
 #                               InfoBasic class.
 # ------------------------------------------------------------------------------
 class InfoBasic(models.Model):
     # Basic
-    uni = models.CharField(max_length=50);
+    uni = models.OneToOneField(University);
     address = models.CharField(max_length=50);
     city = models.CharField(max_length=30);
     country = models.CharField(max_length=50);
@@ -124,7 +128,9 @@ class InfoBasic(models.Model):
     longitud = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True);
     description = models.TextField(help_text='Cómo describirías esta universidad');
     link = models.URLField();
-    image = models.URLField();
+    name_image = models.CharField(max_length=40, null=True, blank=True);
+    # Tengo que quitar lo de blan=True y null=True en las imagenes!!!!!!!!!!! para poder subir el fichero
+    image = models.ImageField(upload_to='universities', verbose_name=u'image_university', blank=True, null=True);
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
 
@@ -133,16 +139,21 @@ class InfoBasic(models.Model):
         verbose_name_plural = u'Basic'
         ordering = ['uni']
  
+    def __unicode__(self):
+        return self.uni;
+        
     def __str__(self):
-        return self.uni
+        return self.uni;
         
 # ------------------------------------------------------------------------------
 #                               InfoStadistic class.
 # ------------------------------------------------------------------------------
 class InfoStadistic(models.Model):
     # Stadistics
-    uni = models.CharField(max_length=50);
+    uni = models.OneToOneField(University);
     nuser = models.IntegerField(default=0);
+    nstudents = models.IntegerField(default=0);
+    nprofessors = models.IntegerField(default=0);
     ncomments = models.IntegerField(default=0);
     score = models.ForeignKey(Score, null=True, blank=True);
     
@@ -151,9 +162,8 @@ class InfoStadistic(models.Model):
         verbose_name_plural = u'Stadistics'
         ordering = ['uni']
         
-    def __unicode__(self):
-        return self.uni; 
-
+    def __str__(self):
+        return self.uni;
 
 # ------------------------------------------------------------------------------
 #                               Subjects class.
@@ -170,7 +180,7 @@ class Subjects(models.Model):
     class Meta:
         ordering = ['subname']
         
-    def __unicode__(self):
+    def __str__(self):
         return self.uni;
         
 # ------------------------------------------------------------------------------
@@ -179,11 +189,12 @@ class Subjects(models.Model):
 class InfoGeneral(models.Model):
     # Documentation
     uni = models.CharField(max_length=50);
+    username = models.CharField(max_length=50);
     qualification = models.TextField(help_text='Escribe algo');
     specialty = models.TextField(help_text='Escribe algo');
     teachingequipment = models.TextField(help_text='Escribe algo');
 
-    librariy = models.TextField(help_text='Escribe algo');
+    library = models.TextField(help_text='Escribe algo');
     lab = models.TextField(help_text='Escribe algo');
     computerequipment = models.TextField(help_text='Escribe algo');
 
@@ -214,7 +225,7 @@ class InfoGeneral(models.Model):
     bankaccount = models.TextField(help_text='Escribe algo');
     
     #Subjects
-    subject = models.ForeignKey(Subjects);
+    subject = models.ForeignKey(Subjects, null=True, blank=True);
     
     #Work
     scholarships = models.TextField(help_text='Escribe algo', null=True, blank=True);
@@ -231,13 +242,16 @@ class InfoGeneral(models.Model):
         ordering = ['uni']
         
     def __unicode__(self):
-        return self.uni; 
+        return self.uni;
+        
+    def __str__(self):
+        return self.uni;
 
 # ------------------------------------------------------------------------------
 #                               Residence class.
 # ------------------------------------------------------------------------------
 class InfoResidence(models.Model):
-    uni = models.CharField(max_length=40);
+    uni = models.CharField(max_length=50);
     residence = models.ForeignKey(Place);
     flatshare = models.TextField(help_text='Dónde poder buscar pisos', null=True, blank=True);
     linktoshare = models.TextField(help_text='Link', null=True, blank=True);
@@ -249,9 +263,12 @@ class InfoResidence(models.Model):
     class Meta:
         verbose_name_plural = u'Residence'
         ordering = ['uni']
-        
+
     def __unicode__(self):
-        return self.uni; 
+        return self.uni;
+        
+    def __str__(self):
+        return self.uni;
 
 # ------------------------------------------------------------------------------
 #                               UserProfile class.
@@ -271,12 +288,18 @@ class UserProfile(models.Model):
     sserasmus = models.CharField(max_length=10, null=True, blank=True);
     # Scholarship Mundus
     ssmundus = models.CharField(max_length=10, null=True, blank=True);
-     
+    
+    def __unicode__(self):
+        return self.username;
+        
+    def __str__(self):
+        return self.username;
+        
 # ------------------------------------------------------------------------------
 #                               UsersUniversity class.
 # ------------------------------------------------------------------------------
 class UsersUniversity(models.Model):
-    uni = models.CharField(max_length=50);
+    uni = models.OneToOneField(University);
     nusers = models.IntegerField(default=0);
     useuni = models.ManyToManyField(User);
     
@@ -285,6 +308,9 @@ class UsersUniversity(models.Model):
         ordering = ['uni']
         
     def __unicode__(self):
+        return self.uni;
+        
+    def __str__(self):
         return self.uni;
              
 # ------------------------------------------------------------------------------
@@ -307,7 +333,12 @@ class City(models.Model):
     class Meta:
         ordering = ['cityname']
 
- 
+    def __unicode__(self):
+        return self.cityname;
+        
+    def __str__(self):
+        return self.cityname;
+
 
 
 

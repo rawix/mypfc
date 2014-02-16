@@ -25,7 +25,6 @@
     {% endif %}
     <br><br>
     {{form.as_p}}
-
     <h3><strong>{{tit1}}</strong></h3>
     {{form1.as_p}}
     <br>
@@ -34,9 +33,9 @@
     <br>
     <h3><strong>{{tit3}}</strong></h3>
     {{form3.as_p}}
-    <br>
+    
     <button class="btn btn-primary" type="submit">Guardar</button>
-    <br><br>
+    <br>
   </form>
 
 {% endblock %}

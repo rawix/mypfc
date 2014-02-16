@@ -28,6 +28,7 @@
     
     {% block java_script %}
     {% endblock %}
+    
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -60,7 +61,7 @@
 
 
     <div class="container theme-showcase">
-
+      
       {% block content %}
       {% endblock %}
       
@@ -71,7 +72,6 @@
       </footer>
 
     </div> <!--/.container theme-showcase -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
