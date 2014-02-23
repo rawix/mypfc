@@ -13,6 +13,8 @@ class Users(models.Model):
     # Sign up day
     day = models.DateField(auto_now=False);
         
+    def __unicode__(self):
+        return self.username;
     def __str__(self):
         return self.username;
         
@@ -36,6 +38,7 @@ class Universities(models.Model):
 # ------------------------------------------------------------------------------
 class Countries(models.Model):
     country = models.CharField(max_length=50);
+    #uni = models.ForeignKey(max_length=50);
 
     # Alphabetical Order  
     class Meta:
@@ -73,6 +76,7 @@ class University(models.Model):
     uni = models.CharField(max_length=50);  
     # Scholarship: Erasmus or Mundus
     scholarship = models.CharField(max_length=10);
+    country = models.CharField(max_length=30);
 
     # Alphabetical Order  
     class Meta:
@@ -100,6 +104,7 @@ class Place(models.Model):
     image = models.URLField(null=True, blank=True);
     # Using Google Maps
     address = models.CharField(max_length=40);
+    postalcode = models.IntegerField();
     latitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
     longitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
     comment = models.ForeignKey(Comment, null=True, blank=True);
@@ -122,15 +127,15 @@ class InfoBasic(models.Model):
     # Basic
     uni = models.OneToOneField(University);
     address = models.CharField(max_length=50);
+    postalcode = models.IntegerField();
     city = models.CharField(max_length=30);
     country = models.CharField(max_length=50);
-    latitud = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True);
-    longitud = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True);
+    latitud = models.DecimalField(max_digits=10, decimal_places=8);
+    longitud = models.DecimalField(max_digits=10, decimal_places=8);
     description = models.TextField(help_text='Cómo describirías esta universidad');
     link = models.URLField();
     name_image = models.CharField(max_length=40, null=True, blank=True);
-    # Tengo que quitar lo de blan=True y null=True en las imagenes!!!!!!!!!!! para poder subir el fichero
-    image = models.ImageField(upload_to='universities', verbose_name=u'image_university', blank=True, null=True);
+    image = models.ImageField(upload_to='universities', verbose_name=u'image_university');
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
 
@@ -232,6 +237,10 @@ class InfoGeneral(models.Model):
     practices = models.TextField(help_text='Escribe algo', null=True, blank=True);
     contact = models.TextField(help_text='Escribe algo', null=True, blank=True);
     
+    # Residences
+    flatshare = models.TextField(help_text='Escribe algo', null=True, blank=True);
+    linktoshare = models.TextField(help_text='Escribe algo', null=True, blank=True);
+
     # Comments    
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
@@ -253,8 +262,6 @@ class InfoGeneral(models.Model):
 class InfoResidence(models.Model):
     uni = models.CharField(max_length=50);
     residence = models.ForeignKey(Place);
-    flatshare = models.TextField(help_text='Dónde poder buscar pisos', null=True, blank=True);
-    linktoshare = models.TextField(help_text='Link', null=True, blank=True);
     # Comments    
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
@@ -279,8 +286,10 @@ class UserProfile(models.Model):
     lastname = models.CharField(max_length=30);
     description = models.TextField(help_text='Escribe tus pensamientos, frases');
     n_university = models.IntegerField(default=0);
+    
     # Image data is stored in the profiles folder, title: Image
     image = models.ImageField(upload_to='profiles', verbose_name=u'image_profile', blank=True, null=True);
+    name_image= models.CharField(max_length=30);
     uni1 = models.CharField(max_length=30, null=True, blank=True);
     uni2 = models.CharField(max_length=30, null=True, blank=True);
     university = models.ForeignKey(University, null=True, blank=True);
@@ -288,9 +297,10 @@ class UserProfile(models.Model):
     sserasmus = models.CharField(max_length=10, null=True, blank=True);
     # Scholarship Mundus
     ssmundus = models.CharField(max_length=10, null=True, blank=True);
-    
+
+        
     def __unicode__(self):
-        return self.username;
+        return unicode(self.username);
         
     def __str__(self):
         return self.username;
@@ -301,14 +311,14 @@ class UserProfile(models.Model):
 class UsersUniversity(models.Model):
     uni = models.OneToOneField(University);
     nusers = models.IntegerField(default=0);
-    useuni = models.ManyToManyField(User);
+    useuni = models.ForeignKey(User);
     
     # Alphabetical Order  
     class Meta:
         ordering = ['uni']
         
     def __unicode__(self):
-        return self.uni;
+        return unicode(self.uni);
         
     def __str__(self):
         return self.uni;

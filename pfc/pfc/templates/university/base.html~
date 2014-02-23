@@ -56,9 +56,8 @@
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>
         </div><!--/.navbar-collapse -->
-      </div><!--/.container -->
+      </div><!--/.container -->be.com
     </div><!--/.navbar-inverse -->
-
 
     <div class="container theme-showcase">
       

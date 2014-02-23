@@ -62,17 +62,39 @@ def home(request, user):
         print "HOME USER: Usuario logueado: " + user
 
         # User is professor or student
+        # User has a profile image
         type_user=""
+        path_image=""
+        description=""
         t = User.objects.get(username=user)
         tt = t.username
         tu = Users.objects.all()
+        tp = UserProfile.objects.all()
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
+        for j in tp:
+            print "nombre de la imagen: " + str(j.name_image)
+            if (tt == str(j.username)) and (str(j.name_image)=="") and not (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = str(j.description)
+            elif (tt == str(j.username)) and (str(j.name_image)=="") and (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and not (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = str(j.description)
+                
+        print "voy a imprimir path_image"
+        print path_image      
+        
 
         # Return the template
-        ctx = {'username': user, 'type_user':type_user}
-        return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+        ctx = {'username': user, 'type_user':type_user, 'path_image':path_image, 'description':description}
+        return render_to_response('tuerasmus/home.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated
@@ -87,7 +109,7 @@ def myprofile(request, user):
 
     if request.user.is_authenticated():
         print "MYPROFILE: usuario logueado " + user
-
+                   
         # Concatenate URL + username
         ur = '/tuerasmus/' + user + '/edit_profile'
         print "MYPROFILE: " + ur
@@ -108,13 +130,108 @@ def edit_profile(request, user):
     if request.user.is_authenticated():
         print "EDIT_PROFILE: usuario logueado " + user 
  
+        if not (user==request.user.username):
+            print "el usuario logueado no es el mismo que el usuario solicitado"
+            ctx={'user':user, }    
+            return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+            
         # Concatenate the URL with username
-        ur = '/tuerasmus/' + user + 'edit_profile/'
+        ur = '/tuerasmus/' + user + '/edit_profile/'
         print "EDIT_PROFILE: " + ur
+        
+        # User is professor or student
+        # User has a profile image
+        type_user=""
+        path_image=""
+        description=""
+        t = User.objects.get(username=user)
+        tt = t.username
+        tu = Users.objects.all()
+        tp = UserProfile.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+        for j in tp:
+            print "nombre de la imagen: " + str(j.name_image)
+            if (tt == str(j.username)) and (str(j.name_image)=="") and not (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = str(j.description)
+            elif (tt == str(j.username)) and (str(j.name_image)=="") and (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and not (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = str(j.description)
+                
+        print "voy a imprimir path_image"
+        print path_image    
+
+        #if not (user==request.user.username):
+        #    print "el usuario logueado no es el mismo que el usuario solicitado"
+        #    users_list = UserProfile.objects.all()
+        #    user_obj = User.objects.get(username=user)
+        #    for i in users_list:
+        #        if (i.username==str(user_obj.username)):
+        #            print "imprimo la info de ese usuario que queiro conocer!!!"
+        #            print i.name
+        #            print i.lastname
+        #            print i.description
+        #    ctx={'dif':True, 'user_object':user_object, 'user':request.user.username, 'type_user':type_user, 'path_image':path_image, 'description':description}    
+        #    return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+       
+
+        if request.method=="POST":
+            form = ProfileForm(request.POST, request.FILES) 
+            if form.is_valid():
+                # Valid form
+                name = form.cleaned_data['name']
+                lastname = form.cleaned_data['lastname']
+                description = form.cleaned_data['description']
+                image = form.cleaned_data['image']
+                print str(image)
+                for u in tp:
+                    if (str(u.username) == tt):
+                        u.name = name
+                        u.lastname = lastname
+                        u.description = description
+                        
+                        if u.name_image=="":
+                            u.name_image = str(image)
+                            u.image = image
+                        else:
+                            
+                            
+                            print "hemos borrado la imagen anterior"
+                            u.name_image = str(image)
+                            u.image = image
+                            print "ya tenemos guardada la imagen nueva"
+                            
+                            
+                        print "recogi la info del form"
+                        u.save()
+                        print "se han guardado los datos del perfil de usuario"
+                        
+                        form = ProfileForm()
+                        ctx = {'alertdone':True, 'form': form, 'username':user, 'type_user':type_user, 'path_image':path_image, 'description':description}
+                        return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+                    else:
+                        print "No existe el usuario"
+                        ctx = {'alerterror':True, 'form': form, 'username':user, 'type_user':type_user, 'path_image':path_image, 'description':description}
+            else:
+                # Invalid form
+                form = ProfileForm()
+                ctx = {'alerterror':True, 'form': form, 'username':user, 'type_user':type_user, 'path_image':path_image, 'description':description}
+                
+        else:
+            form = ProfileForm()
+            ctx = {'form': form, 'username':user, 'type_user':type_user, 'path_image':path_image, 'description':description}
 
         # Return the template
-        ctx = {'username': user}
-        return render_to_response('tuerasmus/edit_profile.html', ctx, context_instance=RequestContext(request))
+        ctx = {'form':form, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
+        return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated
@@ -132,28 +249,49 @@ def uniregister(request):
         user = request.user.username
         print "UNIREGISTER: el usuario esta logueado: " + user
 
-        # User is student or professor
+        # User is professor or student
+        # User has a profile image
         type_user=""
+        path_image=""
+        description=""
         t = User.objects.get(username=user)
         tt = t.username
         tu = Users.objects.all()
+        tp = UserProfile.objects.all()
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
+        for j in tp:
+            print "nombre de la imagen: " + str(j.name_image)
+            if (tt == str(j.username)) and (str(j.name_image)=="") and not (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = str(j.description)
+            elif (tt == str(j.username)) and (str(j.name_image)=="") and (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and not (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = str(j.description)
+                
+        print "voy a imprimir path_image"
+        print path_image    
 
         # Variable 'unis' has all the universities
         unis = Universities.objects.all()
         unis = unis.extra(order_by=['country'])
-                
+        # Variable 'countries' has all the unis countries        
         countries = Countries.objects.all()
         countries = countries.extra(order_by=['country'])
-
-        print "Veamos si es metodo POST o GET"
         
 
         if request.method=="POST": 
             form = BasicForm(request.POST)       
             uni=""
+            coun=""
+            
             print "METODO POST"
 
             ### We get uni and scholarship
@@ -163,11 +301,29 @@ def uniregister(request):
             print "UNI_SELECTED: " + unimenu
             print "UNI_WRITTEN: " + unitext
 
+            
+            menu = unimenu.split(" - ")
             if unitext=="":
-                uni=unimenu
+                
+                print menu[0]
+                print menu[1]
+                
+                uni=menu[1]
             else:
                 uni=unitext
 
+            
+            countext = request.POST['coun_written']
+            
+            print "Imprimo en la siguiente line el country del menu"
+            
+            print "COUN_WRITTEN: " + countext
+            
+            if countext=="":
+                coun=menu[0]
+            else:
+                coun=countext
+                
             scholarship = request.POST['scholarship']
                                    
             print "LA OPCION DE SCHOLARSHIP HA SIDO LA SIGUIENTE: " + scholarship
@@ -187,7 +343,7 @@ def uniregister(request):
             if uni=="":
                 print "uni es vacio, no se ha seleccionado ninguna universidad"
                 error_msg="Debes introducir o seleccionar una universidad"
-                ctx = {'alerterror':True, 'msg':True, 'error_msg': error_msg, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+                ctx = {'alerterror':True, 'msg':True, 'error_msg': error_msg, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
                 return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
 
             # Se ha seleccionado una universidad
@@ -223,15 +379,17 @@ def uniregister(request):
                         # Es una universidad nueva
                         if not warning:
                             print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
-                            un = University(uni=uni, scholarship=scholarship)
+                            un = University(uni=uni, scholarship=scholarship, country=coun)
                             un.save()       
                             print "un.save()"
 
                             # Incrementamos el número de usuarios de esa universidad
                             nusers += 1
                             print "nusers: " + str(nusers)
-                            unu = UsersUniversity(uni=un, nusers=nusers)
+                            
+                            unu = UsersUniversity(uni=un, nusers=nusers, useuni=i.username)
                             print "unu.nusers: " + str(unu.nusers) 
+                            
                             unu.save()
                             print "unu.save()"
 
@@ -258,22 +416,22 @@ def uniregister(request):
                         if done:
                             # Done es True, con lo cual acabamos de registrarla
                             print "ESTOY EN ALERTAS DE DONEEEEEEEEEEEEE"
-                            ctx = {'alertdone':True, 'uni_name':uni, 'uni_id':uu_saved.id, 'saved':True, 'countries':countries, 'unis':unis, 'username':user, 'type_user':type_user}
+                            ctx = {'alertdone':True, 'uni_name':uni, 'uni_id':uu_saved.id, 'saved':True, 'countries':countries, 'unis':unis, 'username':user, 'type_user':type_user, 'path_image':path_image, 'description':description}
                         else:
                             # La universidad ya existe, y no la hemos registrado
                             print "ESTOY EN ALERTAS DE WARNINGGGGGGGGGGGGGGGGGGGGGGGG"
-                            ctx = {'alertwarning':True, 'uni_name':u_saved, 'uni_id':u_saved.id, 'saved':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+                            ctx = {'alertwarning':True, 'uni_name':u_saved, 'uni_id':u_saved.id, 'saved':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
                          
 
 
-                        print "meto en UserUniversity el nuevo usuario que se ha registrado en esa universidad"
-                        unu = University.objects.get(uni=uni)
-                        unuu = UsersUniversity.objects.all()
-                        for k in unuu:
-                            if str(k.uni)==(unu.uni):
-                                k.useuni.add(i.username)
-                                print "useu.useuni.add"
-                        
+                        #print "meto en UsersUniversity el nuevo usuario que se ha registrado en esa universidad"
+                        #unu = University.objects.get(uni=uni)
+                        #unuu = UsersUniversity.objects.all()
+                        #for k in unuu:
+                            #if str(k.uni)==str(unu.uni):
+                            #    k.useuni.add(i.username)
+                            #    print "useu.useuni.add"
+                            #    k.save()
                         print "Guardo en la base de datos el valor de uni1"
                         i.uni1 = uni
                         i.save()
@@ -307,7 +465,7 @@ def uniregister(request):
                                 save=True
                             else:
                                 print "YA TIENES LA UNIVERSIDAD ERASMUS REGISTRADA!!!!!!!!!!!!!!!!!!"
-                                ctx = {'info':True, 'alertaerasmus':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+                                ctx = {'info':True, 'alertaerasmus':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
                                 return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
                         if ms:
                             if (i.ssmundus=="") or (i.ssmundus==None):
@@ -317,7 +475,7 @@ def uniregister(request):
                                 save=True
                             else:
                                 print "YA TIENES LA UNIVERSIDAD MUNDUS REGISTRADA!!!!!!!!!!!!!!!!!!"
-                                ctx = {'info':True, 'alertamundus':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+                                ctx = {'info':True, 'alertamundus':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
                                 return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
 
 
@@ -325,7 +483,7 @@ def uniregister(request):
                         # Es una universidad nueva
                         if not warning:
                             print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
-                            un = University(uni=uni, scholarship=scholarship)
+                            un = University(uni=uni, scholarship=scholarship, country=coun)
                             un.save()
                             print "un.save()"
                             #une = UniErasmus(uni=uni, scholarship=scholarship) 
@@ -338,7 +496,7 @@ def uniregister(request):
                             # Incrementamos el número de usuarios de esa universidad
                             nusers += 1
                             print "nusers: " + str(nusers)
-                            unu = UsersUniversity(uni=un, nusers=nusers)
+                            unu = UsersUniversity(uni=un, nusers=nusers, useuni=i.username)
                             print "unu.nusers: " + str(unu.nusers) 
                             unu.save()
                             print "unu.save()"
@@ -369,20 +527,20 @@ def uniregister(request):
                         if done:
                             # Done es True, con lo cual acabamos de registrarla
                             print "ESTOY EN ALERTAS DE DONEEEEEEEEEEEEE"
-                            ctx = {'alertdone':True, 'uni_name':uni, 'uni_id':uu_saved.id, 'saved':True, 'countries':countries, 'unis':unis, 'username':user, 'type_user':type_user}
+                            ctx = {'alertdone':True, 'uni_name':uni, 'uni_id':uu_saved.id, 'saved':True, 'countries':countries, 'unis':unis, 'username':user, 'type_user':type_user, 'path_image':path_image, 'description':description}
                         else:
                             # La universidad ya existe, y no la hemos registrado
                             print "ESTOY EN ALERTAS DE WARNINGGGGGGGGGGGGGGGGGGGGGGGG"
-                            ctx = {'alertwarning':True, 'uni_name':u_saved, 'uni_id':u_saved.id, 'saved':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+                            ctx = {'alertwarning':True, 'uni_name':u_saved, 'uni_id':u_saved.id, 'saved':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
                        
 
-                        print "meto en UserUniversity el nuevo usuario que se ha registrado en esa universidad"
-                        unu = University.objects.get(uni=uni)
-                        unuu = UsersUniversity.objects.all()
-                        for k in unuu:
-                            if str(k.uni)==(unu.uni):
-                                k.useuni.add(i.username)
-                                print "useu.useuni.add"
+                        #print "meto en UserUniversity el nuevo usuario que se ha registrado en esa universidad"
+                        #unu = University.objects.get(uni=uni)
+                        #unuu = UsersUniversity.objects.all()
+                        #for k in unuu:
+                        #    if str(k.uni)==str(unu.uni):
+                        #        k.useuni.add(i.username)
+                        #        print "useu.useuni.add"
                              
                         print "Guardo en la base de datos el valor de uni2"
                         i.uni2 = uni
@@ -405,16 +563,16 @@ def uniregister(request):
                     if n_university>=2: 
                         print "N_UNIVERSITY ES 2222222222222222 O DISTINTO Y NO PODEMOS REGISTRAR NI SE GUARDAN UNIVERSIDADES"
                         # botuni es para mostrar el boton para ir a las universidades
-                        ctx = {'info':True, 'alertamax':True, 'botuni':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+                        ctx = {'info':True, 'alertamax':True, 'botuni':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
 
                     return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request)) 
 
         else:
             print "METODO GET"
-            ctx = {'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+            ctx = {'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
             return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
 
-        ctx = {'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
+        ctx = {'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user, 'path_image':path_image, 'description':description}
         return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
 
     else:
@@ -574,6 +732,7 @@ def university(request, uni_name):
                 type_user = str(i.type_user)
 
         # In University we can get the name of the university
+        uniobj=""
         try:
             uniname = University.objects.get(id=uni_name[0])
             print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
@@ -640,6 +799,8 @@ def uninfo(request, uni_name, type_info):
              
             uni = InfoBasic.objects.get(uni=uniname)
             print str(uni.image)
+            print uni.latitud
+            print uni.longitud
             ur = "/tuerasmus/media/universities/"+str(uni.image) 
             print ur
             if type_info=="basic":
@@ -655,16 +816,18 @@ def uninfo(request, uni_name, type_info):
                 print InfoGeneral.objects.all().count()
                  
             elif type_info=="hotel":
+                arr = []
                 print "muestro la info hotel"
                 info="hotel"
                 info_list = Place.objects.filter(uni=uniname.uni)
                 print "imprimiendo los nombres de residencias"
+                n = 0;
                 for i in info_list:
-                    print i.name
-                    print i.latitud
-                    print i.longitud
+                    arr.append([str(i.name), str(i.latitud), str(i.longitud)])
+                    print arr[n]
+                    n+=1
 
-                ctx = {'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'mispuntos':arr, 'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
 
                 # Return the template
                 return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
@@ -722,13 +885,35 @@ def myuniversity(request, user):
     if request.user.is_authenticated():
         print "MYUNIVERSITY: el usuario esta logueado " +  user
 
-        # User is student or professor
-        t = User.objects.get(username=request.user.username)
+        # User is professor or student
+        # User has a profile image
+        type_user=""
+        path_image=""
+        description=""
+        t = User.objects.get(username=user)
         tt = t.username
         tu = Users.objects.all()
+        tp = UserProfile.objects.all()
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
+        for j in tp:
+            print "nombre de la imagen: " + str(j.name_image)
+            if (tt == str(j.username)) and (str(j.name_image)=="") and not (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = str(j.description)
+            elif (tt == str(j.username)) and (str(j.name_image)=="") and (str(j.description)==""):
+                path_image = "tuerasmus/erasmus.jpg"
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = "Mi erasmus será genial"
+            elif (tt == str(j.username)) and not (str(j.description)=="") and not (str(j.name_image)==""):
+                path_image = "profiles/" + str(j.name_image)
+                description = str(j.description)
+                
+        print "voy a imprimir path_image"
+        print path_image    
 
         print "Vamos a hacer un try para ver como conseguimos los datos que queremos de user"
         try:
@@ -775,20 +960,20 @@ def myuniversity(request, user):
                 pass
 
             if reco1 and not reco2:                
-                ctx = {'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'type_user':type_user, 'username': request.user.username}
+                ctx = {'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'type_user':type_user, 'username': request.user.username, 'path_image':path_image, 'description':description}
             elif reco2 and not reco1:
-                ctx = {'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+                ctx = {'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username, 'path_image':path_image, 'description':description}
             elif reco1 and reco2:
                 print "reco1 y reco2 son True!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                ctx = {'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+                ctx = {'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username, 'path_image':path_image, 'description':description}
             else:
-                ctx = {'type_user':type_user, 'username': request.user.username}
+                ctx = {'type_user':type_user, 'username': request.user.username, 'path_image':path_image, 'description':description}
             
                 
 
         except UserProfile.DoesNotExist:
             print "universidades uni1 y uni2 están vacías!!!!!!!!1"
-            ctx = {'type_user':type_user, 'username': request.user.username}    
+            ctx = {'type_user':type_user, 'username': request.user.username, 'path_image':path_image, 'description':description}    
 
 
         return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))
@@ -1158,7 +1343,7 @@ def unieditform(request, uni_name, type_form):
 def myerasmus(request, user):
     if request.user.is_authenticated():
       
-        print "MYERASMUS: usuario logueado" + user
+        print "MYERASMUS: usuario logueado " + user
         
         # User is student or professor
         t = User.objects.get(username=user)
@@ -1167,7 +1352,61 @@ def myerasmus(request, user):
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
+                
+        uni1=""
+        uni2=""
+        tp = UserProfile.objects.all()
+        for j in tp:
+            if (tt==str(j.username)):
+                try:
+                    uni1 = str(j.uni1)
+                except:
+                    uni1 = j.uni1
+                try:
+                    uni2 = str(j.uni2)
+                except:
+                    uni2 = j.uni2
+                    
+                    
+                try:
+                    u1 = University.objects.get(uni=uni1)
+                    try:
+                        nuu1 = UsersUniversity.objects.filter(uni=u1).count()
+                        print nuu1
+                        uu1 = UsersUniversity.objects.filter(uni=u1)
+                        for i in uu1:
+                            print str(i.useuni)
+                            u = User.objects.get(username=str(i.useuni))
+                            print u
 
+                    except UsersUniversity.DoesNotExist:
+                        uu1 = ""
+                except University.DoesNotExist:
+                    u1=""
+                    
+                    
+                try:
+                    u2 = University.objects.get(uni=uni2)
+                    try:            
+                        nuu2 = UsersUniversity.objects.filter(uni=u2).count()    
+                        uu2 = UsersUniversity.objects.filter(uni=u2)
+                        print nuu2
+                        for i in uu2:
+                            print str(i.useuni)
+                            u = User.objects.get(username=(i.useuni))
+                            print u
+                    except:
+                        uu2=""
+                except University.DoesNotExist:
+                    u2=""
+                                
+                        
+
+
+            else:
+                print "No hay universidades ni usuarios"
+                
+        
         ctx = {'type_user': type_user, 'username':user}
         return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
 
@@ -1182,7 +1421,7 @@ def myerasmus(request, user):
 # All the users of the website
 def urerasmus(request):
     if request.user.is_authenticated():
-        print "URERASMUS: usuario logueado" + request.user.username
+        print "URERASMUS: usuario logueado " + request.user.username
         
         # User is student or professor
         t = User.objects.get(username=request.user.username)
@@ -1192,8 +1431,11 @@ def urerasmus(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        ctx = {'type_user': type_user, 'username':request.user.username}
-        return render_to_response('tuerasmus/urerasmus.html', ctx, context_instance=RequestContext(request))
+        uu = UsersUniversity.objects.all()            
+        uall = University.objects.all()       
+                            
+        ctx = {'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        return render_to_response('university/urerasmus.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User not authenticated

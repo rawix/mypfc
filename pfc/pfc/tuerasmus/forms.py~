@@ -61,8 +61,8 @@ class RegisterForm(forms.Form):
 class ProfileForm(forms.Form):
     name = forms.CharField(label="Nombre", widget=forms.TextInput(), error_messages={'required': 'Debes introducir tu nombre'})
     lastname = forms.CharField(label="Apellidos", widget=forms.TextInput(), error_messages={'required': 'Debes introducir tus apellidos'})
-    description = forms.CharField(label="Escribe una frase que te defina", required=False)
-    photo = forms.ImageField(label="Imagen de perfil", required=False)
+    description = forms.CharField(label="Escribe una frase que te defina")
+    image = forms.ImageField(label="Imagen de perfil")
 
 #----------------------------------------------------------------------------
 #            Class BasicForm: to change the university profile   
@@ -75,6 +75,7 @@ class BasicForm(forms.Form):
     #    fields = ('address', 'city', 'country', 'latitud', 'longitud', 'link', 'image', 'description')
         
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la dirección'})
+    postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el código postal'})
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
     country = forms.CharField(label="País", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el país'})
     latitud = forms.DecimalField(label='Coordenadas de latitud', widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
@@ -143,6 +144,7 @@ class ResidenceForm(forms.Form):
 class PlaceForm(forms.Form):
     name = forms.CharField(label="Nombre del sitio", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     latitud = forms.DecimalField(label="Coordenadas de latitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
     longitud = forms.DecimalField(label="Coordenadas de longitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de longitud'})
     image = forms.URLField(label="Imagen (copia la URL de internet)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la URL de una imagen', 'invalid':u'Introduce una URL válida'}, )
