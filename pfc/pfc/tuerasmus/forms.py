@@ -10,7 +10,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.utils import timezone 
-from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 #import datetime
 
@@ -194,7 +194,7 @@ class CityForm(forms.Form):
 class OthersForm(forms.Form):
     tema = forms.CharField(label="Tema de información(documentación, residencias, asignaturas, la ciudad)", widget=forms.TextInput(), required=False)
     title = forms.CharField(label="Título de tu comentario", widget=forms.TextInput(), required=False)
-    body_text = forms.CharField(label="Escribe lo que quieras", widget=forms.TextInput(), required=False)
+    body_text = forms.CharField(label="El contenido de tu comentario", widget=forms.TextInput(), required=False)
     
     
 

@@ -194,6 +194,7 @@ class CityForm(forms.Form):
 class OthersForm(forms.Form):
     tema = forms.CharField(label="Tema de información(documentación, residencias, asignaturas, la ciudad)", widget=forms.TextInput(), required=False)
     title = forms.CharField(label="Título de tu comentario", widget=forms.TextInput(), required=False)
-    body_text = forms.CharField(label="Escribe lo que quieras", widget=forms.TextInput(), required=False)
+    body_text = forms.CharField(label="El contenido de tu comentario", widget=forms.TextInput(), required=False)
+    
     
 

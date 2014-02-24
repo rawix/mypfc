@@ -35,29 +35,14 @@ class Universities(models.Model):
         return self.country + " - " + self.noun;
 
 # ------------------------------------------------------------------------------
-#                               Countries class.
-# ------------------------------------------------------------------------------
-class Countries(models.Model):
-    country = models.CharField(max_length=50);
-    uni = models.ForeignKey(max_length=50);
-
-    # Alphabetical Order  
-    class Meta:
-        verbose_name_plural = u'Countries'
-        ordering = ['country']
-
-    def __unicode__(self):
-        return self.country;
-
-# ------------------------------------------------------------------------------
 #                               Comment class.
 # ------------------------------------------------------------------------------
 class Comment(models.Model):
     username = models.CharField(max_length=30);
     title = models.CharField(max_length=30);
     text = models.TextField(help_text="Comenta lo que opinas");
-    # Image data is stored in the xxx folder, title=comment title: 
-    image = models.ImageField(upload_to='', verbose_name=u'title' , null=True, blank=True)
+    # Image data is stored in the xxx folder, title=comment 
+    #image = models.ImageField(upload_to='', verbose_name=u'title', null=True, blank=True);
     # Publication day
     day_publicated = models.DateField();
     time = models.DateTimeField(auto_now=True);
@@ -88,6 +73,21 @@ class University(models.Model):
         return self.uni;
 
 # ------------------------------------------------------------------------------
+#                               Countries class.
+# ------------------------------------------------------------------------------
+class Countries(models.Model):
+    country = models.CharField(max_length=50);
+    uni = models.ForeignKey(University, null=True, blank=True);
+
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Countries'
+        ordering = ['country']
+
+    def __unicode__(self):
+        return self.country;
+        
+# ------------------------------------------------------------------------------
 #                               Score class.
 # ------------------------------------------------------------------------------
 class Score(models.Model):
@@ -111,6 +111,8 @@ class Place(models.Model):
     city = models.CharField(max_length=40); 
     latitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
     longitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
+    
+    # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
     
@@ -142,7 +144,7 @@ class InfoBasic(models.Model):
     name_image = models.CharField(max_length=40, null=True, blank=True);
     image = models.ImageField(upload_to='universities', verbose_name=u'image_university');
     
-     # Comments
+    # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
 
@@ -271,6 +273,18 @@ class InfoGeneral(models.Model):
     def __str__(self):
         return self.uni;
 
+
+# ------------------------------------------------------------------------------
+#                               Others class.
+# ------------------------------------------------------------------------------
+class Others(models.Model):
+    uni = models.CharField(max_length=50);
+    username = models.CharField(max_length=50);
+    tema = models.TextField(max_length=60);
+    title = models.CharFieldField(max_length=60);
+    body_text = models.TextField(help_text='Escribe algo');
+
+
 # ------------------------------------------------------------------------------
 #                               Residence class.
 # ------------------------------------------------------------------------------
@@ -316,7 +330,7 @@ class UserProfile(models.Model):
     
     # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
-    score = models.ForeignKey(Score, null=True, balnk=True);
+    score = models.ForeignKey(Score, null=True, blank=True);
         
     def __unicode__(self):
         return unicode(self.username);
@@ -361,7 +375,7 @@ class City(models.Model):
 
     # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
-    score = models.ForeignKey(Score, null=True, balnk=True);
+    score = models.ForeignKey(Score, null=True, blank=True);
         
     # Alphabetical Order  
     class Meta:

@@ -39,7 +39,7 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 from datetime import datetime, date
 
 # Database tables.  
-from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 # Forms
 from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CostumeServiceForm, DocumentationForm, ResidenceForm, PlaceForm, SubjectsForm, WorkForm, CityForm, OthersForm
@@ -852,9 +852,11 @@ def university(request, uni_name):
                 print latitud
                 print longitud
             except InfoBasic.DoesNotExist:
-                latitud = 0.0
-                longitud = 0.0
-                
+                print "No se encontró el nombre d el auniversidad en la tabla InfoBasic"
+                ctx = {'no_info':True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                # Return the template
+                return render_to_response('university/geouniversity.html', ctx, context_instance=RequestContext(request))
+               
             
             
         except University.DoesNotExist:
@@ -904,56 +906,63 @@ def uninfo(request, uni_name, type_info):
 
         # MÉTODO GET
         if request.method=="GET":
-             
-            uni = InfoBasic.objects.get(uni=uniname)
-            print str(uni.image)
-            print uni.latitud
-            print uni.longitud
-            ur = "/tuerasmus/media/universities/"+str(uni.image) 
-            print ur
-            if type_info=="basic":
-                print "muestro la info basica"
-                info="basic"
-                info_list = InfoGeneral.objects.filter(uni=uniname.uni)
+            try:
+                uni = InfoBasic.objects.get(uni=uniname)
+                print str(uni.image)
+                print uni.latitud
+                print uni.longitud
+                ur = "/tuerasmus/media/universities/"+str(uni.image) 
+                print ur
+                if type_info=="basic":
+                    print "muestro la info basica"
+                    info="basic"
+                    info_list = InfoGeneral.objects.filter(uni=uniname.uni)
 
-            elif type_info=="doc":
-                print "muestro la info doc"
-                info="doc"
-                info_list = InfoGeneral.objects.filter(uni=uniname.uni)
-                print "Acabamos de obtener nuestra info_list"
-                print InfoGeneral.objects.all().count()
-                 
-            elif type_info=="hotel":
-                arr = []
-                print "muestro la info hotel"
-                info="hotel"
-                info_list = Place.objects.filter(uni=uniname.uni)
-                print "imprimiendo los nombres de residencias"
-                n = 0;
-                for i in info_list:
-                    arr.append([str(i.name), str(i.latitud), str(i.longitud)])
-                    print arr[n]
-                    n+=1
+                elif type_info=="doc":
+                    print "muestro la info doc"
+                    info="doc"
+                    info_list = InfoGeneral.objects.filter(uni=uniname.uni)
+                    print "Acabamos de obtener nuestra info_list"
+                    print InfoGeneral.objects.all().count()
+                     
+                elif type_info=="hotel":
+                    arr = []
+                    print "muestro la info hotel"
+                    info="hotel"
+                    info_list = Place.objects.filter(uni=uniname.uni)
+                    print "imprimiendo los nombres de residencias"
+                    n = 0;
+                    for i in info_list:
+                        arr.append([str(i.name), str(i.latitud), str(i.longitud)])
+                        print arr[n]
+                        n+=1
 
-                ctx = {'mispuntos':arr, 'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                    ctx = {'mispuntos':arr, 'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
 
-                # Return the template
-                return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
+                    # Return the template
+                    return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
 
 
-            elif type_info=="subjects":
-                print "muestro la info subjects"
-                info="subjects"
+                elif type_info=="subjects":
+                    print "muestro la info subjects"
+                    info="subjects"
 
-            elif type_info=="city":
-                print "muestro la info city"
-                info="city"
+                elif type_info=="city":
+                    print "muestro la info city"
+                    info="city"
 
-            elif type_info=="others":
-                print "muestro la info others"
-                info="others"
+                elif type_info=="others":
+                    print "muestro la info others"
+                    info="others"
+                    
+                ctx = {'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                 
-            ctx = {'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+            except InfoBasic.DoesNotExist:
+                # uniname.uni: uni's name
+                # uni_name: id_uni
+                # uni.image: url's image of uni
+                ctx = {'no_info':True, 'uniimage':uni.image, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+               
 
             # Return the template
             return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
@@ -1345,15 +1354,7 @@ def unieditform(request, uni_name, type_form):
                     
                     uni_subject = Subjects(uni=uni_obj, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
                     uni_subject.save()
-                    try:
-                        un_data = University.objects.get(uni=uni)
-                        un_data.scholarships = scholarships
-                        un_data.practices = practices
-                        un_data.contact = contact
-                        un_data.save()
-                    except University.DoesNotExist:
-                        un_data = University(uni=uni, practices=practices, scholarships=scholarships, contact=contact)
-                        un_data.save()
+
                         
                     form1 = SubjectsForm()
                     alertdone=True
@@ -1395,17 +1396,25 @@ def unieditform(request, uni_name, type_form):
             ###################### OTHERS FORM ######################
             elif type_form=="others":
                 form = OthersForm(request.POST)
+                tit = "Temas variados"
                 if form.is_valid():
                     # Valid form
-                    others = form.cleaned_data['general']
+                    tema = form.cleaned_data['tema']
+                    title = form.cleaned_data['title']
+                    body_text = form.cleaned_data['body_text']
+                    
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO VARIOS"
                     
+                    data_others = Others(uni=uni_obj.uni, username=request.user.username, tema=tema, title=title, body_text=body_text)
+                    data_others.save()
+                    
+                    form = OthersForm()
                     alertdone = True
                 else:
                     # Invalid form
                     alerterror = True
                     
-                ctx = {'form':form, 'alerterror': alerterror, 'alertdone':alertdone, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'tit':tit, 'form':form, 'alerterror': alerterror, 'alertdone':alertdone, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
 
             # Return the template in method POST
             return render_to_response('university/uni_form.html', ctx, context_instance=RequestContext(request))
