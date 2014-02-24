@@ -8,7 +8,7 @@
     <!--<link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">-->
 
     {% if user.is_authenticated %}
-      <title> {{username}} | Home</title>
+      <title> {{user.username}} | Home</title>
     {% endif %}
 
     <style>
@@ -49,7 +49,7 @@
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡ Hola {{username}} !!</em></strong></a>
+              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡ Hola {{user.username}} !!</em></strong></a>
             </div>
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>

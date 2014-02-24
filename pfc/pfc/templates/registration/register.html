@@ -35,7 +35,24 @@
           {% endif %}
 
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+              <p>
+              <div class="radio-inline">
+                <label>
+                  <input type="radio" name="genero" id="optM" value="male" checked>
+                  Masculino
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input type="radio" name="genero" id="optF" value="female">
+                  Femenino
+                </label>
+              </div>
+              </p>
+              
               {{ form.as_p }}
+              
+              <p>
               <div class="radio-inline">
                 <label>
                   <input type="radio" name="type_user" id="optA" value="alumno" checked>
@@ -48,6 +65,7 @@
                   Profesor
                 </label>
               </div>
+              </p>
 
               <br>
               <button class="btn btn-primary" type="submit">Registrar</button>

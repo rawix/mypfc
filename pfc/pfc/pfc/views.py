@@ -170,6 +170,7 @@ def register(request):
                 username = form.cleaned_data['username']
                 email = form.cleaned_data['email']
                 type_user = request.POST['type_user']
+                genero = request.POST['genero']
                 password_one = form.cleaned_data['password_one']
                 password_two = form.cleaned_data['password_two']
                 # Take the time automatically
@@ -190,7 +191,7 @@ def register(request):
                     u = User.objects.create_user(username=username, password=password_one)
                     u.save()
 
-                    us = Users(username=u, email=email, type_user=type_user, day=day)
+                    us = Users(username=u, email=email, type_user=type_user, genero=genero, day=day)
                     us.save()
 
                     up = UserProfile(username=u)

@@ -28,6 +28,7 @@
 
 {% block content %}
 
+    {% if not see_profile %}
         <div class="col-xs-12 col-sm-9">
         
           <p class="pull-right visible-xs">
@@ -64,10 +65,32 @@
               <button class="btn btn-primary" type="submit">Guardar</button>
               <br><br>
             </form>
-            
+        </div><!--./col-xs-12-->
+    {% else %}
+        <div class="col-xs-12 col-sm-9">
+        
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">    
+            <center><img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/></center>
+            <!--<img src="http://placehold.it/150x150"/> -->
+            <br>
+            <p><center><strong> {{description}} </strong></center></p>
+          </div>
+
+          <p>
+            <li>Nombre: {{up_object.name}}</li>
+            <li>Apellidos: {{up_object.lastname}}</li>
+            <li>Descripción: {{up_object.description}}</li>
+            <li>Universidad Erasmus: {{up_object.uni1}}</li>
+            <li>Universidad Munde: {{up_object.uni2}}</li>
+          </p>                
+    
 
           
-        </div><!--./col-->
+        </div><!--./col-xs-12-->
+    {% endif %}   
 
 {% endblock %}
 

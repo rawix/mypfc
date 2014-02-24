@@ -75,7 +75,7 @@ class BasicForm(forms.Form):
     #    fields = ('address', 'city', 'country', 'latitud', 'longitud', 'link', 'image', 'description')
         
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la dirección'})
-    postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el código postal'})
+    postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), required=False)
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
     country = forms.CharField(label="País", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el país'})
     latitud = forms.DecimalField(label='Coordenadas de latitud', widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
@@ -144,7 +144,8 @@ class ResidenceForm(forms.Form):
 class PlaceForm(forms.Form):
     name = forms.CharField(label="Nombre del sitio", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), required=False)
+    city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     latitud = forms.DecimalField(label="Coordenadas de latitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
     longitud = forms.DecimalField(label="Coordenadas de longitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de longitud'})
     image = forms.URLField(label="Imagen (copia la URL de internet)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la URL de una imagen', 'invalid':u'Introduce una URL válida'}, )
@@ -153,9 +154,15 @@ class PlaceForm(forms.Form):
 #            Class SubjectsForm: to change the university profile   
 #----------------------------------------------------------------------------
 class SubjectsForm(forms.Form):
-    subname = forms.CharField(label="Asignaturas", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    subname = forms.CharField(label="Asignatura en la URJC", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
     credits = forms.DecimalField(label="Créditos de la asignatura", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo', 'invalid':u'Debes introducir un número'})
-    subnameout = forms.CharField(label="Asignaturas", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    subnameout = forms.CharField(label="Asignatura cursada fuera", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    subnameout2 = forms.CharField(label="Otra asignatura cursada fuera", widget=forms.TextInput(), required=False)
+    subnameout3 = forms.CharField(label="Otra más cursada fuera", widget=forms.TextInput(), required=False)
+    works = forms.CharField(label="Trabajos a entregar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    practices = forms.CharField(label="Prácticas a realizar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    difficult = forms.CharField(label="Dificultad de la asignatura fuera", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    
     
 #----------------------------------------------------------------------------
 #            Class WorkForm: to change the university profile   
@@ -185,5 +192,9 @@ class CityForm(forms.Form):
 #            Class OthersForm: to change the university profile   
 #----------------------------------------------------------------------------
 class OthersForm(forms.Form):
-    others = forms.CharField(label="Varios", widget=forms.TextInput(), required=False)
+    tema = forms.CharField(label="Tema de información(documentación, residencias, asignaturas, la ciudad)", widget=forms.TextInput(), required=False)
+    title = forms.CharField(label="Título de tu comentario", widget=forms.TextInput(), required=False)
+    body_text = forms.CharField(label="Escribe lo que quieras", widget=forms.TextInput(), required=False)
+    
+    
 

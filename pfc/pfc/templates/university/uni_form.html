@@ -23,18 +23,22 @@
         <a class="btn btn-lg btn-default" href="http://mygeoposition.com/" target="_blank">Coordenadas</a>
       </p>
     {% endif %}
-    <br><br>
+    
+    <h3><strong>{{tit}}</strong></h3>
     {{form.as_p}}
     <h3><strong>{{tit1}}</strong></h3>
     {{form1.as_p}}
-    <br>
     <h3><strong>{{tit2}}</strong></h3>
     {{form2.as_p}}
-    <br>
     <h3><strong>{{tit3}}</strong></h3>
     {{form3.as_p}}
-    <br>
-    <button class="btn btn-primary" type="submit">Guardar</button>
+    <h3><strong>{{tit4}}</strong></h3>
+    {{form4.as_p}}
+    <h3><strong>{{tit5}}</strong></h3>
+    {{form5.as_p}}
+    {% if not saved %}
+      <button class="btn btn-primary" type="submit">Guardar</button>
+    {% endif %}
     <br><br>
   </form>
 

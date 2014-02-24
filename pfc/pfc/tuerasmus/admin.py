@@ -33,10 +33,8 @@ admin.site.register(Subjects)
 admin.site.register(Universities)
 admin.site.register(University)
 
-# Signed up users
+# Users
 admin.site.register(Users)
-
-# User's profile
 admin.site.register(UserProfile)
 
 # Users that belong to the university

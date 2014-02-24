@@ -63,6 +63,9 @@
       {% block on_geolocalize %}
       {% endblock %}
       
+      {% block on_georesidence %}
+      {% endblock %}
+      
       {% block all_info %}
       {% endblock %}      
 

@@ -10,6 +10,7 @@ class Users(models.Model):
     email = models.CharField(max_length=30);
     # Professor or student
     type_user = models.CharField(max_length=1);
+    genero = models.CharField(max_length=1);
     # Sign up day
     day = models.DateField(auto_now=False);
         
@@ -38,7 +39,7 @@ class Universities(models.Model):
 # ------------------------------------------------------------------------------
 class Countries(models.Model):
     country = models.CharField(max_length=50);
-    #uni = models.ForeignKey(max_length=50);
+    uni = models.ForeignKey(max_length=50);
 
     # Alphabetical Order  
     class Meta:
@@ -55,8 +56,8 @@ class Comment(models.Model):
     username = models.CharField(max_length=30);
     title = models.CharField(max_length=30);
     text = models.TextField(help_text="Comenta lo que opinas");
-    # Image data is stored in the city folder, title=comment title: 
-    image = models.ImageField(upload_to='city', verbose_name=u'title' , blank=True, null=True)
+    # Image data is stored in the xxx folder, title=comment title: 
+    image = models.ImageField(upload_to='', verbose_name=u'title' , null=True, blank=True)
     # Publication day
     day_publicated = models.DateField();
     time = models.DateTimeField(auto_now=True);
@@ -73,7 +74,8 @@ class Comment(models.Model):
 #                               University class.
 # ------------------------------------------------------------------------------
 class University(models.Model):
-    uni = models.CharField(max_length=50);  
+    uni = models.CharField(max_length=50); 
+    username = models.CharField(max_length=30); 
     # Scholarship: Erasmus or Mundus
     scholarship = models.CharField(max_length=10);
     country = models.CharField(max_length=30);
@@ -100,13 +102,17 @@ class Score(models.Model):
 # ------------------------------------------------------------------------------
 class Place(models.Model):
     uni = models.CharField(max_length=50);
+    username = models.CharField(max_length=30);
     name = models.CharField(max_length=40);
     image = models.URLField(null=True, blank=True);
     # Using Google Maps
     address = models.CharField(max_length=40);
-    postalcode = models.IntegerField();
+    postalcode = models.IntegerField(null=True, blank=True);
+    city = models.CharField(max_length=40); 
     latitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
     longitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
+    
+    # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
     
@@ -126,8 +132,9 @@ class Place(models.Model):
 class InfoBasic(models.Model):
     # Basic
     uni = models.OneToOneField(University);
+    username = models.CharField(max_length=30);
     address = models.CharField(max_length=50);
-    postalcode = models.IntegerField();
+    postalcode = models.IntegerField(null=True, blank=True);
     city = models.CharField(max_length=30);
     country = models.CharField(max_length=50);
     latitud = models.DecimalField(max_digits=10, decimal_places=8);
@@ -136,6 +143,8 @@ class InfoBasic(models.Model):
     link = models.URLField();
     name_image = models.CharField(max_length=40, null=True, blank=True);
     image = models.ImageField(upload_to='universities', verbose_name=u'image_university');
+    
+     # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
 
@@ -175,9 +184,17 @@ class InfoStadistic(models.Model):
 # ------------------------------------------------------------------------------
 class Subjects(models.Model):
     subname = models.CharField(max_length=20);
+    username = models.CharField(max_length=30);
     uni = models.ForeignKey(University);
     credits = models.IntegerField(default=0);
     subnameout = models.CharField(max_length=40);
+    subnameout2 = models.CharField(max_length=40, null=True, blank=True);
+    subnameout3 = models.CharField(max_length=40, null=True, blank=True);
+    works = models.CharField(max_length=40);
+    practices = models.CharField(max_length=40);
+    difficult = models.CharField(max_length=40);
+    
+    # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
     score = models.ForeignKey(Score, null=True, blank=True);
     
@@ -261,6 +278,7 @@ class InfoGeneral(models.Model):
 # ------------------------------------------------------------------------------
 class InfoResidence(models.Model):
     uni = models.CharField(max_length=50);
+    username = models.CharField(max_length=30);    
     residence = models.ForeignKey(Place);
     # Comments    
     comment = models.ForeignKey(Comment, null=True, blank=True);
@@ -297,7 +315,10 @@ class UserProfile(models.Model):
     sserasmus = models.CharField(max_length=10, null=True, blank=True);
     # Scholarship Mundus
     ssmundus = models.CharField(max_length=10, null=True, blank=True);
-
+    
+    # Comments
+    comment = models.ForeignKey(Comment, null=True, blank=True);
+    score = models.ForeignKey(Score, null=True, balnk=True);
         
     def __unicode__(self):
         return unicode(self.username);
@@ -328,6 +349,7 @@ class UsersUniversity(models.Model):
 # ------------------------------------------------------------------------------
 class City(models.Model):
     cityname = models.CharField(max_length=50);
+    username = models.CharField(max_length=30);
     prices = models.TextField();
     uniarea = models.TextField();
     studentlife = models.TextField();
@@ -338,6 +360,10 @@ class City(models.Model):
     shopping = models.TextField();
     erasmuslife = models.TextField();
     more = models.TextField();
+
+    # Comments
+    comment = models.ForeignKey(Comment, null=True, blank=True);
+    score = models.ForeignKey(Score, null=True, balnk=True);
         
     # Alphabetical Order  
     class Meta:
@@ -348,9 +374,4 @@ class City(models.Model):
         
     def __str__(self):
         return self.cityname;
-
-
-
-
-
 

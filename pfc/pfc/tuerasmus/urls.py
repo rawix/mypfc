@@ -29,7 +29,8 @@ urlpatterns = patterns('',
     url(r'^comments/$', 'tuerasmus.views.comments', name='comments'),
 
     # Users urls
-    url(r'^(?P<user>[\S]+)/myprofile/$', 'tuerasmus.views.myprofile', name='myprofile'), 
+    url(r'^(?P<user>[\S]+)/myprofile/$', 'tuerasmus.views.myprofile', name='myprofile'),
+    url(r'^(?P<user>[\S]+)/profile/$', 'tuerasmus.views.profile', name='profile'), 
     url(r'^(?P<user>[\S]+)/edit_profile/$', 'tuerasmus.views.edit_profile', name='edit_profile'), 
     url(r'^(?P<user>[\S]+)/myuniversity/$', 'tuerasmus.views.myuniversity', name='myuniversity'),
     url(r'^(?P<user>[\S]+)/myerasmus/$', 'tuerasmus.views.myerasmus', name='myerasmus'),

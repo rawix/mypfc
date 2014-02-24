@@ -48,7 +48,7 @@
       </div>
  
       {% regroup uall by scholarship as scholarship_list %}
-      {% regroup scholarship_list by country as country_list %}    
+         
       <ul>
         {% for scholarship in scholarship_list %}
             <li><h3><strong> {{ scholarship.grouper }} </strong></h3>      
@@ -72,7 +72,10 @@
             <li><h3><strong> {{ uni.grouper }} </strong></h3>      
             <ul>
                 {% for item in uni.list %}
-                  <li><a href="/tuerasmus/{{item.useuni}}/myprofile">{{item.useuni}}</a></li>
+                    <li><a href="/tuerasmus/{{item.useuni}}/profile">{{item.useuni.username}}</a></li>
+                    <!--
+                      <li><a href="/tuerasmus/{{item.useuni}}/profile">{{k.username}}</a></li>
+                    -->
                 {% endfor %}
             </ul>
             </li>
