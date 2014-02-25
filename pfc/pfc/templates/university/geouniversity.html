@@ -52,12 +52,17 @@
 
 {% endblock %}
 
+{% block pathimage %}
+  <img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/>
+{% endblock %}
+
 {% block on_geolocalize %}
 
 
-	<div class="row">
+	
 
     {% if not no_info %}
+            <div class="row">
 		                  <div class="col-xs-9">
 			                  <h2> Localizada la universidad </h2>
 			                  <div id="googleMap" style="width:700px;height:500px;"></div>
@@ -71,15 +76,16 @@
 			                    <br><br>
 				                  <h4><strong>{{uniobj.uni}}</strong><br>
 				                  {{uniobj.address}}<br>
+				                  {{uniobj.postalcode}}<br>
 				                  {{uniobj.city}}<br>
 				                  {{uniobj.country}}<br>
-				                  <abbr title="Phone">P:</abbr> {{uniobj.tlf}}</h4>
+				                  <abbr title="Phone">P:</abbr> {{uniobj.phone}}</h4>
 			                  </address>
 
 		                  </div>
 		
-		                  
-
+		        </div><!--/.row-->        
+            <div class="row">
                       <div class="page-header">
                         <h1>Dropdown menus</h1>
                       </div>
@@ -119,7 +125,7 @@
                         <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
                       </div>
 
-
+              </div><!--/.row--> 
 
                       <div class="page-header">
                         <h1>Enlaces relacionados</h1>
@@ -161,7 +167,7 @@
                             </a>
                           </div>
                         </div><!-- /.col-sm-4 -->
-                      </div>
+                      </div><!--/.row--> 
 
 
 

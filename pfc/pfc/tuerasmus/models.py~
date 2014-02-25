@@ -39,10 +39,10 @@ class Universities(models.Model):
 # ------------------------------------------------------------------------------
 class Comment(models.Model):
     username = models.CharField(max_length=30);
+    uni = models.CharField(max_length=40);
+    tag = models.CharField(max_length=40);
     title = models.CharField(max_length=30);
     text = models.TextField(help_text="Comenta lo que opinas");
-    # Image data is stored in the xxx folder, title=comment 
-    #image = models.ImageField(upload_to='', verbose_name=u'title', null=True, blank=True);
     # Publication day
     day_publicated = models.DateField();
     time = models.DateTimeField(auto_now=True);
@@ -55,6 +55,16 @@ class Comment(models.Model):
     def __unicode__(self):
         return str(self.day) + " - " + self.username + ": " + self.title;
         
+# ------------------------------------------------------------------------------
+#                               Contact class.
+# ------------------------------------------------------------------------------
+class Contact(models.Model):
+    subject = models.CharField(max_length=100);
+    message = models.CharField();
+    sender = models.EmailField();
+    cc_myself = models.BooleanField(required=False);    
+    
+    
 # ------------------------------------------------------------------------------
 #                               University class.
 # ------------------------------------------------------------------------------
@@ -104,10 +114,12 @@ class Place(models.Model):
     uni = models.CharField(max_length=50);
     username = models.CharField(max_length=30);
     name = models.CharField(max_length=40);
-    image = models.URLField(null=True, blank=True);
-    # Using Google Maps
+    name_image = models.CharField(max_length=40, null=True, blank=True);
+    image = models.ImageField(upload_to='places', verbose_name=u'image_place', null=True, blank=True);
+    # Google Maps
     address = models.CharField(max_length=40);
     postalcode = models.IntegerField(null=True, blank=True);
+    phone = models.IntegerField(null=True, blank=True);
     city = models.CharField(max_length=40); 
     latitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
     longitud = models.DecimalField(default=0, max_digits=6, decimal_places=4);
@@ -133,16 +145,18 @@ class InfoBasic(models.Model):
     # Basic
     uni = models.OneToOneField(University);
     username = models.CharField(max_length=30);
+    description = models.TextField(help_text='Cómo describirías esta universidad');
+    link = models.URLField();
+    name_image = models.CharField(max_length=40);
+    image = models.ImageField(upload_to='universities', verbose_name=u'image_university');
+    # Google Maps
     address = models.CharField(max_length=50);
     postalcode = models.IntegerField(null=True, blank=True);
+    phone = models.IntegerField();
     city = models.CharField(max_length=30);
     country = models.CharField(max_length=50);
     latitud = models.DecimalField(max_digits=10, decimal_places=8);
     longitud = models.DecimalField(max_digits=10, decimal_places=8);
-    description = models.TextField(help_text='Cómo describirías esta universidad');
-    link = models.URLField();
-    name_image = models.CharField(max_length=40, null=True, blank=True);
-    image = models.ImageField(upload_to='universities', verbose_name=u'image_university');
     
     # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
@@ -154,7 +168,7 @@ class InfoBasic(models.Model):
         ordering = ['uni']
  
     def __unicode__(self):
-        return self.uni;
+        return unicode(self.uni);
         
     def __str__(self):
         return self.uni;
@@ -281,7 +295,7 @@ class Others(models.Model):
     uni = models.CharField(max_length=50);
     username = models.CharField(max_length=50);
     tema = models.TextField(max_length=60);
-    title = models.CharFieldField(max_length=60);
+    title = models.CharField(max_length=60);
     body_text = models.TextField(help_text='Escribe algo');
 
 
@@ -319,7 +333,7 @@ class UserProfile(models.Model):
     
     # Image data is stored in the profiles folder, title: Image
     image = models.ImageField(upload_to='profiles', verbose_name=u'image_profile', blank=True, null=True);
-    name_image= models.CharField(max_length=30);
+    name_image= models.CharField(max_length=30, null=True, blank=True);
     uni1 = models.CharField(max_length=30, null=True, blank=True);
     uni2 = models.CharField(max_length=30, null=True, blank=True);
     university = models.ForeignKey(University, null=True, blank=True);
@@ -362,16 +376,16 @@ class UsersUniversity(models.Model):
 class City(models.Model):
     cityname = models.CharField(max_length=50);
     username = models.CharField(max_length=30);
-    prices = models.TextField();
-    uniarea = models.TextField();
-    studentlife = models.TextField();
-    turism = models.TextField();
-    party = models.TextField();
-    culture = models.TextField();
-    crime = models.TextField();
-    shopping = models.TextField();
-    erasmuslife = models.TextField();
-    more = models.TextField();
+    prices = models.TextField(null=True, blank=True);
+    uniarea = models.TextField(null=True, blank=True);
+    studentlife = models.TextField(null=True, blank=True);
+    turism = models.TextField(null=True, blank=True);
+    party = models.TextField(null=True, blank=True);
+    culture = models.TextField(null=True, blank=True);
+    crime = models.TextField(null=True, blank=True);
+    shopping = models.TextField(null=True, blank=True);
+    erasmuslife = models.TextField(null=True, blank=True);
+    more = models.TextField(null=True, blank=True);
 
     # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);

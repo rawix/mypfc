@@ -2,50 +2,55 @@
 
 {% block uni_form %}
 
-  <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-    <br>
+  {% if not no_user %}
+  
+      <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+        <br>
+        
+        {% if alerterror %}
+          <div class="alert alert-danger">
+            <center><strong>¡¡ERROR!!</strong>, asegúrate te introducir bien los datos</center>
+          </div>
+        {% endif %}
 
-    {% if alerterror %}
-      <div class="alert alert-danger">
-        <center><strong>¡¡ERROR!!</strong>, asegúrate te introducir bien los datos</center>
+        {% if alertdone %}
+          <div class="alert alert-success">
+            <center><strong>BIEN!! <big>{{usu}}</big>, ¡la información de {{uniname}} quedó guardada correctamente!</strong></center>
+          </div>
+        {% endif %}
+        <br>
+        {% if coor %}
+          <p>
+            <h3>Para obtener las coordenadas pincha en el siguiente enlace:</h3>
+            <a class="btn btn-lg btn-default" href="http://mygeoposition.com/" target="_blank">Coordenadas</a>
+          </p>
+        {% endif %}
+        
+        <h3><strong>{{tit}}</strong></h3>
+        {{form.as_p}}
+        <h3><strong>{{tit1}}</strong></h3>
+        {{form1.as_p}}
+        <h3><strong>{{tit2}}</strong></h3>
+        {{form2.as_p}}
+        <h3><strong>{{tit3}}</strong></h3>
+        {{form3.as_p}}
+        <h3><strong>{{tit4}}</strong></h3>
+        {{form4.as_p}}
+        <h3><strong>{{tit5}}</strong></h3>
+        {{form5.as_p}}
+        {% if not saved %}
+          <button class="btn btn-primary" type="submit">Guardar</button>
+        {% endif %}
+        <br><br>
+      </form>
+      
+  {% else %}
+  
+      <div class="page-header">
+        <h1>El usuario {{user_infobasic}} ya registro estos datos de la universidad</h1>
       </div>
-    {% endif %}
-
-    {% if alertdone %}
-      <div class="alert alert-success">
-        <center><strong>BIEN!! <big>{{usu}}</big>, ¡la información de {{uniname}} quedó guardada correctamente!</strong></center>
-      </div>
-    {% endif %}
-    <br>
-    {% if coor %}
-      <p>
-        <h3>Para obtener las coordenadas pincha en el siguiente enlace:</h3>
-        <a class="btn btn-lg btn-default" href="http://mygeoposition.com/" target="_blank">Coordenadas</a>
-      </p>
-    {% endif %}
-    
-    <h3><strong>{{tit}}</strong></h3>
-    {{form.as_p}}
-    <br>
-    <h3><strong>{{tit1}}</strong></h3>
-    {{form1.as_p}}
-    <br>
-    <h3><strong>{{tit2}}</strong></h3>
-    {{form2.as_p}}
-    <br>
-    <h3><strong>{{tit3}}</strong></h3>
-    {{form3.as_p}}
-    <br>
-    <h3><strong>{{tit4}}</strong></h3>
-    {{form4.as_p}}
-    <br>
-    <h3><strong>{{tit5}}</strong></h3>
-    {{form5.as_p}}
-    <br>
-    {% if not saved %}
-      <button class="btn btn-primary" type="submit">Guardar</button>
-    {% endif %}
-    <br><br>
-  </form>
-
+      <br>
+      <h1>Por tanto, solo deberás rellenar los formularios de los distintos botones</h1>
+      
+  {% endif%}
 {% endblock %}

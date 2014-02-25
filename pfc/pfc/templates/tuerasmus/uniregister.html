@@ -42,6 +42,16 @@
           <h1>Registra tu universidad erasmus</h1><br><br><br>
           <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
 
+            {% if saved %}
+              <center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>
+              <center><a class="btn btn-success btn-lg" href="/tuerasmus/uniedit/{{ uni_id }}"> {{ uni_name }} </a></center>
+            {% endif %}
+
+            {% if botuni %}
+              <center><strong>¡¡AHORA!!</strong>, pincha abajo y comienza a ver las universidades</center>
+              <center><a class="btn btn-success btn-lg" href="/tuerasmus/universities/"> UNIVERSIDADES </a></center>
+            {% endif %}
+            
             {% if alerterror %}
 	          <div class="alert alert-danger">
 	            <center><strong>¡¡ERROR!!</strong>, asegúrate de elegir una universidad de la lista</center>
@@ -60,11 +70,7 @@
 	          </div><!--./alertdone-->
             {% endif %}
 
-            {% if msg %}
-              <ul><li><h5>{{error_msg}}</h5></li></ul>
-            {% endif %}
-
-            <h3>Busca tu universidad en el listado, e introdúcela en el recuadro correspondiente!!! </h3>
+            <h3>Busca tu universidad en el listado, o introdúcela en el recuadro de abajo!!! </h3>
             <label for="selected">Selecciona una universidad</label>
 	          <select id="selected" class="form-control" name="uni_selected">  
               {% for u in unis %}
@@ -72,26 +78,32 @@
               {% endfor %}
 	          </select>
             <br><br>
-            <label for="selected">Escribe tu universidad</label>
-	          <input id="selected" type="text" class="form-control" name="uni_written">  
-            <br>
-
-            <label for="selected">Escribe el país de universidad</label>
-	          <input id="selected" type="text" class="form-control" name="coun_written">  
-            <br>
-
+            <div class="row">
+              <div class="col-xs-6">
+                <label for="selected">Escribe tu universidad</label>
+	              <input id="selected" type="text" class="form-control" name="uni_written">  
+                <br>
+              </div><!--/.col-xs-6-->
+              
+              <div class="col-xs-6">
+                <label for="selected">Escribe el país de universidad</label>
+	              <input id="selected" type="text" class="form-control" name="coun_written">  
+                <br>
+              </div><!--/.col-xs-6-->
+            </div><!--/.row-->
+            
             <div class="radio-inline">
               <label>
                 <input type="radio" name="scholarship" id="optA" value="erasmus" checked>
                 Erasmus
               </label>
-            </div><!--/radio-inline-->
+            </div><!--/.radio-inline-->
             <div class="radio-inline">
               <label>
                 <input type="radio" name="scholarship" id="optP" value="mundus">
                 Munde
               </label>
-            </div><!--/radio-inline-->
+            </div><!--/.radio-inline-->
             <br>
             <button class="btn btn-primary" type="submit"> Registrar </button>
 
@@ -111,16 +123,6 @@
 	                <center><strong>¡¡Ya tienes tu universidad munde registrada!!</strong></center>
 	              </div>
               {% endif %}
-            {% endif %}
-
-            {% if saved %}
-              <center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>
-              <center><a class="btn btn-success btn-lg" href="/tuerasmus/uniedit/{{ uni_id }}"> {{ uni_name }} </a></center>
-            {% endif %}
-
-            {% if botuni %}
-              <center><strong>¡¡AHORA!!</strong>, pincha abajo y comienza a ver las universidades</center>
-              <center><a class="btn btn-success btn-lg" href="/tuerasmus/universities/"> UNIVERSIDADES </a></center>
             {% endif %}
 
             <br><br>

@@ -76,6 +76,7 @@ class BasicForm(forms.Form):
         
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la dirección'})
     postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), required=False)
+    phone = forms.IntegerField(label="Teléfono de contacto", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
     country = forms.CharField(label="País", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el país'})
     latitud = forms.DecimalField(label='Coordenadas de latitud', widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
@@ -192,9 +193,17 @@ class CityForm(forms.Form):
 #            Class OthersForm: to change the university profile   
 #----------------------------------------------------------------------------
 class OthersForm(forms.Form):
-    tema = forms.CharField(label="Tema de información(documentación, residencias, asignaturas, la ciudad)", widget=forms.TextInput(), required=False)
-    title = forms.CharField(label="Título de tu comentario", widget=forms.TextInput(), required=False)
-    body_text = forms.CharField(label="El contenido de tu comentario", widget=forms.TextInput(), required=False)
+    tema = forms.CharField(label="Tema de información(documentación, residencias, asignaturas, la ciudad)", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    title = forms.CharField(label="Título de tu comentario", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    body_text = forms.CharField(label="El contenido de tu comentario", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     
+#----------------------------------------------------------------------------
+#            Class ContactForm: to contact any user  
+#----------------------------------------------------------------------------    
+class ContactForm(forms.Form):
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField()
+    sender = forms.EmailField()
+    cc_myself = forms.BooleanField(required=False)
     
 

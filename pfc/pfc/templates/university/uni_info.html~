@@ -48,6 +48,8 @@
 
 {% endblock %}
 
+
+
 {% block uni_info %}
 
   <div class="page-header">
@@ -347,6 +349,7 @@
 
       </form> 
   {% else %}
-      <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni_name}}" name="uni_selected" value={{uni2}}>{{uniname}}</a></center> 
+      <p><h>Esta universidad aún no tiene información añadida, pincha y sé el primero en comenzar a completar su perfil</h2></p>
+      <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni_name}}">{{uniname}}</a></center> 
   {% endif %}
 {% endblock %}
