@@ -66,8 +66,8 @@
                         <div class="col-lg-9">
                             <br>
                             {% for c in comments %}
-                                <li> {{ c.username }} el {{ c.day }} 
-	                                <p>{{ c.comment }}</p>
+                                <li><h4><strong> {{ c.username }} el {{ c.day_publicated }} </strong></h4>
+	                                <p>{{ c.text }}</p>
                                 </li>
                                 <br>
                             {% endfor %}

@@ -72,10 +72,9 @@
             <li><h3><strong> {{ uni.grouper }} </strong></h3>      
             <ul>
                 {% for item in uni.list %}
-                    <li><a href="/tuerasmus/{{item.useuni}}/profile">{{item.useuni.username}}</a></li>
-                    <!--
-                      <li><a href="/tuerasmus/{{item.useuni}}/profile">{{k.username}}</a></li>
-                    -->
+                    {% for i in item.useuni.all %}
+                        <li><a href="/tuerasmus/{{i.username}}/profile">{{i.username}}</a></li>
+                    {% endfor %}
                 {% endfor %}
             </ul>
             </li>
@@ -89,7 +88,8 @@
       </div>
        
       <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span></div>
+        
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Universidades registradas</span></div>
       </div>
       <div class="progress">
         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span></div>

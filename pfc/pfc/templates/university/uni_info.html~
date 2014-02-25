@@ -26,6 +26,7 @@
 	</script>-->
 
 	<script type="text/javascript">
+	
     function marcando()
 		  {
 		  var map = new google.maps.Map(
@@ -75,7 +76,7 @@
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.qualification}}
-            <!--{% ifequal username i.username %}
+            {% ifequal user.username i.username %}
               <button value="modqua" name="op" type="submit" class="btn btn-sm btn-danger" >Modificar</button> <button value="delqua" name="op" type="submit" class="btn btn-sm btn-danger" >Eliminar</button>
             {% endifequal %}-->
             </p></li>
