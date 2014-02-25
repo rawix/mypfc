@@ -15,7 +15,7 @@ class Users(models.Model):
     day = models.DateField(auto_now=False);
         
     def __unicode__(self):
-        return self.username;
+        return unicode(self.username);
     def __str__(self):
         return self.username;
         
@@ -358,7 +358,7 @@ class UserProfile(models.Model):
 class UsersUniversity(models.Model):
     uni = models.OneToOneField(University);
     nusers = models.IntegerField(default=0);
-    useuni = models.ForeignKey(User);
+    useuni = models.ManyToManyField(User);
     
     # Alphabetical Order  
     class Meta:

@@ -12,7 +12,6 @@
                 <li class="divider"></li>
                   <li class="dropdown-header">Más</li>
                   <li class="active"><a href="/tuerasmus/uniregister">Registrar</a></li>
-                  <li><a href="/tuerasmus/uniedit/{{uni_name}}">Editar</a></li>
               </ul>
             </li>
             <li class="dropdown">

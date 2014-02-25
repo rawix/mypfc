@@ -463,7 +463,7 @@ def uniregister(request):
                         # Es una universidad nueva
                         if not warning:
                             print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
-                            un = University(uni=uni, username= request.user.username, scholarship=scholarship, country=coun)
+                            un = University(uni=uni, username=request.user.username, scholarship=scholarship, country=coun)
                             un.save()       
                             print "un.save()"
 
@@ -471,19 +471,37 @@ def uniregister(request):
                             nusers += 1
                             print "nusers: " + str(nusers)
                             
-                            unu = UsersUniversity(uni=un, nusers=nusers, useuni=i.username)
+                            unu = UsersUniversity(uni=un, nusers=nusers)
                             print "unu.nusers: " + str(unu.nusers) 
-                            
-                            
                             unu.save()
-                            print "unu.save()"
+                            
+                            try:
+                                unu_user = UsersUniversity.objects.get(uni=un)
+                                unu_user.useuni.add(i.username)
+                                unu_user.save()
+                            except UsersUniversity.DoesNotExist:
+                                unu_user=""
+                           
+                            #unu_user.useuni.add(i.username)
+                            #une = UniErasmus(uni=uni, scholarship=scholarship) 
+                            #une.save()
+                            #print "une.save()"
+                            #i.university.add(uni)
+                            #print "i.university.add(un.uni)"
+                            
+                            
+                            #unu.save()
+                            #print "unu.save()"
 
 
                             print "GUARDAMOS EN LAS BASES DE DATOS"
 
 
                             print "SE SUPONE QUE MI USUARIO AHORA TIENE SU UNIVERSIDAD GUARDADA"
-                            uu_saved = University.objects.get(uni=uni)
+                            try:
+                                uu_saved = University.objects.get(uni=uni)
+                            except University.DoesNotExist:
+                                uu_saved=""
                             done = True
                         # Es una universidad antigua, ya estaba registrada
                         else:
@@ -494,6 +512,7 @@ def uniregister(request):
                                 if str(j.uni)==(unu.uni):
                                     print "antes de incrementar: j.nusers: " + str(j.nusers)
                                     j.nusers += 1
+                                    j.useuni.add(i.username)
                                     print "despues de incrementar: j.nusers: " + str(j.nusers)
                                     j.save()
 
@@ -559,7 +578,7 @@ def uniregister(request):
                         # Es una universidad nueva
                         if not warning:
                             print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
-                            un = University(uni=uni, username= request.user.username, scholarship=scholarship, country=coun)
+                            un = University(uni=uni, username=request.user.username, scholarship=scholarship, country=coun)
                             un.save()
                             print "un.save()"
                             #une = UniErasmus(uni=uni, scholarship=scholarship) 
@@ -572,17 +591,30 @@ def uniregister(request):
                             # Incrementamos el número de usuarios de esa universidad
                             nusers += 1
                             print "nusers: " + str(nusers)
-                            unu = UsersUniversity(uni=un, nusers=nusers, useuni=i.username)
+                            unu = UsersUniversity(uni=un, nusers=nusers)
                             print "unu.nusers: " + str(unu.nusers) 
                             unu.save()
                             print "unu.save()"
+                            # Incrementamos el número de usuarios de esa universidad
+                            nusers += 1
+                            print "nusers: " + str(nusers)
 
+                            
+                            try:
+                                unu_user = UsersUniversity.objects.get(uni=un)
+                                unu_user.useuni.add(i.username)
+                                unu_user.save()
+                            except UsersUniversity.DoesNotExist:
+                                unu_user=""
 
                             print "GUARDAMOS EN LAS BASES DE DATOS"
 
 
                             print "SE SUPONE QUE MI USUARIO AHORA TIENE SU UNIVERSIDAD GUARDADA"
-                            uu_saved = University.objects.get(uni=uni)
+                            try:
+                                uu_saved = University.objects.get(uni=uni)
+                            except University.DoesNotExist:
+                                uu_saved=""
                             done = True
 
                         # Es una universidad antigua, ya estaba registrada
@@ -595,6 +627,7 @@ def uniregister(request):
                                     print "antes de incrementar: j.nusers: " + str(j.nusers)
                                     j.nusers += 1
                                     print "despues de incrementar: j.nusers: " + str(j.nusers)
+                                    j.useuni.add(i.username)
                                     j.save()
 
                           
@@ -827,7 +860,7 @@ def uninfo(request, uni_name, type_info):
         print "type_info: " + str(type_info)
         
         
-        uni=""
+        
         # With uni id we can get the name
         try:
             uniname = University.objects.get(id=uni_name)
@@ -984,14 +1017,15 @@ def myuniversity(request, user):
 
                     print record.uni1
 
-                    if ("-" in record.uni1):
-                        record.uni1=record.uni1.split(" - ")[1]
-                    else:
-                        record.uni1=record.uni1
+                    #if ("-" in record.uni1):
+                    #    record.uni1=record.uni1.split(" - ")[1]
+                    #else:
+                    #    record.uni1=record.uni1
 
-                    print record.uni1
+                    #print record.uni1
                     reco1 = True
-     
+
+                        
                 except University.DoesNotExist:
                     pass
                    
@@ -1002,12 +1036,12 @@ def myuniversity(request, user):
 
                     print record.uni2
                     
-                    if ("-" in record.uni2):
-                        record.uni2=record.uni2.split(" - ")[1]
-                    else:
-                        record.uni2=record.uni2
+                    #if ("-" in record.uni2):
+                    #    record.uni2=record.uni2.split(" - ")[1]
+                    #else:
+                    #    record.uni2=record.uni2
 
-                    print record.uni2
+                    #print record.uni2
                     reco2 = True
 
                 except University.DoesNotExist:
@@ -1441,7 +1475,7 @@ def unieditform(request, uni_name, type_form):
 def myerasmus(request, user):
     if request.user.is_authenticated():
         if (request.user.username==user):
-      
+
             print "MYERASMUS: usuario logueado " + user
             
             # User is student or professor
@@ -1457,58 +1491,94 @@ def myerasmus(request, user):
             tp = UserProfile.objects.all()
             for j in tp:
                 if (tt==str(j.username)):
-                    try:
+                    if not (str(j.uni1)=="None"):
                         uni1 = str(j.uni1)
-                    except:
-                        uni1 = j.uni1
+                    if not (str(j.uni2=="None")):
+                        uni2 = str(j.uni2)                       
+            if (uni1=="") and (uni2==""):
+                ctx = {'no_users':True, 'type_user': type_user, 'username':user}
+                return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
+            else:       
+                try:
+                    u1 = University.objects.get(uni=uni1)
                     try:
-                        uni2 = str(j.uni2)
-                    except:
-                        uni2 = j.uni2
+                        nuu1 = UsersUniversity.objects.filter(uni=u1).count()
+                        print "Campos con el nombre de esa universidad: " + str(nuu1)
+                        uu1 = UsersUniversity.objects.get(uni=u1)
+                        uu1_list = uu1.useuni.all()
+                        for i in uu1.useuni.all():
+                            print i.username
                         
                         
-                    try:
-                        u1 = University.objects.get(uni=uni1)
-                        try:
-                            nuu1 = UsersUniversity.objects.filter(uni=u1).count()
-                            print nuu1
-                            uu1 = UsersUniversity.objects.filter(uni=u1)
-                            for i in uu1:
-                                print str(i.useuni)
-                                u = User.objects.get(username=str(i.useuni))
-                                print u
-
-                        except UsersUniversity.DoesNotExist:
-                            uu1 = ""
-                    except University.DoesNotExist:
-                        u1=""
-                        
-                        
-                    try:
-                        u2 = University.objects.get(uni=uni2)
-                        try:            
-                            nuu2 = UsersUniversity.objects.filter(uni=u2).count()    
-                            uu2 = UsersUniversity.objects.filter(uni=u2)
-                            print nuu2
-                            for i in uu2:
-                                print str(i.useuni)
-                                u = User.objects.get(username=(i.useuni))
-                                print u
-                        except:
-                            uu2=""
-                    except University.DoesNotExist:
-                        u2=""
-                                    
-                            
-
-
-                else:
-                    print "No hay universidades ni usuarios"
+                        print "Imprimo el nombre del usuario que es de esa universidad1"
+                    except UsersUniversity.DoesNotExist:
+                        uu1 = ""
+                except University.DoesNotExist:
+                    u1=""
                     
-            
-            ctx = {'type_user': type_user, 'username':user}
+                try:
+                    u2 = University.objects.get(uni=uni2)
+                    try:
+                        nuu2 = UsersUniversity.objects.filter(uni=u2).count()
+                        print "Campos con el nombre de esa universidad: " + str(nuu2)
+                        uu2 = UsersUniversity.objects.get(uni=u2)
+                        uu2_list = uu2.useuni.all()
+                        for i in uu2.useuni.all():
+                            print i.username
+                        
+                        
+                        print "Imprimo el nombre del usuario que es de esa universidad2"
+                    except UsersUniversity.DoesNotExist:
+                        uu2 = ""
+                except University.DoesNotExist:
+                    u2=""
+
+            print "Vamos a hacer un try para ver como conseguimos los datos que queremos de user"
+            try:
+                reco1=""
+                reco2=""
+                u = User.objects.get(username=user)
+                record = UserProfile.objects.get(username=u)
+                
+
+                try:
+                    rec1 = University.objects.get(uni=record.uni1)
+                
+                    print "rec1.id: " + str(rec1.id)
+
+                    print record.uni1
+                    reco1 = True
+                except University.DoesNotExist:
+                    pass
+                   
+
+                try:
+                    rec2 = University.objects.get(uni=record.uni2)
+                    print "rec2.id: " + str(rec2.id)
+
+                    print record.uni2
+                    reco2 = True
+
+                except University.DoesNotExist:
+                    pass
+
+                if reco1 and not reco2:                
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'type_user':type_user, 'username': request.user.username}
+                elif reco2 and not reco1:
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+                elif reco1 and reco2:
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+                else:
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'type_user':type_user, 'username': request.user.username}
+                
+                    
+
+            except UserProfile.DoesNotExist:
+                print "universidades uni1 y uni2 están vacías!!!!!!!!1"
+                ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'type_user':type_user, 'username': request.user.username}    
+
             return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
-            
+        
         else:
             # User no authenticated
             print "Usuario logueado distinto del usuario solicitado"

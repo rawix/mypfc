@@ -15,7 +15,7 @@ class Users(models.Model):
     day = models.DateField(auto_now=False);
         
     def __unicode__(self):
-        return self.username;
+        return unicode(self.username);
     def __str__(self):
         return self.username;
         
@@ -58,11 +58,11 @@ class Comment(models.Model):
 # ------------------------------------------------------------------------------
 #                               Contact class.
 # ------------------------------------------------------------------------------
-class Contact(models.Model):
-    subject = models.CharField(max_length=100);
-    message = models.CharField();
-    sender = models.EmailField();
-    cc_myself = models.BooleanField(required=False);    
+#class Contact(models.Model):
+#    subject = models.CharField(max_length=100);
+#    message = models.CharField();
+#    sender = models.EmailField();
+#    cc_myself = models.BooleanField(required=False);    
     
     
 # ------------------------------------------------------------------------------
@@ -358,14 +358,14 @@ class UserProfile(models.Model):
 class UsersUniversity(models.Model):
     uni = models.OneToOneField(University);
     nusers = models.IntegerField(default=0);
-    useuni = models.ForeignKey(User);
+    useuni = models.ManyToManyField(User);
     
     # Alphabetical Order  
     class Meta:
         ordering = ['uni']
         
     def __unicode__(self):
-        return unicode(self.uni);
+        return unicode(self.uni) + self.useuni;
         
     def __str__(self):
         return self.uni;
