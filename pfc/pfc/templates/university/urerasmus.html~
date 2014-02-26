@@ -17,8 +17,8 @@
   <li class="active" class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-      <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
+      <li><a href="/tuerasmus/{{username}}/myerasmus">MisErasmus</a></li>
+      <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
     </ul>
   </li>
   <li><a href="/tuerasmus/comments">TusComentarios</a></li>
@@ -83,7 +83,7 @@
       
  
         
-      <div class="page-header">
+      <!--<div class="page-header">
         <h1>Algunos datos estadísticos: </h1>
       </div>
        
@@ -107,7 +107,7 @@
         <div class="progress-bar progress-bar-success" style="width: 35%"><span class="sr-only">35% Complete (success)</span></div>
         <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
         <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
-      </div>  
+      </div>  -->
 
 {% endblock %}
 

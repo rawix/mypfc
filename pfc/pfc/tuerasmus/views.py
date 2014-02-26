@@ -1601,6 +1601,95 @@ def myerasmus(request, user):
         print "MYERASMUS: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
 
+
+
+# ----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Name: CITIES
+# All the cities of the universities
+def cities(request):
+    if request.user.is_authenticated():
+        print "CITIES: usuario logueado " + request.user.username
+        
+        # User is student or professor
+        t = User.objects.get(username=request.user.username)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+
+        cit = City.objects.all() 
+        ncit = City.objects.all().count()           
+        uall = University.objects.all()       
+        nuall = University.objects.all().count()                    
+        ctx = {'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
+
+    else:
+        # User not authenticated
+        print "URERASMUS: el usuario no esta logueado"
+        return HttpResponseRedirect('/tuerasmus')
+        
+        
+# ----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Name: RESIDENCES
+# All the residences of the universities
+def residences(request):
+    if request.user.is_authenticated():
+        print "RESIDENCES: usuario logueado " + request.user.username
+        
+        # User is student or professor
+        t = User.objects.get(username=request.user.username)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+
+        uu = UsersUniversity.objects.all()
+        res = Residence.objects.all()
+        nres = Residence.objects.all().count()           
+        uall = University.objects.all()       
+        nuall = University.objects.all().count()                    
+        ctx = {'resi_info':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
+
+    else:
+        # User not authenticated
+        print "URERASMUS: el usuario no esta logueado"
+        return HttpResponseRedirect('/tuerasmus')
+
+
+# ----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# Name: SUBJECTS
+# All the subjects of the universities
+def subjects(request):
+    if request.user.is_authenticated():
+        print "SUBJECTS: usuario logueado " + request.user.username
+        
+        # User is student or professor
+        t = User.objects.get(username=request.user.username)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+
+        sub = Subjects.objects.all() 
+        nsub = Subjects.objects.all().count()           
+        uall = University.objects.all()       
+        nuall = University.objects.all().count()                    
+        ctx = {'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
+
+    else:
+        # User not authenticated
+        print "URERASMUS: el usuario no esta logueado"
+        return HttpResponseRedirect('/tuerasmus')
+        
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # Name: URERASMUS
@@ -1627,6 +1716,7 @@ def urerasmus(request):
         # User not authenticated
         print "URERASMUS: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
+
 
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------

@@ -1,114 +1,48 @@
-<!-- Va a heredar de base.html -->
+{% extends "university/base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+{% block java_script %}
+  <!-- university/geocity.html -->
+  <!-- university/geouniversity.html -->
+  <!-- university/georesidence.html-->
+{% endblock %}
 
-    {% if user.is_authenticated %}
-      <title> {{user.username}} | TuErasmus</title>
-    {% endif %}
+{% block link_content %}
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
-    <link href="/static/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+  <li><a href="/tuerasmus">Home</a></li>
+  <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
+  <li class="active" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+      <li><a href="/tuerasmus/universities">Las universidades</a></li>
+      <li class="divider"></li>
+      <li class="dropdown-header">más</li>
+      <li><a href="/tuerasmus/uniregister">Registrar</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+      <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
+    </ul>
+  </li>
+  <li><a href="/tuerasmus/comments">TusComentarios</a></li>
+  <li><a href="/contact">Contacto</a></li>
+  
+{% endblock %}
 
-    <!-- Custom styles for this template -->
-    <link href="/static/examples/theme/theme.css" rel="stylesheet">
+{% block content %}
+  {% if city_info %}
 
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/tuerasmus">Home</a></li>
-            <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
-            <li class="active" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
-                <li><a href="/tuerasmus/universities">Las universidades</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-                <li><a href="/tuerasmus/urerasmus">TusErasmus</a></li>
-               
-             
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Otros</li>-->
-                <!--<li><a href="#">Blog</a></li>-->
-                <!--<li><a href="#">Descubre más</a></li>-->
-
-
-              </ul>
-            </li>
-
-            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-
-            <li><a href="/contact">Contacto</a></li>
-          </ul>
-          
-          <!-- Logout user -->
-          <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{user.username}}"><strong><em>¡¡Hola {{type_user}} {{user.username}}!!</em></strong></a>
-            </div>
-            <!--<a class="btn btn-danger" href="/tuerasmus">Cerrar sesión</a>-->
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
-          </form>
-
-
-     
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-
-
-    <div class="container theme-showcase">
-
-      <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>LAS UNIVERSIDADES ERASMUS Y MUNDE</h1>
-      </div>
-
-
+        <h1>LAS CIUDADES DESTINO</h1>
+      </div><!--/.jumbotron -->
 
       <div class="page-header">
         <h1>Universidades que puedes encontrar en TuErasmus:</h1>
       </div>
+      
         <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
 
           {% if uems_ %}
@@ -123,36 +57,52 @@
             <h3> {{ uems_msg }} </h3>
           {% endif %} 
 
+          <br><br>
 
-          <!--{% if uniserasmus %}
-            <h3>Universidades destino beca erasmus:</h3>
-            <select class="form-control" name="uniems_selected">
-              {% for u in ue %}
-	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>
-                <option> {{ u.uni }} </option>
-              {% endfor %}
-            </select>
-          {% else %}
-	    <div class="alert alert-danger">
-	      <center><strong><h3>NO HAY UNIS ERASMUS</h3></strong></center>
-	    </div>
-            
-          {% endif %}  -->      
-
+          {% if unisempty %}
+	      <div class="alert alert-danger">
+	        <center><strong>¡¡NO HAY UNIVERSIDADES!!</strong></center>
+	      </div>
+          {% endif %}
 
           <br><br>
 
-          <!--{% if unismundus %}
-            <h3>Universidades destino beca munde:</h3>
-            <select class="form-control" name="unims_selected">  
-              {% for u in um %}
-	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option> ESTA LINEA YA ESTABA COMENTADA
+          
+          {% ifequal uniuser user.username %}
+            <center><button class="btn btn-success btn-lg" type="submit"> EDITAR UNIVERSIDAD </button><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
+          {% else %}
+            <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
+          {% endifequal %}
+          
+        </form>  
+  {% elif resi_info %}
+  
+  {% elif sub_info %}
+  
+  {% else %}    
+      <div class="jumbotron">
+        <h1>LAS UNIVERSIDADES ERASMUS Y MUNDE</h1>
+      </div><!--/.jumbotron -->
+
+      <div class="page-header">
+        <h1>Universidades que puedes encontrar en TuErasmus:</h1>
+      </div>
+      
+        <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+
+          {% if uems_ %}
+            <label for="selected">Selecciona una universidad:</label>
+            <select id="selected" class="form-control" name="uniems_selected">
+              {% for u in uems %}
+	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>-->
                 <option> {{ u.uni }} </option>
               {% endfor %}
             </select>
           {% else %}
-            <h3>NO HAY UNIS MUNDUS</h3>
-          {% endif %}-->
+            <h3> {{ uems_msg }} </h3>
+          {% endif %} 
+
+          <br><br>
 
           {% if unisempty %}
 	      <div class="alert alert-danger">
@@ -171,6 +121,9 @@
           
         </form>
 
+  {% endif %}
+
+{% endblock %}
 <!-- TODAS ESTAS LINEAS LAS PUEDO MODIFICAR MAS ADELANTE, Y SERÍAN CÓMO MOSTRAR LAS DISTINTAS UNIVERSIDADES Y SUS INFORMACIONES
       <div class="page-header">
         <h1>Thumbnails</h1>
@@ -250,35 +203,11 @@
               <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             </a>
           </div>
-        </div><!-- /.col-sm-4 -->
-      </div>
+        </div><!-- /.col-sm-4 
+      </div><!-- /.row -->
 
 
 
-     </div>
-
-      <br><br><br>
- 
-      <hr>
-
-      <footer>
-        <!--<div><span style="float:right">PFC - <a href="http://gsyc.es" target="_blank" style="color: #424242">GSyC 2013</span> <a href="http://urjc.es" target="_blank" style="color: #424242"> URJC </a></div>-->
-        <p><center>&copy; ETSIT-URJC 2013</center></p>
-      </footer>
 
 
-    </div> <!-- /container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="../../docs-assets/js/holder.js"></script>
-
-    <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
-    <script src="/static/examples/theme/theme.js"></script>
-
-  </body>
-</html>

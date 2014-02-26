@@ -18,12 +18,13 @@ urlpatterns = patterns('',
     url(r'^uniregister/$', 'tuerasmus.views.uniregister', name='uniregister'),
     url(r'^uniedit/(?P<uni_name>[\S]+)/(?P<type_form>[\S]+)/$', 'tuerasmus.views.unieditform', name='unieditform'),
     url(r'^university/(?P<uni_name>[\S]+)/(?P<type_info>[\S]+)/$', 'tuerasmus.views.uninfo', name='uninfo'),
+    url(r'^universities/cities/$', 'tuerasmus.views.cities', name='cities'),    
+    url(r'^universities/residences/$', 'tuerasmus.views.residences', name='residences'),
+    url(r'^universities/subjects/$', 'tuerasmus.views.subjects', name='subjects'),
+    url(r'^universities/urerasmus/$', 'tuerasmus.views.urerasmus', name='urerasmus'),
     url(r'^universities/$', 'tuerasmus.views.universities', name='universities'),
     url(r'^uniedit/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.uniedit', name='uniedit'),
     url(r'^university/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.university', name='university'),
-
-    # All users
-    url(r'^urerasmus/$', 'tuerasmus.views.urerasmus', name='urerasmus'),
 
     # Comments urls
     url(r'^comments/$', 'tuerasmus.views.comments', name='comments'),
