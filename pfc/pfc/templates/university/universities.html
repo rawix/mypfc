@@ -68,13 +68,12 @@
         <h1>Universidades que puedes encontrar en TuErasmus:</h1>
       </div>
       
-        <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+        <!--<form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
 
           {% if uems_ %}
             <label for="selected">Selecciona una universidad:</label>
             <select id="selected" class="form-control" name="uniems_selected">
               {% for u in uems %}
-	              <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>-->
                 <option> {{ u.uni }} </option>
               {% endfor %}
             </select>
@@ -95,8 +94,27 @@
           
           <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
           
-        </form>
+        </form>-->
 
+
+      <div class="page-header">
+        <h3>Las universidades según la beca correspondiente</h3>
+      </div>
+ 
+      {% regroup uall by scholarship as scholarship_list %}
+         
+      <ul>
+        {% for scholarship in scholarship_list %}
+            <li><h3><strong> {{ scholarship.grouper }} </strong></h3>      
+            <ul>
+                {% for item in scholarship.list %}
+                  <li><a href="/tuerasmus/university/{{item.id}}">{{ item.country }}: {{item.uni}}</a></li>
+                {% endfor %}
+            </ul>
+            </li>
+        {% endfor %}
+      </ul>    
+      
   {% endif %}
 
 {% endblock %}

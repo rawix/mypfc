@@ -48,27 +48,36 @@
             <h3><strong><center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni1id}}" name="uni_selected" value={{uni1}}>{{uni1}}</a></p></center></strong></h3>
             <br>
             {% for u in uu1_list %}
+              {% ifnotequal u.username user.username %}
               <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
+              {% endifnotequal %}
             {% endfor %}
+            
         {% elif reco2 and not reco1%}
             <h3><strong><center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni2id}}" name="uni_selected" value={{uni2}}>{{uni2}}</a></p></center></strong></h3>
             <br>
             {% for u in uu2_list %}
+              {% ifnotequal u.username user.username %}
               <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
+              {% endifnotequal %}
             {% endfor %}
         {% elif reco2 and reco1 %} 
           <div class="col-lg-6">
             <h3><strong><center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni1id}}" name="uni_selected" value={{uni1}}>{{uni1}}</a></p></center></strong></h3>
             <br>
             {% for u in uu1_list %}
+              {% ifnotequal u.username user.username %}
               <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
+              {% endifnotequal %}
             {% endfor %}
           </div><!-- /.col-lg-6 -->
           <div class="col-lg-6">
             <h3><strong><center><a class="btn btn-success btn-lg" href="/tuerasmus/university/{{uni2id}}" name="uni_selected" value={{uni2}}>{{uni2}}</a></p></center></strong></h3>
             <br>
             {% for u in uu2_list %}
+              {% ifnotequal u.username user.username %}
               <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
+              {% endifnotequal %}
             {% endfor %}
            </div><!-- /.col-lg-6 -->
         {% else %}

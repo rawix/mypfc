@@ -743,17 +743,18 @@ def universities(request):
                 uems_msg = "No hay universidades registradas"
                 uems_ = False
 
+            uall = University.objects.all
             if uniserasmus and unismundus:
-                ctx = {'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
+                ctx = {'uall':uall, 'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
  
             if uniserasmus and not unismundus:
-                ctx = {'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
+                ctx = {'uall':uall, 'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
  
             if unismundus and not uniserasmus:
-                ctx = {'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user} 
+                ctx = {'uall':uall, 'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user} 
  
             if not unismundus and not uniserasmus:
-                ctx = {'unisempty':True, 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
+                ctx = {'uall':uall, 'unisempty':True, 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
 
             return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))  
 
@@ -1712,8 +1713,8 @@ def urerasmus(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        uu = UsersUniversity.objects.all()           
-        uall = University.objects.all()      
+        uu = UsersUniversity.objects.all()          
+        uall = University.objects.all().order_by('uni')      
         nuall = University.objects.all().count()                    
         ctx = {'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
         return render_to_response('university/urerasmus.html', ctx, context_instance=RequestContext(request))

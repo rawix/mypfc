@@ -35,23 +35,7 @@
 {% block content %}
     <div class="container theme-showcase">
 
-      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-        <div class="well sidebar-nav">
-          <ul class="nav">
-            <li>Universidades</li>
-            <li class="active"><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li>Usuarios</li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li>Curiosidades</li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-          </ul>
-        </div><!--/.well -->
-      </div><!--/span-->
+
       
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -61,7 +45,7 @@
             <p>{% block pathimage %}{% endblock %}</p>
           </div>
           <div class="col-xs-7">
-            <p><h1> {{ uniname }} </h1></p>
+            <p><h1><a name="marker"> {{ uniname }} </a></h1></p>
           </div>
         </div>
       </div>
