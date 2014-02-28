@@ -13,7 +13,8 @@ class Users(models.Model):
     genero = models.CharField(max_length=1);
     # Sign up day
     day = models.DateField(auto_now=False);
-        
+
+                
     def __unicode__(self):
         return unicode(self.username);
     def __str__(self):
@@ -53,7 +54,7 @@ class Comment(models.Model):
         ordering = ['-time']
 
     def __unicode__(self):
-        return str(self.day) + " - " + self.username + ": " + self.title;
+        return str(self.day_publicated) + " - " + self.username + ": " + self.title;
         
 # ------------------------------------------------------------------------------
 #                               Contact class.

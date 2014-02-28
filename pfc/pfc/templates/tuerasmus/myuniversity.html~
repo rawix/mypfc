@@ -4,10 +4,10 @@
 
             <li><a href="/tuerasmus">Home</a></li>
             <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
-            <li class="dropdown">
+            <li class="active" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li class="active"><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
                 <li><a href="/tuerasmus/universities">Las universidades</a></li>
                 <li class="divider"></li>
                   <li class="dropdown-header">Más</li>
@@ -67,8 +67,13 @@
           <h3>Registra tu universidad erasmus</h3>
           <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
         {% endif %}
-        
+        <br><br>
       </div><!-- /.row -->
+        
+      <div class="row">
+        <center><a class="btn btn-success btn-lg" href="/tuerasmus/universities" > IR A UNIVERSIDADES </a></center>
+      </div><!-- /.row -->
+      
      </div><!--/span-->
      
 {% endblock %}

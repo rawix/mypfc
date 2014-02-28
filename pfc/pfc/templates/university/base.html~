@@ -56,14 +56,20 @@
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>
         </div><!--/.navbar-collapse -->
-      </div><!--/.container -->be.com
+      </div><!--/.container -->
     </div><!--/.navbar-inverse -->
 
     <div class="container theme-showcase">
       
-      {% block content %}
-      {% endblock %}
-      
+      <div class="row">
+
+        {% block content %}
+        {% endblock %}
+
+
+      </div><!--/.row-->            
+
+
       <hr>
 
       <footer>

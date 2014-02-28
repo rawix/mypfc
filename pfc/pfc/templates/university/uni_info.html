@@ -49,7 +49,9 @@
 
 {% endblock %}
 
-
+{% block pathimage %}
+  <img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/>
+{% endblock %}
 
 {% block uni_info %}
 
@@ -65,9 +67,6 @@
         <br>
       {% endif %}
       
-      <!--<img data-src="holder.js/200x200" class="img-thumbnail" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old intant camera">-->
-      
-      <img data-src="{{ur}}" class="img-thumbnail" alt="Imagen no disponible: {{uniname.uni}}">
       <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
       
       {% ifequal info "basic" %}
@@ -76,8 +75,11 @@
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.qualification}}
-            <!--{% ifequal username i.username %}
-              <button value="modqua" name="op" type="submit" class="btn btn-sm btn-danger" >Modificar</button> <button value="delqua" name="op" type="submit" class="btn btn-sm btn-danger" >Eliminar</button>
+            {% ifequal user.username i.username %}
+              <a value="modqua" name="op" type="submit" class="btn btn-sm btn-warning" >Modificar</button><button value="delqua" name="op" type="submit" class="btn btn-sm btn-danger" >Eliminar</button>
+              {% if modqua %}
+                <textarea name="op" rows="10" cols="40">Escribe aquí la información</textarea>
+              {% endif %}
             {% endifequal %}-->
             </p></li>
           {% empty %}

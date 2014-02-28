@@ -68,11 +68,11 @@
       {% regroup uu by uni as uni_list %}
         
       <ul>
-        {% for uni in uni_list %}
+        {% for uni in uni_list.order_by('uni') %}
             <li><h3><strong> {{ uni.grouper }} </strong></h3>      
             <ul>
                 {% for item in uni.list %}
-                    {% for i in item.useuni.all %}
+                    {% for i in item.useuni.all.order_by('username') %}
                         <li><a href="/tuerasmus/{{i.username}}/profile">{{i.username}}</a></li>
                     {% endfor %}
                 {% endfor %}

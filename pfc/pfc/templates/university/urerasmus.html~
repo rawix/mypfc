@@ -17,7 +17,7 @@
   <li class="active" class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li><a href="/tuerasmus/{{username}}/myerasmus">MisErasmus</a></li>
+      <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
       <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
     </ul>
   </li>

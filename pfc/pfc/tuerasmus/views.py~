@@ -154,8 +154,7 @@ def profile(request, user):
 
     if request.user.is_authenticated():
         if (request.user.username==user):
-            print "HOME USER: Usuario logueado: " + user
-            print "PROFILE: usuario logueado " + user
+            print "PROFILE: Usuario logueado: " + user
                        
             # Concatenate URL + username
             ur = '/tuerasmus/' + user + '/edit_profile'
@@ -163,8 +162,7 @@ def profile(request, user):
             # Redirect url
             return HttpResponseRedirect(ur)
         else:
-
-            
+ 
             print "PROFILE: usuario logueado " + request.user.username
             print "USUARIO SOLICITADO: " + user
                        
@@ -210,7 +208,7 @@ def profile(request, user):
                 print path_image  
 
             # Return the template
-            ctx = {'see_profile':True, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+            ctx = {'up_obj':j, 'see_profile':True, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
             return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
 
     else:
@@ -802,6 +800,7 @@ def university(request, uni_name):
 
         # In University we can get the name of the university
         uniobj=""
+        uni_image=""
         try:
             uniname = University.objects.get(id=uni_name[0])
             print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
@@ -815,7 +814,7 @@ def university(request, uni_name):
                 else:
                     path_image=str(uniobj.name_image)
                 print "imprimo el nombre de la imagen"
-                print uni_image
+                print path_image
                 print "vamos a imprimir los valores de latitud y longitud"
                 print latitud
                 print longitud
@@ -875,14 +874,14 @@ def uninfo(request, uni_name, type_info):
 
         # MÉTODO GET
         if request.method=="GET":
-            
+            path_image=""
             try:
                 uni = InfoBasic.objects.get(uni=uniname)
                 print str(uni.image)
                 print uni.latitud
                 print uni.longitud
-                ur = "/tuerasmus/media/universities/"+str(uni.image) 
-                print ur
+                path_image = str(uni.image) 
+                print path_image
                 if type_info=="basic":
                     print "muestro la info basica"
                     info="basic"
@@ -907,7 +906,7 @@ def uninfo(request, uni_name, type_info):
                         print arr[n]
                         n+=1
 
-                    ctx = {'mispuntos':arr, 'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                    ctx = {'mispuntos':arr, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
 
                     # Return the template
                     return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
@@ -925,13 +924,14 @@ def uninfo(request, uni_name, type_info):
                     print "muestro la info others"
                     info="others"
                     
-                ctx = {'uni':uni, 'ur':ur, 'info':info, 'info_list':info_list, 'uniimage':uni.image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                 
             except InfoBasic.DoesNotExist:
                 # uniname.uni: uni's name
                 # uni_name: id_uni
                 # uni.image: url's image of uni
-                ctx = {'no_info':True, 'uniimage':uni.image, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                path_image = "universities/universidad.png"
+                ctx = {'no_info':True, 'path_image':path_image, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                
 
             # Return the template
@@ -1172,6 +1172,7 @@ def unieditform(request, uni_name, type_form):
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
                     
                     no_user=""
+                    name_image=""
                     user_infobasic=""
                     try: 
                         un = InfoBasic.objects.get(uni=un_obj)
@@ -1193,8 +1194,10 @@ def unieditform(request, uni_name, type_form):
                                 un.name_image = str(image)
                                 print un.image
                                 print "se supone que la he borrado y guardado la nueva"
-                                
+                            
                             un.description = un.description + ". " + description
+                            name_image = str(un.name_image)
+                            description = str(un.description)
                             print "voy a intentar cambiar el valor d ela descripcion!!!!!!!!!!!!!!"
                             un.save()
                         else:
@@ -1516,7 +1519,7 @@ def myerasmus(request, user):
                         nuu1 = UsersUniversity.objects.filter(uni=u1).count()
                         print "Campos con el nombre de esa universidad: " + str(nuu1)
                         uu1 = UsersUniversity.objects.get(uni=u1)
-                        uu1_list = uu1.useuni.all()
+                        uu1_list = uu1.useuni.all().order_by('username')
                         for i in uu1.useuni.all():
                             print i.username
                         
@@ -1533,7 +1536,7 @@ def myerasmus(request, user):
                         nuu2 = UsersUniversity.objects.filter(uni=u2).count()
                         print "Campos con el nombre de esa universidad: " + str(nuu2)
                         uu2 = UsersUniversity.objects.get(uni=u2)
-                        uu2_list = uu2.useuni.all()
+                        uu2_list = uu2.useuni.all().order_by('username')
                         for i in uu2.useuni.all():
                             print i.username
                         
@@ -1619,16 +1622,16 @@ def cities(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        cit = City.objects.all() 
+        cit = City.objects.all().order_by('cityname') 
         ncit = City.objects.all().count()           
-        uall = University.objects.all()       
+        uall = University.objects.all().order_by('uni')       
         nuall = University.objects.all().count()                    
         ctx = {'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
         return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User not authenticated
-        print "URERASMUS: el usuario no esta logueado"
+        print "CITIES: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
         
         
@@ -1648,17 +1651,17 @@ def residences(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        uu = UsersUniversity.objects.all()
-        res = Residence.objects.all()
-        nres = Residence.objects.all().count()           
-        uall = University.objects.all()       
+        uu = UsersUniversity.objects.all().order_by('username')
+        res = Place.objects.all().order_by('cityname')
+        nres = Place.objects.all().count()           
+        uall = University.objects.all() .order_by('uni')      
         nuall = University.objects.all().count()                    
-        ctx = {'info_resi':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        ctx = {'resi_info':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
         return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User not authenticated
-        print "URERASMUS: el usuario no esta logueado"
+        print "RESIDENCES: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
 
 
@@ -1678,16 +1681,16 @@ def subjects(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        sub = Subjects.objects.all() 
+        sub = Subjects.objects.all().order_by('subname') 
         nsub = Subjects.objects.all().count()           
-        uall = University.objects.all()       
+        uall = University.objects.all().order_by('uni')       
         nuall = University.objects.all().count()                    
         ctx = {'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
         return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User not authenticated
-        print "URERASMUS: el usuario no esta logueado"
+        print "SUBJECTS: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
         
 # ----------------------------------------------------------------------
@@ -1706,8 +1709,8 @@ def urerasmus(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        uu = UsersUniversity.objects.all()            
-        uall = University.objects.all()       
+        uu = UsersUniversity.objects.all()           
+        uall = University.objects.all()      
         nuall = University.objects.all().count()                    
         ctx = {'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
         return render_to_response('university/urerasmus.html', ctx, context_instance=RequestContext(request))

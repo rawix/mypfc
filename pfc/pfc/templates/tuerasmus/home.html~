@@ -18,7 +18,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-                <li><a href=" class="active"">TusErasmus</a></li>
+                <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
               </ul>
             </li>
             <li><a href="/tuerasmus/comments">TusComentarios</a></li>
@@ -51,6 +51,7 @@
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>2.Tu información</h2>
               <p>Rellena la información de la universidad.</p>
+              <p>O también puedes ver qué otras universidades hay.</p>
             </div><!--/span-->              
 
             <div class="col-6 col-sm-6 col-lg-4">

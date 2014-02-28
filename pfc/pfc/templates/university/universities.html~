@@ -10,10 +10,10 @@
 
   <li><a href="/tuerasmus">Home</a></li>
   <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
-  <li class="dropdown">
+  <li class="active" class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li class="active"><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+      <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
       <li><a href="/tuerasmus/universities">Las universidades</a></li>
       <li class="divider"></li>
       <li class="dropdown-header">más</li>
@@ -36,43 +36,23 @@
   {% if city_info %}
 
       <div class="jumbotron">
-        <h1>LAS CIUDADES DESTINO</h1>
+        <h1>LAS CIUDADES ERASMUS</h1>
       </div><!--/.jumbotron -->
 
       <div class="page-header">
-        <h1>Universidades que puedes encontrar en TuErasmus:</h1>
+        <h1>¿Qué ciudades son las que se asignan para tu estancia erasmus?:</h1>
       </div>
       
         <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
 
-          {% if uems_ %}
-            <label for="selected">Selecciona una universidad:</label>
-            <select id="selected" class="form-control" name="uniems_selected">
-              {% for u in uems %}
-	        <!--<option> {{ u.scholarship }} - {{ u.uni }} </option>-->
-                <option> {{ u.uni }} </option>
-              {% endfor %}
-            </select>
-          {% else %}
-            <h3> {{ uems_msg }} </h3>
-          {% endif %} 
-
-          <br><br>
-
-          {% if unisempty %}
-	      <div class="alert alert-danger">
-	        <center><strong>¡¡NO HAY UNIVERSIDADES!!</strong></center>
-	      </div>
-          {% endif %}
-
-          <br><br>
-
-          
-          {% ifequal uniuser user.username %}
-            <center><button class="btn btn-success btn-lg" type="submit"> EDITAR UNIVERSIDAD </button><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
-          {% else %}
-            <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
-          {% endifequal %}
+          <label for="selected_city">Cónoce las ciudades:</label>
+          <select id="selected_city" class="form-control" name="city_selected">
+            {% for u in cit %}
+              <option> {{ u.uni }} </option>
+            {% empty %}
+              <h3> Aún no hay ciudades registradas </h3>
+            {% endfor %}
+          </select>
           
         </form>  
   {% elif resi_info %}
@@ -105,19 +85,15 @@
           <br><br>
 
           {% if unisempty %}
-	      <div class="alert alert-danger">
-	        <center><strong>¡¡NO HAY UNIVERSIDADES!!</strong></center>
-	      </div>
+	          <div class="alert alert-danger">
+	            <center><strong>¡¡NO HAY UNIVERSIDADES!!</strong></center>
+	          </div>
           {% endif %}
 
           <br><br>
 
           
-          {% ifequal uniuser user.username %}
-            <center><button class="btn btn-success btn-lg" type="submit"> EDITAR UNIVERSIDAD </button><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
-          {% else %}
-            <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
-          {% endifequal %}
+          <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
           
         </form>
 
