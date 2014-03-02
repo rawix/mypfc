@@ -80,11 +80,32 @@
           </div>
 
           <p>
-            <li>Nombre: {{up_obj.name}}</li>
-            <li>Apellidos: {{up_obj.lastname}}</li>
+            {% ifequal up_obj.name "" %}
+              <li>Nombre: No tiene nombre</li>
+            {% else %}
+              <li>Nombre: {{up_obj.name}}</li>
+            {% endifequal %}
+
+            {% ifequal up_obj.name "" %}
+              <li>Apellidos: No tiene apellidos</li>
+            {% else %}
+              <li>Apellidos: {{up_obj.lastname}}</li>
+            {% endifequal %}
+            
             <li>Descripción: {{description}}</li>
-            <li>Universidad Erasmus: {{up_obj.uni1}}</li>
-            <li>Universidad Munde: {{up_obj.uni2}}</li>
+            
+            {% ifequal up_obj.uni1 None %}
+              <li>Universidad Erasmus: </li>
+            {% else %}
+              <li>Universidad Erasmus: {{up_obj.uni1}}</li>
+            {% endifequal %} 
+            
+            {% ifequal up_obj.uni2 None %}
+              <li>Universidad Mundus: Se está pensando dónde ir con la beca mundus</li>
+            {% else %}
+              <li>Universidad Mundus: {{up_obj.uni2}}</li>
+            {% endifequal %} 
+            
           </p>                
           
         </div><!--./col-xs-12-->

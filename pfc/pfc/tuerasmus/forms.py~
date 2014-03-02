@@ -10,7 +10,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.utils import timezone 
-from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Residence, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 #import datetime
 
@@ -76,7 +76,7 @@ class BasicForm(forms.Form):
         
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la dirección'})
     postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), required=False)
-    phone = forms.IntegerField(label="Teléfono de contacto", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
+    phone = forms.IntegerField(label="Teléfono de contacto", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un teléfono de contacto'})
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
     country = forms.CharField(label="País", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el país'})
     latitud = forms.DecimalField(label='Coordenadas de latitud', widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
@@ -169,9 +169,9 @@ class SubjectsForm(forms.Form):
 #            Class WorkForm: to change the university profile   
 #----------------------------------------------------------------------------
 class WorkForm(forms.Form):
-    scholarships = forms.CharField(label="Becas", widget=forms.TextInput(), required=False)
-    practices = forms.CharField(label="Trabajo", widget=forms.TextInput(), required=False)
-    contact = forms.CharField(label="Contacto con empresas", widget=forms.TextInput(), required=False)
+    scholarships = forms.TextField(label="Becas", widget=forms.TextInput(), required=False)
+    practices = forms.TextField(label="Trabajo", widget=forms.TextInput(), required=False)
+    contact = forms.TextField(label="Contacto con empresas", widget=forms.TextInput(), required=False)
 
 #----------------------------------------------------------------------------
 #            Class CityForm: to change the university profile   

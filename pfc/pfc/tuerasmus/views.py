@@ -109,7 +109,7 @@ def home(request, user):
             return render_to_response('tuerasmus/home.html', ctx, context_instance=RequestContext(request))
         else:
             # User no authenticated
-            print "Usuario logueado distinto del usuario solicitado"
+            print "HOMEUSER: Usuario logueado distinto del usuario solicitado"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
@@ -137,7 +137,7 @@ def myprofile(request, user):
             return HttpResponseRedirect(ur)
         else:
             # User no authenticated
-            print "Usuario logueado distinto del usuario solicitado"
+            print "MYPROFILE: Usuario logueado distinto del usuario solicitado"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
@@ -164,7 +164,7 @@ def profile(request, user):
         else:
  
             print "PROFILE: usuario logueado " + request.user.username
-            print "USUARIO SOLICITADO: " + user
+            print "PROFILE: USUARIO SOLICITADO: " + user
                        
             # User is professor or student
             # User has a profile image
@@ -326,7 +326,7 @@ def edit_profile(request, user):
             return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
         else:
             # User no authenticated
-            print "Usuario logueado distinto del usuario solicitado"
+            print "EDIT_PROFILE: Usuario logueado distinto del usuario solicitado"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
@@ -866,13 +866,37 @@ def uninfo(request, uni_name, type_info):
         try:
             uniname = University.objects.get(id=uni_name)
             print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
-            uni = uniname.uni
+            #uni = uniname.uni
             
         except University.DoesNotExist:
             print "No se han encontrado ningun objecto con ese id"  
             ur = "/tuerasmus" + tt + "/myuniversity" 
             return HttpResponseRedirect(ur)
 
+        # MÉTODO POST
+        if request.method=="POST":
+            data = request.POST['qualification']
+            
+            if data=="mod":
+                print "modificamos comentario"
+                data_obj = InfoGeneral.objects.get(username=request.user.username)
+                print str(data_obj.qualification)
+                info_list = InfoGeneral.objects.all()
+                
+                ctx = {'no_info': True, 'basic':True, 'modqua':True, 'info_list':info_list, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
+                print "retornamos el template para modificar"
+
+                return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
+                
+            elif data=="delqua":
+                print "eliminamos comentario"
+            
+                ctx = {'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
+            
+                # Return the template
+                return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
+            
+            
         # MÉTODO GET
         if request.method=="GET":
             path_image=""
@@ -887,6 +911,9 @@ def uninfo(request, uni_name, type_info):
                     print "muestro la info basica"
                     info="basic"
                     info_list = InfoGeneral.objects.filter(uni=uniname.uni)
+                    
+                    print "modificamos comentario en GET info basic" 
+                    
 
                 elif type_info=="doc":
                     print "muestro la info doc"
@@ -934,7 +961,7 @@ def uninfo(request, uni_name, type_info):
                 # uniname.uni: uni's name
                 # uni_name: id_uni
                 # uni.image: url's image of uni
-                path_image = "universities/universidad.png"
+                path_image = "tuerasmus/universidad.png"
                 ctx = {'no_info':True, 'path_image':path_image, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                
 
@@ -943,11 +970,11 @@ def uninfo(request, uni_name, type_info):
 
 
             
-        else:
-            ctx = {'basic':True, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+        #else:
+        #    ctx = {'basic':True, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
         
             # Return the template
-            return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
+        #    return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated
@@ -1073,7 +1100,7 @@ def myuniversity(request, user):
             return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))
         else:
             # User no authenticated
-            print "Usuario logueado distinto del usuario solicitado"
+            print "MYUNIVERSITY: Usuario logueado distinto del usuario solicitado"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
@@ -1134,7 +1161,6 @@ def unieditform(request, uni_name, type_form):
                 type_user = str(i.type_user)
 
         print "uni_name: " + str(uni_name)
-
         print "type_form: " + str(type_form)
 
         # With uni_id we can get the name
@@ -1146,15 +1172,13 @@ def unieditform(request, uni_name, type_form):
             print "No se han encontrado ningun objecto con ese id"  
             ur = "/tuerasmus/" + tt + "/myuniversity" 
             return HttpResponseRedirect(ur)
-
-        uni = uniname.uni
         
         # MÉTODO POST
         if request.method=="POST":
             alertdone=""
             alerterror=""
             
-            un_obj = University.objects.get(uni=uni)
+            un_obj = University.objects.get(uni=uniname.uni)
             
             ###################### BASIC FORM ######################
             if type_form=="basic":
@@ -1242,7 +1266,7 @@ def unieditform(request, uni_name, type_form):
                 tit4 = "Pisos compartidos"
                 tit5 = "Prácticas, becas y trabajos en empresas"
 
-                if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid(): 
+                if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid(): 
                     # Valid form
                     #DocumentationForm
                     unidoc = form1.cleaned_data['unidoc']
@@ -1282,7 +1306,7 @@ def unieditform(request, uni_name, type_form):
                     contact = form5.cleaned_data['contact']
                     
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO DOCUMENTACION"
-                    print uni
+                    print uniname.uni
 
                     # Instanciamos la base de datos
                     un_data = InfoGeneral(uni=un_obj, username=request.user.username, unidoc=unidoc, residencelicence=residencelicence, getresidence=getresidence, economicaid=economicaid, bankaccount=bankaccount, costume=costume, meetings=meetings, offices=offices, qualification=qualification, specialty=specialty, teachingequipment=teachingequipment, library=library, lab=lab, computerequipment=computerequipment, others=others, dinningroom=dinningroom, cafeteria=cafeteria, sportactivities=sportactivities, asociation=asociation, languagecourse=languagecourse, schoolyear=schoolyear, vacations=vacations, compteleco=compteleco, teachers=teachers, teaching=teaching, studies=studies, flatshare=flatshare, linktoshare=linktoshare, scholarships=scholarships, practices=practices, contact=contact)
@@ -1299,7 +1323,7 @@ def unieditform(request, uni_name, type_form):
                     # Invalid forms
                     alerterror = True
 
-                ctx = {'tit1':tit1, 'tit2':tit2, 'tit3':tit3, 'tit4':tit4, 'tit5':tit5, 'form1':form1, 'form2':form2, 'form3':form3, 'form4':form4, 'form5':form5, 'alerterror': alerterror, 'saved':saved, 'alertdone':alertdone, 'uni_name':uni_name, 'uniname':uni, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'tit1':tit1, 'tit2':tit2, 'tit3':tit3, 'tit4':tit4, 'tit5':tit5, 'form1':form1, 'form2':form2, 'form3':form3, 'form4':form4, 'form5':form5, 'alerterror': alerterror, 'saved':saved, 'alertdone':alertdone, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
 
             ###################### HOTEL FORM ######################
             elif type_form=="hotel":
@@ -1599,7 +1623,7 @@ def myerasmus(request, user):
         
         else:
             # User no authenticated
-            print "Usuario logueado distinto del usuario solicitado"
+            print "MYERASMUS: Usuario logueado distinto del usuario solicitado"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)

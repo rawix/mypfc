@@ -56,20 +56,17 @@
 {% block uni_info %}
 
   <div class="page-header">
-    <h1>{{ uniname }}</h1>
+    <h1><a href="/tuerasmus/university/{{uni_name}}" style="color: #424242">{{ uniname }}</a></h1>
   </div>
   
   {% if not no_info %}
-      {% if texto %}
+      <!--{% if texto %}
         <h1>Voy a modificar o eliminar la info</h1>
         <label for="infoadd">Escribe tu universidad</label>
         <input id="infoadd" type="text" class="form-control" name="newinfo">  
         <br>
-      {% endif %}
+      {% endif %}-->
       
-      <!--<img data-src="holder.js/200x200" class="img-thumbnail" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old intant camera">-->
-      
-      <img data-src="{{ur}}" class="img-thumbnail" alt="Imagen no disponible: {{uniname.uni}}">
       <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
       
       {% ifequal info "basic" %}
@@ -79,12 +76,21 @@
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.qualification}}
             {% ifequal user.username i.username %}
-              <a value="modqua" name="op" type="submit" class="btn btn-sm btn-warning" >Modificar</button><button value="delqua" name="op" type="submit" class="btn btn-sm btn-danger" >Eliminar</button>
+              <a value="mod" type="submit" name="modqua" class="btn btn-sm btn-default">Modificar</a><button value="delqua" name="qualification" type="submit" class="btn btn-sm btn-default">Eliminar</button>
+
+<!--<a class="btn btn-default" href="#" role="button">Link</a>
+<button class="btn btn-default" type="submit">Button</button>
+<input class="btn btn-default" type="button" value="Input">
+<input class="btn btn-default" type="submit" value="Submit">-->
+              
               {% if modqua %}
                 <textarea name="op" rows="10" cols="40">Escribe aquí la información</textarea>
               {% endif %}
-            {% endifequal %}-->
+
+              
+            {% endifequal %}
             </p></li>
+            
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}

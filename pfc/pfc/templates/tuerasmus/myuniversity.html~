@@ -67,11 +67,11 @@
           <h3>Registra tu universidad erasmus</h3>
           <center><p><a class="btn btn-warning btn-lg" href="/tuerasmus/uniregister">REGISTRAR UNIVERSIDAD</a></p></center>
         {% endif %}
-        <br><br>
+        
       </div><!-- /.row -->
         
       <div class="row">
-        <center><a class="btn btn-success btn-lg" href="/tuerasmus/universities" > IR A UNIVERSIDADES </a></center>
+        <br><br><center><a class="btn btn-success btn-lg" href="/tuerasmus/universities" > IR A UNIVERSIDADES </a></center>
       </div><!-- /.row -->
       
      </div><!--/span-->
