@@ -1,7 +1,3 @@
 {% extends "university/uni_info.html" %}
 
-{% block modifing %}
-  {% if modqua %}
-    <textarea name="op" rows="10" cols="40">Escribe aquí la información</textarea>
-  {% endif %}
-{% endblock %}
+

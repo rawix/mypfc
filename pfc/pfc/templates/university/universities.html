@@ -56,9 +56,49 @@
           
         </form>  
   {% elif resi_info %}
-  
+      <div class="jumbotron">
+        <h1>LAS RESIDENCIAS ERASMUS</h1>
+      </div><!--/.jumbotron -->
+
+      <div class="page-header">
+        <h1>¿Qué residencias son las más cercanas a tu universidad?:</h1>
+      </div>
+      
+        <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+
+          <label for="selected_resi">Cónoce las residencias:</label>
+          <select id="selected_resi" class="form-control" name="resi_selected">
+            {% for u in cit %}
+              <option> {{ u.name }} </option>
+            {% empty %}
+              <h3> Aún no hay residencias registradas </h3>
+            {% endfor %}
+          </select>
+          
+        </form>    
   {% elif sub_info %}
-  
+ 
+      <div class="jumbotron">
+        <h1>LAS ASIGNATURAS</h1>
+      </div><!--/.jumbotron -->
+
+      <div class="page-header">
+        <h1>¿Qué asignaturas puedes llevarte y cursar fuera?:</h1>
+      </div>
+      
+        <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+
+          <label for="selected_subj">Cónoce las residencias:</label>
+          <select id="selected_subj" class="form-control" name="subj_selected">
+            {% for u in cit %}
+              <option> {{ u.subname }} </option>
+            {% empty %}
+              <h3> Aún no hay residencias registradas </h3>
+            {% endfor %}
+          </select>
+          
+        </form> 
+        
   {% else %}    
       <div class="jumbotron">
         <h1>LAS UNIVERSIDADES ERASMUS Y MUNDE</h1>

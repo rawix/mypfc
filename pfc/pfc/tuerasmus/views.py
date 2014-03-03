@@ -915,6 +915,7 @@ def uninfo(request, uni_name, type_info):
                     print "modificamos comentario en GET info basic" 
                     
 
+
                 elif type_info=="doc":
                     print "muestro la info doc"
                     info="doc"
@@ -1375,7 +1376,7 @@ def unieditform(request, uni_name, type_form):
 
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO ASIGNATURAS"
                     
-                    uni_subject = Subjects(uni=uni_obj, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
+                    uni_subject = Subjects(uni=un_obj, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
                     uni_subject.save()
 
                         

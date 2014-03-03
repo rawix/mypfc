@@ -60,14 +60,7 @@
   </div>
   
   {% if not no_info %}
-      <!--{% if texto %}
-        <h1>Voy a modificar o eliminar la info</h1>
-        <label for="infoadd">Escribe tu universidad</label>
-        <input id="infoadd" type="text" class="form-control" name="newinfo">  
-        <br>
-      {% endif %}-->
-      
-      <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+      <form action="/tuerasmus/university/{{uni_name}}/" enctype="multipart/form-data" method="post"> {% csrf_token %}
       
       {% ifequal info "basic" %}
         <!-- INFORMACIÓN DE LAS INSTALACIONES DE LA UNIVERSIDAD -->
@@ -76,17 +69,15 @@
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.qualification}}
             {% ifequal user.username i.username %}
-              <a value="mod" type="submit" name="qualification" class="btn btn-sm btn-default">Modificar</a><button value="delqua" name="qualification" type="submit" class="btn btn-sm btn-default">Eliminar</button>
+              <a value="mod" type="text" name="qualification" class="btn btn-sm btn-default" >Modificar</a><button value="delqua" name="qualification" type="submit" class="btn btn-sm btn-default">Eliminar</button>
+              <!--<a name="mod_comment"><textarea name="op" rows="10" cols="40">Escribe aquí la información</textarea></a>-->
 
 <!--<a class="btn btn-default" href="#" role="button">Link</a>
 <button class="btn btn-default" type="submit">Button</button>
 <input class="btn btn-default" type="button" value="Input">
 <input class="btn btn-default" type="submit" value="Submit">-->
               
-              {% if modqua %}
-                <textarea name="op" rows="10" cols="40">Escribe aquí la información</textarea>
-              {% endif %}
-
+            
               
             {% endifequal %}
             </p></li>

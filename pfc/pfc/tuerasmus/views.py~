@@ -877,7 +877,7 @@ def uninfo(request, uni_name, type_info):
         if request.method=="POST":
             data = request.POST['qualification']
             
-            if data=="modqua":
+            if data=="mod":
                 print "modificamos comentario"
                 data_obj = InfoGeneral.objects.get(username=request.user.username)
                 print str(data_obj.qualification)
@@ -914,6 +914,7 @@ def uninfo(request, uni_name, type_info):
                     
                     print "modificamos comentario en GET info basic" 
                     
+
 
                 elif type_info=="doc":
                     print "muestro la info doc"

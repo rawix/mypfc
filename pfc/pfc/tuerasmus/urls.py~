@@ -15,7 +15,8 @@ from tuerasmus import views
 urlpatterns = patterns('',
 
     # Universities urls
-    url(r'^uniregister$', 'tuerasmus.views.uniregister', name='uniregister'),
+    url(r'^uniregister/$', 'tuerasmus.views.uniregister', name='uniregister'),
+    url(r'^university/(?P<uni_name>[\S]+)/(?P<type_info>[\S]+)/modifing/$', 'tuerasmus.views.modifing', name='modifing'),
     url(r'^uniedit/(?P<uni_name>[\S]+)/(?P<type_form>[\S]+)/$', 'tuerasmus.views.unieditform', name='unieditform'),
     url(r'^university/(?P<uni_name>[\S]+)/(?P<type_info>[\S]+)/$', 'tuerasmus.views.uninfo', name='uninfo'),
     url(r'^universities/cities/$', 'tuerasmus.views.cities', name='cities'),    
