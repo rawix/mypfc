@@ -28,15 +28,18 @@
 
 {% block content %}
 
-      <div class="jumbotron">
-        <p>
-          <h1> {{ uniname }} </h1>
-          <a href="/tuerasmus/university/{{uni_name}}" class="btn btn-lg btn-default" type="submit">Ver perfil</a>
-        </p>
-      </div>
+  <div class="col-xs-12 col-sm-9">
+
+    <div class="jumbotron">
+      <p>
+        <h1> {{ uniname }} </h1>
+        <a href="/tuerasmus/university/{{uni_name}}/basic" class="btn btn-lg btn-default">Ver perfil</a>
+      </p>
+    </div>
     
     <div class="page-header">
       <h1>Elige el tema de información que desees completar</h1>
+    </div>
       <p>
         <!--<button type="button" class="btn btn-lg" style="background:white">Básica</button>-->
         <a href="/tuerasmus/uniedit/{{uni_name}}/basic" class="btn btn-lg btn-danger" type="submit">Datos de la universidad</a>
@@ -55,5 +58,7 @@
 
       {% block uni_form %}
       {% endblock %}
+
+  </div><!--/span-->
 
 {% endblock %}

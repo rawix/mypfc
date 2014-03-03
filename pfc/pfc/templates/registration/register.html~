@@ -51,6 +51,7 @@
               </p>
               
               {{ form.as_p }}
+              
               <p>
               <div class="radio-inline">
                 <label>

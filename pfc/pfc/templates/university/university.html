@@ -33,11 +33,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container theme-showcase">
-
-
+  <div class="col-xs-12 col-sm-9">
+  
+      <p class="pull-right visible-xs">
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p>
       
-      <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <!--<a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1> {{ uniname }} </h1></a>-->
         <div class="row">
@@ -85,7 +86,9 @@
       {% endblock %}      
 
       {% block uni_info %}
-      {% endblock %}      
+      {% endblock %}  
+          
+  </div><!--/span-->
 
 {% endblock %}
 

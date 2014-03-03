@@ -169,9 +169,9 @@ class SubjectsForm(forms.Form):
 #            Class WorkForm: to change the university profile   
 #----------------------------------------------------------------------------
 class WorkForm(forms.Form):
-    scholarships = forms.TextField(label="Becas", widget=forms.TextInput(), required=False)
-    practices = forms.TextField(label="Trabajo", widget=forms.TextInput(), required=False)
-    contact = forms.TextField(label="Contacto con empresas", widget=forms.TextInput(), required=False)
+    scholarships = forms.CharField(label="Becas", widget=forms.TextInput(), required=False)
+    practices = forms.CharField(label="Trabajo", widget=forms.TextInput(), required=False)
+    contact = forms.CharField(label="Contacto con empresas", widget=forms.TextInput(), required=False)
 
 #----------------------------------------------------------------------------
 #            Class CityForm: to change the university profile   

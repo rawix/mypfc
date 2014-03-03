@@ -61,15 +61,28 @@
 
     <div class="container theme-showcase">
       
-      <div class="row">
-
         {% block content %}
         {% endblock %}
 
-
-      </div><!--/.row-->            
-
-
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="well sidebar-nav">
+            <ul class="nav">
+              <li>Universidades</li>
+              <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mis universidades</a></li>
+              <li><a href="/tuerasmus/universities">Las universidades</a></li>
+              
+              <li>Usuarios</li>
+              <li><a href="/tuerasmus/{{user.username}}/myerasmus">Mis erasmus</a></li>
+              <li><a href="/tuerasmus/universities/urerasmus">Los erasmus</a></li>
+              
+              <li>Curiosidades</li>
+              <li><a href="/tuerasmus/universities/cities">Las ciudades</a></li>
+              <li><a href="/tuerasmus/universities/residences">Las residencias</a></li>
+              <li><a href="/tuerasmus/universities/subjects">Las asignaturas</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+          
       <hr>
 
       <footer>

@@ -81,8 +81,11 @@ class University(models.Model):
         ordering = ['uni']
         
     def __unicode__(self):
-        return self.uni;
+        return unicode(self.uni);
 
+    def __str__(self):
+        return self.uni;
+        
 # ------------------------------------------------------------------------------
 #                               Countries class.
 # ------------------------------------------------------------------------------
@@ -171,8 +174,7 @@ class InfoBasic(models.Model):
     def __unicode__(self):
         return unicode(self.uni);
         
-    def __str__(self):
-        return self.uni;
+
         
 # ------------------------------------------------------------------------------
 #                               InfoStadistic class.
@@ -192,7 +194,7 @@ class InfoStadistic(models.Model):
         ordering = ['uni']
         
     def __str__(self):
-        return self.uni;
+        return str(self.uni);
 
 # ------------------------------------------------------------------------------
 #                               Subjects class.
@@ -218,7 +220,7 @@ class Subjects(models.Model):
         ordering = ['subname']
         
     def __str__(self):
-        return self.uni;
+        return str(self.uni);
         
 # ------------------------------------------------------------------------------
 #                               InfoGeneral class.
@@ -281,12 +283,9 @@ class InfoGeneral(models.Model):
     class Meta:
         verbose_name_plural = u'General'
         ordering = ['uni']
-        
-    def __unicode__(self):
-        return self.uni;
-        
+      
     def __str__(self):
-        return self.uni;
+        return str(self.uni);
 
 
 # ------------------------------------------------------------------------------

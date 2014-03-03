@@ -27,8 +27,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container theme-showcase">
-
+  <div class="col-xs-12 col-sm-9">
+  
+      <p class="pull-right visible-xs">
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p>
+      
       <div class="jumbotron">
         <h1><strong> LOS ERASMUS </strong></h1>
       </div>
@@ -42,26 +46,29 @@
         <h3>Los tuerasmus según las universidades</h3>
       </div>      
       
-      {% regroup uu by uni as uni_list %}
-        
-      <ul>
-        {% for uni in uni_list %}
-            <li><h3><strong> {{ uni.grouper }} </strong></h3>      
-            <ul>
-                {% for item in uni.list %}
-                    {% for i in item.useuni.all %}
-                      {% ifnotequal i.username user.username %}
-                        <li><a href="/tuerasmus/{{i.username}}/profile">{{i.username}}</a></li>
-                      {% endifnotequal %}
-                    {% endfor %}
-                {% endfor %}
-            </ul>
-            </li>
-        {% endfor %}
-      </ul>  
-      
- 
-        
+      {% if not nuall_msg %}
+        {% regroup uu by uni as uni_list %}
+          
+        <ul>
+          {% for uni in uni_list %}
+              <li><h3><strong> {{ uni.grouper }} </strong></h3>      
+              <ul>
+                  {% for item in uni.list %}
+                      {% for i in item.useuni.all %}
+                        {% ifnotequal i.username user.username %}
+                          <li><a href="/tuerasmus/{{i.username}}/profile">{{i.username}}</a></li>
+                        {% endifnotequal %}
+                      {% endfor %}
+                  {% endfor %}
+              </ul>
+              </li>
+          {% endfor %}
+        </ul>  
+      {% else %}
+        <h3><strong> No hay más usuarios </strong></h3>
+      {% endif %}
+    
+
       <!--<div class="page-header">
         <h1>Algunos datos estadísticos: </h1>
       </div>
@@ -87,7 +94,8 @@
         <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
         <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
       </div>  -->
-
+  </div><!--/span-->
+  
 {% endblock %}
 
 

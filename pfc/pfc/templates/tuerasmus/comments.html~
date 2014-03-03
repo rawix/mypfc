@@ -11,7 +11,7 @@
                 <li><a href="/tuerasmus/universities">Las universidades</a></li>
                 <li class="divider"></li>
                   <li class="dropdown-header">Más</li>
-                  <li class="active"><a href="/tuerasmus/uniregister">Registrar</a></li>
+                  <li><a href="/tuerasmus/uniregister">Registrar</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -70,6 +70,8 @@
 	                                <p>{{ c.text }}</p>
                                 </li>
                                 <br>
+                            {% empty %}
+                                <h4><strong> No hay comentarios </strong></h4>
                             {% endfor %}
 	                    </div><!-- /.col-lg-9 -->
                     {% endif %}

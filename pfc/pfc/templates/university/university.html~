@@ -52,8 +52,9 @@
            
 
       <div class="page-header">
-        <p><h1>¿¡Qué quieres conocer de esta universidad!?</h1>
-        <a href="/tuerasmus/uniedit/{{uni_name}}" class="btn btn-lg btn-default" type="submit">Editar perfil</a>
+        <p>
+          <h1>¿¡Qué quieres conocer de esta universidad!?</h1>
+          <a href="/tuerasmus/uniedit/{{uni_name}}" class="btn btn-lg btn-default" type="submit">Editar perfil</a>
         </p>
       </div>
       <p>

@@ -177,7 +177,7 @@ class WorkForm(forms.Form):
 #            Class CityForm: to change the university profile   
 #----------------------------------------------------------------------------
 class CityForm(forms.Form):
-    cityname = forms.CharField(label="En general", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    cityname = forms.CharField(label="Nombre de la ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     prices = forms.CharField(label="Precios", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     uniarea = forms.CharField(label="La universidad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     studentlife = forms.CharField(label="Vida estudiantil", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})

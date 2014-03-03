@@ -1376,7 +1376,7 @@ def unieditform(request, uni_name, type_form):
 
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO ASIGNATURAS"
                     
-                    uni_subject = Subjects(uni=uni_obj, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
+                    uni_subject = Subjects(uni=un_obj, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
                     uni_subject.save()
 
                         
@@ -1651,12 +1651,26 @@ def cities(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
+        # Lists from DBs
         cit = City.objects.all().order_by('cityname') 
         ncit = City.objects.all().count()           
         uall = University.objects.all().order_by('uni')       
-        nuall = University.objects.all().count()                    
-        ctx = {'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
-        return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
+        nuall = University.objects.all().count()  
+        
+        if request.method=="POST":
+            city_menu = request.POST['city_selected']
+            print city_menu
+            try:
+                city_data = City.objects.get(cityname=city_menu)
+                ctx = {'infoData':True, 'cityData':True, 'city_data':info_data, 'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            except City.Does.NotExist:
+                ctx = {'form_city':True, 'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            
+            
+        else:                 
+            ctx = {'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+            
+        return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User not authenticated
@@ -1680,11 +1694,13 @@ def residences(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
+        # Lists from DBs
         uu = UsersUniversity.objects.all().order_by('username')
-        res = Place.objects.all().order_by('cityname')
+        res = Place.objects.all().order_by('name')
         nres = Place.objects.all().count()           
         uall = University.objects.all() .order_by('uni')      
-        nuall = University.objects.all().count()                    
+        nuall = University.objects.all().count() 
+                           
         ctx = {'resi_info':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
         return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
@@ -1709,11 +1725,13 @@ def subjects(request):
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
-
+                
+        # Lists from DBs
         sub = Subjects.objects.all().order_by('subname') 
         nsub = Subjects.objects.all().count()           
         uall = University.objects.all().order_by('uni')       
-        nuall = University.objects.all().count()                    
+        nuall = University.objects.all().count()    
+                        
         ctx = {'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
         return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
@@ -1738,10 +1756,18 @@ def urerasmus(request):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
-        uu = UsersUniversity.objects.all()          
+        # Lists from DBs
+        uu = UsersUniversity.objects.all() 
+        nuu = UsersUniversity.objects.all().count()       
         uall = University.objects.all().order_by('uni')      
-        nuall = University.objects.all().count()                    
-        ctx = {'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        nuall = University.objects.all().count()  
+        
+        # To show all the tuerasmus
+        if nuu==0:
+            ctx = {'nuu_msg':True, 'nuall':nuall, 'uu':uu, 'nuu':nuu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        else:
+            ctx = {'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+                  
         return render_to_response('university/urerasmus.html', ctx, context_instance=RequestContext(request))
 
     else:
