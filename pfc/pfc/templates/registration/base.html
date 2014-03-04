@@ -114,7 +114,7 @@
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡Hola {{type_user}} {{username}}!!</em></strong></a>
+              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡Hola {{username}}!!</em></strong></a>
             </div>
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>

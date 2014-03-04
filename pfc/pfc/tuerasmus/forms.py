@@ -201,6 +201,7 @@ class OthersForm(forms.Form):
 #            Class ContactForm: to contact any user  
 #----------------------------------------------------------------------------    
 class ContactForm(forms.Form):
+    username = forms.CharField()
     subject = forms.CharField(max_length=100)
     message = forms.CharField()
     sender = forms.EmailField()

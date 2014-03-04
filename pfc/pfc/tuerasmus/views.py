@@ -127,11 +127,12 @@ def myprofile(request, user):
 
     if request.user.is_authenticated():
         if (request.user.username==user):
-            print "HOME USER: Usuario logueado: " + user
-            print "MYPROFILE: usuario logueado " + user
-                       
+            
+            print "MYPROFILE: usuario logueado " + request.user.username
+            print "MYPROFILE: usuario solicitado " + user
+            
             # Concatenate URL + username
-            ur = '/tuerasmus/' + user + '/edit_profile'
+            ur = "/tuerasmus/" + user + "/profile"
             print "MYPROFILE: " + ur
             # Redirect url
             return HttpResponseRedirect(ur)
@@ -153,63 +154,63 @@ def myprofile(request, user):
 def profile(request, user):
 
     if request.user.is_authenticated():
-        if (request.user.username==user):
-            print "PROFILE: Usuario logueado: " + user
+        #if (request.user.username==user):
+        #    print "PROFILE: Usuario logueado: " + user
                        
             # Concatenate URL + username
-            ur = '/tuerasmus/' + user + '/edit_profile'
-            print "MYPROFILE: " + ur
+        #    ur = "/tuerasmus/" + user + "/myprofile"
+        #    print "MYPROFILE: " + ur
             # Redirect url
-            return HttpResponseRedirect(ur)
-        else:
+        #    return HttpResponseRedirect(ur)
+        #else:
  
-            print "PROFILE: usuario logueado " + request.user.username
-            print "PROFILE: USUARIO SOLICITADO: " + user
-                       
-            # User is professor or student
-            # User has a profile image
-            type_user=""
-            path_image=""
-            description=""
-            t = User.objects.get(username=user)
-            tt = t.username
-            tu = Users.objects.all()
-            tp = UserProfile.objects.all()
-            for i in tu:
-                if (tt == str(i.username)):
-                    type_user = str(i.type_user)
-                    genero = str(i.genero)
-            for j in tp:
-                print "nombre de la imagen 3333333333333333333: " + str(j.name_image) + str(j.username)
-                print "description 3333333333333333333: " + str(j.description) + str(j.username)
-                if (tt == str(j.username)):
-                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"
-                        description = "Mi erasmus será genial"
-                        
-                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"               
-                        description = str(j.description)
-                        
-                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = "Mi erasmus será genial"
-                    elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = str(j.description)
-                        
-                print "voy a imprimir path_image 3333333333333333333333333333333333333" + str(j.username)
-                print path_image  
+        print "PROFILE: usuario logueado " + request.user.username
+        print "PROFILE: USUARIO SOLICITADO: " + user
+                   
+        # User is professor or student
+        # User has a profile image
+        type_user=""
+        path_image=""
+        description=""
+        t = User.objects.get(username=user)
+        tt = t.username
+        tu = Users.objects.all()
+        tp = UserProfile.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+                genero = str(i.genero)
+        for j in tp:
+            print "nombre de la imagen 3333333333333333333: " + str(j.name_image) + str(j.username)
+            print "description 3333333333333333333: " + str(j.description) + str(j.username)
+            if (tt == str(j.username)):
+                if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                    if genero=="male":
+                        path_image ="tuerasmus/male.jpg"
+                    elif genero=="female":
+                        path_image="tuerasmus/female.jpg"
+                    description = "Mi erasmus será genial"
+                    
+                elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                    if genero=="male":
+                        path_image ="tuerasmus/male.jpg"
+                    elif genero=="female":
+                        path_image="tuerasmus/female.jpg"               
+                    description = str(j.description)
+                    
+                elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    path_image = "profiles/" + str(j.name_image)
+                    description = "Mi erasmus será genial"
+                elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    path_image = "profiles/" + str(j.name_image)
+                    description = str(j.description)
+                    
+            print "voy a imprimir path_image 3333333333333333333333333333333333333" + str(j.username)
+            print path_image  
 
-            # Return the template
-            ctx = {'up_obj':j, 'see_profile':True, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
-            return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+        # Return the template
+        ctx = {'up_obj':j, 'see_profile':True, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+        return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated
@@ -1661,12 +1662,11 @@ def cities(request):
             city_menu = request.POST['city_selected']
             print city_menu
             try:
-                city_data = City.objects.get(cityname=city_menu)
-                ctx = {'infoData':True, 'cityData':True, 'city_data':info_data, 'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
-            except City.Does.NotExist:
+                city_data = City.objects.filter(cityname=city_menu)
+                ctx = {'city_menu':city_menu, 'infoData':True, 'cityData':True, 'city_data':info_data, 'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            except City.DoesNotExist:
                 ctx = {'form_city':True, 'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
-            
-            
+                        
         else:                 
             ctx = {'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
             

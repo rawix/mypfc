@@ -2,8 +2,7 @@
 
 {% block data_info%}
 
-  <h3><strong>{{city_menu}}</strong></h3>
-  
+  <strong>{{city_menu}}</strong>
   <ul>
     {% for i in city_data %}
       <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>

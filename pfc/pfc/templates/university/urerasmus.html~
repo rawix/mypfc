@@ -65,6 +65,7 @@
           {% endfor %}
         </ul>  
       {% else %}
+        <h3><strong> No hay más usuarios </strong></h3>
       {% endif %}
     
 

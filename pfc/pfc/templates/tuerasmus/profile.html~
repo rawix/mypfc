@@ -3,7 +3,14 @@
 {% block link_content%}
 
             <li><a href="/tuerasmus">Home</a></li>
-            <li class="active"><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
+            <li class="active" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi perfil<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myprofile">Ver perfil</a></li>
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
+              </ul>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -19,6 +26,10 @@
               <ul class="dropdown-menu">
                 <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
                 <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>-->
+                  <li><a href="#">Contactar</a></li>
               </ul>
             </li>
             <li><a href="/tuerasmus/comments">TusComentarios</a></li>
@@ -70,7 +81,7 @@
         <div class="col-xs-12 col-sm-9">
         
           <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Menú</button>
           </p>
           <div class="jumbotron">    
             <center><img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/></center>
@@ -81,18 +92,18 @@
 
           <p>
             {% ifequal up_obj.name "" %}
-              <li>Nombre: No tiene nombre
+              <li>Nombre: No tiene nombre</li>
             {% else %}
-              <li>Nombre: {{up_obj.name}}
+              <li>Nombre: {{up_obj.name}}</li>
             {% endifequal %}
 
             {% ifequal up_obj.name "" %}
-              <li>Apellidos: No tiene apellidos
+              <li>Apellidos: No tiene apellidos</li>
             {% else %}
-              <li>Apellidos: {{up_obj.lastname}}
+              <li>Apellidos: {{up_obj.lastname}}</li>
             {% endifequal %}
             
-            <li>Descripción: {{description}}
+            <li>Descripción: {{description}}</li>
             
             {% ifequal up_obj.uni1 None %}
               <li>Universidad Erasmus: </li>

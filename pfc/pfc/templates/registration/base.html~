@@ -97,8 +97,7 @@
                 <li><a href="/tuerasmus/universities">Las universidades</a></li>
                 <li class="divider"></li>
                   <li class="dropdown-header">Más</li>
-                  <li><a href="/tuerasmus/uniresgister">Resgistrar</a></li>
-                
+                  <li><a href="/tuerasmus/uniresgister">Resgistrar</a></li> 
               </ul>
             </li>
             <li class="dropdown">

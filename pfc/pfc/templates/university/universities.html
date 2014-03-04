@@ -8,27 +8,38 @@
 
 {% block link_content %}
 
-  <li><a href="/tuerasmus">Home</a></li>
-  <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
-  <li class="active" class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-      <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
-      <li><a href="/tuerasmus/universities">Las universidades</a></li>
-      <li class="divider"></li>
-      <li class="dropdown-header">más</li>
-      <li><a href="/tuerasmus/uniregister">Registrar</a></li>
-    </ul>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-      <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-      <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
-    </ul>
-  </li>
-  <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-  <li><a href="/contact">Contacto</a></li>
+            <li><a href="/tuerasmus">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi perfil<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myprofile">Ver perfil</a></li>
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
+              </ul>
+            <li class="active" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+                <li><a href="/tuerasmus/universities">Las universidades</a></li>
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <li><a href="/tuerasmus/uniregister">Registrar</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+                <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
+                <li class="divider"></li>
+                  <li class="dropdown-header">Más</li>
+                  <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>-->
+                  <li><a href="#">Contactar</a></li>
+              </ul>
+            </li>
+            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
+            <li><a href="/contact">Contacto</a></li>
   
 {% endblock %}
 
@@ -55,7 +66,7 @@
               <label for="selected_city">Cónoce las ciudades:</label>
               <select id="selected_city" class="form-control" name="city_selected">
                 {% for u in cit %}
-                  <option> {{ u.cityname }} </option>
+                  <option> {{u.username}}: {{ u.cityname }} </option>
                 {% empty %}
                   <h3> Aún no hay ciudades registradas </h3>
                 {% endfor %}

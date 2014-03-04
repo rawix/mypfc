@@ -220,7 +220,7 @@ class Subjects(models.Model):
         ordering = ['subname']
         
     def __str__(self):
-        return str(self.uni);
+        return str(self.subname);
         
 # ------------------------------------------------------------------------------
 #                               InfoGeneral class.
