@@ -1,72 +1,222 @@
 {% extends "university/universities.html" %}
 
-{% block data_info%}
+{% block data_info %}
 
-  <strong>{{city_menu}}</strong>
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
+  <!-- BLOQUE CIUDADES -->  
 
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
+  {% if cityData %}
+    <h3><strong>{{city_menu}}</strong></h3>
+    
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
   
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for i in city_data %}
-      <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
-    {% empty %}
-      <li><p>Lo siento, pero no hay nada escrito.</p></li>
-    {% endfor %}
-  </ul>
+  
+  
+  <!-- BLOQUE RESIDENCIAS -->  
+  
+  {% if resiData %}
+    <h3><strong>{{resi_menu}}</strong></h3>
+    
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- BLOQUE ASIGNATURAS -->
+  {% if subjData %}
+    <h3><strong>{{subj_menu}}</strong></h3>
+    
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for i in city_data %}
+        <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
+      {% empty %}
+        <li><p>Lo siento, pero no hay nada escrito.</p></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endblock %}
 

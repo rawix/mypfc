@@ -102,6 +102,48 @@ class Countries(models.Model):
         return self.country;
         
 # ------------------------------------------------------------------------------
+#                               Cities class.
+# ------------------------------------------------------------------------------
+class Cities(models.Model):
+    city = models.CharField(max_length=50);
+    
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Cities'
+        ordering = ['city']
+
+    def __unicode__(self):
+        return self.city;
+        
+# ------------------------------------------------------------------------------
+#                               Resis class.
+# ------------------------------------------------------------------------------
+class Resis(models.Model):
+    resi = models.CharField(max_length=50);
+    
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Resis'
+        ordering = ['resi']
+
+    def __unicode__(self):
+        return self.resi;
+        
+# ------------------------------------------------------------------------------
+#                               Subjs class.
+# ------------------------------------------------------------------------------
+class Subjs(models.Model):
+    subj = models.CharField(max_length=50);
+    
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Subjs'
+        ordering = ['subj']
+
+    def __unicode__(self):
+        return self.subj;
+
+# ------------------------------------------------------------------------------
 #                               Score class.
 # ------------------------------------------------------------------------------
 class Score(models.Model):

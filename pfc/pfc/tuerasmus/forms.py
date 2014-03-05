@@ -10,7 +10,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.utils import timezone 
-from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Cities, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Resis, Score, Subjs, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 #import datetime
 

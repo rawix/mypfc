@@ -65,8 +65,8 @@
             <div class="col-xs-6">
               <label for="selected_city">Cónoce las ciudades:</label>
               <select id="selected_city" class="form-control" name="city_selected">
-                {% for u in cit %}
-                  <option> {{ u.cityname }} </option>
+                {% for u in cits %}
+                  <option> {{ u.city }} </option>
                 {% empty %}
                   <h3> Aún no hay ciudades registradas </h3>
                 {% endfor %}

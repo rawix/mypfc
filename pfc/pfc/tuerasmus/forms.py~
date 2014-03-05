@@ -10,7 +10,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.utils import timezone 
-from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Cities, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 #import datetime
 
@@ -201,6 +201,7 @@ class OthersForm(forms.Form):
 #            Class ContactForm: to contact any user  
 #----------------------------------------------------------------------------    
 class ContactForm(forms.Form):
+    username = forms.CharField()
     subject = forms.CharField(max_length=100)
     message = forms.CharField()
     sender = forms.EmailField()

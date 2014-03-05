@@ -39,7 +39,7 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 from datetime import datetime, date
 
 # Database tables.  
-from tuerasmus.models import City, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Score, Subjects, Universities, University, UserProfile, Users, UsersUniversity
+from tuerasmus.models import City, Cities, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Resis, Score, Subjs, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 # Forms
 from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CostumeServiceForm, DocumentationForm, ResidenceForm, PlaceForm, SubjectsForm, WorkForm, CityForm, OthersForm
@@ -1349,6 +1349,13 @@ def unieditform(request, uni_name, type_form):
                     un_inforesi = InfoResidence(uni=un_obj, username=request.user.username, residence=un_resi)
                     un_inforesi.save()
                     
+                    # Saving just the resi names
+                    try:
+                        r = Resis.objects.get(resi=name)
+                    except Resis.DoesNotExist:
+                        r = Resis(resi=name)
+                        r.save()
+                                            
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO Residencia"
                     form1=PlaceForm()
                     alertdone=True
@@ -1380,7 +1387,13 @@ def unieditform(request, uni_name, type_form):
                     uni_subject = Subjects(uni=un_obj, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
                     uni_subject.save()
 
-                        
+                    # Saving just the subjects names
+                    try:
+                        s = Subjs.objects.get(subj=subname)
+                    except Subjs.DoesNotExist:
+                        s = Subjs(subj=subname)
+                        s.save()
+                                                
                     form1 = SubjectsForm()
                     alertdone=True
                 else:
@@ -1409,6 +1422,15 @@ def unieditform(request, uni_name, type_form):
                     city_data = City(cityname=cityname, username=request.user.username, prices=prices, uniarea=uniarea, studentlife=studentlife, turism=turism, party=party, culture=culture, crime=crime, shopping=shopping, erasmuslife=erasmuslife, more=more)
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO CIUDAD"
                     city_data.save()
+                    
+                    # Saving just the cities
+                    try:
+                        c = Cities.objects.get(city=cityname)
+                    except Cities.DoesNotExist:
+                        c = Cities(city=cityname)
+                        c.save()
+                        
+                    
                     form = CityForm()
                     alertdone=True
                     
@@ -1653,6 +1675,8 @@ def cities(request):
                 type_user = str(i.type_user)
 
         # Lists from DBs
+        cits = Cities.objects.all().order_by('city')
+        ncits = Cities.objects.all().count()
         cit = City.objects.all().order_by('cityname') 
         ncit = City.objects.all().count()           
         uall = University.objects.all().order_by('uni')       
@@ -1663,14 +1687,15 @@ def cities(request):
             print city_menu
             try:
                 city_data = City.objects.filter(cityname=city_menu)
-                ctx = {'infoData':True, 'cityData':True, 'city_data':info_data, 'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                ctx = {'city_menu':city_menu, 'infoData':True, 'cityData':True, 'city_info':True, 'cits':cits, 'ncits':ncits, 'city_data':city_data, 'cits':cits, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
             except City.DoesNotExist:
                 ctx = {'form_city':True, 'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
                         
         else:                 
-            ctx = {'city_info':True, 'cit':cit, 'ncit':ncit, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
-            
-        return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
+            ctx = {'city_info':True, 'cits':cits, 'ncits':ncits, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+            return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
+        
 
     else:
         # User not authenticated
@@ -1696,13 +1721,27 @@ def residences(request):
 
         # Lists from DBs
         uu = UsersUniversity.objects.all().order_by('username')
+        resis = Resis.objects.all().order_by('resi')
+        nresis = Resis.objects.all().count()
         res = Place.objects.all().order_by('name')
         nres = Place.objects.all().count()           
         uall = University.objects.all() .order_by('uni')      
         nuall = University.objects.all().count() 
-                           
-        ctx = {'resi_info':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
-        return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
+        
+        if request.method=="POST":
+            resi_menu = request.POST['resi_selected']
+            print resi_menu
+            try:
+                resi_data = Place.objects.filter(resi=resi_menu)
+                ctx = {'resi_menu':resi_menu, 'infoData':True, 'resiData':True, 'resi_info':True, 'resis':resis, 'nresis':nresis, 'resi_data':resi_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            except Place.DoesNotExist:
+                ctx = {'form_resi':True, 'resi_info':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
+        
+        
+        else:      
+            ctx = {'resi_info':True, 'resis':resis, 'nresis':nresis, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+            return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User not authenticated
@@ -1725,15 +1764,28 @@ def subjects(request):
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
-                
+        
         # Lists from DBs
+        subs = Subjs.objects.all().order_by('subj')
+        nsubs = Subjs.objects.all().count()
         sub = Subjects.objects.all().order_by('subname') 
         nsub = Subjects.objects.all().count()           
         uall = University.objects.all().order_by('uni')       
         nuall = University.objects.all().count()    
-                        
-        ctx = {'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
-        return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
+
+        if request.method=="POST":
+            subj_menu = request.POST['subj_selected']
+            print subj_menu
+            try:
+                subj_data = Subjs.objects.filter(subj=subj_menu)
+                ctx = {'subj_menu':subj_menu, 'infoData':True, 'subjData':True, 'subj_info':True, 'subs':subs, 'nsubs':nsubs, 'subj_data':subj_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            except Subjs.DoesNotExist:
+                ctx = {'form_resi':True, 'resi_info':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+            return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
+        
+        else:               
+            ctx = {'sub_info':True, 'subs':subs, 'nsubs':nsubs, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+            return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User not authenticated

@@ -102,6 +102,22 @@ class Countries(models.Model):
         return self.country;
         
 # ------------------------------------------------------------------------------
+#                               Countries class.
+# ------------------------------------------------------------------------------
+class Cities(models.Model):
+    city = models.CharField(max_length=50);
+    resi = models.CharField(max_length=50);
+    subj = models.CharField(mas_length=50);
+    
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Cities'
+        ordering = ['city']
+
+    def __unicode__(self):
+        return self.city;
+        
+# ------------------------------------------------------------------------------
 #                               Score class.
 # ------------------------------------------------------------------------------
 class Score(models.Model):
@@ -220,7 +236,7 @@ class Subjects(models.Model):
         ordering = ['subname']
         
     def __str__(self):
-        return str(self.uni);
+        return str(self.subname);
         
 # ------------------------------------------------------------------------------
 #                               InfoGeneral class.
