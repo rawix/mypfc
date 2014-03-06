@@ -8,186 +8,187 @@
 
 {% block link_content %}
 
-            <li><a href="/tuerasmus">Home</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi perfil<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/tuerasmus/{{user.username}}/myprofile">Ver perfil</a></li>
-                <li class="divider"></li>
-                  <li class="dropdown-header">Más</li>
-                  <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
-              </ul>
-            <li class="active" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
-                <li><a href="/tuerasmus/universities">Las universidades</a></li>
-                <li class="divider"></li>
-                  <li class="dropdown-header">Más</li>
-                  <li><a href="/tuerasmus/uniregister">Registrar</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-                <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
-                <li class="divider"></li>
-                  <li class="dropdown-header">Más</li>
-                  <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>-->
-                  <li><a href="#">Contactar</a></li>
-              </ul>
-            </li>
-            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-            <li><a href="/contact">Contacto</a></li>
+        <li><a href="/tuerasmus">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi perfil<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/tuerasmus/{{user.username}}/myprofile">Ver perfil</a></li>
+            <li class="divider"></li>
+              <li class="dropdown-header">Más</li>
+              <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
+          </ul>
+        </li>
+        <li class="active" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
+            <li><a href="/tuerasmus/universities">Las universidades</a></li>
+            <li class="divider"></li>
+              <li class="dropdown-header">Más</li>
+              <li><a href="/tuerasmus/uniregister">Registrar</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+            <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
+            <li class="divider"></li>
+              <li class="dropdown-header">Más</li>
+              <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>-->
+              <li><a href="#">Contactar</a></li>
+          </ul>
+        </li>
+        <li><a href="/tuerasmus/comments">TusComentarios</a></li>
+        <li><a href="/contact">Contacto</a></li>
   
 {% endblock %}
 
 {% block content %}
-  <div class="col-xs-12 col-sm-9">
-  
-    <p class="pull-right visible-xs">
-        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-    </p>
-      
-    {% if city_info %}
-
-        <div class="jumbotron">
-          <h1>LAS CIUDADES ERASMUS</h1>
-        </div><!--/.jumbotron -->
-
-        <div class="page-header">
-          <h1>¿Qué ciudades son las que se asignan para los erasmus?</h1>
-        </div>
+        <div class="col-xs-12 col-sm-9">
         
-        <form action="/tuerasmus/universities/cities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-          <div class="row">
-            <div class="col-xs-6">
-              <label for="selected_city">Cónoce las ciudades:</label>
-              <select id="selected_city" class="form-control" name="city_selected">
-                {% for u in cits %}
-                  <option> {{ u.city }} </option>
-                {% empty %}
-                  <h3> Aún no hay ciudades registradas </h3>
-                {% endfor %}
-              </select>
-              <br>
-              <button class="btn btn-success btn-sm" type="submit"> VER CIUDAD </button>
-            </div><!--/.col-xs-6-->
-          </div><!--/.row-->
-        </form>  
-        
-    {% elif resi_info %}
-        <div class="jumbotron">
-          <h1>LAS RESIDENCIAS ERASMUS</h1>
-        </div><!--/.jumbotron -->
+          <p class="pull-right visible-xs">
+              <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+            
+          {% if city_info %}
 
-        <div class="page-header">
-          <h1>¿Qué residencias son las más cercanas a las universidad?</h1>
-        </div>
-        
-        <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-          <div class="row">
-            <div class="col-xs-6">
-              <label for="selected_resi">Cónoce las residencias:</label>
-              <select id="selected_resi" class="form-control" name="resi_selected">
-                {% for u in res %}
-                  <option> {{ u.name }} </option>
-                {% empty %}
-                  <h3> Aún no hay residencias registradas </h3>
-                {% endfor %}
-              </select>
-            </div><!--/.col-xs-6-->
-          </div><!--/.row-->
-        </form>   
+              <div class="jumbotron">
+                <h1>LAS CIUDADES ERASMUS</h1>
+              </div><!--/.jumbotron -->
+
+              <div class="page-header">
+                <h1>¿Qué ciudades son las que se asignan para los erasmus?</h1>
+              </div>
+              
+              <form action="/tuerasmus/universities/cities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="selected_city">Cónoce las ciudades:</label>
+                    <select id="selected_city" class="form-control" name="city_selected">
+                      {% for u in cits %}
+                        <option> {{ u.city }} </option>
+                      {% empty %}
+                        <h3> Aún no hay ciudades registradas </h3>
+                      {% endfor %}
+                    </select>
+                    <br>
+                    <button class="btn btn-success btn-sm" type="submit"> VER CIUDAD </button>
+                  </div><!--/.col-xs-6-->
+                </div><!--/.row-->
+              </form>  
+              
+          {% elif resi_info %}
+              <div class="jumbotron">
+                <h1>LAS RESIDENCIAS ERASMUS</h1>
+              </div><!--/.jumbotron -->
+
+              <div class="page-header">
+                <h1>¿Qué residencias son las más cercanas a las universidad?</h1>
+              </div>
+              
+              <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="selected_resi">Cónoce las residencias:</label>
+                    <select id="selected_resi" class="form-control" name="resi_selected">
+                      {% for u in res %}
+                        <option> {{ u.name }} </option>
+                      {% empty %}
+                        <h3> Aún no hay residencias registradas </h3>
+                      {% endfor %}
+                    </select>
+                  </div><!--/.col-xs-6-->
+                </div><!--/.row-->
+              </form>   
+               
+          {% elif sub_info %}
          
-    {% elif sub_info %}
-   
-        <div class="jumbotron">
-          <h1>LAS ASIGNATURAS</h1>
-        </div><!--/.jumbotron -->
+              <div class="jumbotron">
+                <h1>LAS ASIGNATURAS</h1>
+              </div><!--/.jumbotron -->
 
-        <div class="page-header">
-          <h1>¿Qué asignaturas puedes llevarte y cursar fuera?</h1>
-        </div>
-        
-        <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-          <div class="row">
-            <div class="col-xs-6">
-              <label for="selected_subj">Cónoce las asignaturas:</label>
-              <select id="selected_subj" class="form-control" name="subj_selected">
-                {% for u in sub %}
-                  <option> {{ u.subname }} </option>
-                {% empty %}
-                  <h3> Aún no hay residencias registradas </h3>
-                {% endfor %}
-              </select>
-            </div><!--/.col-xs-6-->
-          </div><!--/.row-->     
-        </form> 
-          
-    {% else %}    
-        <div class="jumbotron">
-          <h1>LAS UNIVERSIDADES ERASMUS Y MUNDE</h1>
-        </div><!--/.jumbotron -->
+              <div class="page-header">
+                <h1>¿Qué asignaturas puedes llevarte y cursar fuera?</h1>
+              </div>
+              
+              <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="selected_subj">Cónoce las asignaturas:</label>
+                    <select id="selected_subj" class="form-control" name="subj_selected">
+                      {% for u in sub %}
+                        <option> {{ u.subname }} </option>
+                      {% empty %}
+                        <h3> Aún no hay residencias registradas </h3>
+                      {% endfor %}
+                    </select>
+                  </div><!--/.col-xs-6-->
+                </div><!--/.row-->     
+              </form> 
+                
+          {% else %}    
+              <div class="jumbotron">
+                <h1>LAS UNIVERSIDADES ERASMUS Y MUNDE</h1>
+              </div><!--/.jumbotron -->
 
 
-        
-          <!--<form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+              
+                <!--<form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
 
-            {% if uems_ %}
-              <label for="selected">Selecciona una universidad:</label>
-              <select id="selected" class="form-control" name="uniems_selected">
-                {% for u in uems %}
-                  <option> {{ u.uni }} </option>
-                {% endfor %}
-              </select>
-            {% else %}
-              <h3> {{ uems_msg }} </h3>
-            {% endif %} 
+                  {% if uems_ %}
+                    <label for="selected">Selecciona una universidad:</label>
+                    <select id="selected" class="form-control" name="uniems_selected">
+                      {% for u in uems %}
+                        <option> {{ u.uni }} </option>
+                      {% endfor %}
+                    </select>
+                  {% else %}
+                    <h3> {{ uems_msg }} </h3>
+                  {% endif %} 
 
-            <br><br>
+                  <br><br>
 
-            {% if unisempty %}
-	            <div class="alert alert-danger">
-	              <center><strong>¡¡NO HAY UNIVERSIDADES!!</strong></center>
-	            </div>
-            {% endif %}
+                  {% if unisempty %}
+                    <div class="alert alert-danger">
+                      <center><strong>¡¡NO HAY UNIVERSIDADES!!</strong></center>
+                    </div>
+                  {% endif %}
 
-            <br><br>
+                  <br><br>
 
-            
-            <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
-            
-          </form>-->
+                  
+                  <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
+                  
+                </form>-->
 
 
-        <div class="page-header">
-          <h3>Las universidades según la beca correspondiente</h3>
-        </div>
-   
-        {% regroup uall by scholarship as scholarship_list %}
-           
-        <ul>
-          {% for scholarship in scholarship_list %}
-              <li><h3><strong> {{ scholarship.grouper }} </strong></h3>      
+              <div class="page-header">
+                <h3>Las universidades según la beca correspondiente</h3>
+              </div>
+         
+              {% regroup uall by scholarship as scholarship_list %}
+                 
               <ul>
-                  {% for item in scholarship.list %}
-                    <li><a href="/tuerasmus/university/{{item.id}}">{{ item.country }}: {{item.uni}}</a></li>
-                  {% endfor %}
-              </ul>
-              </li>
-          {% endfor %}
-        </ul>    
+                {% for scholarship in scholarship_list %}
+                    <li><h3><strong> {{ scholarship.grouper }} </strong></h3>      
+                    <ul>
+                        {% for item in scholarship.list %}
+                          <li><a href="/tuerasmus/university/{{item.id}}">{{ item.country }}: {{item.uni}}</a></li>
+                        {% endfor %}
+                    </ul>
+                    </li>
+                {% endfor %}
+              </ul>    
+              
+          {% endif %}
         
-    {% endif %}
-  
-    {% if infoData %}
-      {% block data_info %}
-      {% endblock %}
-    {% endif %}
-    
-  </div><!--/span-->
+          {% if infoData %}
+            {% block data_info %}
+            {% endblock %}
+          {% endif %}
+          
+        </div><!--/span-->
 
 {% endblock %}
 <!-- TODAS ESTAS LINEAS LAS PUEDO MODIFICAR MAS ADELANTE, Y SERÍAN CÓMO MOSTRAR LAS DISTINTAS UNIVERSIDADES Y SUS INFORMACIONES
