@@ -5,8 +5,9 @@
   <!-- BLOQUE CIUDADES -->  
 
   {% if cityData %}
-    <h3><strong>{{city_menu}}</strong></h3>
+    <h2><strong>{{city_menu}}</strong></h2>
     
+    <h3>Precios:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
@@ -14,7 +15,9 @@
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
-
+    
+    
+    <h3>Zona universitaria:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
@@ -23,6 +26,7 @@
       {% endfor %}
     </ul>
     
+    <h3>Vida estudiantil:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
@@ -30,6 +34,8 @@
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Turismo:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
@@ -37,6 +43,8 @@
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Fiestas:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
@@ -44,6 +52,8 @@
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Cultura de la ciudad:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
@@ -51,6 +61,8 @@
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Delincuencia de la ciudad:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
@@ -58,6 +70,8 @@
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Compras en la ciudad:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
@@ -65,6 +79,8 @@
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Vida de los erasmus:</h3>
     <ul>
       {% for i in city_data %}
         <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
@@ -152,71 +168,69 @@
   {% if subjData %}
     <h3><strong>{{subj_menu}}</strong></h3>
     
+    <h3>Créditos:</h3>
     <ul>
       {% for i in subj_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
+        <li><p><strong>{{i.username}}</strong>: {{i.credits}}</p></li>
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
 
+    <h3>Asignatura fuera de la URJC:</h3>
     <ul>
       {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
+        <li><p><strong>{{i.username}}</strong>: {{i.subnameout}}</p></li>
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
     
+    <h3>Asignatura fuera de la URJC:</h3>
     <ul>
       {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
+        <li><p><strong>{{i.username}}</strong>: {{i.subnameout2}}</p></li>
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Asignatura fuera de la URJC:</h3>
     <ul>
       {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
+        <li><p><strong>{{i.username}}</strong>: {{i.subnameout3}}</p></li>
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Trabajos a realizar:</h3>
     <ul>
       {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
+        <li><p><strong>{{i.username}}</strong>: {{i.works}}</p></li>
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Prácticas que hay que hacer:</h3>
     <ul>
       {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
+        <li><p><strong>{{i.username}}</strong>: {{i.practices}}</p></li>
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
+    
+    <h3>Dificultad para cursarla fuera:</h3>
     <ul>
       {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
+        <li><p><strong>{{i.username}}</strong>: {{i.difficult}}</p></li>
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
     </ul>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
+
   {% endif %}
 {% endblock %}
 

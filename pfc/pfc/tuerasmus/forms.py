@@ -163,8 +163,7 @@ class SubjectsForm(forms.Form):
     works = forms.CharField(label="Trabajos a entregar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
     practices = forms.CharField(label="Prácticas a realizar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
     difficult = forms.CharField(label="Dificultad de la asignatura fuera", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
-    
-    
+      
 #----------------------------------------------------------------------------
 #            Class WorkForm: to change the university profile   
 #----------------------------------------------------------------------------
@@ -207,4 +206,11 @@ class ContactForm(forms.Form):
     sender = forms.EmailField()
     cc_myself = forms.BooleanField(required=False)
     
+#----------------------------------------------------------------------------
+#            Class CommentForm: to comment anything
+#----------------------------------------------------------------------------
+class CommentForm(forms.Form):
+    title = forms.CharField(label="Título del comentario", widget=forms.TextInput(), error_messages={'required': 'Pon un título para el comentario'})
+    text = forms.CharField(label="Escribe tu comentario", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar el campo'})
+
 

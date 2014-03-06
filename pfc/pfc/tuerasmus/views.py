@@ -42,7 +42,7 @@ from datetime import datetime, date
 from tuerasmus.models import City, Cities, Comment, Countries, InfoBasic, InfoGeneral, InfoResidence, InfoStadistic, Others, Place, Resis, Score, Subjs, Subjects, Universities, University, UserProfile, Users, UsersUniversity
 
 # Forms
-from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CostumeServiceForm, DocumentationForm, ResidenceForm, PlaceForm, SubjectsForm, WorkForm, CityForm, OthersForm
+from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CommentForm, CostumeServiceForm, DocumentationForm, ResidenceForm, PlaceForm, SubjectsForm, WorkForm, CityForm, OthersForm
 
 
 
@@ -1330,9 +1330,10 @@ def unieditform(request, uni_name, type_form):
             ###################### HOTEL FORM ######################
             elif type_form=="hotel":
                 form1 = PlaceForm(request.POST)
+                form2 = CommentForm(request.POST)
                 tit1 = "Residencias universitarias"
-                                
-                if form1.is_valid():
+                tit2 = "Comentarios de las residencias"                
+                if form1.is_valid() and form2.is_valid():
                     # Valid form
                     #PlaceForm
                     name = form1.cleaned_data['name']
@@ -1343,11 +1344,19 @@ def unieditform(request, uni_name, type_form):
                     latitud = form1.cleaned_data['latitud']
                     longitud = form1.cleaned_data['longitud']
                     
+                    #CommentForm
+                    title = form2.cleaned_data['title']
+                    text = form2.cleaned_data['text']
+                    
+                    
                     un_resi = Place(uni=un_obj, name=name, address=address, postalcode=postalcode, city=city, latitud=latitud, longitud=longitud, image=image);
                     un_resi.save()
                                         
                     un_inforesi = InfoResidence(uni=un_obj, username=request.user.username, residence=un_resi)
                     un_inforesi.save()
+                    
+                    un_com = Comment(username=request.user.username, uni=uniname.uni, tag="Residences", title=title, text=text, day_publicated=datetime.now())
+                    un_com.save()
                     
                     # Saving just the resi names
                     try:
@@ -1358,13 +1367,14 @@ def unieditform(request, uni_name, type_form):
                                             
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO Residencia"
                     form1=PlaceForm()
+                    form2=CommentForm()
                     alertdone=True
 
                 else:
                     # Invalid forms
                     alerterror=True
                     
-                ctx = {'coor':True, 'tit1':tit1, 'form1':form1, 'alerterror': alerterror, 'alertdone':alertdone, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'coor':True, 'tit1':tit1, 'tit2':tit2, 'form1':form1, 'form2':form2, 'alerterror': alerterror, 'alertdone':alertdone, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
 
             ###################### SUBJECTS FORM ######################
             elif type_form=="subjects":
@@ -1493,9 +1503,11 @@ def unieditform(request, uni_name, type_form):
             # Hotel form                  
             elif type_form=="hotel":
                 form1 = PlaceForm()
+                form2 = CommentForm()
                 tit1="Residencias universitarias"
+                tit2="Comentarios de las residencias"
                 print "formulario hotelllllllllllllllll!!!!!!!!!!!!!!!"
-                ctx = {'coor':True, 'tit1':tit1, 'form1':form1, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'coor':True, 'tit1':tit1, 'tit2':tit2, 'form1':form1, 'form2':form2, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                 
             # Subjects form
             elif type_form=="subjects":
@@ -1780,7 +1792,7 @@ def subjects(request):
                 subj_data = Subjs.objects.filter(subj=subj_menu)
                 ctx = {'subj_menu':subj_menu, 'infoData':True, 'subjData':True, 'subj_info':True, 'subs':subs, 'nsubs':nsubs, 'subj_data':subj_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
             except Subjs.DoesNotExist:
-                ctx = {'form_resi':True, 'subj_info':True, 'subs'subs, 'nsubs':nsubs, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                ctx = {'form_resi':True, 'subj_info':True, 'subs':subs, 'nsubs':nsubs, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
             return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
         
         else:               
