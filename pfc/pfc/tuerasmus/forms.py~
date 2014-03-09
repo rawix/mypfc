@@ -65,6 +65,12 @@ class ProfileForm(forms.Form):
     image = forms.ImageField(label="Imagen de perfil")
 
 #----------------------------------------------------------------------------
+#            Class ImageForm: to change the university image  
+#----------------------------------------------------------------------------
+class ImageForm(forms.Form):
+    image_profile = forms.ImageField(label="Imagen de universidad", required=False)
+
+#----------------------------------------------------------------------------
 #            Class BasicForm: to change the university profile   
 #----------------------------------------------------------------------------
 class BasicForm(forms.Form):
@@ -160,7 +166,7 @@ class SubjectsForm(forms.Form):
     subnameout = forms.CharField(label="Asignatura cursada fuera", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
     subnameout2 = forms.CharField(label="Otra asignatura cursada fuera", widget=forms.TextInput(), required=False)
     subnameout3 = forms.CharField(label="Otra más cursada fuera", widget=forms.TextInput(), required=False)
-    works = forms.CharField(label="Trabajos a entregar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    works = forms.CharField(label="Trabajos a entregar", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     practices = forms.CharField(label="Prácticas a realizar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
     difficult = forms.CharField(label="Dificultad de la asignatura fuera", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
       
@@ -177,16 +183,16 @@ class WorkForm(forms.Form):
 #----------------------------------------------------------------------------
 class CityForm(forms.Form):
     cityname = forms.CharField(label="Nombre de la ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    prices = forms.CharField(label="Precios", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    uniarea = forms.CharField(label="La universidad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    studentlife = forms.CharField(label="Vida estudiantil", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    turism = forms.CharField(label="Turismo", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    party = forms.CharField(label="Salir", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    culture = forms.CharField(label="Cultura", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    crime = forms.CharField(label="Delincuencia", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    shopping = forms.CharField(label="De compras", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    erasmuslife = forms.CharField(label="Ambiente erasmus", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    more = forms.CharField(label="Más cosas", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    prices = forms.TextField(label="Precios", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    uniarea = forms.TextField(label="La universidad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    studentlife = forms.TextField(label="Vida estudiantil", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    turism = forms.TextField(label="Turismo", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    party = forms.TextField(label="Salir", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    culture = forms.TextField(label="Cultura", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    crime = forms.TextField(label="Delincuencia", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    shopping = forms.TextField(label="De compras", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    erasmuslife = forms.TextField(label="Ambiente erasmus", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    more = forms.TextField(label="Más cosas", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
 
 #----------------------------------------------------------------------------
 #            Class OthersForm: to change the university profile   
@@ -211,6 +217,6 @@ class ContactForm(forms.Form):
 #----------------------------------------------------------------------------
 class CommentForm(forms.Form):
     title = forms.CharField(label="Título del comentario", widget=forms.TextInput(), error_messages={'required': 'Pon un título para el comentario'})
-    lastname = forms.CharField(label="Escribe tu comentario", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar el campo'})
+    text = forms.CharField(label="Escribe tu comentario", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar el campo'})
 
 

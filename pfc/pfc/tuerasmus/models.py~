@@ -102,12 +102,10 @@ class Countries(models.Model):
         return self.country;
         
 # ------------------------------------------------------------------------------
-#                               Countries class.
+#                               Cities class.
 # ------------------------------------------------------------------------------
 class Cities(models.Model):
     city = models.CharField(max_length=50);
-    resi = models.CharField(max_length=50);
-    subj = models.CharField(mas_length=50);
     
     # Alphabetical Order  
     class Meta:
@@ -117,6 +115,34 @@ class Cities(models.Model):
     def __unicode__(self):
         return self.city;
         
+# ------------------------------------------------------------------------------
+#                               Resis class.
+# ------------------------------------------------------------------------------
+class Resis(models.Model):
+    resi = models.CharField(max_length=50);
+    
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Resis'
+        ordering = ['resi']
+
+    def __unicode__(self):
+        return self.resi;
+        
+# ------------------------------------------------------------------------------
+#                               Subjs class.
+# ------------------------------------------------------------------------------
+class Subjs(models.Model):
+    subj = models.CharField(max_length=50);
+    
+    # Alphabetical Order  
+    class Meta:
+        verbose_name_plural = u'Subjs'
+        ordering = ['subj']
+
+    def __unicode__(self):
+        return self.subj;
+
 # ------------------------------------------------------------------------------
 #                               Score class.
 # ------------------------------------------------------------------------------
@@ -223,9 +249,9 @@ class Subjects(models.Model):
     subnameout = models.CharField(max_length=40);
     subnameout2 = models.CharField(max_length=40, null=True, blank=True);
     subnameout3 = models.CharField(max_length=40, null=True, blank=True);
-    works = models.CharField(max_length=40);
-    practices = models.CharField(max_length=40);
-    difficult = models.CharField(max_length=40);
+    works = models.TextField(help_text='Escribe algo');
+    practices = models.TextField(help_text='Escribe algo');
+    difficult = models.TextField(help_text='Escribe algo');
     
     # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
@@ -391,6 +417,7 @@ class UsersUniversity(models.Model):
 # ------------------------------------------------------------------------------
 class City(models.Model):
     cityname = models.CharField(max_length=50);
+    uni = models.CharField(max_length=50);
     username = models.CharField(max_length=30);
     prices = models.TextField(null=True, blank=True);
     uniarea = models.TextField(null=True, blank=True);

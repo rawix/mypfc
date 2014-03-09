@@ -244,14 +244,14 @@ class InfoStadistic(models.Model):
 class Subjects(models.Model):
     subname = models.CharField(max_length=20);
     username = models.CharField(max_length=30);
-    uni = models.ForeignKey(University);
+    uni = models.CharField(max_length=40);
     credits = models.IntegerField(default=0);
     subnameout = models.CharField(max_length=40);
     subnameout2 = models.CharField(max_length=40, null=True, blank=True);
     subnameout3 = models.CharField(max_length=40, null=True, blank=True);
-    works = models.CharField(max_length=40);
-    practices = models.CharField(max_length=40);
-    difficult = models.CharField(max_length=40);
+    works = models.TextField(help_text='Escribe algo');
+    practices = models.TextField(help_text='Escribe algo');
+    difficult = models.TextField(help_text='Escribe algo');
     
     # Comments
     comment = models.ForeignKey(Comment, null=True, blank=True);
@@ -417,6 +417,7 @@ class UsersUniversity(models.Model):
 # ------------------------------------------------------------------------------
 class City(models.Model):
     cityname = models.CharField(max_length=50);
+    uni = models.CharField(max_length=50);
     username = models.CharField(max_length=30);
     prices = models.TextField(null=True, blank=True);
     uniarea = models.TextField(null=True, blank=True);

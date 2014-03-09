@@ -52,18 +52,17 @@
             </p>
             
             <div class="jumbotron">
-              <!--<a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1> {{ uniname }} </h1></a>-->
               <div class="row">
                 <div class="col-xs-5">
                   <p>{% block pathimage %}{% endblock %}</p>
                 </div>
                 <div class="col-xs-7">
-                  <p><h1> {{ uniname }} </h1></p>
+                  <!--<p><a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1>{{ uniname }}</h1></a></p>-->
+                  <h1>{{ uniname }}</h1>
                 </div>
               </div>
             </div>
                  
-
             <div class="page-header">
               <p>
                 <h1>¿¡Qué quieres conocer de esta universidad!?</h1>
@@ -85,7 +84,6 @@
               <a href="/tuerasmus/university/{{uni_name}}/others" class="btn btn-lg btn-default" type="submit">Varios</a>
               <!--<button type="button" class="btn btn-lg btn-default" name="others">Varios</button>-->
             </p>
-            
             
             
             {% block on_geolocalize %}

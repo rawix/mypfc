@@ -170,7 +170,7 @@ def register(request):
                 username = form.cleaned_data['username']
                 email = form.cleaned_data['email']
                 type_user = request.POST['type_user']
-                genero = request.POST['male_female']
+                genero = request.POST['genero']
                 password_one = form.cleaned_data['password_one']
                 password_two = form.cleaned_data['password_two']
                 # Take the time automatically

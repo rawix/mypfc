@@ -65,6 +65,12 @@ class ProfileForm(forms.Form):
     image = forms.ImageField(label="Imagen de perfil")
 
 #----------------------------------------------------------------------------
+#            Class ImageForm: to change the university image  
+#----------------------------------------------------------------------------
+class ImageForm(forms.Form):
+    image_profile = forms.ImageField(label="Imagen de universidad", required=False)
+
+#----------------------------------------------------------------------------
 #            Class BasicForm: to change the university profile   
 #----------------------------------------------------------------------------
 class BasicForm(forms.Form):
@@ -160,7 +166,7 @@ class SubjectsForm(forms.Form):
     subnameout = forms.CharField(label="Asignatura cursada fuera", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
     subnameout2 = forms.CharField(label="Otra asignatura cursada fuera", widget=forms.TextInput(), required=False)
     subnameout3 = forms.CharField(label="Otra más cursada fuera", widget=forms.TextInput(), required=False)
-    works = forms.CharField(label="Trabajos a entregar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
+    works = forms.CharField(label="Trabajos a entregar", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     practices = forms.CharField(label="Prácticas a realizar", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
     difficult = forms.CharField(label="Dificultad de la asignatura fuera", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo'})
       

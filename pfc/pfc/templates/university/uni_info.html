@@ -336,23 +336,54 @@
       {% endifequal %}
 
 
-      {% ifequal info subjects %}  
+      {% ifequal info "subjects" %}  
+        <h3>Las asignaturas impartidas en esta universidad:</h3>
+          <ul>
+          {% for i in info_list %}
+            <li><p><strong>{{i.username}}</strong>: <h3>{{i.subname}}</h3></p>
+                <p><strong>Créditos de la asignatura</strong>: {{i.credits}}</p>
+                <p><strong>Asignatura por convenio</strong>: {{i.subnameout1}}</p>
+                <p><strong>Asignatura por convenio</strong>: {{i.subnameout2}}</p>
+                <p><strong>Asignatura por convenio</strong>: {{i.subnameout3}}</p>
+                <p><strong>Trabajos que realizar</strong>: {{i.works}}</p>
+                <p><strong>Prácticas a realizar</strong>: {{i.practices}}</p>
+                <p><strong>Dificultad que presenta respecto a tu universidad de origen</strong>: {{i.difficult}}</p>
+            </li>
+          {% empty %}
+            <li><p>Lo siento, pero no hay nada escrito.</p></li>
+          {% endfor %}
+          </ul>
+      {% endifequal %}
+
+      {% ifequal info "city" %}  
+        <h3>La ciudad de la universidad:</h3>
+          <ul>
+          {% for i in info_list %}
+            <li><p><strong>{{i.username}}</strong>: {{i.cityname}}</p></li>
+            <li><p><strong>Precios en general</strong>: {{i.prices}}</p></li>
+            <li><p><strong>La zona de la universidad</strong>: {{i.uniarea}}</p></li>
+            <li><p><strong>La vida estudiantil</strong>: {{i.studentlife}}</p></li>
+            <li><p><strong>El turismo en la ciudad</strong>: {{i.turism}}</p></li>
+            <li><p><strong>Las salidas nocturnas</strong>: {{i.party}}</p></li>
+            <li><p><strong>Cultura de la ciudad</strong>: {{i.culture}}</p></li>
+            <li><p><strong>Grado criminal</strong>: {{i.crime}}</p></li>
+            <li><p><strong>Ir de tiendas</strong>: {{i.shopping}}</p></li>
+            <li><p><strong>La vida de los erasmus</strong>: {{i.erasmuslife}}</p></li>
+            <li><p><strong>Temas varios</strong>: {{i.more}}</p></li>
+          {% empty %}
+            <li><p>Lo siento, pero no hay nada escrito.</p></li>
+          {% endfor %}
+          </ul>      
       
       {% endifequal %}
 
-      {% ifequal info city %}  
-      
-      
-      {% endifequal %}
-
-      {% ifequal info others %}  
+      {% ifequal info "others" %}  
       
       
       {% endifequal %}
 
       </form> 
   {% else %}
-      <p><h>Esta universidad aún no tiene información añadida, pincha y sé el primero en comenzar a completar su perfil</h2></p>
-      <center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni_name}}">{{uniname}}</a></center> 
+      <p><h>Esta universidad aún no tiene información añadida, pincha en el botón superior y sé el primero en comenzar a completar su perfil</h2></p> 
   {% endif %}
 {% endblock %}

@@ -11,6 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
           </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -39,7 +40,9 @@
 
 {% block content %}
 
+    <!-- User can edit the profile -->
     {% if not see_profile %}
+    
         <div class="col-xs-12 col-sm-9">
         
           <p class="pull-right visible-xs">
@@ -73,10 +76,13 @@
 
               {{form.as_p}}
 
+              <br><br>
               <button class="btn btn-primary" type="submit">Guardar</button>
               <br><br>
             </form>
         </div><!--./col-xs-12-->
+        
+    <!-- User can not edit the profile -->
     {% else %}
         <div class="col-xs-12 col-sm-9">
         
@@ -117,6 +123,10 @@
               <li>Universidad Mundus: {{up_obj.uni2}}</li>
             {% endifequal %} 
             
+            <br><br>
+            {% ifequal username user.username%}
+              <a href="/tuerasmus/{{user.username}}/edit_profile" class="btn btn-ms btn-primary">Editar perfil</a>
+            {% endifequal %}
           </p>                
           
         </div><!--./col-xs-12-->

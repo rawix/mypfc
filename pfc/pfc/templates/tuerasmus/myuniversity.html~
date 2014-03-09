@@ -11,6 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
           </ul>
+        </li>
         <li class="active" class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
           <ul class="dropdown-menu">

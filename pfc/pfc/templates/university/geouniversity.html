@@ -58,9 +58,6 @@
 
 {% block on_geolocalize %}
 
-
-	
-
     {% if not no_info %}
             <div class="row">
               <div class="col-xs-8">
@@ -74,19 +71,22 @@
                 <h3>{{uniname}}</h3>
                 <address>
                   <br><br>
-                  <h4><strong>{{uniobj.uni}}</strong><br>
+                  <h4>
+                  <strong>{{uniobj.uni}}</strong><br>
                   {{uniobj.address}}<br>
                   {{uniobj.postalcode}}<br>
                   {{uniobj.city}}<br>
                   {{uniobj.country}}<br>
-                  <abbr title="Phone">P:</abbr> {{uniobj.phone}}</h4>
+                  <abbr title="Phone">P:</abbr>{{uniobj.phone}}<br>
+                  </h4>
                 </address>
               </div>	
 		        </div><!--/.row-->  
 		        
 		              
             <div class="row">
-              <div class="page-header">
+            
+              <!--<div class="page-header">
                 <h1>Dropdown menus</h1>
               </div>
               <div class="dropdown theme-dropdown clearfix">
@@ -107,9 +107,12 @@
             <div class="page-header">
               <h1>Datos a destacar</h1>
             </div>
+           
+            <h3>¿Cuántos erasmus han ido a esta universidad?</h3>
             <div class="progress">
               <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span></div>
             </div>
+            <h3>¿Cuánta información está compeltada?</h3>
             <div class="progress">
               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span></div>
             </div>
@@ -129,7 +132,7 @@
             </div>
 
 
-            <div class="page-header">
+            <!--<div class="page-header">
               <h1>Enlaces relacionados</h1>
             </div>
             <div class="row">
@@ -141,7 +144,7 @@
                   <li class="list-group-item">Porta ac consectetur ac</li>
                   <li class="list-group-item">Vestibulum at eros</li>
                 </ul>
-              </div><!-- /.col-sm-4 -->
+              </div><!-- /.col-sm-4 
               <div class="col-sm-4">
                 <div class="list-group">
                   <a href="#" class="list-group-item active">
@@ -152,7 +155,7 @@
                   <a href="#" class="list-group-item">Porta ac consectetur ac</a>
                   <a href="#" class="list-group-item">Vestibulum at eros</a>
                 </div>
-              </div><!-- /.col-sm-4 -->
+              </div><!-- /.col-sm-4 
               <div class="col-sm-4">
                 <div class="list-group">
                   <a href="#" class="list-group-item active">
@@ -168,12 +171,12 @@
                     <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
                   </a>
                 </div>
-              </div><!-- /.col-sm-4 -->
+              </div><!-- /.col-sm-4 
             </div><!--/.row--> 
 
 
 
-            <div class="page-header">
+            <!--<div class="page-header">
               <h1>Panels</h1>
             </div>
             <div class="row">
@@ -194,7 +197,7 @@
                     Panel content
                   </div>
                 </div>
-              </div><!-- /.col-sm-4 -->
+              </div><!-- /.col-sm-4 
               <div class="col-sm-4">
                 <div class="panel panel-success">
                   <div class="panel-heading">
@@ -212,7 +215,7 @@
                     Panel content
                   </div>
                 </div>
-              </div><!-- /.col-sm-4 -->
+              </div><!-- /.col-sm-4 
               <div class="col-sm-4">
                 <div class="panel panel-warning">
                   <div class="panel-heading">
@@ -230,7 +233,8 @@
                     Panel content
                   </div>
                 </div>
-              </div><!-- /.col-sm-4 -->
+              </div><!--/.col-sm-4-->
+              
             </div><!-- /.row -->
 
 
@@ -249,10 +253,6 @@
       <div class="page-header">
         <h1>No hay información acerca de la universidad</h1>
       </div>
-
-      <p><h2>Pincha sobre la universidad y sé el primero en editar su perfil</h2></p>
-      <p><a class="btn btn-default btn-lg" href="/tuerasmus/uniedit/{{uni_name}}">{{uniname}}</a></p>
-
 		{% endif %}
 	<!--</div>/.row-->
 

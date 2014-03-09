@@ -11,6 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
           </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -61,7 +62,11 @@
                 {% for u in uu1_list %}
                   {% ifnotequal u.username user.username %}
                   <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
+                  {% else %}
+                    <h3><center>Eres el único erasmus registrado en esta universidad</center></h3>
                   {% endifnotequal %}
+                {% empty %}
+                  <h3>No hay erasmus en esta universidad registrados</h3>
                 {% endfor %}
                 
             {% elif reco2 and not reco1%}
@@ -71,6 +76,8 @@
                   {% ifnotequal u.username user.username %}
                   <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
                   {% endifnotequal %}
+                {% empty %}
+                  <h3>No hay erasmus en esta universidad registrados</h3>
                 {% endfor %}
             {% elif reco2 and reco1 %} 
               <div class="col-lg-6">
@@ -80,6 +87,8 @@
                   {% ifnotequal u.username user.username %}
                   <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
                   {% endifnotequal %}
+                {% empty %}
+                  <h3>No hay erasmus en esta universidad registrados</h3>
                 {% endfor %}
               </div><!-- /.col-lg-6 -->
               <div class="col-lg-6">
@@ -89,6 +98,8 @@
                   {% ifnotequal u.username user.username %}
                   <h3><strong><center><a href="/tuerasmus/{{u.username}}/profile">{{u.username}}</a></p></center></strong></h3>
                   {% endifnotequal %}
+                {% empty %}
+                  <h3>No hay erasmus en esta universidad registrados</h3>
                 {% endfor %}
                </div><!-- /.col-lg-6 -->
             {% else %}
