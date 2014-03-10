@@ -90,13 +90,13 @@
                 <h1>¿Qué residencias son las más cercanas a las universidad?</h1>
               </div>
               
-              <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+              <form action="/tuerasmus/universities/residences/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
                       <label for="selected_resi">Cónoce las residencias:</label>
                       <select id="selected_resi" class="form-control" name="resi_selected">
-                      {% for u in res %}
-                        <option> {{ u.name }} </option>
+                      {% for u in resis %}
+                        <option> {{ u.res }} </option>
                        {% empty %}
                         <h3> Aún no hay residencias registradas </h3>
                       {% endfor %}
@@ -118,7 +118,7 @@
                 <h1>¿Qué asignaturas puedes llevarte y cursar fuera?</h1>
               </div>
               
-              <form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+              <form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
                     
@@ -130,10 +130,9 @@
                         {% empty %}
                           <h3> Aún no hay asignaturas registradas </h3>
                         {% endfor %}
-                        <br>
-                        <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>
                       </select>
-                    
+                      <br>
+                      <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>                    
                   </div><!--/.col-xs-6-->
                 </div><!--/.row-->     
               </form> 
@@ -192,6 +191,34 @@
                 {% endfor %}
               </ul>    
               
+              
+          {% endif %}
+        
+          {% if infoData %}
+            {% block data_info %}
+            {% endblock %}
+          {% endif %}
+          
+        </div><!--/span-->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <!--<div class="page-header">
                 <h1>Datos a destacar</h1>
               </div>
@@ -223,17 +250,11 @@
                 <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
                 <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
               </div>-->
-              
-          {% endif %}
-        
-          {% if infoData %}
-            {% block data_info %}
-            {% endblock %}
-          {% endif %}
-          
-        </div><!--/span-->
 
-{% endblock %}
+
+
+
+
 <!-- TODAS ESTAS LINEAS LAS PUEDO MODIFICAR MAS ADELANTE, Y SERÍAN CÓMO MOSTRAR LAS DISTINTAS UNIVERSIDADES Y SUS INFORMACIONES
       <div class="page-header">
         <h1>Thumbnails</h1>

@@ -1398,7 +1398,7 @@ def unieditform(request, uni_name, type_form):
                     un_inforesi = InfoResidence(uni=un_obj, username=request.user.username, residence=un_resi)
                     un_inforesi.save()
                     
-                    un_com = Comment(username=request.user.username, uni=uniname.uni, tag="Residences", title=title, text=text, day_publicated=datetime.now())
+                    un_com = Comment(username=request.user.username, uni=uniname.uni, tag=name, title=title, text=text, day_publicated=datetime.now())
                     un_com.save()
                     
                     # Saving just the resi names
@@ -1779,11 +1779,19 @@ def residences(request):
                 type_user = str(i.type_user)
 
         # Lists from DBs
+        
+        # uu: All the users of the universities
         uu = UsersUniversity.objects.all().order_by('username')
+        
+        # resis: the names of the residences (For the menu in universities.html)
         resis = Resis.objects.all().order_by('resi')
         nresis = Resis.objects.all().count()
+        
+        # res: Residence objects
         res = Place.objects.all().order_by('name')
         nres = Place.objects.all().count()           
+        
+        # All the universities
         uall = University.objects.all() .order_by('uni')      
         nuall = University.objects.all().count() 
         
@@ -1791,15 +1799,20 @@ def residences(request):
             resi_menu = request.POST['resi_selected']
             print resi_menu
             try:
-                resi_data = Place.objects.filter(resi=resi_menu)
-                ctx = {'resi_menu':resi_menu, 'infoData':True, 'resiData':True, 'resi_info':True, 'resis':resis, 'nresis':nresis, 'resi_data':resi_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                resi_data = Place.objects.filter(name=resi_menu)
+                try:
+                    resi_com = Comment.objects.filter(tag=resi_menu).order_by('day_publicated')
+                except Comment.DoesNotExist:
+                    resi_com=""
+                ctx = {'infoData':True, 'resiData':True, 'resi_info':True, 'resi_menu':resi_menu, 'resis':resis, 'nresis':nresis, 'resi_data':resi_data, 'resi_com':resi_com, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                
             except Place.DoesNotExist:
-                ctx = {'form_resi':True, 'resi_info':True, 'res':res, 'nres':nres, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                ctx = {'form_resi':True, 'resi_info':True, 'resis':resis, 'nresis':nresis, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
             return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
         
         
         else:      
-            ctx = {'resi_info':True, 'resis':resis, 'nresis':nresis, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+            ctx = {'infoData':True, 'resiData':True, 'resi_info':True, 'resis':resis, 'nresis':nresis, 'res':res, 'nres':nres, 'nuall':nuall, 'uu':uu, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
             return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
     else:
@@ -1825,25 +1838,36 @@ def subjects(request):
                 type_user = str(i.type_user)
         
         # Lists from DBs
+        # subs: all the names of the subjects
         subs = Subjs.objects.all().order_by('subj')
         nsubs = Subjs.objects.all().count()
+        
+        # sub: all the subject objects
         sub = Subjects.objects.all().order_by('subname') 
-        nsub = Subjects.objects.all().count()           
+        nsub = Subjects.objects.all().count()      
+        
+        # All the universities     
         uall = University.objects.all().order_by('uni')       
         nuall = University.objects.all().count()    
 
         if request.method=="POST":
+            print "ha elegido el usuario una asignatura!!!!!!!!!!!!!099999999999999999999999999999999999999"
             subj_menu = request.POST['subj_selected']
             print subj_menu
             try:
-                subj_data = Subjs.objects.filter(subj=subj_menu)
-                ctx = {'subj_menu':subj_menu, 'infoData':True, 'subjData':True, 'subj_info':True, 'subs':subs, 'nsubs':nsubs, 'subj_data':subj_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
-            except Subjs.DoesNotExist:
-                ctx = {'form_resi':True, 'subj_info':True, 'subs':subs, 'nsubs':nsubs, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                # The subject selected exists in the DB Subjects
+                subj_data = Subjects.objects.filter(subname=subj_menu)
+                ctx = {'infoData':True, 'subjData':True, 'sub_info':True, 'subj_menu':subj_menu, 'sub':sub, 'nsub':nsub, 'subj_data':subj_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                
+            except Subjects.DoesNotExist:
+                # The subject selected doesn't exist in the DB
+                ctx = {'form_resi':True, 'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                
             return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
         
-        else:               
-            ctx = {'sub_info':True, 'subs':subs, 'nsubs':nsubs, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
+        else:        
+            # Method is not POST       
+            ctx = {'infoData':True, 'subjData':True, 'sub_info':True, 'subs':subs, 'nsubs':nsubs, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
             return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
     else:

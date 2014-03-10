@@ -102,7 +102,7 @@ class Countries(models.Model):
         return self.country;
         
 # ------------------------------------------------------------------------------
-#                               Cities class.
+#                 Cities class: Just save the names of the cities
 # ------------------------------------------------------------------------------
 class Cities(models.Model):
     city = models.CharField(max_length=50);
@@ -116,7 +116,7 @@ class Cities(models.Model):
         return self.city;
         
 # ------------------------------------------------------------------------------
-#                               Resis class.
+#                 Resis class: Just save the names of the residences
 # ------------------------------------------------------------------------------
 class Resis(models.Model):
     resi = models.CharField(max_length=50);
@@ -130,7 +130,7 @@ class Resis(models.Model):
         return self.resi;
         
 # ------------------------------------------------------------------------------
-#                               Subjs class.
+#                 Subjs class: Just save the names of the subjects
 # ------------------------------------------------------------------------------
 class Subjs(models.Model):
     subj = models.CharField(max_length=50);

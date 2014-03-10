@@ -95,142 +95,51 @@
   <!-- BLOQUE RESIDENCIAS -->  
   
   {% if resiData %}
-    <h3><strong>{{resi_menu}}</strong></h3>
-    
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
+    <h3><strong>La residencia {{resi_menu}}</strong></h3>
 
     <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
+    {% for i in resi_data %}
+      <li>Comentarios hechos por: <strong>{{i.username}}</strong>
+      
+          <ul>
+          {% for i in resi_com %}
+            <li><h3>{{i.title}}</h3>
+                <p>{{i.text}}</p>
+            </li>
+          {% empty %}
+            <li><p>Lo siento, pero no hay nada escrito.</p></li>
+          {% endfor %}
+          </ul> 
+
+      </li>
+    {% empty %}
+      <li><p>Lo siento, pero no hay nada escrito.</p></li>
+    {% endfor %}
+    </ul> 
     
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for i in resi_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
   {% endif %}
 
   <!-- BLOQUE ASIGNATURAS -->
   {% if subjData %}
     <h3><strong>{{subj_menu}}</strong></h3>
-    
-    <h3>Créditos:</h3>
-    <ul>
-      {% for i in subj_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.credits}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
 
-    <h3>Asignatura fuera de la URJC:</h3>
     <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.subnameout}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Asignatura fuera de la URJC:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.subnameout2}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Asignatura fuera de la URJC:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.subnameout3}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Trabajos a realizar:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.works}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Prácticas que hay que hacer:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.practices}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Dificultad para cursarla fuera:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.difficult}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
+    {% for i in subj_data %}
+      <li><p><strong>{{i.username}}</strong>: <h3>{{i.subname}}</h3></p>
+          <p><strong>Créditos de la asignatura</strong>: {{i.credits}}</p>
+          <p><strong>Asignatura por convenio</strong>: {{i.subnameout1}}</p>
+          <p><strong>Asignatura por convenio</strong>: {{i.subnameout2}}</p>
+          <p><strong>Asignatura por convenio</strong>: {{i.subnameout3}}</p>
+          <p><strong>Trabajos que realizar</strong>: {{i.works}}</p>
+          <p><strong>Prácticas a realizar</strong>: {{i.practices}}</p>
+          <p><strong>Dificultad que presenta respecto a tu universidad de origen</strong>: {{i.difficult}}</p>
+      </li>
+    {% empty %}
+      <li><p>Lo siento, pero no hay nada escrito.</p></li>
+    {% endfor %}
+    </ul> 
 
   {% endif %}
+  
 {% endblock %}
 
