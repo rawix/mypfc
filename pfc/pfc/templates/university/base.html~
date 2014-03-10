@@ -85,6 +85,8 @@
         </div><!--/span-->
       </div><!--/row-offcanvas-->
         
+      <br>
+      <a href="#inicio" class="btn btn-sm btn-warning">Inicio</a>
       <hr>
 
       <footer>

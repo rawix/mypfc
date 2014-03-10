@@ -57,7 +57,7 @@ from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CommentForm, Costu
 
 # Name : HOME USER
 def home(request, user):
-    
+
     if request.user.is_authenticated():
         if (request.user.username==user):
             print "HOME USER: Usuario logueado: " + user
@@ -75,6 +75,8 @@ def home(request, user):
                 if (tt == str(i.username)):
                     type_user = str(i.type_user)
                     genero = str(i.genero)
+                    
+            # Get the path of the image and the user description  
             for j in tp:
                 print "nombre de la imagen 11111111111111111111: " + str(j.name_image) + str(j.username)
                 print "description 111111111111111111111: " + str(j.description) + str(j.username)
@@ -180,6 +182,8 @@ def profile(request, user):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
                 genero = str(i.genero)
+                
+        # Get the path of the image and the user description
         for j in tp:
             print "nombre de la imagen 3333333333333333333: " + str(j.name_image) + str(j.username)
             print "description 3333333333333333333: " + str(j.description) + str(j.username)
@@ -246,6 +250,8 @@ def edit_profile(request, user):
                 if (tt == str(i.username)):
                     type_user = str(i.type_user)
                     genero = str(i.genero)
+                    
+            # Get the path of the image and the user description
             for j in tp:
                 print "nombre de la imagen 555555555555555555555555: " + str(j.name_image) + str(j.username)
                 print "description 5555555555555555555555555555: " + str(j.description) + str(j.username)
@@ -873,33 +879,7 @@ def uninfo(request, uni_name, type_info):
         except University.DoesNotExist:
             print "No se han encontrado ningun objecto con ese id"  
             ur = "/tuerasmus" + tt + "/myuniversity" 
-            return HttpResponseRedirect(ur)
-
-        # MÉTODO POST
-        ###########################################################################
-        ######## LINEAS QUE DEBO DE BORRAR
-        if request.method=="POST":
-            data = request.POST['qualification']
-            
-            if data=="mod":
-                print "modificamos comentario"
-                data_obj = InfoGeneral.objects.get(username=request.user.username)
-                print str(data_obj.qualification)
-                info_list = InfoGeneral.objects.all()
-                
-                ctx = {'no_info': True, 'basic':True, 'modqua':True, 'info_list':info_list, 'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
-                print "retornamos el template para modificar"
-
-                return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
-                
-            elif data=="delqua":
-                print "eliminamos comentario"
-            
-                ctx = {'uni_name':uni_name, 'uniname':uniname.uni, 'type_user': type_user, 'username':request.user.username}
-            
-                # Return the template
-                return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
-        #####################################################################################################  
+            return HttpResponseRedirect(ur) 
             
         # MÉTODO GET
         if request.method=="GET":
@@ -1204,24 +1184,7 @@ def unieditform(request, uni_name, type_form):
             alertdone=""
             alerterror="" 
             un_obj = University.objects.get(uni=uniname.uni)
-            #if form0.is_valid():
-            #    image_profile = form0.cleaned_data['image_profile']
-            #    print "la nueva imagen de l auniversidad es: " + str(image_profile)
-            #    try:
-            #        uni_dataimage = InfoBasic.objects.get(uni=un_obj)
-            #        uni_dataimage.name_image = image_profile
-            #        if not (uni_dataimage.name_image==None):
-            #            url_img = "/tuerasmus/media/universities/" + str(uni_dataimage.image)
-            #            uni_dataimage.image.delete(url_img)
-            #        uni_dataimage.image = image_profile
-            #        uni_dataimage.save()
-                    
-            #    except InfoBasic.DoesNotExist:
-            #        print "no hay universidades iguales en InfoBasic"
-                    
-            #else:
-            #    ctx = {'coor':True, 'tit':tit, 'form':form, 'form0':form0, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                       
+             
             ###################### BASIC FORM ######################
             if type_form=="basic":
                 tit = "Datos de la universidad"
@@ -1240,7 +1203,6 @@ def unieditform(request, uni_name, type_form):
                     link = form.cleaned_data['link']
                     image = request.FILES['image']
                     description = form.cleaned_data['description']                    
-                  
                         
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
                     
