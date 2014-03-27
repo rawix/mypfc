@@ -55,16 +55,6 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return str(self.day_publicated) + " - " + self.username + ": " + self.title;
-        
-# ------------------------------------------------------------------------------
-#                               Contact class.
-# ------------------------------------------------------------------------------
-#class Contact(models.Model):
-#    subject = models.CharField(max_length=100);
-#    message = models.CharField();
-#    sender = models.EmailField();
-#    cc_myself = models.BooleanField(required=False);    
-    
     
 # ------------------------------------------------------------------------------
 #                               University class.

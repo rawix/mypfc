@@ -1,5 +1,50 @@
 {% extends "university/universities.html" %}
 
+{% block java_script %}
+ <!-- <script type="text/javascript">
+    document.getElementById("btn_edit").edit();
+    function edit(){
+       document.write("Editamos comentario");
+    }
+    
+  </script>
+
+  <script type="text/javascript">
+    
+    /*document.getElementById("bt_edit").onclick = function () {
+        document.write("Welcome!!!");   
+    }*/
+    function funcion() {
+    
+      document.write('ESTO SON PRUEBAS!!!!!!!!!');
+      document.getElementById("btn_editar").funcion();
+      <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+          <textarea class="form-control" col="2" rows="2" name="com_edit"></textarea>
+          <button class="btn btn-sm btn-primary" type="submit"> Guardar cambios </button>
+      </form>      
+    }
+  </script>*/
+
+  <script> 
+    function editar(){ 
+        document.write('HOLAAAAAAAA ESTO ES UNA PRUEBA DE BOTON EDITAR')
+        numCaracteres = document.formul.textito.value.length 
+       	document.formul.numCaracteres.value = numCaracteres 
+    } 
+  </script> 
+
+  <form name="formul"> 
+    <a name="btn_editar"></a>
+    <textarea name=textito cols=40 rows=3> 
+    Este es el texto por defecto 
+    </textarea> 
+    <br> 
+    <br> 
+    Número de caracteres <input type="Text" name="numCaracteres" size="4"> 
+  </form> -->
+
+{% endblock %}
+
 {% block data_info %}
 
   <!-- BLOQUE CIUDADES -->  
@@ -10,7 +55,32 @@
     <h3>Precios:</h3>
     <ul>
       {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
+        <!--li><p><strong>{{i.username}}</strong>: {{i.prices}}</p><a href="#" id="bt_edit" onclick="editar()">Editar</a></li>-->
+        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p><!--<a href="" class="btn btn-sm btn-primary" id="btn_editar" value="Editar" onclick="editar()"></li>-->
+        
+        <form id="frm1" action="">
+          <h6>Deseas editar o eliminar el comentario</h6>
+          <button id="btn1" name="comment" type="submit" value="editar" onclick="myedit()">EDITAR</button>
+          <button id="btn2" name="comment" type="submit" value="eliminar" onclick="mydelete()">ELIMINAR</button>
+        </form>
+        
+
+        
+        <script>
+        function myedit()
+        {
+          var x = document.getElementById("frmedit").value;
+          document.getElementById("frmedit").innerHTML=x;
+                  
+        }
+        </script>    
+        
+        
+        <form id="frmedit" action="">
+          <textarea row="3" col="5">Escribe tu nuevo comentario</textarea>
+        </form>
+        
+        
       {% empty %}
         <li><p>Lo siento, pero no hay nada escrito.</p></li>
       {% endfor %}
@@ -99,7 +169,7 @@
 
     <ul>
     {% for i in resi_data %}
-      <li>Comentarios hechos por: <strong>{{i.username}}</strong>:
+      <li>Comentarios hechos por: <strong>{{i.username}}</strong>
       
           <ul>
           {% for i in resi_com %}

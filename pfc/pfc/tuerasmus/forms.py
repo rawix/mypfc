@@ -206,11 +206,11 @@ class OthersForm(forms.Form):
 #            Class ContactForm: to contact any user  
 #----------------------------------------------------------------------------    
 class ContactForm(forms.Form):
-    username = forms.CharField()
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField()
-    sender = forms.EmailField()
-    cc_myself = forms.BooleanField(required=False)
+    username = forms.CharField(label="Usuario",widget=forms.TextInput())
+    subject = forms.CharField(label="Asunto",max_length=100, widget=forms.TextInput())
+    message = forms.CharField(label="Mensaje",widget=forms.TextInput())
+    #sender = forms.EmailField(label="EL desarrollador (rawankho@gmail.com)",widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo', 'invalid':u'Introduce un correo válido'})
+    #cc_myself = forms.BooleanField(label="Ponerme en CC", required=False)
     
 #----------------------------------------------------------------------------
 #            Class CommentForm: to comment anything

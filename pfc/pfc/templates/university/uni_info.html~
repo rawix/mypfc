@@ -57,6 +57,7 @@
 
   <div class="page-header">
     <h1><a href="/tuerasmus/university/{{uni_name}}" style="color: #424242">{{ uniname }}</a></h1>
+    <h6>Pincha sobre el nombre de la universidad para ir al perfil de la universidad</h6>
   </div>
   
   {% if not no_info %}
@@ -340,7 +341,7 @@
         <h3>Las asignaturas impartidas en esta universidad:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.subname}}</p>
+            <li><p><strong>{{i.username}}</strong>: <h3>{{i.subname}}</h3></p>
                 <p><strong>Créditos de la asignatura</strong>: {{i.credits}}</p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout1}}</p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout2}}</p>
@@ -378,7 +379,17 @@
       {% endifequal %}
 
       {% ifequal info "others" %}  
-      
+        <h3>Comentarios de esta universidad:</h3>
+          <ul>
+          {% for i in info_list %}
+            <li><p><strong>{{i.username}}</strong> 
+                <strong>{{i.title}} {{day_publicated}}</strong>: 
+                <p>{{i.text}}</p>
+            </li>
+          {% empty %}
+            <li><p>Lo siento, pero no hay nada escrito.</p></li>
+          {% endfor %}
+          </ul>        
       
       {% endifequal %}
 

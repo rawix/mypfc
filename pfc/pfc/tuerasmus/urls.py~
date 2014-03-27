@@ -35,7 +35,6 @@ urlpatterns = patterns('',
     url(r'^(?P<user>[\S]+)/edit_profile/$', 'tuerasmus.views.edit_profile', name='edit_profile'), 
     url(r'^(?P<user>[\S]+)/myuniversity/$', 'tuerasmus.views.myuniversity', name='myuniversity'),
     url(r'^(?P<user>[\S]+)/myerasmus/$', 'tuerasmus.views.myerasmus', name='myerasmus'),
-    url(r'^(?P<user>[\S]+)/contact/$', 'tuerasmus.views.contact', name='contact'),
     url(r'^(?P<user>[\S]+)/$', 'tuerasmus.views.home', name='home'),
     
     # URLs enabled to view images

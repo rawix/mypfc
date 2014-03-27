@@ -42,7 +42,7 @@
           
         <div class="col-xs-12 col-sm-9">
             <p class="pull-right visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Menú</button>
+                <button type="button" class="btn btn-danger btn-xs" data-toggle="offcanvas">Menú</button>
             </p>
             <div class="jumbotron">    
                 <p><h2><strong>TuErasmus me gusta porque... pero creo que le faltaría...</strong></h2></p>                

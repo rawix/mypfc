@@ -17,7 +17,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template: Bootstrap offcanvas -->
     <link href="/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,6 +29,7 @@
 
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
+      
       <div class="container">
 
         <div class="navbar-header">
@@ -48,25 +49,26 @@
           
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{user.username}}"><strong><em>¡¡ Hola {{user.username}} !!</em></strong></a>
-            </div>
+            <!--<div class="form-group">-->
+            <a href="/tuerasmus/{{user.username}}" style="color:#F2F2F2"><strong><em>  ¡¡ Hola {{user.username}} !!  </em></strong></a>
+            <!--</div>/.form-group -->
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>
 
         </div><!--/.navbar-collapse -->
       </div><!--/.container -->
-    </div><!--/.navbar -->
+    </div><!--/.navbar-inverse -->
 
     <div class="container">
 
       <div class="row row-offcanvas row-offcanvas-right">
 
-        <a name="inicio"></a>
+        <a name="top"></a>
         {% block content %}
         {% endblock %}
         
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        
           <div class="well sidebar-nav">
             <ul class="nav">
               <li>Universidades</li>
@@ -84,18 +86,17 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        
       </div><!--/row-offcanvas-->
       
       <br>
-      <a href="#inicio" class="btn btn-sm btn-warning">Inicio</a>
+      <a href="#top" class="btn btn-sm btn-default">Inicio</a>
       <hr>
 
       <footer>
         <p><center>&copy; ETSIT-URJC 2013</center></p>
       </footer>
 
-    </div><!--/.container-->
+    </div><!--/.container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

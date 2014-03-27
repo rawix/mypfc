@@ -940,7 +940,7 @@ def uninfo(request, uni_name, type_info):
                 elif type_info=="others":
                     print "muestro la info others"
                     info="others"
-                    
+                    info_list = Comment.objects.filter(tag=uniname.uni)
                     
                 ctx = {'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                 
@@ -1203,7 +1203,6 @@ def unieditform(request, uni_name, type_form):
                     link = form.cleaned_data['link']
                     image = request.FILES['image']
                     description = form.cleaned_data['description']                    
-                  
                         
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
                     
@@ -1471,7 +1470,7 @@ def unieditform(request, uni_name, type_form):
                     
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO VARIOS"
                     
-                    data_others = Comment(uni=uniname.uni, username=request.user.username, tag="varios", tema=tema, title=title, text=text, day_publicated=datetime.now())
+                    data_others = Comment(uni=uniname.uni, username=request.user.username, tag=uniname.uni, tema=tema, title=title, text=text, day_publicated=datetime.now())
                     data_others.save()
                     
                     form = CommentForm()

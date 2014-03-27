@@ -940,7 +940,7 @@ def uninfo(request, uni_name, type_info):
                 elif type_info=="others":
                     print "muestro la info others"
                     info="others"
-                    
+                    info_list = Comment.objects.filter(tag=uniname.uni)
                     
                 ctx = {'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                 
@@ -1470,7 +1470,7 @@ def unieditform(request, uni_name, type_form):
                     
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO VARIOS"
                     
-                    data_others = Comment(uni=uniname.uni, username=request.user.username, tag="varios", tema=tema, title=title, text=text, day_publicated=datetime.now())
+                    data_others = Comment(uni=uniname.uni, username=request.user.username, tag=uniname.uni, tema=tema, title=title, text=text, day_publicated=datetime.now())
                     data_others.save()
                     
                     form = CommentForm()
@@ -1877,50 +1877,50 @@ def urerasmus(request):
 #-----------------------------------------------------------------------
 # Name: COMMENTS
 # Users can comments about the website, what they like and what they don't
-def comments(request):
-    if request.user.is_authenticated():
-        print "COMMENTS: usuario logueado: " + request.user.username
+#def comments(request):
+#    if request.user.is_authenticated():
+#        print "COMMENTS: usuario logueado: " + request.user.username
 
         # User is student or professor
-        t = User.objects.get(username=request.user.username)
-        tt = t.username
-        tu = Users.objects.all()
+#        t = User.objects.get(username=request.user.username)
+#        tt = t.username
+#        tu = Users.objects.all()
 
-        for i in tu:
-            if (tt == str(i.username)):
-                type_user = str(i.type_user)
+#        for i in tu:
+#            if (tt == str(i.username)):
+#                type_user = str(i.type_user)
 
-        print "veamos si es método GET o POST"
-        alertsubmit=""
-        alerterror=""
-        date=""
-        time=""
-        if request.method=="POST":
-            print "método POST"
-            text = request.POST['comment']
-            print "El comentario que acaban de escribir es: " +  text
-            print "FECHA DE HOY: " + str(datetime.now())
+#        print "veamos si es método GET o POST"
+#        alertsubmit=""
+#        alerterror=""
+#        date=""
+#        time=""
+#        if request.method=="POST":
+#           print "método POST"
+#            text = request.POST['comment']
+#            print "El comentario que acaban de escribir es: " +  text
+#            print "FECHA DE HOY: " + str(datetime.now())
 
             # Saving comment
-            if not text=="":
-                record = Comment(username=request.user.username, tag="comentarios", title="comentarios_web", text=text, day_publicated=datetime.now())
-                record.save()
-                alertsubmit=True
-            else:
-                alerterror=True       
+#            if not text=="":
+#               record = Comment(username=request.user.username, tag="comentarios", title="comentarios_web", text=text, day_publicated=datetime.now())
+#                record.save()
+#                alertsubmit=True
+#            else:
+#                alerterror=True       
                           
         # To show all the comments
-        comments = Comment.objects.filter(tag="comentarios")
-        if not comments.count()==0:
-            ctx = {'alertsubmit':alertsubmit, 'alerterror':alerterror, 'cmts': True, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
-        else:
-            ctx = {'alertsubmit':alertsubmit, 'alerterror':alerterror, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
+#        comments = Comment.objects.filter(tag="comentarios")
+#        if not comments.count()==0:
+#            ctx = {'alertsubmit':alertsubmit, 'alerterror':alerterror, 'cmts': True, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
+#        else:
+#            ctx = {'alertsubmit':alertsubmit, 'alerterror':alerterror, 'comments':comments, 'username':request.user.username, 'type_user': type_user}
 
-        return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
+#        return render_to_response('tuerasmus/comments.html', ctx, context_instance=RequestContext(request))
     
-    else:
+#    else:
         # User not authenticated
-        print "COMMENTS: el usuario no esta logueado"
-        return HttpResponseRedirect('/tuerasmus')
+#        print "COMMENTS: el usuario no esta logueado"
+#        return HttpResponseRedirect('/tuerasmus')
 
 

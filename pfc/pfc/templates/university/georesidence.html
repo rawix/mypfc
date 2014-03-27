@@ -44,7 +44,7 @@
     function initialize(){
         var n=1;
         var options = {
-            zoom: 4,
+            zoom: 8,
             center: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
             mapTypeId: google.maps.MapTypeId.ROADMAP};
         var marker = new google.maps.Marker({
@@ -55,7 +55,15 @@
         var infoWindow = new google.maps.InfoWindow({content: '{{uniname}}'});
         var map = new google.maps.Map(document.getElementById("googleMap"), options, marker, infoWindow);
         marker.setMap(map);
-        setGoogleMarkers(map, {{misPuntos}});
+        /*setGoogleMarkers(map, {{misPuntos}});*/
+        console.log("hola");
+        console.log({{mispuntos|safe}});
+var misPuntos = [
+    ["Sagrada Familia", "41.403571", "2.174472", "icon1", "<div>html</div>"],
+    ["Plaça Catalunya", "41.387097", "2.170072", "icon2", "<div>html</div>"],
+    ["Estación de Sants", "41.379514", "2.140644", "icon3", "<div>html</div>"],
+];
+        setGoogleMarkers(map, {{mispuntos|safe}});
         infoWindow.open(map, marker);
     };
 
@@ -64,12 +72,16 @@
 
 {% endblock %}
 
+
+{% block pathimage %}
+  <img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/>
+{% endblock %}
+
 {% block on_georesidence %}
 	
 	<div class="row">
 
 		<div class="col-xs-9">
-			<h2>Supuestamente este mapa de google sera para mostrar las residencias!!!!!!!!!!!</h2>
 			<div id="googleMap" style="width:700px;height:500px;"></div>
 		</div>
 

@@ -183,16 +183,16 @@ class WorkForm(forms.Form):
 #----------------------------------------------------------------------------
 class CityForm(forms.Form):
     cityname = forms.CharField(label="Nombre de la ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    prices = forms.TextField(label="Precios", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    uniarea = forms.TextField(label="La universidad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    studentlife = forms.TextField(label="Vida estudiantil", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    turism = forms.TextField(label="Turismo", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    party = forms.TextField(label="Salir", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    culture = forms.TextField(label="Cultura", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    crime = forms.TextField(label="Delincuencia", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    shopping = forms.TextField(label="De compras", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    erasmuslife = forms.TextField(label="Ambiente erasmus", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    more = forms.TextField(label="Más cosas", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    prices = forms.CharField(label="Precios", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    uniarea = forms.CharField(label="La universidad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    studentlife = forms.CharField(label="Vida estudiantil", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    turism = forms.CharField(label="Turismo", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    party = forms.CharField(label="Salir", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    culture = forms.CharField(label="Cultura", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    crime = forms.CharField(label="Delincuencia", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    shopping = forms.CharField(label="De compras", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    erasmuslife = forms.CharField(label="Ambiente erasmus", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    more = forms.CharField(label="Más cosas", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
 
 #----------------------------------------------------------------------------
 #            Class OthersForm: to change the university profile   
@@ -206,11 +206,11 @@ class OthersForm(forms.Form):
 #            Class ContactForm: to contact any user  
 #----------------------------------------------------------------------------    
 class ContactForm(forms.Form):
-    username = forms.CharField()
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField()
-    sender = forms.EmailField()
-    cc_myself = forms.BooleanField(required=False)
+    username = forms.CharField(label="Usuario",widget=forms.TextInput())
+    subject = forms.CharField(label="Asunto",max_length=100, widget=forms.TextInput())
+    message = forms.CharField(label="Mensaje",widget=forms.TextInput())
+    #sender = forms.EmailField(label="EL desarrollador (rawankho@gmail.com)",widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo', 'invalid':u'Introduce un correo válido'})
+    cc_myself = forms.BooleanField(label="Ponerme en CC", required=False)
     
 #----------------------------------------------------------------------------
 #            Class CommentForm: to comment anything

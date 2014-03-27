@@ -57,6 +57,7 @@
 
   <div class="page-header">
     <h1><a href="/tuerasmus/university/{{uni_name}}" style="color: #424242">{{ uniname }}</a></h1>
+    <h6>Pincha sobre el nombre de la universidad para ir al perfil de la universidad</h6>
   </div>
   
   {% if not no_info %}
@@ -378,7 +379,18 @@
       {% endifequal %}
 
       {% ifequal info "others" %}  
-      
+        <h3>Comentarios de esta universidad:</h3>
+          <ul>
+          {% for i in info_list %}
+            <li><p><strong>{{i.username}}</strong> 
+                <strong>{{i.title}} {{day_publicated}}</strong>: 
+                <p>{{i.text}}</p>
+                </p>
+            </li>
+          {% empty %}
+            <li><p>Lo siento, pero no hay nada escrito.</p></li>
+          {% endfor %}
+          </ul>        
       
       {% endifequal %}
 

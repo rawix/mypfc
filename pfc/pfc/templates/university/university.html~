@@ -47,9 +47,9 @@
 {% block content %}
         <div class="col-xs-12 col-sm-9">
         
-            <p class="pull-right visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-            </p>
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-danger btn-xs" data-toggle="theme">Menú</button>
+          </p>
             
             <div class="jumbotron">
               <div class="row">
@@ -57,7 +57,8 @@
                   <p>{% block pathimage %}{% endblock %}</p>
                 </div>
                 <div class="col-xs-7">
-                  <p><a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1>{{ uniname }}</h1></a></p>
+                  <!--<p><a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1>{{ uniname }}</h1></a></p>-->
+                  <h1>{{ uniname }}</h1>
                 </div>
               </div>
             </div>
@@ -65,24 +66,25 @@
             <div class="page-header">
               <p>
                 <h1>¿¡Qué quieres conocer de esta universidad!?</h1>
-                <a href="/tuerasmus/uniedit/{{uni_name}}" class="btn btn-lg btn-default" type="submit">Editar perfil</a>
+                <a href="/tuerasmus/uniedit/{{uni_name}}" class="btn btn-lg btn-primary" type="submit">Editar perfil</a>
               </p>
             </div>
             <p>
               <!--<button type="button" class="btn btn-lg" style="background:white">Básica</button>-->
-              <a href="/tuerasmus/university/{{uni_name}}/basic" class="btn btn-lg btn-danger" type="submit">General</a>
+              <a href="/tuerasmus/university/{{uni_name}}/basic" class="btn btn-lg btn-warning" type="submit">General</a>
               <!--<button type="button" class="btn btn-lg btn-danger" name="basic">Básica</button>-->
-              <a href="/tuerasmus/university/{{uni_name}}/doc" class="btn btn-lg btn-primary" type="submit">Documentación y atención</a>
+              <a href="/tuerasmus/university/{{uni_name}}/doc" class="btn btn-lg btn-warning" type="submit">Documentación</a>
               <!--<button type="button" class="btn btn-lg btn-primary" name="doc">Documentación y atención</button>-->
-              <a href="/tuerasmus/university/{{uni_name}}/hotel" class="btn btn-lg btn-info" type="submit">Residencias</a>
+              <a href="/tuerasmus/university/{{uni_name}}/hotel" class="btn btn-lg btn-warning" type="submit">Residencias</a>
               <!--<button type="button" class="btn btn-lg btn-info" name="hotel">Alojamientos</button>-->
-              <a href="/tuerasmus/university/{{uni_name}}/subjects" class="btn btn-lg btn-success" type="submit">Asignaturas y prácticas</a>
+              <a href="/tuerasmus/university/{{uni_name}}/subjects" class="btn btn-lg btn-warning" type="submit">Asignaturas</a>
               <!--<button type="button" class="btn btn-lg btn-success" name="subjects">Asignaturas y Prácticas</button>-->
               <a href="/tuerasmus/university/{{uni_name}}/city" class="btn btn-lg btn-warning" type="submit">La ciudad</a>
               <!--<button type="button" class="btn btn-lg btn-warning" name="city">La ciudad</button>-->
-              <a href="/tuerasmus/university/{{uni_name}}/others" class="btn btn-lg btn-default" type="submit">Varios</a>
+              <a href="/tuerasmus/university/{{uni_name}}/others" class="btn btn-lg btn-warning" type="submit">Comentarios</a>
               <!--<button type="button" class="btn btn-lg btn-default" name="others">Varios</button>-->
             </p>
+            
             
             {% block on_geolocalize %}
             {% endblock %}

@@ -4,7 +4,7 @@
 
     <li><a href="/tuerasmus">Inicio</a></li>
     <li><a href="/howto">¿Qué es?</a></li>
-    <li><a href="http://www.urjc.es/relaciones_internacionales/inicio.html" target="_blank">Erasmus URJC</a></li>
+    <li><a href="http://www.urjc.es/relaciones_internacionales" target="_blank">Erasmus URJC</a></li>
     <li class="active"><a href="/contact">Contacto</a></li>
 
 {% endblock %}
@@ -15,7 +15,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Para cualquier consulta contactar con: </h1>
-        <p style="float:right"><a class="btn btn-info btn-lg" href="http://gmail.com" target="_blank"> rawankho@gmail.com </a></p>
+        <p style="float:right"><a class="btn btn-info btn-lg" href="/contactform" target="_blank"> rawankho@gmail.com </a></p>
       </div>
     </div>
 

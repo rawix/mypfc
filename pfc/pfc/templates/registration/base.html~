@@ -56,16 +56,21 @@
             <div class="form-group">
               <input type="password" name="password" placeholder="Contraseña" class="form-control" value="" id="password">
             </div>
-            <button type="submit" class="btn btn-warning" value="login">Entrar</button>
-
+            <button type="submit" class="btn btn-danger" value="login">Entrar</button>
+            <div class="form-group">
             {% if alertlogin %}
               <br><br>
-              <div class="alert alert-danger">
-	        <center><strong>Error, revisa tus datos!!</strong></center>
-	      </div>
+              <!--<div class="alert alert-danger">¡¡ERROR!!</div>-->
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>¡¡Datos erróneos!!</strong>
+              </div>
             {% endif %}
+            </div>
+            
 
           </form>
+          
 
         </div><!--/.navbar-collapse -->
       </div><!--/.container -->
@@ -100,25 +105,28 @@
                   <li><a href="/tuerasmus/uniresgister">Resgistrar</a></li> 
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-                <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>              
-              </ul>
-            </li>
-            <li><a href="/tuerasmus/comments">TusComentarios</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
+            <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
+            <li class="divider"></li>
+              <li class="dropdown-header">Más</li>
+              <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>-->
+              <li><a href="#">Contactar</a></li>
+          </ul>
+        </li>
+            <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
             <li class="active"><a href="/contact">Contacto</a></li>
           </ul>
           
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <div class="form-group">
-              <a class="navbar-brand" href="/tuerasmus/{{username}}"><strong><em>¡¡Hola {{type_user}} {{username}}!!</em></strong></a>
-            </div>
+            <!--<div class="form-group">-->
+            <a href="/tuerasmus/{{user.username}}" style="color:#F2F2F2"><strong><em>  ¡¡ Hola {{user.username}} !!  </em></strong></a>
+            <!--</div>/.form-group -->
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
-          </form>
-     
+          </form>     
         </div><!--/.navbar-collapse -->
       </div><!--/.container -->
     </div><!--/.navbar -->

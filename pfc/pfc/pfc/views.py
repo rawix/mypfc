@@ -30,14 +30,14 @@ from django.shortcuts import render_to_response, get_object_or_404
 # HTML rendering libraries.
 from django.template import RequestContext, loader
 
-# Sending HTML
+# Sending HTML (Importamos la librería para enviar los correos)
 from django.core.mail import EmailMessage, EmailMultiAlternatives 
 
 # Database tables.  
 from tuerasmus.models import Users, Universities, UserProfile, Countries
 
 # Forms
-from tuerasmus.forms import RegisterForm
+from tuerasmus.forms import RegisterForm, ContactForm
 
 # Own libraries.
 import parserXML
@@ -252,5 +252,59 @@ def contact(request):
     # Return the template
     ctx = {'username': u, 'type_user':type_user}
     return render_to_response('registration/contact.html', ctx, context_instance=RequestContext(request))
+ 
+#----------------------------------------------------------------------
+#----------------------------------------------------------------------
+# Name: CONTACTFORM
+# How to contact the browser 
+def contactform(request):
+    print "CONTACTFORM: Contactar con el desarrollador"
 
+    type_user=""
+    try:
+        # Getting if user is student or professor
+        t = User.objects.get(username=request.user.username)
+        tt = t.username
+        tu = Users.objects.all()
+        for i in tu:
+            if (tt == str(i.username)):
+                type_user = str(i.type_user)
+        u = request.user.username
+    except User.DoesNotExist:
+        u = ""
+    
+    
+    if request.method=="POST":
+        form = ContactForm(request.POST)
+
+        # Valid form
+        if form.is_valid():
+            # Get the information form
+            username = form.cleaned_data['username']
+            subject = form.cleaned_data['subject']
+            message = request.POST['message']
+            #sender = request.POST['sender']
+            sender = "rawankho@gmail.com"
+            #cc_myself = form.cleaned_data['cc_myself']
+            
+            # Agregamos una variable 'email' y le pasamos los valores del Asunto, Mensaje y el correo destinatario
+            email = EmailMessage('subject', 'message', to=['sender']) 
+            #Por último enviamos el correo
+            email.send() 
+            
+            ctx = {'alertdone':True, 'username': u, 'type_user':type_user}  
+            
+            
+        # Form not valid
+        else:
+            ctx = {'form': form, 'alerterror': True, 'username': u, 'type_user':type_user}
+            
+        return render_to_response('registration/contactform.html', ctx, context_instance=RequestContext(request))
+
+        
+    else:
+        form = ContactForm()
+        # Return the template
+        ctx = {'form':form, 'username': u, 'type_user':type_user}
+        return render_to_response('registration/contactform.html', ctx, context_instance=RequestContext(request))
    
