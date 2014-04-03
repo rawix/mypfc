@@ -116,8 +116,7 @@
             {% endifnotequal %} 
             
             {% ifequal up_obj.uni2 None %}
-              <li>Universidad Mundus: Se está pensando dónde ir con la beca mundus</li>
-            {% else %}
+              <!--<li>Universidad Mundus: Se está pensando dónde ir con la beca mundus</li>-->
               <li>Universidad Mundus: {{up_obj.uni2}}</li>
             {% endifequal %} 
             

@@ -28,7 +28,7 @@
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(places[i][1], places[i][2]),
                 map: map,
-                colour: 'green',
+                icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png'
                 title: 'places[i][0]'});        
      
             google.maps.event.addListener(marker, 'mouseup', function(){
@@ -51,6 +51,7 @@
                 position: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
                 // True para desplazar el icono               
                 draggable: false, 
+                
                 title: '{{uniname}}'});
         var infoWindow = new google.maps.InfoWindow({content: '{{uniname}}'});
         var map = new google.maps.Map(document.getElementById("googleMap"), options, marker, infoWindow);
@@ -58,11 +59,11 @@
         /*setGoogleMarkers(map, {{misPuntos}});*/
         console.log("hola");
         console.log({{mispuntos|safe}});
-var misPuntos = [
+/*var misPuntos = [
     ["Sagrada Familia", "41.403571", "2.174472", "icon1", "<div>html</div>"],
     ["Plaça Catalunya", "41.387097", "2.170072", "icon2", "<div>html</div>"],
     ["Estación de Sants", "41.379514", "2.140644", "icon3", "<div>html</div>"],
-];
+];*/
         setGoogleMarkers(map, {{mispuntos|safe}});
         infoWindow.open(map, marker);
     };

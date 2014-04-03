@@ -39,8 +39,8 @@
               <li><a href="#">Contactar</a></li>
           </ul>
         </li>
-        <li><a href="/tuerasmus/comments">TusComentarios</a></li>
-        <li><a href="/contact">Contacto</a></li>
+        <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
+        <!--<li><a href="/contact">Contacto</a></li>-->
   
 {% endblock %}
 
@@ -53,10 +53,10 @@
             
             <div class="jumbotron">
               <div class="row">
-                <div class="col-xs-5">
+                <div class="col-lg-5 col-xs-7">
                   <p>{% block pathimage %}{% endblock %}</p>
                 </div>
-                <div class="col-xs-7">
+                <div class="col-lg-7 col-xs-7">
                   <!--<p><a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1>{{ uniname }}</h1></a></p>-->
                   <h1>{{ uniname }}</h1>
                 </div>
@@ -85,16 +85,19 @@
               <!--<button type="button" class="btn btn-lg btn-default" name="others">Varios</button>-->
             </p>
             
-            
+            <!-- -->
             {% block on_geolocalize %}
             {% endblock %}
             
+            <!-- -->
             {% block on_georesidence %}
             {% endblock %}
             
+            <!-- -->
             {% block all_info %}
             {% endblock %}      
 
+            <!-- -->
             {% block uni_info %}
             {% endblock %}  
                 

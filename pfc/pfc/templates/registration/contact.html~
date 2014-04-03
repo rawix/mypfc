@@ -15,7 +15,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Para cualquier consulta contactar con: </h1>
-        <p style="float:right"><a class="btn btn-info btn-lg" href="/contactform" target="_blank"> rawankho@gmail.com </a></p>
+        <p style="float:right"><a class="btn btn-info btn-lg"> rawankho@gmail.com </a></p>
       </div>
     </div>
 
