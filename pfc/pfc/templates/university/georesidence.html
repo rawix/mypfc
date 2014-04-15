@@ -29,12 +29,12 @@
                 position: new google.maps.LatLng(places[i][1], places[i][2]),
                 map: map,
                 icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png',
-                title: 'places[i][0]'});        
+                title: places[i][0]});        
      
             google.maps.event.addListener(marker, 'mouseup', function(){
                 var popup = new google.maps.InfoWindow();
-                var note = 'Wohoooo, salió el InfoWindow cuando pulsé el marcador y en el lugar: ' + i
-                    + ', pero ¿por qué todos se muestran en ' + i + '?';
+                var note = title;
+                
                 popup.setContent(note);
                 popup.open(map, marker);
             });
@@ -51,7 +51,6 @@
                 position: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
                 // True para desplazar el icono               
                 draggable: false, 
-                //icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png',
                 title: '{{uniname}}'});
         var infoWindow = new google.maps.InfoWindow({content: '{{uniname}}'});
         var map = new google.maps.Map(document.getElementById("googleMap"), options, marker, infoWindow);

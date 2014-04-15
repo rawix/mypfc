@@ -10,6 +10,8 @@
             <li class="divider"></li>
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
+              <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
+              <a href="#">Modificar contraseña</a>
           </ul>
         </li>
         <li class="dropdown">
@@ -34,7 +36,7 @@
           </ul>
         </li>
         <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
-        <li><a href="/contact">Contacto</a></li>
+        <!--<li><a href="/contact">Contacto</a></li>-->
 
 {% endblock %}
 
@@ -58,8 +60,11 @@
 
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
               <br>
-              
-              <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
+              {% if editpassword %}
+                <p><h2>Modifica tu contraseña:</h2></p>
+              {% else %}
+                <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
+              {% endif %}
 
               {% if alerterror %}
                 <div class="alert alert-danger">
@@ -70,6 +75,12 @@
               {% if alertdone %}
                 <div class="alert alert-success">
                   <center><strong>BIEN!! <big>{{usu}}</big>, tus datos quedaron guardados correctamente!</strong></center>
+                </div>
+              {% endif %}
+              
+              {% if alerterrorpass %}
+                <div class="alert alert-danger">
+                  <center><strong>¡¡ERROR!!</strong>, las contraseñas no coinciden</center>
                 </div>
               {% endif %}
               <br>
@@ -115,10 +126,10 @@
               <li>Universidad Erasmus: {{up_obj.uni1}}</li>
             {% endifnotequal %} 
             
-            {% ifequal up_obj.uni2 None %}
+            {% ifnotequal up_obj.uni2 None %}
               <!--<li>Universidad Mundus: Se está pensando dónde ir con la beca mundus</li>-->
               <li>Universidad Mundus: {{up_obj.uni2}}</li>
-            {% endifequal %} 
+            {% endifnotequal %} 
             
             <br><br>
             <!-- The user can see and edit his own profile -->

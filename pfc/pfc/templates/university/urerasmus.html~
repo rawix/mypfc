@@ -10,6 +10,8 @@
             <li class="divider"></li>
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
+              <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
+              <a href="#">Modificar contraseña</a>
           </ul>
         </li>
         <li class="dropdown">
@@ -34,7 +36,7 @@
           </ul>
         </li>
         <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
-        <li><a href="/contact">Contacto</a></li>
+        <!--<li><a href="/contact">Contacto</a></li>-->
   
 {% endblock %}
 

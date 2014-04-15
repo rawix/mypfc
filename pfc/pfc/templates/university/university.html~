@@ -16,6 +16,8 @@
             <li class="divider"></li>
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
+              <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
+              <a href="#">Modificar contraseña</a>
           </ul>
         </li>
         <li class="active" class="dropdown">
@@ -48,15 +50,15 @@
         <div class="col-xs-12 col-sm-9">
         
           <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-danger btn-xs" data-toggle="theme">Menú</button>
+            <button type="button" class="btn btn-danger btn-xs" data-toggle="offcanvas">Menú</button>
           </p>
             
             <div class="jumbotron">
               <div class="row">
-                <div class="col-lg-5 col-md-5 col-ms-5 col-xs-7">
+                <div class="col-lg-5 col-ms-5 col-xs-7">
                   <p>{% block pathimage %}{% endblock %}</p>
                 </div>
-                <div class="col-lg-7 col-md-7 col-ms-7 col-xs-7">
+                <div class="col-lg-7 col-ms-7 col-xs-7">
                   <!--<p><a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1>{{ uniname }}</h1></a></p>-->
                   <h1>{{ uniname }}</h1>
                 </div>

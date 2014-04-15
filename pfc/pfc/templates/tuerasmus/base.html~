@@ -29,7 +29,7 @@
 
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <a name="top"></a>
+      
       <div class="container">
 
         <div class="navbar-header">
@@ -49,9 +49,10 @@
           
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
-            <!--<div class="form-group">-->
-            <a href="/tuerasmus/{{user.username}}" style="color:#F2F2F2"><strong><em>  ¡¡ Hola {{user.username}} !!  </em></strong></a>
-            <!--</div>/.form-group -->
+            
+            <div class="form-group">
+              <a href="/tuerasmus/{{user.username}}" style="color:#F2F2F2"><strong><em>  ¡¡ Hola {{user.username}} !!  </em></strong></a>
+            </div>
             <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>
 
@@ -63,7 +64,7 @@
 
       <div class="row row-offcanvas row-offcanvas-right">
 
-        
+        <a name="top"></a>
         {% block content %}
         {% endblock %}
         

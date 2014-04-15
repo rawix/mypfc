@@ -1,4 +1,5 @@
 #encoding:utf-8
+
 ##########################################################################
 # @Author : Rawan Nazmi-Issa Khozouz                                     #
 # @Date : 18/09/13.                                                      #
@@ -33,6 +34,7 @@ urlpatterns = patterns('',
     url(r'^(?P<user>[\S]+)/myprofile/$', 'tuerasmus.views.myprofile', name='myprofile'),
     url(r'^(?P<user>[\S]+)/profile/$', 'tuerasmus.views.profile', name='profile'), 
     url(r'^(?P<user>[\S]+)/edit_profile/$', 'tuerasmus.views.edit_profile', name='edit_profile'), 
+    url(r'^(?P<user>[\S]+)/edit_password/$', 'tuerasmus.views.edit_password', name='edit_password'), 
     url(r'^(?P<user>[\S]+)/myuniversity/$', 'tuerasmus.views.myuniversity', name='myuniversity'),
     url(r'^(?P<user>[\S]+)/myerasmus/$', 'tuerasmus.views.myerasmus', name='myerasmus'),
     url(r'^(?P<user>[\S]+)/$', 'tuerasmus.views.home', name='home'),

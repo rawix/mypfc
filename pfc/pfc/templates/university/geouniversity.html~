@@ -66,7 +66,7 @@
                 <!--<div id="googleMap" style="width:500px;height:380px;"></div>-->
               </div>
 
-              <div class="col-xs-3">
+              <div class="col-xs-8">
                 <br><br>
                 <h3>{{uniname}}</h3>
                 <address>
@@ -252,7 +252,7 @@
 		{% else %}
       <div class="page-header">
         <h1>No hay información acerca de la universidad</h1>
-        <h5>Pincha sobre editar el perfil y comienza a completar el perfil de la universidad</h5>
+        <h5>Pincha sobre editar perfil y comienza a completar el perfil de la universidad</h5>
       </div>
 		{% endif %}
 	<!--</div>/.row-->
