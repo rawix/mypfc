@@ -17,7 +17,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <a href="#">Modificar contraseña</a>
+              <li><a href="#">Modificar contraseña</a></li>
           </ul>
         </li>
         <li class="active" class="dropdown">
@@ -53,6 +53,7 @@
             <button type="button" class="btn btn-danger btn-xs" data-toggle="offcanvas">Menú</button>
           </p>
             
+          <!-- Template for cities -->
           {% if city_info %}
 
               <div class="jumbotron">
@@ -83,6 +84,7 @@
                 </div><!--/.row-->
               </form>  
               
+          <!-- Template for residences -->
           {% elif resi_info %}
               <div class="jumbotron">
                 <h1>LAS RESIDENCIAS ERASMUS</h1>
@@ -110,6 +112,7 @@
                 </div><!--/.row-->
               </form>   
                
+          <!-- Template for subjects -->
           {% elif sub_info %}
          
               <div class="jumbotron">
@@ -139,9 +142,10 @@
                 </div><!--/.row-->     
               </form> 
                 
+          <!-- Template for universities -->
           {% else %}    
               <div class="jumbotron">
-                <h1>LAS UNIVERSIDADES ERASMUS Y MUNDE</h1>
+                <h1>LAS UNIVERSIDADES</h1>
               </div><!--/.jumbotron -->
 
 
@@ -176,7 +180,7 @@
 
 
               <div class="page-header">
-                <h3>Las universidades según la beca correspondiente:</h3>
+                <h1>¿Qué universidades quieres conocer?</h1>
               </div>
          
               {% regroup uall by scholarship as scholarship_list %}
@@ -190,6 +194,9 @@
                         {% endfor %}
                     </ul>
                     </li>
+                {% empty %}
+                  <h3> Aún no hay universidades registradas </h3>
+
                 {% endfor %}
               </ul>    
               
@@ -202,23 +209,31 @@
           {% endif %}
 
 
+          <!-- General information about the website, like users, universities, comments, etc -->
           <div class="page-header">
-            <h1>Datos a destacar</h1>
+            <h2>Algunos datos de interés de TuErasmus</h2>
           </div>
           
           <h3>Usuarios de TuErasmus</h3>
           <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% Complete</span></div>
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% erasmus</span></div>
           </div>
           
           <h3>Usuarios alumnos</h3>
           <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% Complete (success)</span></div>
+            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% alumnos</span></div>
           </div>
           
           <h3>Usuarios profesores</h3>
           <div class="progress">
-            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% Complete</span></div>
+            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% profesores</span></div>
+          </div>
+
+          <h3>Usuarios masculinos y usuarios femeninas</h3>         
+          <div class="progress">
+            <div class="progress-bar progress-bar-success" style="width: {{porcentaje_chicos}}%"><span class="sr-only">{{porcentaje_chicos}}% Complete (success)</span></div>
+            <div class="progress-bar progress-bar-warning" style="width: {{porcentaje_chicas}}%"><span class="sr-only">{{porcentaje_chicas}}% Complete (warning)</span></div>
+            <!--<div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>-->
           </div>
           
           <h3>Comentarios realizados</h3>
@@ -228,92 +243,16 @@
           <div class="progress">
             <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">80% Complete (danger)</span></div>
           </div>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" style="width: 35%"><span class="sr-only">35% Complete (success)</span></div>
-            <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
-            <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
-          </div>
-
-
-
-
-
-
-
           
         </div><!--/span-->
-        
-        
-        
-
-
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              <!--<div class="page-header">
-                <h1>Datos a destacar</h1>
-              </div>
-              
-              <h3>Usuarios de TuErasmus</h3>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% Complete</span></div>
-              </div>
-              
-              <h3>Usuarios alumnos</h3>
-              <div class="progress">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% Complete (success)</span></div>
-              </div>
-              
-              <h3>Usuarios profesores</h3>
-              <div class="progress">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% Complete</span></div>
-              </div>
-              
-              <h3>Comentarios realizados</h3>
-              <div class="progress">
-                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">80% Complete (danger)</span></div>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-success" style="width: 35%"><span class="sr-only">35% Complete (success)</span></div>
-                <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
-                <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
-              </div>-->
-
-
-
-
 
 <!-- TODAS ESTAS LINEAS LAS PUEDO MODIFICAR MAS ADELANTE, Y SERÍAN CÓMO MOSTRAR LAS DISTINTAS UNIVERSIDADES Y SUS INFORMACIONES
       <div class="page-header">
         <h1>Thumbnails</h1>
       </div>
       <img data-src="holder.js/200x200" class="img-thumbnail" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
-
-
-
-
-
-
-    
 
 
       <div class="page-header">
