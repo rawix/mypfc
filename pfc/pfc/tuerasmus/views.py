@@ -1070,6 +1070,7 @@ def uninfo(request, uni_name, type_info):
         if request.method=="GET":
         
             path_image=""
+            tmp = 'university/uni_info.html'
             try:
                 uni = InfoBasic.objects.get(uni=uniname)
                 print str(uni.image)
@@ -1077,6 +1078,7 @@ def uninfo(request, uni_name, type_info):
                 print uni.longitud
                 path_image = str(uni.image) 
                 print path_image
+                
                 tmp = 'university/geouniversity.html'
                 if type_info=="basic":
                     print "muestro la info basica"
@@ -1436,7 +1438,7 @@ def unieditform(request, uni_name, type_form):
 
                             if not (str(image)=="") or not (str(image)==None):
                                 print "es name_image vacioooooooooooooooooooooooooooooooooooooooooo"
-                                print u.name_image
+                                print uni_data.name_image
                             
                                 if (uni_data.name_image=="") or (uni_data.name_image==None):
                                     print "name_image es vacio en el usuario "
@@ -1458,7 +1460,7 @@ def unieditform(request, uni_name, type_form):
                                 
                             uni_data.description = uni_data.description + ". " + description
                             name_image = uni_data.name_image
-                            description = str(uni_data.description)
+                            description = uni_data.description
                             print "voy a intentar cambiar el valor d ela descripcion!!!!!!!!!!!!!!"
                             uni_data.save()
                         else:

@@ -20,8 +20,8 @@
             <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
             <li><a href="/tuerasmus/universities">Las universidades</a></li>
             <li class="divider"></li>
-            <li class="dropdown-header">Más</li>
-            <li><a href="/tuerasmus/uniregister">Registrar</a></li>
+              <li class="dropdown-header">Más</li>
+              <li><a href="/tuerasmus/uniregister">Registrar</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -29,6 +29,10 @@
           <ul class="dropdown-menu">
             <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
             <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
+            <li class="divider"></li>
+              <li class="dropdown-header">Más</li>
+              <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>-->
+              <li><a href="#">Contactar</a></li>
           </ul>
         </li>
         <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
@@ -57,7 +61,7 @@
                       
           <div class="page-header">
             <h1>Elige el tema de información que desees completar</h1>
-            <a href="/tuerasmus/university/{{uni_name}}/basic" class="btn btn-lg btn-primary">Ver perfil</a>
+            <a href="/tuerasmus/university/{{uni_name}}" class="btn btn-lg btn-primary">Ver perfil</a>
           </div>
           
           <p>
