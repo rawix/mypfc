@@ -11,7 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <a href="#">Modificar contraseña</a>
+              <li><a href="#">Modificar contraseña</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -63,7 +63,9 @@
               {% if editpassword %}
                 <p><h2>Modifica tu contraseña:</h2></p>
               {% else %}
-                <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
+                {% if not alertdone %}
+                  <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
+                {% endif %}
               {% endif %}
 
               {% if alerterror %}
@@ -86,10 +88,13 @@
               <br>
 
               {{form.as_p}}
-
-              <br><br>
-              <button class="btn btn-primary" type="submit">Guardar</button>
-              <br><br>
+              
+              {% if not alertdone %}
+                <br><br>
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <br><br>
+              {% endif %}
+              
             </form>
         </div><!--./col-xs-12-->
         
@@ -114,20 +119,17 @@
               <li>Nombre: {{up_obj.name}}</li>
             {% endifequal %}
 
-            {% ifnotequal up_obj.name "" %}
-              <!--<li>Apellidos: No tiene apellidos</li>-->
+            {% ifnotequal up_obj.lastname "" %}
               <li>Apellidos: {{up_obj.lastname}}</li>
             {% endifnotequal %}
             
             <li>Descripción: {{description}}</li>
             
             {% ifnotequal up_obj.uni1 None %}
-              <!--<li>Universidad Erasmus: Se está pensando dónde ir con la beca erasmus</li>-->
               <li>Universidad Erasmus: {{up_obj.uni1}}</li>
             {% endifnotequal %} 
             
-            {% ifnotequal up_obj.uni2 None %}
-              <!--<li>Universidad Mundus: Se está pensando dónde ir con la beca mundus</li>-->
+            {% ifnotequal up_obj.uni2 "" %}
               <li>Universidad Mundus: {{up_obj.uni2}}</li>
             {% endifnotequal %} 
             

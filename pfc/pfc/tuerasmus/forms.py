@@ -103,13 +103,14 @@ class BasicForm(forms.Form):
         
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la dirección'})
     postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), required=False)
-    phone = forms.IntegerField(label="Teléfono de contacto", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un teléfono de contacto'})
+    phone = forms.IntegerField(label="Teléfono de contacto", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un teléfono de contacto', 'invalid':u'Introduce el teléfono sin el prefijo'})
+    prefix = forms.IntegerField(label="Prefijo telefónico", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un teléfono de contacto', 'invalid':u'Introduce el prefijo telefónico'})
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la ciudad'})
     country = forms.CharField(label="País", widget=forms.TextInput(), error_messages={'required': 'Debes introducir el país'})
     latitud = forms.DecimalField(label='Coordenadas de latitud', widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
     longitud = forms.DecimalField(label='Coordenadas de longitud', widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de longitud'})
     link = forms.URLField(label='Web oficial de la universidad', widget=forms.TextInput(), error_messages={'required': 'Debes introducir la web oficial de la universidad', 'invalid':u'Introduce una URL válida'})
-    image = forms.ImageField(label="Imagen de universidad", required=False)
+    image = forms.ImageField(label="Imagen de universidad", error_messages={'required': 'Debes seleccionar una imagen'})
     description = forms.CharField(label="Descripción breve sobre la universidad", widget=forms.TextInput(), error_messages={'required': 'Debes introducir una breve descripción'})
 
 #----------------------------------------------------------------------------

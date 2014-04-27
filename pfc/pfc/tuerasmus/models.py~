@@ -26,6 +26,7 @@ class Users(models.Model):
 class Universities(models.Model):
     noun = models.CharField(max_length=50);  
     country = models.CharField(max_length=50);
+    prefix = models.IntegerField();
 
     # Alphabetical Order  
     class Meta:
@@ -55,16 +56,6 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return str(self.day_publicated) + " - " + self.username + ": " + self.title;
-        
-# ------------------------------------------------------------------------------
-#                               Contact class.
-# ------------------------------------------------------------------------------
-#class Contact(models.Model):
-#    subject = models.CharField(max_length=100);
-#    message = models.CharField();
-#    sender = models.EmailField();
-#    cc_myself = models.BooleanField(required=False);    
-    
     
 # ------------------------------------------------------------------------------
 #                               University class.
@@ -199,6 +190,7 @@ class InfoBasic(models.Model):
     address = models.CharField(max_length=50);
     postalcode = models.IntegerField(null=True, blank=True);
     phone = models.IntegerField();
+    prefix = models.IntegerField();
     city = models.CharField(max_length=30);
     country = models.CharField(max_length=50);
     latitud = models.DecimalField(max_digits=10, decimal_places=8);

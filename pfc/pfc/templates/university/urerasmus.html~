@@ -11,7 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <a href="#">Modificar contraseña</a>
+              <li><a href="#">Modificar contraseña</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -65,7 +65,8 @@
                 
               <ul>
                 {% for uni in uni_list %}
-                    <li><h3><strong> {{ uni.grouper }} </strong></h3>
+                    <li><h3><strong><a href="/tuerasmus/university/{{ uni.grouper.id }}" style="color:#151515"> {{ uni.grouper }} </strong></h3>
+                    
                     <ul>
                         {% for item in uni.list %}
                             {% for i in item.useuni.all %}

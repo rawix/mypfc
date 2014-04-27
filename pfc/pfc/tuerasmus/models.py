@@ -189,6 +189,7 @@ class InfoBasic(models.Model):
     address = models.CharField(max_length=50);
     postalcode = models.IntegerField(null=True, blank=True);
     phone = models.IntegerField();
+    prefix = models.IntegerField();
     city = models.CharField(max_length=30);
     country = models.CharField(max_length=50);
     latitud = models.DecimalField(max_digits=10, decimal_places=8);

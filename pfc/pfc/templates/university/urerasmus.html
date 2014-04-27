@@ -65,7 +65,8 @@
                 
               <ul>
                 {% for uni in uni_list %}
-                    <li><h3><strong> {{ uni.grouper }} </strong></h3>
+                    <li><h3><strong><a href="/tuerasmus/university/{{ uni.grouper.id }}" style="color:#151515"> {{ uni.grouper }} </a></strong></h3>
+                    
                     <ul>
                         {% for item in uni.list %}
                             {% for i in item.useuni.all %}

@@ -67,6 +67,7 @@ def home(request, user):
             type_user=""
             path_image=""
             description=""
+            genero=""
             t = User.objects.get(username=user)
             tt = t.username
             tu = Users.objects.all()
@@ -182,12 +183,17 @@ def profile(request, user):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
                 genero = str(i.genero)
+                print "imprimimos genero y type_user"
+                print genero
+                print type_user
+                
                 
         # Get the path of the image and the user description
         for j in tp:
             print "nombre de la imagen 3333333333333333333: " + str(j.name_image) + str(j.username)
             print "description 3333333333333333333: " + str(j.description) + str(j.username)
             if (tt == str(j.username)):
+                # No photo and no description
                 if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
                     if genero=="male":
                         path_image ="tuerasmus/male.jpg"
@@ -195,6 +201,7 @@ def profile(request, user):
                         path_image="tuerasmus/female.jpg"
                     description = "Mi erasmus será genial"
                     
+                # No photo but yes description
                 elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
                     if genero=="male":
                         path_image ="tuerasmus/male.jpg"
@@ -202,15 +209,21 @@ def profile(request, user):
                         path_image="tuerasmus/female.jpg"               
                     description = str(j.description)
                     
+                # No description but yes photo
                 elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
                     path_image = "profiles/" + str(j.name_image)
                     description = "Mi erasmus será genial"
-                elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    
+                # Yes photo and description
+                elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
+                    print "EL USUARIO TIENE FOTO Y DESCRIPCION"
                     path_image = "profiles/" + str(j.name_image)
                     description = str(j.description)
                     
             print "voy a imprimir path_image 3333333333333333333333333333333333333" + str(j.username)
             print path_image  
+            print "voy a imprimir la desscripcion!!!!!!!!!!!!!!!!!!!!!!"
+            print description
 
         # Return the template
         ctx = {'up_obj':j, 'see_profile':True, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
@@ -251,35 +264,44 @@ def edit_profile(request, user):
                     type_user = str(i.type_user)
                     genero = str(i.genero)
                     
-            # Get the path of the image and the user description
-            for j in tp:
-                print "nombre de la imagen 555555555555555555555555: " + str(j.name_image) +" "+ str(j.username)
-                print "description 5555555555555555555555555555: " + str(j.description) +" "+ str(j.username)
-                if (tt == str(j.username)):
-                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"
-                        description = "Mi erasmus será genial"
-                        
-                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"               
-                        description = str(j.description)
-                        
-                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = "Mi erasmus será genial"
-                    elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = str(j.description)
-                        
-                print "voy a imprimir path_image 55555555555555555555555555555555555555555" + str(j.username)
-                print path_image 
-
+        # Get the path of the image and the user description
+        for j in tp:
+            print "nombre de la imagen 5555555555555555555555: " + str(j.name_image) + str(j.username)
+            print "description 5555555555555555555555: " + str(j.description) + str(j.username)
+            if (tt == str(j.username)):
+                # No photo and no description
+                if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                    if genero=="male":
+                        path_image ="tuerasmus/male.jpg"
+                    elif genero=="female":
+                        path_image="tuerasmus/female.jpg"
+                    description = "Mi erasmus será genial"
+                    
+                # No photo but yes description
+                elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                    if genero=="male":
+                        path_image ="tuerasmus/male.jpg"
+                    elif genero=="female":
+                        path_image="tuerasmus/female.jpg"               
+                    description = str(j.description)
+                    
+                # No description but yes photo
+                elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    path_image = "profiles/" + str(j.name_image)
+                    description = "Mi erasmus será genial"
+                    
+                # Yes photo and description
+                elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
+                    print "EL USUARIO TIENE FOTO Y DESCRIPCION"
+                    path_image = "profiles/" + str(j.name_image)
+                    description = str(j.description)
+                    
+            print "voy a imprimir path_image 55555555555555555555555555555555555555555" + str(j.username)
+            print path_image  
+            print "voy a imprimir la desscripcion!!!!!!!!!!!!!!!!!!!!!!"
+            print description
+            
+            
             if request.method=="POST":
                 form = ProfileForm(request.POST, request.FILES) 
                 if form.is_valid():
@@ -318,11 +340,16 @@ def edit_profile(request, user):
                                     print "ya tenemos guardada la imagen nueva"
                                 
                             print "recogi la info del form"
+                            
                             u.save()
                             print "se han guardado los datos del perfil de usuario"
                             
+                            us_image = UserProfile.objects.get(username=u.username)
+                            path_image="profiles/" + str(us_image.name_image)
                             form = ProfileForm()
-                            ctx = {'alertdone':True, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                            
+                            ctx = {'alertdone':True,  'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                            
                             return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
                         else:
                             print "No existe el usuario"
@@ -888,6 +915,7 @@ def universities(request):
             uall = University.objects.all
             
             # Porcentajes de la web:
+            
             nusuarios = Users.objects.all().count()
             porcentaje_usuarios = nusuarios/float(50)
             nalumnos = Users.objects.all().filter(type_user="alumno").count()
@@ -912,16 +940,16 @@ def universities(request):
             print str(porcentaje_chicas)            
             
             if uniserasmus and unismundus:
-                ctx = {'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
+                ctx = {'curiosities':True, 'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
  
             if uniserasmus and not unismundus:
-                ctx = {'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
+                ctx = {'curiosities':True, 'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'uniserasmus':uniserasmus, 'ue':University.objects.all().filter(scholarship="erasmus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
  
             if unismundus and not uniserasmus:
-                ctx = {'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user} 
+                ctx = {'curiosities':True, 'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'unismundus':unismundus, 'um':University.objects.all().filter(scholarship="mundus"), 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user} 
  
             if not unismundus and not uniserasmus:
-                ctx = {'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'unisempty':True, 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
+                ctx = {'curiosities':True, 'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uall':uall, 'unisempty':True, 'uniuser':uniuser, 'uems':uems, 'uems_':uems_, 'uems_msg':uems_msg, 'username': request.user.username, 'type_user': type_user}
 
             return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))  
 
@@ -977,10 +1005,10 @@ def university(request, uni_name):
                 latitud = uniobj.latitud
                 longitud = uniobj.longitud
                 
-                if (str(uniobj.name_image)==""):
+                if (str(uniobj.name_image)=="") or (str(uniobj.name_image)=="None"):
                     path_image="tuerasmus/universidad.png"
                 else:
-                    path_image=str(uniobj.name_image)
+                    path_image="universities/" + str(uniobj.name_image)
                 print "imprimo el nombre de la imagen"
                 print path_image
                 print "vamos a imprimir los valores de latitud y longitud"
@@ -1040,6 +1068,7 @@ def uninfo(request, uni_name, type_info):
             
         # MÉTODO GET
         if request.method=="GET":
+        
             path_image=""
             try:
                 uni = InfoBasic.objects.get(uni=uniname)
@@ -1048,10 +1077,12 @@ def uninfo(request, uni_name, type_info):
                 print uni.longitud
                 path_image = str(uni.image) 
                 print path_image
+                tmp = 'university/geouniversity.html'
                 if type_info=="basic":
                     print "muestro la info basica"
                     info="basic"
                     info_list = InfoGeneral.objects.filter(uni=uniname.uni)
+                    tmp = 'university/uni_info.html'
 
                 elif type_info=="doc":
                     print "muestro la info doc"
@@ -1059,24 +1090,30 @@ def uninfo(request, uni_name, type_info):
                     info_list = InfoGeneral.objects.filter(uni=uniname.uni)
                     print "Acabamos de obtener nuestra info_list"
                     print InfoGeneral.objects.all().count()
+                    tmp = 'university/uni_info.html'
                      
                 elif type_info=="hotel":
                     arr = []
+                    list_empty = False
                     print "muestro la info hotel"
                     info="hotel"
                     info_list = Place.objects.filter(uni=uniname.uni)
+                    print "voy a imprimir el supuesto contenido de info_list"
+                    print info_list
+                    if len(info_list)==0:
+                        print "INFO_LIST ESTA VACIAAAAAAAAAAAAAAAAAAAAAA NO HAY RESIDENCIASSSSSSSSSS"
+                        list_empty = True
+                        print list_empty
                     print "imprimiendo los nombres de residencias"
                     n = 0;
                     for i in info_list:
                         arr.append([str(i.name), str(i.latitud), str(i.longitud)])
+                        print "voy a imprimir los items del FOR"
                         print arr[n]
                         n+=1
 
-                    ctx = {'mispuntos':arr, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-
-                    # Return the template
-                    return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
-
+                    ctx = {'mispuntos':arr, 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                    tmp = 'university/georesidence.html'
 
                 elif type_info=="subjects":
                     print "muestro la info subjects"
@@ -1085,7 +1122,7 @@ def uninfo(request, uni_name, type_info):
                     info_list = Subjects.objects.filter(uni=uniname.uni)
                     
                     #info_list=Subjects.objects.filter(uni=uniname.uni)
-                    
+                    tmp = 'university/uni_info.html'    
 
                 elif type_info=="city":
                     print "muestro la info city"
@@ -1093,11 +1130,13 @@ def uninfo(request, uni_name, type_info):
                     info_city = InfoBasic.objects.get(uni=uniname)
                     print "88888888888888888888888888888888888888888la ciudad que quiero mostrar de la universidad es: " + str(info_city.city)
                     info_list=City.objects.filter(cityname=info_city.city)
+                    tmp = 'university/uni_info.html'
 
                 elif type_info=="others":
                     print "muestro la info others"
                     info="others"
                     info_list = Comment.objects.filter(tag=uniname.uni)
+                    tmp = 'university/uni_info.html'
                     
                 ctx = {'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                 
@@ -1107,10 +1146,10 @@ def uninfo(request, uni_name, type_info):
                 # uni.image: url's image of uni
                 path_image = "tuerasmus/universidad.png"
                 ctx = {'no_info':True, 'path_image':path_image, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-               
+                tmp = 'university/uni_info.html'
 
             # Return the template
-            return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
+            return render_to_response(tmp, ctx, context_instance=RequestContext(request))
 
 
             
@@ -1310,11 +1349,14 @@ def unieditform(request, uni_name, type_form):
 
         # With uni_id we can get the name
         path_image=""
+        data_infobasic=""
         try:
             uniname = University.objects.get(id=uni_name)
             print uniname.uni
             try:
+                # uni_data es el objeto que corresponde con el item de esa universidad en la tabla InfoBasic
                 uni_data = InfoBasic.objects.get(uni=uniname)
+                data_infobasic = True
                 print "Tiene info en InfoBAsic la universidad"
                 print "imprimimos el nombre de la imagen"
                 print str(uni_data.image)
@@ -1325,9 +1367,11 @@ def unieditform(request, uni_name, type_form):
                     path_image = "tuerasmus/universidad.png"
                 else:
                     path_image = "universities/" + str(uni_data.name_image)
-                    print "name_image no es vacio asi que imprimimos el nomrbe d el aimagen que tenemos actualmente en nuestra universidad"
+                    print "name_image no es vacio asi que imprimimos el nombre de la imagen que tenemos actualmente en nuestra universidad"
                     print path_image
             except InfoBasic.DoesNotExist:
+                print "EXCEPT del try de UNIEDIT FORM!!!!!!!!!!!!!!!!: no se encontro ningun item de l auniversidad en InfoBAisc"
+                data_infobasic = False
                 path_image = "tuerasmus/universidad.png"
                 
         except University.DoesNotExist:
@@ -1340,19 +1384,25 @@ def unieditform(request, uni_name, type_form):
         if request.method=="POST":
             alertdone=""
             alerterror="" 
-            un_obj = University.objects.get(uni=uniname.uni)
+            # un_obj es el objeto de la universidad(uni, username, scholarship y country)
+            # un_obj = University.objects.get(uni=uniname.uni)
              
+             
+            # ya no uso el OBJETO UN_OBJ, AHORA ES UNINAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
+            
+            
             ###################### BASIC FORM ######################
             if type_form=="basic":
                 tit = "Datos de la universidad"
                 form = BasicForm(request.POST, request.FILES)
                 
-
                 if form.is_valid(): 
                     # Valid form
                     address = form.cleaned_data['address']
                     postalcode = form.cleaned_data['postalcode']
                     phone = form.cleaned_data['phone']
+                    prefix = form.cleaned_data['prefix']
                     city = form.cleaned_data['city']
                     country = form.cleaned_data['country']
                     latitud = form.cleaned_data['latitud']
@@ -1361,51 +1411,77 @@ def unieditform(request, uni_name, type_form):
                     image = request.FILES['image']
                     description = form.cleaned_data['description']                    
                         
+                    print "YA TENEMOSSSSSSSSSSSSSSSSSSSSSSSSS LOS DATOS DE L FORMULARIOOOOOOOOOOOOOOOOOOO"
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
                     
                     no_user=""
                     name_image=""
                     user_infobasic=""
-                    try: 
-                        un = InfoBasic.objects.get(uni=un_obj)
+                    
+                    if data_infobasic:
+                    
+                    #try: 
+                        # This university is in DB_InfoBasic
+                        print "Estoy en el try que ahora e sun if y he encontrado un item de la universidaddddddddddddddd en InfoBasic"
+                        #un = InfoBasic.objects.get(uni=un_obj)
+                        # el item de infobasic de esa universidad es UNI_DATA
+                        
                         print "si habia en InfoBasic"
                         print "imprimimos el nombre de la imagen"
                         print str(image)
-                        print un.username
-                        if (str(un.username)==request.user.username):
                         
-                            if (un.name_image=="") or (un.name_image==None):
-                                un.image = image
-                                un.name_image = str(image)
-                            else:
+                        print uni_data.username
+                        
+                        if (str(uni_data.username)==request.user.username):
+
+                            if not (str(image)=="") or not (str(image)==None):
+                                print "es name_image vacioooooooooooooooooooooooooooooooooooooooooo"
+                                print u.name_image
                             
-                                im = "/tuerasmus/media/universities/" + str(un.image)
-                                print "tengo la imagen antigua: " + im
-                                un.image.delete(im)
-                                un.image = image
-                                un.name_image = str(image)
-                                print un.image
-                                print "se supone que la he borrado y guardado la nueva"
-                            
-                            un.description = un.description + ". " + description
-                            name_image = un.name_image
-                            description = str(un.description)
+                                if (uni_data.name_image=="") or (uni_data.name_image==None):
+                                    print "name_image es vacio en el usuario "
+                                    # Saving the name of the file image.xxx
+                                    uni_data.image = image
+                                    uni_data.name_image = str(image)
+                                else:
+                                
+                                    im = "/tuerasmus/media/universities/" + str(uni_data.image)
+                                    print "borramos esta imagen para guardar la nueva: " + im
+                                    print "tengo la imagen antigua: " + im
+                                    if not (im=="/tuerasmus/media/universities/"):
+                                        uni_data.image.delete(im)
+                                    print "esta es la nueva imagen: " + str(image)
+                                    uni_data.image = image
+                                    uni_data.name_image = str(image)
+                                    print uni_data.image
+                                    print "se supone que la he borrado y guardado la nueva"
+                                
+                            uni_data.description = uni_data.description + ". " + description
+                            name_image = uni_data.name_image
+                            description = str(uni_data.description)
                             print "voy a intentar cambiar el valor d ela descripcion!!!!!!!!!!!!!!"
-                            un.save()
+                            uni_data.save()
                         else:
                             no_user = True
-                            user_infobasic = str(un.username)
+                            user_infobasic = str(uni_data.username)
                             print "imprimimos un.username"
                             print str(un.username)
 
-                    except InfoBasic.DoesNotExist:
+                    #except InfoBasic.DoesNotExist:
+                    
+                    else:
+                    # El else de uni_infobasic=False
+                    
+                        # This university is not in DB_InfoBasic
+                        print "Estoy en el except del try y no encontré ningun item de la universidad en InfoBaisc!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                         print "No hay nada en InfoBasic" 
                         
                         # Instanciamos la base de datos
-                        uni_data = InfoBasic(uni=un_obj, username=request.user.username, city=city, address=address, postalcode=postalcode, phone=phone, country=country, latitud=latitud, longitud=longitud, link=link, name_image=name_image, image=image, description=description)
+                        uni_data = InfoBasic(uni=uniname, username=request.user.username, city=city, address=address, postalcode=postalcode, phone=phone, prefix=prefix, country=country, latitud=latitud, longitud=longitud, link=link, name_image=str(image), image=image, description=description)
+                        
                         # Saving in DB
                         uni_data.save()
-
+                        path_image = "universities/" + str(uni_data.name_image)
                     #form = BasicForm()
                     
                     ctx = {'no_user':no_user, 'user_infobasic':user_infobasic, 'alertdone':True, 'path_image':path_image, 'saved':True, 'uniname':uniname.uni, 'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}      
@@ -1643,6 +1719,7 @@ def unieditform(request, uni_name, type_form):
 
         # MÉTODO GET
         if request.method=="GET":
+            print "MéTODO BGETTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
             form0 = ImageForm(request.FILES)
             # Basic form
             if type_form=="basic":
@@ -1962,30 +2039,36 @@ def subjects(request):
         nsubs = Subjs.objects.all().count()
         
         # sub: all the subject objects
+        
         sub = Subjects.objects.all().order_by('subname') 
         nsub = Subjects.objects.all().count()      
-        
+        if nsub==0:
+            sub=""
         # All the universities     
         uall = University.objects.all().order_by('uni')       
-        nuall = University.objects.all().count()    
+        nuall = University.objects.all().count()   
+        if nuall==0:
+            uall="" 
 
         if request.method=="POST":
             print "ha elegido el usuario una asignatura!!!!!!!!!!!!!099999999999999999999999999999999999999"
             subj_menu = request.POST['subj_selected']
-            print subj_menu
-            try:
-                # The subject selected exists in the DB Subjects
-                subj_data = Subjects.objects.filter(subname=subj_menu)
-                ctx = {'infoData':True, 'subjData':True, 'sub_info':True, 'subj_menu':subj_menu, 'sub':sub, 'nsub':nsub, 'subj_data':subj_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
-                
-            except Subjects.DoesNotExist:
-                # The subject selected doesn't exist in the DB
-                ctx = {'form_resi':True, 'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
-                
+            
+            if not (subj_menu==""):
+                print subj_menu
+                try:
+                    # The subject selected exists in the DB Subjects
+                    subj_data = Subjects.objects.filter(subname=subj_menu)
+                    ctx = {'infoData':True, 'subjData':True, 'sub_info':True, 'subj_menu':subj_menu, 'sub':sub, 'nsub':nsub, 'subj_data':subj_data, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
+                    
+                except Subjects.DoesNotExist:
+                    # The subject selected doesn't exist in the DB
+                    ctx = {'form_resi':True, 'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
             return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
         
         else:        
-            # Method is not POST       
+            # Method is not POST
+                   
             ctx = {'infoData':True, 'subjData':True, 'sub_info':True, 'subs':subs, 'nsubs':nsubs, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username}
             return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 

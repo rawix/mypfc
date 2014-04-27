@@ -81,41 +81,45 @@
 	
 	<div class="row">
 
-		<div class="col-xs-9">
-			<div id="googleMap" style="width:700px;height:500px;"></div>
-		</div>
+    {% if not list_empty %}
+      <h3><center>No hay residencias registradas para esta universidad</center></h3>
+    {% else %} 
+    
+		  <div class="col-xs-9">
+			  <div id="googleMap" style="width:700px;height:500px;"></div>
+		  </div>
 
-		<!--<div class="col-xs-3">
-			<div class="row">
-				<div class="col-xs-6">
-					<h2>Hong Kong</h2>
-					<address>
-						<strong>HK Business Address</strong><br>
-						100 Business Address<br>
-						Kowloon<br>
-						Hong Kong<br>
-						Hong Kong<br>
-						Zip Code N/A<br>
-						<abbr title="Phone">P:</abbr> 01234 567 890
-					</address>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6">
-					<h2>Shenzhen, P.R.C.</h2>
-					<address>
-						<strong>SZ Business Address</strong><br>
-						100 Business Address<br>
-						Futian District<br>
-						<br>
-						Shenzhen, Guangdong<br>
-						518000<br>
-						<abbr title="Phone">P:</abbr> 01234 567 890
-					</address>
-				</div>
-			</div>
-		</div>-->
-		
+		  <!--<div class="col-xs-3">
+			  <div class="row">
+				  <div class="col-xs-6">
+					  <h2>Hong Kong</h2>
+					  <address>
+						  <strong>HK Business Address</strong><br>
+						  100 Business Address<br>
+						  Kowloon<br>
+						  Hong Kong<br>
+						  Hong Kong<br>
+						  Zip Code N/A<br>
+						  <abbr title="Phone">P:</abbr> 01234 567 890
+					  </address>
+				  </div>
+			  </div>
+			  <div class="row">
+				  <div class="col-xs-6">
+					  <h2>Shenzhen, P.R.C.</h2>
+					  <address>
+						  <strong>SZ Business Address</strong><br>
+						  100 Business Address<br>
+						  Futian District<br>
+						  <br>
+						  Shenzhen, Guangdong<br>
+						  518000<br>
+						  <abbr title="Phone">P:</abbr> 01234 567 890
+					  </address>
+				  </div>
+			  </div>
+		  </div>-->
+		{% endif %}
 		
 	</div><!--/.row-->
 

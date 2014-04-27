@@ -3,7 +3,17 @@
 {% block link_content %}
 
         <li><a href="/tuerasmus">Home</a></li>
-        <li><a href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi perfil<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/tuerasmus/{{user.username}}/myprofile">Ver perfil</a></li>
+            <li class="divider"></li>
+              <li class="dropdown-header">Más</li>
+              <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
+              <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
+              <li><a href="#">Modificar contraseña</a></li>
+          </ul>
+        </li>      
         <li class="active" class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -29,17 +39,21 @@
 {% block content %}
 
         <div class="col-xs-12 col-sm-9">
-
-            <div class="jumbotron">
-              <div class="row">
-                <div class="col-lg-5 col-ms-5 col-xs-7">
-                  <p>{% block pathimage %}{% endblock %}</p>
-                </div>
-                <div class="col-lg-7 col-ms-7 col-xs-7">
-                  <h1>{{ uniname }}</h1>
-                </div>
+        
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-danger btn-xs" data-toggle="offcanvas">Menú</button>
+          </p>
+            
+          <div class="jumbotron">
+            <div class="row">
+              <div class="col-lg-5 col-ms-5 col-xs-7">
+                <p>{% block pathimage %}{% endblock %}</p>
+              </div>
+              <div class="col-lg-7 col-ms-7 col-xs-7">
+                <h1>{{ uniname }}</h1>
               </div>
             </div>
+          </div>
                       
           <div class="page-header">
             <h1>Elige el tema de información que desees completar</h1>
@@ -48,7 +62,7 @@
           
           <p>
             <!--<button type="button" class="btn btn-lg" style="background:white">Básica</button>-->
-            <a href="/tuerasmus/uniedit/{{uni_name}}/basic" class="btn btn-lg btn-warning" type="submit">Datos básicos</a>
+            <!--<a href="/tuerasmus/uniedit/{{uni_name}}/basic" class="btn btn-lg btn-warning" type="submit">Datos básicos</a>-->
             <!--<button type="button" class="btn btn-lg btn-danger" name="basic">Básica</button>-->
             <a href="/tuerasmus/uniedit/{{uni_name}}/doc" class="btn btn-lg btn-warning" type="submit">General</a>
             <!--<button type="button" class="btn btn-lg btn-primary" name="doc">Documentación y atención</button>-->

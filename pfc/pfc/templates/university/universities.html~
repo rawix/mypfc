@@ -74,6 +74,7 @@
                           <option> {{ u.city }} </option>
                       
                       {% empty %}
+                      
                         <h3> Aún no hay ciudades registradas </h3>
                       {% endfor %}
                     </select>
@@ -123,7 +124,7 @@
                 <h1>¿Qué asignaturas puedes llevarte y cursar fuera?</h1>
               </div>
               
-              <form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+              <!--<form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
                     
@@ -133,51 +134,40 @@
                           <option> {{ u.subname }} </option>
 
                         {% empty %}
+                        
                           <h3> Aún no hay asignaturas registradas </h3>
                         {% endfor %}
                       </select>
                       <br>
                       <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>                    
-                  </div><!--/.col-xs-6-->
-                </div><!--/.row-->     
-              </form> 
-                
+                  </div>
+                </div>    
+              </form> -->
+
+
+              <form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+             
+                    
+                      <label for="selected_subj">Cónoce las asignaturas:</label>
+                      <select id="selected_subj" class="form-control" name="subj_selected">
+                        {% for u in sub %}
+                          <option> {{ u.subname }} </option>
+
+                        {% empty %}
+                        
+                          <h3> Aún no hay asignaturas registradas </h3>
+                        {% endfor %}
+                      </select>
+                      <br>
+                      <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>                    
+    
+              </form>                
           <!-- Template for universities -->
           {% else %}    
+          
               <div class="jumbotron">
                 <h1>LAS UNIVERSIDADES</h1>
               </div><!--/.jumbotron -->
-
-
-              
-                <!--<form action="/tuerasmus/universities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-
-                  {% if uems_ %}
-                    <label for="selected">Selecciona una universidad:</label>
-                    <select id="selected" class="form-control" name="uniems_selected">
-                      {% for u in uems %}
-                        <option> {{ u.uni }} </option>
-                      {% endfor %}
-                    </select>
-                  {% else %}
-                    <h3> {{ uems_msg }} </h3>
-                  {% endif %} 
-
-                  <br><br>
-
-                  {% if unisempty %}
-                    <div class="alert alert-danger">
-                      <center><strong>¡¡NO HAY UNIVERSIDADES!!</strong></center>
-                    </div>
-                  {% endif %}
-
-                  <br><br>
-
-                  
-                  <center><button class="btn btn-success btn-lg" type="submit"> VER UNIVERSIDAD </button></center>
-                  
-                </form>-->
-
 
               <div class="page-header">
                 <h1>¿Qué universidades quieres conocer?</h1>
@@ -196,57 +186,73 @@
                     </li>
                 {% empty %}
                   <h3> Aún no hay universidades registradas </h3>
-
                 {% endfor %}
-              </ul>    
-              
-              
+              </ul>                  
           {% endif %}
-        
+
+
+          <!-- Template for the information about cities, universities, residences or subjects -->
           {% if infoData %}
             {% block data_info %}
             {% endblock %}
           {% endif %}
 
 
-          <!-- General information about the website, like users, universities, comments, etc -->
-          <div class="page-header">
-            <h2>Algunos datos de interés de TuErasmus</h2>
-          </div>
-          
-          <h3>Usuarios de TuErasmus</h3>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% erasmus</span></div>
-          </div>
-          
-          <h3>Usuarios alumnos</h3>
-          <div class="progress">
-            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% alumnos</span></div>
-          </div>
-          
-          <h3>Usuarios profesores</h3>
-          <div class="progress">
-            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% profesores</span></div>
-          </div>
+          <!-- Template for curiosities of universities -->
+          {% if curiosities %}
+            <br><br><br>
+            
+            <div class="jumbotron">
+              <h1>Más cosas</h1>
+            </div><!-- /.jumbotron -->
+            
+            <!-- General information about the website, users, universities, comments, etc -->
+            <div class="page-header">
+              <h2><strong>Algunos datos de interés de TuErasmus</strong></h2>
+            </div>
+            
+            <h3>Usuarios de TuErasmus</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% erasmus</span></div>
+            </div>
+            
+            <h3>Usuarios alumnos</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% alumnos</span></div>
+            </div>
+            
+            <h3>Usuarios profesores</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% profesores</span></div>
+            </div>
 
-          <h3>Usuarios masculinos y usuarios femeninas</h3>         
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" style="width: {{porcentaje_chicos}}%"><span class="sr-only">{{porcentaje_chicos}}% Complete (success)</span></div>
-            <div class="progress-bar progress-bar-warning" style="width: {{porcentaje_chicas}}%"><span class="sr-only">{{porcentaje_chicas}}% Complete (warning)</span></div>
-            <!--<div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>-->
-          </div>
-          
-          <h3>Comentarios realizados</h3>
-          <div class="progress">
-            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
-          </div>
-          <div class="progress">
-            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">80% Complete (danger)</span></div>
-          </div>
-          
-        </div><!--/span-->
-
+            <h3>Usuarios masculinos y usuarios femeninas</h3>         
+            <div class="progress">
+              <div class="progress-bar progress-bar-danger" style="width: {{porcentaje_chicos}}%"><span class="sr-only">{{porcentaje_chicos}}% Complete (success)</span></div>
+              <div class="progress-bar progress-bar-warning" style="width: {{porcentaje_chicas}}%"><span class="sr-only">{{porcentaje_chicas}}% Complete (warning)</span></div>
+              <!--<div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>-->
+            </div>
+            
+            <h3>Comentarios realizados</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
+            </div>
+           {% endif %} 
+          </div><!--/span-->
+        
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- TODAS ESTAS LINEAS LAS PUEDO MODIFICAR MAS ADELANTE, Y SERÍAN CÓMO MOSTRAR LAS DISTINTAS UNIVERSIDADES Y SUS INFORMACIONES
       <div class="page-header">

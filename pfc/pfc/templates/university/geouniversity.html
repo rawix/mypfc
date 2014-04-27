@@ -58,6 +58,11 @@
 
 {% block on_geolocalize %}
 
+    <div class="page-header">
+      <h1><a href="/tuerasmus/university/{{uni_name}}" style="color: #424242">{{ uniname }}</a></h1>
+      <h6>Pincha sobre el nombre de la universidad para ir al perfil de la universidad</h6>
+    </div>
+    
     {% if not no_info %}
             <div class="row">
               <div class="col-lg-8 col-xs-8">
@@ -68,16 +73,17 @@
 
               <div class="col-lg-3 col-xs-8">
                 <br><br>
-                <h3>{{uniname}}</h3>
+                <!--<h3>{{uniname}}</h3>-->
                 <address>
                   <br><br>
+                  <h3>
+                  <strong>{{uniobj.uni}}</strong></h3><br>
                   <h4>
-                  <strong>{{uniobj.uni}}</strong><br>
-                  {{uniobj.address}}<br>
-                  {{uniobj.postalcode}}<br>
-                  {{uniobj.city}}<br>
-                  {{uniobj.country}}<br>
-                  <abbr title="Phone">P:</abbr>{{uniobj.phone}}<br>
+                    {{uniobj.address}}<br>
+                    {{uniobj.postalcode}}<br>
+                    {{uniobj.city}}<br>
+                    {{uniobj.country}}<br>
+                  <!--<abbr title="Phone">Tlf de contacto: </abbr>--> (+{{uniobj.prefix}}) {{uniobj.phone}}<br>
                   </h4>
                 </address>
               </div>	
