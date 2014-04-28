@@ -135,7 +135,7 @@ class AreaForm(forms.Form):
   
     schoolyear = forms.CharField(label="Periodo lectivo", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
     vacations = forms.CharField(label="Vacaciones/Fiestas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    compteleco = forms.CharField(label="En comparación con teleco", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    compteleco = forms.CharField(label="Dificultades en los estudios", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
     # SubMenu
     teachers = forms.CharField(label="Calidad/Dedicación/Atención de profesorado", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
     teaching = forms.CharField(label="Calidad global de la enseñanza", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
@@ -154,11 +154,11 @@ class CostumeServiceForm(forms.Form):
 #            Class DocumentationForm: to change the university profile   
 #----------------------------------------------------------------------------
 class DocumentationForm(forms.Form):
-    unidoc = forms.CharField(label="Documentación necesaria en la universidad", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    residencelicence = forms.CharField(label="Obtener permiso de residencia", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    getresidence = forms.CharField(label="Obtener alojamiento", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    economicaid = forms.CharField(label="Obtener ayudas económicas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    bankaccount = forms.CharField(label="Abrir cuenta bancaria", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    unidoc = forms.CharField(label="Documentación necesaria", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    residencelicence = forms.CharField(label="Seguro médico", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    getresidence = forms.CharField(label="Alojamiento", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    economicaid = forms.CharField(label="Ayudas económicas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    bankaccount = forms.CharField(label="Servicios bancarios", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
 
 #----------------------------------------------------------------------------
 #            Class ResidenceForm: to change the university profile   

@@ -383,7 +383,7 @@
           {% endfor %}
           </ul>
           
-        <h3>En comparación con teleco:</h3>
+        <h3>Dificultades en los estudios:</h3>
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.compteleco}}
@@ -472,7 +472,7 @@
 
       <!-- INFORMACIÓN DE DOCUMENTACIÓN -->
       {% ifequal info "doc" %}
-        <h3>Documentación necesaria en la universidad:</h3>
+        <h3>Documentación necesaria:</h3>
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.unidoc}}

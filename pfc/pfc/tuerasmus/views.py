@@ -1353,6 +1353,7 @@ def unieditform(request, uni_name, type_form):
         path_image=""
         data_infobasic=""
         try:
+            # he cambiado la variable un_obj por uniname
             uniname = University.objects.get(id=uni_name)
             print uniname.uni
             try:
@@ -1508,6 +1509,8 @@ def unieditform(request, uni_name, type_form):
                 tit4 = "Pisos compartidos"
                 tit5 = "Prácticas, becas y trabajos en empresas"
 
+                saved = ""
+                
                 if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid(): 
                     # Valid form
                     #DocumentationForm
@@ -1551,7 +1554,7 @@ def unieditform(request, uni_name, type_form):
                     print uniname.uni
 
                     # Instanciamos la base de datos
-                    un_data = InfoGeneral(uni=un_obj, username=request.user.username, unidoc=unidoc, residencelicence=residencelicence, getresidence=getresidence, economicaid=economicaid, bankaccount=bankaccount, costume=costume, meetings=meetings, offices=offices, qualification=qualification, specialty=specialty, teachingequipment=teachingequipment, library=library, lab=lab, computerequipment=computerequipment, others=others, dinningroom=dinningroom, cafeteria=cafeteria, sportactivities=sportactivities, asociation=asociation, languagecourse=languagecourse, schoolyear=schoolyear, vacations=vacations, compteleco=compteleco, teachers=teachers, teaching=teaching, studies=studies, flatshare=flatshare, linktoshare=linktoshare, scholarships=scholarships, practices=practices, contact=contact)
+                    un_data = InfoGeneral(uni=uniname, username=request.user.username, unidoc=unidoc, residencelicence=residencelicence, getresidence=getresidence, economicaid=economicaid, bankaccount=bankaccount, costume=costume, meetings=meetings, offices=offices, qualification=qualification, specialty=specialty, teachingequipment=teachingequipment, library=library, lab=lab, computerequipment=computerequipment, others=others, dinningroom=dinningroom, cafeteria=cafeteria, sportactivities=sportactivities, asociation=asociation, languagecourse=languagecourse, schoolyear=schoolyear, vacations=vacations, compteleco=compteleco, teachers=teachers, teaching=teaching, studies=studies, flatshare=flatshare, linktoshare=linktoshare, scholarships=scholarships, practices=practices, contact=contact)
                     # Saving in DB
                     un_data.save()
                     form2 = CostumeServiceForm()
@@ -1589,10 +1592,10 @@ def unieditform(request, uni_name, type_form):
                     text = form2.cleaned_data['text']
                     
                     
-                    un_resi = Place(uni=un_obj, name=name, address=address, postalcode=postalcode, city=city, latitud=latitud, longitud=longitud, image=image);
+                    un_resi = Place(uni=uniname, name=name, address=address, postalcode=postalcode, city=city, latitud=latitud, longitud=longitud, image=image);
                     un_resi.save()
                                         
-                    un_inforesi = InfoResidence(uni=un_obj, username=request.user.username, residence=un_resi)
+                    un_inforesi = InfoResidence(uni=uniname, username=request.user.username, residence=un_resi)
                     un_inforesi.save()
                     
                     un_com = Comment(username=request.user.username, uni=uniname.uni, tag=name, title=title, text=text, day_publicated=datetime.now())
@@ -1635,7 +1638,7 @@ def unieditform(request, uni_name, type_form):
                     print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO ASIGNATURAS"
                     
                     # Saving subject in DB's table "Subjects"
-                    uni_subject = Subjects(uni=un_obj, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
+                    uni_subject = Subjects(uni=uniname, username=request.user.username, subname=subname, credits=credits, subnameout=subnameout, subnameout2=subnameout2, subnameout3=subnameout3, works=works, practices=practices, difficult=difficult)
                     
 
 

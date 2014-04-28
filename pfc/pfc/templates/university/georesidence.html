@@ -79,11 +79,18 @@
 
 {% block on_georesidence %}
 	
+  <div class="page-header">
+    <h1><a href="/tuerasmus/university/{{uni_name}}" style="color: #424242">{{ uniname }}</a></h1>
+    <h6>Pincha sobre el nombre de la universidad para ir al perfil de la universidad</h6>
+  </div>
+  
 	<div class="row">
 
     {% if not list_empty %}
       <h3><center>No hay residencias registradas para esta universidad</center></h3>
     {% else %} 
+    
+
     
 		  <div class="col-xs-9">
 			  <div id="googleMap" style="width:700px;height:500px;"></div>

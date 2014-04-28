@@ -1078,6 +1078,7 @@ def uninfo(request, uni_name, type_info):
                 print uni.longitud
                 path_image = str(uni.image) 
                 print path_image
+                
                 tmp = 'university/geouniversity.html'
                 if type_info=="basic":
                     print "muestro la info basica"
@@ -1352,6 +1353,7 @@ def unieditform(request, uni_name, type_form):
         path_image=""
         data_infobasic=""
         try:
+            # he cambiado la variable un_obj por uniname
             uniname = University.objects.get(id=uni_name)
             print uniname.uni
             try:
@@ -1507,6 +1509,8 @@ def unieditform(request, uni_name, type_form):
                 tit4 = "Pisos compartidos"
                 tit5 = "Prácticas, becas y trabajos en empresas"
 
+                saved = ""
+                
                 if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid(): 
                     # Valid form
                     #DocumentationForm
@@ -1550,7 +1554,7 @@ def unieditform(request, uni_name, type_form):
                     print uniname.uni
 
                     # Instanciamos la base de datos
-                    un_data = InfoGeneral(uni=un_obj, username=request.user.username, unidoc=unidoc, residencelicence=residencelicence, getresidence=getresidence, economicaid=economicaid, bankaccount=bankaccount, costume=costume, meetings=meetings, offices=offices, qualification=qualification, specialty=specialty, teachingequipment=teachingequipment, library=library, lab=lab, computerequipment=computerequipment, others=others, dinningroom=dinningroom, cafeteria=cafeteria, sportactivities=sportactivities, asociation=asociation, languagecourse=languagecourse, schoolyear=schoolyear, vacations=vacations, compteleco=compteleco, teachers=teachers, teaching=teaching, studies=studies, flatshare=flatshare, linktoshare=linktoshare, scholarships=scholarships, practices=practices, contact=contact)
+                    un_data = InfoGeneral(uni=uniname, username=request.user.username, unidoc=unidoc, residencelicence=residencelicence, getresidence=getresidence, economicaid=economicaid, bankaccount=bankaccount, costume=costume, meetings=meetings, offices=offices, qualification=qualification, specialty=specialty, teachingequipment=teachingequipment, library=library, lab=lab, computerequipment=computerequipment, others=others, dinningroom=dinningroom, cafeteria=cafeteria, sportactivities=sportactivities, asociation=asociation, languagecourse=languagecourse, schoolyear=schoolyear, vacations=vacations, compteleco=compteleco, teachers=teachers, teaching=teaching, studies=studies, flatshare=flatshare, linktoshare=linktoshare, scholarships=scholarships, practices=practices, contact=contact)
                     # Saving in DB
                     un_data.save()
                     form2 = CostumeServiceForm()
