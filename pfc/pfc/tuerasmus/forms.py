@@ -171,14 +171,14 @@ class ResidenceForm(forms.Form):
 #            Class PlaceForm: to change the university profile   
 #----------------------------------------------------------------------------
 class PlaceForm(forms.Form):
-    name = forms.CharField(label="Nombre del sitio", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    address = forms.CharField(label="Dirección", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
+    name = forms.CharField(label="Nombre de la residencia", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
+    address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), required=False)
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
     latitud = forms.DecimalField(label="Coordenadas de latitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
     longitud = forms.DecimalField(label="Coordenadas de longitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de longitud'})
     image = forms.URLField(label="Imagen (copia la URL de internet)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la URL de una imagen', 'invalid':u'Introduce una URL válida'}, )
-
+    #image = forms.ImageField(label="Imagen de residencia", error_messages={'required': 'Debes seleccionar una imagen'})
 #----------------------------------------------------------------------------
 #            Class SubjectsForm: to change the university profile   
 #----------------------------------------------------------------------------

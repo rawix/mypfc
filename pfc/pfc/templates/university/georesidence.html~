@@ -49,6 +49,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP};
         var marker = new google.maps.Marker({
                 position: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
+                icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png',
                 // True para desplazar el icono               
                 draggable: false, 
                 title: '{{uniname}}'});
@@ -83,9 +84,10 @@
     <h1><a href="/tuerasmus/university/{{uni_name}}" style="color: #424242">{{ uniname }}</a></h1>
     <h6>Pincha sobre el nombre de la universidad para ir al perfil de la universidad</h6>
   </div>
+  
 	<div class="row">
 
-    {% if not list_empty %}
+    {% if list_empty %}
       <h3><center>No hay residencias registradas para esta universidad</center></h3>
     {% else %} 
     

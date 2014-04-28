@@ -34,37 +34,40 @@
           </div>
         {% endif %}
         
-        {% if coor %}
-          <br>
-          <p>
-            <h3>Para obtener las coordenadas pincha en el siguiente enlace:</h3>
-            <a class="btn btn-lg btn-success" href="http://mygeoposition.com/" target="_blank">Coordenadas</a>
-          </p>
-        {% endif %}
+        {% if not alertdone %}        
+          {% if coor %}
+            <br>
+            <p>
+              <h3>Para obtener las coordenadas pincha en el siguiente enlace:</h3>
+              <a class="btn btn-lg btn-success" href="http://mygeoposition.com/" target="_blank">Coordenadas</a>
+            </p>
+          {% endif %}
         
-        <h3><strong>{{tit}}</strong></h3>
-        {{form.as_p}}
-        
-        <h3><strong>{{tit1}}</strong></h3>
-        {{form1.as_p}}
-        
-        <h3><strong>{{tit2}}</strong></h3>
-        {{form2.as_p}}
-        
-        <h3><strong>{{tit3}}</strong></h3>
-        {{form3.as_p}}
-        
-        <h3><strong>{{tit4}}</strong></h3>
-        {{form4.as_p}}
-        
-        <h3><strong>{{tit5}}</strong></h3>
-        {{form5.as_p}}
-        
-        {% if not saved %}
+
+          <h3><strong>{{tit}}</strong></h3>
+          {{form.as_p}}
+          
+          <h3><strong>{{tit1}}</strong></h3>
+          {{form1.as_p}}
+          
+          <h3><strong>{{tit2}}</strong></h3>
+          {{form2.as_p}}
+          
+          <h3><strong>{{tit3}}</strong></h3>
+          {{form3.as_p}}
+          
+          <h3><strong>{{tit4}}</strong></h3>
+          {{form4.as_p}}
+          
+          <h3><strong>{{tit5}}</strong></h3>
+          {{form5.as_p}}
+          
+          {% if not saved %}
+            <br><br>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+          {% endif %}
           <br><br>
-          <button class="btn btn-primary" type="submit">Guardar</button>
         {% endif %}
-        <br><br>
       </form>
       
   {% else %}

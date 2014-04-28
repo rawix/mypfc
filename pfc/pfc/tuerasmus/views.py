@@ -1070,6 +1070,7 @@ def uninfo(request, uni_name, type_info):
         if request.method=="GET":
         
             path_image=""
+            list_empty=""
             tmp = 'university/uni_info.html'
             try:
                 uni = InfoBasic.objects.get(uni=uniname)
@@ -1096,7 +1097,7 @@ def uninfo(request, uni_name, type_info):
                      
                 elif type_info=="hotel":
                     arr = []
-                    list_empty = False
+                    
                     print "muestro la info hotel"
                     info="hotel"
                     info_list = Place.objects.filter(uni=uniname.uni)
@@ -1106,16 +1107,18 @@ def uninfo(request, uni_name, type_info):
                         print "INFO_LIST ESTA VACIAAAAAAAAAAAAAAAAAAAAAA NO HAY RESIDENCIASSSSSSSSSS"
                         list_empty = True
                         print list_empty
-                    print "imprimiendo los nombres de residencias"
-                    n = 0;
-                    for i in info_list:
-                        arr.append([str(i.name), str(i.latitud), str(i.longitud)])
-                        print "voy a imprimir los items del FOR"
-                        print arr[n]
-                        n+=1
+                    else:
+                        list_empty = False
+                        print "imprimiendo los nombres de residencias"
+                        n = 0;
+                        for i in info_list:
+                            arr.append([str(i.name), str(i.latitud), str(i.longitud)])
+                            print "voy a imprimir los items del FOR"
+                            print arr[n]
+                            n+=1
 
-                    ctx = {'mispuntos':arr, 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                    tmp = 'university/georesidence.html'
+                        ctx = {'mispuntos':arr, 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                    return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
 
                 elif type_info=="subjects":
                     print "muestro la info subjects"
