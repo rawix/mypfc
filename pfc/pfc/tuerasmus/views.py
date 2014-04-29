@@ -1944,7 +1944,35 @@ def cities(request):
         ncit = City.objects.all().count()           
         uall = University.objects.all().order_by('uni')       
         nuall = University.objects.all().count()  
+
+        # Porcentajes de la web:
+        # eESTOY HACIENDO ESTOS PORCENTAJES PARA LAS CIUDADES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
+        nuniversities = Universities.all().count()
+        ncities = Cities.objects.all().count()
+        porcentaje_ciudades = ncities/nuniversities
+        nalumnos = Users.objects.all().filter(type_user="alumno").count()
+        porcentaje_alumnos = nalumnos/float(nusuarios)
+        nprofesores = Users.objects.all().filter(type_user="profesor").count()
+        porcentaje_profesores = nprofesores/float(nusuarios)
+        nchicos = Users.objects.all().filter(genero="male").count()
+        porcentaje_chicos = nchicos/float(nusuarios)
+        nchicas = Users.objects.all().filter(genero="female").count()
+        porcentaje_chicas = nchicas/float(nusuarios)
         
+        print "voy a imprimir los tres porcentajes que acabo de calcular"
+        print nusuarios
+        print str(porcentaje_usuarios)
+        print nalumnos
+        print str(porcentaje_alumnos)
+        print nprofesores
+        print str(porcentaje_profesores)
+        print nchicos
+        print str(porcentaje_chicos)
+        print nchicas
+        print str(porcentaje_chicas)    
+            
+                    
         if request.method=="POST":
             city_menu = request.POST['city_selected']
             print city_menu

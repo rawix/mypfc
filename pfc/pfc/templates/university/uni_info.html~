@@ -50,15 +50,17 @@
   <script type="text/javascript">
       function showText(ident, ident2)
         {
-          document.getElementById("bt").style.visibility = "visible";
-          document.getElementById("bt2").style.visibility = "visible";
+          console.log("HOLA ESTOY EN SHOWTEXT");
+          console.log(ident);
+          //document.getElementById("bt").style.visibility = "visible";
+          //document.getElementById("bt2").style.visibility = "visible";
           document.getElementById(ident).style.display = "block";
           document.getElementById(ident2).style.display = "block";
         }
       function hideText(ident, ident2)
         {
-          document.getElementById("bt").style.visibility = "hidden";
-          document.getElementById("bt2").style.visibility = "hidden";
+          //document.getElementById("bt").style.visibility = "hidden";
+          //document.getElementById("bt2").style.visibility = "hidden";
           document.getElementById(ident).style.display = "none";
           document.getElementById(ident2).style.display = "none";
         }
@@ -90,19 +92,20 @@
             
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
-            
+                
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("qualification","qualification2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("qualification","qualification2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("qualification","qualification2")'> Cancelar </a> 
+                
+                <br><br>
+                 
                 <textarea id="qualification" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                
                 <button id="qualification2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                
             {% endifequal %}
             
             </p></li>        
-                          
-
-
-
-                      
+                                                
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
@@ -118,6 +121,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("specialty","specialty2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("specialty","specialty2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="specialty" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="specialty2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -138,9 +144,15 @@
             {% ifequal user.username i.username %}
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("teachingequipment","teachingequipment2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teachingequipment","teachingequipment2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teachingequipment","teachingequipment2")'> Cancelar </a> 
+                
+                <br><br>
+                 
+ 
                 <textarea id="teachingequipment" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                
                 <button id="teachingequipment2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                
             {% endifequal %}
             
             </p></li>  
@@ -159,8 +171,13 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("library","library2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("library","library2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="library" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                
                 <button id="library2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                
             {% endifequal %}
             
             </p></li>  
@@ -493,7 +510,7 @@
           {% endfor %}
           </ul>
           
-        <h3>Obtención permiso de residencia:</h3>
+        <h3>Seguro médico:</h3>
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.residencelicence}}
@@ -514,7 +531,7 @@
           {% endfor %}
           </ul>
           
-        <h3>Obtener alojamiento:</h3>
+        <h3>Alojamiento:</h3>
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.getresidence}}
@@ -534,7 +551,7 @@
           {% endfor %}
           </ul>
           
-        <h3>Obtener ayudas económicas:</h3>
+        <h3>Ayudas económicas:</h3>
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.economicaid}}
@@ -555,7 +572,7 @@
           {% endfor %}
           </ul>
           
-        <h3>Abrir Cuenta Bancaria:</h3>
+        <h3>Servicios bancarios:</h3>
           <ul>
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong>: {{i.bankaccount}}

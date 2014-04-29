@@ -50,15 +50,17 @@
   <script type="text/javascript">
       function showText(ident, ident2)
         {
-          document.getElementById("bt").style.visibility = "visible";
-          document.getElementById("bt2").style.visibility = "visible";
+          console.log("HOLA ESTOY EN SHOWTEXT");
+          console.log(ident);
+          //document.getElementById("bt").style.visibility = "visible";
+          //document.getElementById("bt2").style.visibility = "visible";
           document.getElementById(ident).style.display = "block";
           document.getElementById(ident2).style.display = "block";
         }
       function hideText(ident, ident2)
         {
-          document.getElementById("bt").style.visibility = "hidden";
-          document.getElementById("bt2").style.visibility = "hidden";
+          //document.getElementById("bt").style.visibility = "hidden";
+          //document.getElementById("bt2").style.visibility = "hidden";
           document.getElementById(ident).style.display = "none";
           document.getElementById(ident2).style.display = "none";
         }
@@ -90,19 +92,20 @@
             
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
-            
+                
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("qualification","qualification2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("qualification","qualification2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("qualification","qualification2")'> Cancelar </a> 
+                
+                <br><br>
+                 
                 <textarea id="qualification" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                
                 <button id="qualification2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                
             {% endifequal %}
             
             </p></li>        
-                          
-
-
-
-                      
+                                                
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
@@ -118,6 +121,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("specialty","specialty2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("specialty","specialty2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="specialty" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="specialty2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -138,9 +144,15 @@
             {% ifequal user.username i.username %}
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("teachingequipment","teachingequipment2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teachingequipment","teachingequipment2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teachingequipment","teachingequipment2")'> Cancelar </a> 
+                
+                <br><br>
+                 
+ 
                 <textarea id="teachingequipment" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                
                 <button id="teachingequipment2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                
             {% endifequal %}
             
             </p></li>  
@@ -159,8 +171,13 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("library","library2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("library","library2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="library" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                
                 <button id="library2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                
             {% endifequal %}
             
             </p></li>  
@@ -179,6 +196,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("lab","lab2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("lab","lab2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="lab" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="lab2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -200,6 +220,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("computerequipment","computerequipment2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("computerequipment","computerequipment2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="computerequipment" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="computerequipment2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -220,6 +243,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("others","others2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("others","others2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="others" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="others2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -244,6 +270,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("dinningroom","dinningroom2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("dinningroom","dinningroom2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="dinningroom" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="dinningroom2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -264,6 +293,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("cafeteria","cafeteria2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("cafeteria","cafeteria2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="cafeteria" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="cafeteria2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -289,6 +321,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("sportactivities","sportactivities2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("sportactivities","sportactivities2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="sportactivities" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="sportactivities2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -309,6 +344,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("asociation","asociation2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("asociation","asociation2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="asociation" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="asociation2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -330,6 +368,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("languagecourse","languagecourse2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("languagecourse","languagecourse2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="languagecourse" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="languagecourse2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -351,6 +392,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("schoolyear","schoolyear2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("schoolyear","schoolyear2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="schoolyear" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="schoolyear2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -372,6 +416,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("vacations","vacations2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("vacations","vacations2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="vacations" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="vacations2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -393,6 +440,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("compteleco","compteleco2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("compteleco","compteleco2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="compteleco" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="compteleco2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -414,6 +464,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("teachers","teachers2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teqachers","teachers2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="teachers" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="teachers2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -435,6 +488,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("teaching","teaching2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teaching","teaching2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="teaching" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="teaching2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -457,6 +513,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("studies","studies2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("studies","studies2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="studies" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="studies2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -481,6 +540,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("unidoc","unidoc2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("unidoc","unidoc2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="unidoc" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="unidoc2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -502,6 +564,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("residencelicence","residencelicence2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("residencelicence","residencelicence2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="residencelicence" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="residencelicence2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -524,6 +589,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("getresidence","getresidence2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("getresidence","getresidence2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="getresidence" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="getresidence2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -544,6 +612,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("economicaid","economicaid2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("economicaid","economicaid2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="economicaid" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="economicaid2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -564,6 +635,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("bankaccount","bankaccount2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("bankaccount","bankaccount2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="bankaccount" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="bankaccount2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -588,6 +662,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("costume","costume2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("costume","costume2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="costume" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="costume2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -610,6 +687,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("meetings","meetings2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("meetings","meetings2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="meetings" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="meetings2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
@@ -631,6 +711,9 @@
             
                 <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("offices","offices2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("offices","offices2")'> Cancelar </a>  
+                
+                <br><br>
+                 
                 <textarea id="offices" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
                 <button id="offices2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
