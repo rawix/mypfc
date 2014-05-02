@@ -80,8 +80,9 @@
     <h6>Pincha sobre el nombre de la universidad para ir al perfil de la universidad</h6>
   </div>
   
+   
   {% if not no_info %}
-      <form action="/tuerasmus/university/{{uni_name}}/" enctype="multipart/form-data" method="post"> {% csrf_token %}
+      <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
       
       {% ifequal info "basic" %}
         <!-- INFORMACIÓN DE LAS INSTALACIONES DE LA UNIVERSIDAD -->
@@ -119,12 +120,15 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("specialty","specialty2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("specialty","specialty2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" value="specialty" name="newcomment" onclick='showText("specialty","specialty2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("specialty","specialty2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="specialty" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="specialty" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.specialty}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="specialty">
                 <button id="specialty2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             

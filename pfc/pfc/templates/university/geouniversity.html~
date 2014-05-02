@@ -50,6 +50,27 @@
 /*var point = new GPoint (latitud, longitud); var marker = new GMarker(point); map.addOverlay(marker); map.centerAndZoom(point, 3);*/
 	</script>
 
+
+  <script type="text/javascript">
+      function showText(ident, ident2)
+        {
+          console.log("HOLA ESTOY EN SHOWTEXT");
+          console.log(ident);
+          //document.getElementById("bt").style.visibility = "visible";
+          //document.getElementById("bt2").style.visibility = "visible";
+          document.getElementById(ident).style.display = "block";
+          document.getElementById(ident2).style.display = "block";
+        }
+      function hideText(ident, ident2)
+        {
+          //document.getElementById("bt").style.visibility = "hidden";
+          //document.getElementById("bt2").style.visibility = "hidden";
+          document.getElementById(ident).style.display = "none";
+          document.getElementById(ident2).style.display = "none";
+        }
+  </script> 
+  
+  
 {% endblock %}
 
 {% block pathimage %}
@@ -83,7 +104,7 @@
                     {{uniobj.postalcode}}<br>
                     {{uniobj.city}}<br>
                     {{uniobj.country}}<br>
-                  <!--<abbr title="Phone">Tlf de contacto: </abbr>--> {{uniobj.prefix}} {{uniobj.phone}}<br>
+                  <!--<abbr title="Phone">Tlf de contacto: </abbr>--> (+{{uniobj.prefix}}) {{uniobj.phone}}<br>
                   </h4>
                 </address>
               </div>	
@@ -249,9 +270,32 @@
               <h1>Una descripción...</h1>
             </div>
 
-            <div class="well">
-              <p>{{uniobj.description}}</p>
-            </div>
+            <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+                <div class="well">
+                  <p>{{uniobj.description}}      
+                    
+                    <!--The comment owner can modify it -->
+                    {% ifequal user.username uniobj.username %}
+                        
+                        <a type="submit" class="btn btn-sm btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
+                        <a type="submit" class="btn btn-sm btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
+                        
+                        <br><br>
+                         
+                        <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
+
+                        <input type="hidden" name="commentid" value="{{uniobj.id}}">
+                         
+                        <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                        
+                    {% endifequal %}
+                    
+                  </p>        
+                </div>                                     
+              
+            </form>
+            
+
               
 		
 		
