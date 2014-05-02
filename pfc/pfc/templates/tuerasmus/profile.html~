@@ -124,12 +124,12 @@
             {% endifnotequal %}
             
             <li>Descripción: {{description}}</li>
-            
+
             {% ifnotequal up_obj.uni1 None %}
               <li>Universidad Erasmus: {{up_obj.uni1}}</li>
             {% endifnotequal %} 
             
-            {% ifnotequal up_obj.uni2 "" %}
+            {% ifnotequal up_obj.uni2 None %}
               <li>Universidad Mundus: {{up_obj.uni2}}</li>
             {% endifnotequal %} 
             

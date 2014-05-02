@@ -60,7 +60,7 @@ def home(request, user):
 
     if request.user.is_authenticated():
         if (request.user.username==user):
-            print "HOME USER: Usuario logueado: " + user
+            print "HOME USER: User authenticated: " + user
 
             # User is professor or student
             # User has a profile image
@@ -78,10 +78,9 @@ def home(request, user):
                     genero = str(i.genero)
                     
             # Get the path of the image and the user description  
-            for j in tp:
-                print "nombre de la imagen 11111111111111111111: " + str(j.name_image) + str(j.username)
-                print "description 111111111111111111111: " + str(j.description) + str(j.username)
+            for j in tp:              
                 if (tt == str(j.username)):
+                    # No photo and no description
                     if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
@@ -89,6 +88,7 @@ def home(request, user):
                             path_image="tuerasmus/female.jpg"
                         description = "Mi erasmus será genial"
                         
+                    # No photo but yes description
                     elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
@@ -96,30 +96,31 @@ def home(request, user):
                             path_image="tuerasmus/female.jpg"               
                         description = str(j.description)
                         
+                    # No description but yes photo
                     elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
                         path_image = "profiles/" + str(j.name_image)
                         description = "Mi erasmus será genial"
+                    
+                     # Yes photo and description
                     elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
                         path_image = "profiles/" + str(j.name_image)
                         description = str(j.description)
                         
-                print "voy a imprimir path_image 111111111111111111111111111111111111111111" + str(j.username)
-                print path_image      
-            
 
             # Return the template
             ctx = {'username': user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
             return render_to_response('tuerasmus/home.html', ctx, context_instance=RequestContext(request))
+            
         else:
-            # User no authenticated
-            print "HOMEUSER: Usuario logueado distinto del usuario solicitado"
+            # User authenticated and user requested are differents
+            print "HOMEUSER: User authenticated and user requested are differents"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
               
     else:
         # User no authenticated
-        print "HOME USER: el usuario no esta logueado"
+        print "HOME USER: User no authenticated"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
 
@@ -131,8 +132,8 @@ def myprofile(request, user):
     if request.user.is_authenticated():
         if (request.user.username==user):
             
-            print "MYPROFILE: usuario logueado " + request.user.username
-            print "MYPROFILE: usuario solicitado " + user
+            print "MYPROFILE: user authenticated " + request.user.username
+            print "MYPROFILE: user requested " + user
             
             # Concatenate URL + username
             ur = "/tuerasmus/" + user + "/profile"
@@ -140,14 +141,14 @@ def myprofile(request, user):
             # Redirect url
             return HttpResponseRedirect(ur)
         else:
-            # User no authenticated
-            print "MYPROFILE: Usuario logueado distinto del usuario solicitado"
+            # User authenticated and user requested are differents
+            print "MYPROFILE: User authenticated and user requested are differents"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
     else:
         # User no authenticated
-        print "MYPROFILE: usuario no logueado"
+        print "MYPROFILE: User no authenticated"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
 
@@ -157,18 +158,9 @@ def myprofile(request, user):
 def profile(request, user):
 
     if request.user.is_authenticated():
-        #if (request.user.username==user):
-        #    print "PROFILE: Usuario logueado: " + user
-                       
-            # Concatenate URL + username
-        #    ur = "/tuerasmus/" + user + "/myprofile"
-        #    print "MYPROFILE: " + ur
-            # Redirect url
-        #    return HttpResponseRedirect(ur)
-        #else:
- 
-        print "PROFILE: usuario logueado " + request.user.username
-        print "PROFILE: USUARIO SOLICITADO: " + user
+       
+        print "PROFILE: user authenticated " + request.user.username
+        print "PROFILE: user requested " + user
                    
         # User is professor or student
         # User has a profile image
@@ -182,16 +174,11 @@ def profile(request, user):
         for i in tu:
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
-                genero = str(i.genero)
-                print "imprimimos genero y type_user"
-                print genero
-                print type_user
-                
+                genero = str(i.genero)      
                 
         # Get the path of the image and the user description
         for j in tp:
-            print "nombre de la imagen 3333333333333333333: " + str(j.name_image) + str(j.username)
-            print "description 3333333333333333333: " + str(j.description) + str(j.username)
+        
             if (tt == str(j.username)):
                 # No photo and no description
                 if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
@@ -216,22 +203,17 @@ def profile(request, user):
                     
                 # Yes photo and description
                 elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
-                    print "EL USUARIO TIENE FOTO Y DESCRIPCION"
                     path_image = "profiles/" + str(j.name_image)
                     description = str(j.description)
                     
-            print "voy a imprimir path_image 3333333333333333333333333333333333333" + str(j.username)
-            print path_image  
-            print "voy a imprimir la desscripcion!!!!!!!!!!!!!!!!!!!!!!"
-            print description
+                ctx = {'up_obj':j, 'see_profile':True, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
 
         # Return the template
-        ctx = {'up_obj':j, 'see_profile':True, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
         return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated
-        print "EDIT_PROFILE: usuario no logueado"
+        print "PROFILE: User no authenticated"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
         
@@ -243,8 +225,8 @@ def edit_profile(request, user):
     if request.user.is_authenticated():
         if (request.user.username==user):
 
-
-            print "EDIT_PROFILE: usuario logueado " + user 
+            print "EDIT_PROFILE: user authenticated " + request.user.username
+            print "EDIT_PROFILE: user requested: " + user
                 
             # Concatenate the URL with username
             ur = '/tuerasmus/' + user + '/edit_profile/'
@@ -264,44 +246,36 @@ def edit_profile(request, user):
                     type_user = str(i.type_user)
                     genero = str(i.genero)
                     
-        # Get the path of the image and the user description
-        for j in tp:
-            print "nombre de la imagen 5555555555555555555555: " + str(j.name_image) + str(j.username)
-            print "description 5555555555555555555555: " + str(j.description) + str(j.username)
-            if (tt == str(j.username)):
-                # No photo and no description
-                if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
-                    if genero=="male":
-                        path_image ="tuerasmus/male.jpg"
-                    elif genero=="female":
-                        path_image="tuerasmus/female.jpg"
-                    description = "Mi erasmus será genial"
-                    
-                # No photo but yes description
-                elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
-                    if genero=="male":
-                        path_image ="tuerasmus/male.jpg"
-                    elif genero=="female":
-                        path_image="tuerasmus/female.jpg"               
-                    description = str(j.description)
-                    
-                # No description but yes photo
-                elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
-                    path_image = "profiles/" + str(j.name_image)
-                    description = "Mi erasmus será genial"
-                    
-                # Yes photo and description
-                elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
-                    print "EL USUARIO TIENE FOTO Y DESCRIPCION"
-                    path_image = "profiles/" + str(j.name_image)
-                    description = str(j.description)
-                    
-            print "voy a imprimir path_image 55555555555555555555555555555555555555555" + str(j.username)
-            print path_image  
-            print "voy a imprimir la desscripcion!!!!!!!!!!!!!!!!!!!!!!"
-            print description
-            
-            
+            # Get the path of the image and the user description
+            for j in tp:
+                
+                if (tt == str(j.username)):
+                    # No photo and no description
+                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                        if genero=="male":
+                            path_image ="tuerasmus/male.jpg"
+                        elif genero=="female":
+                            path_image="tuerasmus/female.jpg"
+                        description = "Mi erasmus será genial"
+                        
+                    # No photo but yes description
+                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                        if genero=="male":
+                            path_image ="tuerasmus/male.jpg"
+                        elif genero=="female":
+                            path_image="tuerasmus/female.jpg"               
+                        description = str(j.description)
+                        
+                    # No description but yes photo
+                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                        path_image = "profiles/" + str(j.name_image)
+                        description = "Mi erasmus será genial"
+                        
+                    # Yes photo and description
+                    elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
+                        path_image = "profiles/" + str(j.name_image)
+                        description = str(j.description)
+                
             if request.method=="POST":
                 form = ProfileForm(request.POST, request.FILES) 
                 if form.is_valid():
@@ -362,14 +336,15 @@ def edit_profile(request, user):
                     
             else:
                 form = ProfileForm()
-                ctx = {'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
-
+                
+                   
             # Return the template
             ctx = {'form':form, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
             return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+                
         else:
-            # User no authenticated
-            print "EDIT_PROFILE: Usuario logueado distinto del usuario solicitado"
+            # User authenticated and user requested are differents
+            print "EDIT_PROFILE: User authenticated and user requested are differents"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
@@ -379,132 +354,7 @@ def edit_profile(request, user):
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
 
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# Name : EDIT_PASSWORD
-def edit_password(request, user):
-
-    if request.user.is_authenticated():
-        if (request.user.username==user):
-
-
-            print "EDIT_PASSWORD: usuario logueado " + user 
-                
-            # Concatenate the URL with username
-            ur = '/tuerasmus/' + user + '/edit_profile/'
-            print "EDIT_PASSWORD: " + ur
-            
-            # User is professor or student
-            # User has a profile image
-            type_user=""
-            path_image=""
-            description=""
-            t = User.objects.get(username=user)
-            tt = t.username
-            tu = Users.objects.all()
-            tp = UserProfile.objects.all()
-            for i in tu:
-                if (tt == str(i.username)):
-                    type_user = str(i.type_user)
-                    genero = str(i.genero)
-                    
-            # Get the path of the image and the user description
-            for j in tp:
-                print "nombre de la imagen 555555555555555555555555: " + str(j.name_image) +" "+ str(j.username)
-                print "description 5555555555555555555555555555: " + str(j.description) +" "+ str(j.username)
-                if (tt == str(j.username)):
-                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"
-                        description = "Mi erasmus será genial"
-                        
-                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"               
-                        description = str(j.description)
-                        
-                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = "Mi erasmus será genial"
-                    elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = str(j.description)
-                        
-                print "voy a imprimir path_image 55555555555555555555555555555555555555555" + str(j.username)
-                print path_image 
-
-            alerterror=""
-            alerterrorpass=""
-            alertdone=""
-            error_password=""
-            msg_password=""
-            
-            # Method request POST
-            if request.method=="POST":
-                form = PasswordForm(request.POST) 
-                
-                # Valid form
-                if form.is_valid():
-                    
-                    # Get the information form
-                    password_one = form.cleaned_data['password_one']
-                    password_two = form.cleaned_data['password_two']
-                    
-                    # Cheking the information
-                    if (" " in password_one) or (password_one=="") or (len(password_one)<6):
-                        error_password = "La contraseña no es válida"
-                        msg_password = True
-                        alerterrorpass= True
-                        
-                    else:
-                        # Saving data in DB
-                        try:
-                            u = User.objects.get(username=user)
-                            u.password=password_one
-                            u.save()
-                            alertdone = True
-                        except User.DoesNotExist:
-                            alerterror= True
-                            
-                    form = PasswordForm()    
-                
-                    # Return the template                                 
-                    ctx = {'editpassword':True, 'form': form, 'error_password':error_password, 'msg_password':msg_password, 'alertdone':alertdone, 'alerterror':alerterror, 'alerterrorpass': alerterrorpass, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
-                    return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
-    
-
-                else:
-                    # Invalid form
-                    form = PasswordForm()
-                    ctx = {'editpassword':True, 'form': form, 'alerterror': True, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
-
-                    return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
-
-            # Method request not POST
-            else:
-                form = PasswordForm()
-                ctx = {'editpassword':True, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
-
-            # Return the template
-            ctx = {'editpassword':True, 'form':form, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
-            return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
-
-        else:
-            # User no authenticated
-            print "EDIT_PASSWORD: Usuario logueado distinto del usuario solicitado"
-            ur = "/tuerasmus/" + user + "/profile"
-            # Redirect to main URL
-            return HttpResponseRedirect(ur)
-    else:
-        # User no authenticated
-        print "EDIT_PASSWORD: usuario no logueado"
-        # Redirect to main URL
-        return HttpResponseRedirect('/tuerasmus')
-        
+       
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # Name: UNIREGISTER
@@ -994,12 +844,84 @@ def university(request, uni_name):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
 
+
+        
+        
+            
+   
         # In University we can get the name of the university
         uniobj=""
         uni_image=""
+        nchicos = 0
+        nchicas = 0
+        nprofesores = 0
+        nalumnos = 0
+        
         try:
             uniname = University.objects.get(id=uni_name[0])
             print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
+            
+            # Percents:
+            print "444444444444444444444444444444444444444444444"
+            nusuarios = Users.objects.all().count()
+            print "5555555555555555555555555555555555555555555555555"
+            try:
+                uniname_users = UsersUniversity.objects.get(uni=uniname)
+                # nuniname_user is the number of the students in this university
+                nuniname_users = uniname_users.nusers
+                print "vamos a imprimir el numero de usuarios de esa universidad"
+                print nuniname_users
+                users_list = uniname_users.useuni.all()
+                for i in users_list:
+                    print i.username
+                    u = User.objects.get(username=i.username)
+                    try:
+                        userinfo = Users.objects.get(username=u)
+                        if (userinfo.genero=="male"):
+                            nchicos+=1
+                        else:
+                            nchicas+=1
+                            
+                        if (userinfo.type_user=="alumno"):
+                            nalumnos+=1
+                        else:
+                            nprofesores+=1
+                    except UserProfile.DoesNotExist:
+                        print "No hay datos recogidos"                        
+                
+            except UsersUniversity.DoesNotExist:
+                nuniname_users = 0 
+
+            print "imprimo los datos recogidos despues de recorrer la base de datos"
+            print nusuarios
+            print nchicos
+            print nchicas
+            print nalumnos
+            print nprofesores
+            porcentaje_usuarios = nuniname_users/float(nusuarios)
+            #nalumnos = Users.objects.all().filter(type_user="alumno").count()
+            porcentaje_alumnos = nalumnos/float(nuniname_users)
+            #nprofesores = Users.objects.all().filter(type_user="profesor").count()
+            porcentaje_profesores = nprofesores/float(nuniname_users)
+            #nchicos = Users.objects.all().filter(genero="male").count()
+            porcentaje_chicos = nchicos/float(nuniname_users)
+            #nchicas = Users.objects.all().filter(genero="female").count()
+            porcentaje_chicas = nchicas/float(nuniname_users)
+            
+            #print "voy a imprimir los tres porcentajes que acabo de calcular"
+            #print nusuarios
+            print str(porcentaje_usuarios)
+            #print nalumnos
+            print str(porcentaje_alumnos)
+            #print nprofesores
+            print str(porcentaje_profesores)
+            #print nchicos
+            print str(porcentaje_chicos)
+            #print nchicas
+            print str(porcentaje_chicas)
+
+
+
             try:
                 uniobj = InfoBasic.objects.get(uni=uniname)
                 latitud = uniobj.latitud
@@ -1014,6 +936,8 @@ def university(request, uni_name):
                 print "vamos a imprimir los valores de latitud y longitud"
                 print latitud
                 print longitud
+                
+                
             except InfoBasic.DoesNotExist:
                 path_image="tuerasmus/universidad.png"
                 print "No se encontró el nombre de la universidad en la tabla InfoBasic"
@@ -1022,8 +946,9 @@ def university(request, uni_name):
                 return render_to_response('university/geouniversity.html', ctx, context_instance=RequestContext(request))
             
         except University.DoesNotExist:
-            print "No se han encontrado ningun objecto con ese id"   
-            return HttpResponseRedirect('/tuerasmus/universities')
+            print "No se han encontrado ningun objecto con ese id" 
+            ctx = {'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+            return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
 
         if request.method=="POST":
@@ -1033,27 +958,30 @@ def university(request, uni_name):
             newcomment = request.POST['newcomment']
             commentid = request.POST['commentid']
             
-            print "vamos a imprimir el comentario nuevo que se ha hecho"
-            print newcomment
-            print "vamos a imprimir el id del comentario nuevo que se ha hecho"
-            print commentid
-
-            
-            print "imprimo el id de la universidad que estoy usando ahora mismo"
-            print uniobj.id
+            # Se pueden borrar estas líneas #
+            #print "vamos a imprimir el comentario nuevo que se ha hecho"
+            #print newcomment
+            #print "vamos a imprimir el id del comentario nuevo que se ha hecho"
+            #print commentid
+            #print "imprimo el id de la universidad que estoy usando ahora mismo"
+            #print uniobj.id
+            ###############################
             
             try: 
                 newinfo = InfoBasic.objects.get(id=commentid)
-                print newinfo.description
+                #print newinfo.description
                 newinfo.description = newcomment
                 newinfo.save()
+                
+                uniobj = InfoBasic.objects.get(uni=uniname)
             except InfoBasic.DoesNotExist:
                 print "No hay informacionnnn con ese id"
+                #return HttpResponseRedirect('/tuerasmus/')
 
-
-        print "Voy a imprimir el valor de la variable uniname"
-        print uniname
-        ctx = {'uniobj':uniobj, 'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+            
+        #print "Voy a imprimir el valor de la variable uniname"
+        #print uniname
+        ctx = {'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uniobj':uniobj, 'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
         # Return the template
         return render_to_response('university/geouniversity.html', ctx, context_instance=RequestContext(request))
     else:
@@ -1200,7 +1128,9 @@ def uninfo(request, uni_name, type_info):
             commentid = request.POST['commentid']
             info = request.POST['info']
             category = request.POST['category']
-            
+# ESTO NO ESTÁ ACABADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+# TENGO QUE TEMRINAR DE HACE RBIEN LO DE LOS REGISTROS!!!!!!!!!!!!!!!!!!!!!!!!!!11
+# EN EL TEMPLATE DE UNI_INFO.HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             print "vamos a imprimir el comentario nuevo que se ha hecho"
             print newcomment
             print "vamos a imprimir el id del comentario nuevo que se ha hecho"
@@ -2232,6 +2162,135 @@ def urerasmus(request):
         return HttpResponseRedirect('/tuerasmus')
 
 
+########################################################################
+################# MÉTODO QUE NO SÉ SI USARÉ MÁS ADELANTE ###############
+########################################################################
+
+# ----------------------------------------------------------------------
+# ----------------------------------------------------------------------
+# Name : EDIT_PASSWORD
+def edit_password(request, user):
+
+    if request.user.is_authenticated():
+        if (request.user.username==user):
+
+
+            print "EDIT_PASSWORD: usuario logueado " + user 
+                
+            # Concatenate the URL with username
+            ur = '/tuerasmus/' + user + '/edit_profile/'
+            print "EDIT_PASSWORD: " + ur
+            
+            # User is professor or student
+            # User has a profile image
+            type_user=""
+            path_image=""
+            description=""
+            t = User.objects.get(username=user)
+            tt = t.username
+            tu = Users.objects.all()
+            tp = UserProfile.objects.all()
+            for i in tu:
+                if (tt == str(i.username)):
+                    type_user = str(i.type_user)
+                    genero = str(i.genero)
+                    
+            # Get the path of the image and the user description
+            for j in tp:
+                print "nombre de la imagen 555555555555555555555555: " + str(j.name_image) +" "+ str(j.username)
+                print "description 5555555555555555555555555555: " + str(j.description) +" "+ str(j.username)
+                if (tt == str(j.username)):
+                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                        if genero=="male":
+                            path_image ="tuerasmus/male.jpg"
+                        elif genero=="female":
+                            path_image="tuerasmus/female.jpg"
+                        description = "Mi erasmus será genial"
+                        
+                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                        if genero=="male":
+                            path_image ="tuerasmus/male.jpg"
+                        elif genero=="female":
+                            path_image="tuerasmus/female.jpg"               
+                        description = str(j.description)
+                        
+                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                        path_image = "profiles/" + str(j.name_image)
+                        description = "Mi erasmus será genial"
+                    elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                        path_image = "profiles/" + str(j.name_image)
+                        description = str(j.description)
+                        
+                print "voy a imprimir path_image 55555555555555555555555555555555555555555" + str(j.username)
+                print path_image 
+
+            alerterror=""
+            alerterrorpass=""
+            alertdone=""
+            error_password=""
+            msg_password=""
+            
+            # Method request POST
+            if request.method=="POST":
+                form = PasswordForm(request.POST) 
+                
+                # Valid form
+                if form.is_valid():
+                    
+                    # Get the information form
+                    password_one = form.cleaned_data['password_one']
+                    password_two = form.cleaned_data['password_two']
+                    
+                    # Cheking the information
+                    if (" " in password_one) or (password_one=="") or (len(password_one)<6):
+                        error_password = "La contraseña no es válida"
+                        msg_password = True
+                        alerterrorpass= True
+                        
+                    else:
+                        # Saving data in DB
+                        try:
+                            u = User.objects.get(username=user)
+                            u.password=password_one
+                            u.save()
+                            alertdone = True
+                        except User.DoesNotExist:
+                            alerterror= True
+                            
+                    form = PasswordForm()    
+                
+                    # Return the template                                 
+                    ctx = {'editpassword':True, 'form': form, 'error_password':error_password, 'msg_password':msg_password, 'alertdone':alertdone, 'alerterror':alerterror, 'alerterrorpass': alerterrorpass, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                    return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+    
+
+                else:
+                    # Invalid form
+                    form = PasswordForm()
+                    ctx = {'editpassword':True, 'form': form, 'alerterror': True, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+
+                    return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+
+            # Method request not POST
+            else:
+                form = PasswordForm()
+                ctx = {'editpassword':True, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+
+            # Return the template
+            ctx = {'editpassword':True, 'form':form, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+            return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+
+        else:
+            # User no authenticated
+            print "EDIT_PASSWORD: Usuario logueado distinto del usuario solicitado"
+            ur = "/tuerasmus/" + user + "/profile"
+            # Redirect to main URL
+            return HttpResponseRedirect(ur)
+    else:
+        # User no authenticated
+        print "EDIT_PASSWORD: usuario no logueado"
+        # Redirect to main URL
+        return HttpResponseRedirect('/tuerasmus')
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # Name: COMMENTS

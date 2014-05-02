@@ -124,7 +124,7 @@
                 <h1>¿Qué asignaturas puedes llevarte y cursar fuera?</h1>
               </div>
               
-              <!--<form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+              <form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
                     
@@ -140,28 +140,10 @@
                       </select>
                       <br>
                       <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>                    
-                  </div>
-                </div>    
-              </form> -->
-
-
-              <form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-             
-                    
-                      <label for="selected_subj">Cónoce las asignaturas:</label>
-                      <select id="selected_subj" class="form-control" name="subj_selected">
-                        {% for u in sub %}
-                          <option> {{ u.subname }} </option>
-
-                        {% empty %}
-                        
-                          <h3> Aún no hay asignaturas registradas </h3>
-                        {% endfor %}
-                      </select>
-                      <br>
-                      <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>                    
-    
-              </form>                
+                  </div><!--/.col-xs-6-->
+                </div><!--/.row-->     
+              </form> 
+                
           <!-- Template for universities -->
           {% else %}    
           
@@ -238,7 +220,6 @@
               <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
             </div>
            {% endif %} 
-          </div><!--/span-->
         
 {% endblock %}
 
@@ -305,8 +286,8 @@
             </a>
           </div>
         </div><!-- /.col-sm-4 
-      </div><!-- /.row -->
-
+      </div><!-- /.row 
+    </div><!--/span-->
 
 
 

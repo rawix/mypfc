@@ -94,13 +94,15 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
                 
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("qualification","qualification2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("qualification","qualification2")'> Cancelar </a> 
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("qualification","qualification2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("qualification","qualification2")'> Cancelar </a> 
                 
                 <br><br>
                  
-                <textarea id="qualification" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
-                
+                <textarea id="qualification" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.qualification}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="qualification">                
                 <button id="qualification2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
                 
             {% endifequal %}
@@ -120,7 +122,7 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="specialty" name="newcomment" onclick='showText("specialty","specialty2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("specialty","specialty2")'> Modificar </a>
                 <a type="submit" class="btn btn-sm btn-default" onclick='hideText("specialty","specialty2")'> Cancelar </a>  
                 
                 <br><br>
@@ -129,6 +131,7 @@
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
                 <input type="hidden" name="category" value="specialty">
+                
                 <button id="specialty2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -147,13 +150,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("teachingequipment","teachingequipment2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teachingequipment","teachingequipment2")'> Cancelar </a> 
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("teachingequipment","teachingequipment2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("teachingequipment","teachingequipment2")'> Cancelar </a> 
                 
                 <br><br>
                  
  
-                <textarea id="teachingequipment" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="teachingequipment" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.teachingequipment}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="teachingequipment">
                 
                 <button id="teachingequipment2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
                 
@@ -173,12 +179,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("library","library2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("library","library2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("library","library2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("library","library2")'> Cancelar </a> 
                 
                 <br><br>
                  
-                <textarea id="library" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+ 
+                <textarea id="library" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.library}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="library">
                 
                 <button id="library2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
                 
@@ -198,12 +208,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("lab","lab2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("lab","lab2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default"onclick='showText("lab","lab2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("lab","lab2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="lab" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="lab" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.lab}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="lab">
+
                 <button id="lab2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -222,12 +236,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("computerequipment","computerequipment2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("computerequipment","computerequipment2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("computerequipment","computerequipment2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("computerequipment","computerequipment2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="computerequipment" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="computerequipment" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.computerequipment}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="computerequipment">
+  
                 <button id="computerequipment2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -245,12 +263,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("others","others2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("others","others2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("others","others2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("others","others2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="others" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="others" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.others}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="others">
+
                 <button id="others2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -277,7 +299,11 @@
                 
                 <br><br>
                  
-                <textarea id="dinningroom" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="dinningroom" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.dinningroom}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="dinningroom">
+
                 <button id="dinningroom2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -295,12 +321,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("cafeteria","cafeteria2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("cafeteria","cafeteria2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("cafeteria","cafeteria2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("cafeteria","cafeteria2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="cafeteria" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="cafeteria" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.cafeteria}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="dinningroom">
+                
                 <button id="cafeteria2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -323,12 +353,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("sportactivities","sportactivities2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("sportactivities","sportactivities2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("sportactivities","sportactivities2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("sportactivities","sportactivities2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="sportactivities" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="sportactivities" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.sportactivities}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="sportactivities">
+                
                 <button id="sportactivities2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -346,12 +380,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("asociation","asociation2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("asociation","asociation2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("asociation","asociation2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("asociation","asociation2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="asociation" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="asociation" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.asociation}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="asociation">
+                
                 <button id="asociation2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -370,12 +408,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("languagecourse","languagecourse2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("languagecourse","languagecourse2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("languagecourse","languagecourse2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("languagecourse","languagecourse2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="languagecourse" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="languagecourse" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.languagecourse}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="languagecourse">
+                
                 <button id="languagecourse2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -394,12 +436,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("schoolyear","schoolyear2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("schoolyear","schoolyear2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("schoolyear","schoolyear2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("schoolyear","schoolyear2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="schoolyear" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="schoolyear" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.schoolyear}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="schoolyear">
+                
                 <button id="schoolyear2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -418,12 +464,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("vacations","vacations2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("vacations","vacations2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("vacations","vacations2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("vacations","vacations2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="vacations" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="vacations" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.vacations}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="vacations">
+
                 <button id="vacations2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -442,12 +492,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("compteleco","compteleco2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("compteleco","compteleco2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("compteleco","compteleco2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("compteleco","compteleco2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="compteleco" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="compteleco" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.compteleco}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="compteleco">
+
                 <button id="compteleco2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -466,12 +520,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("teachers","teachers2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teqachers","teachers2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("teachers","teachers2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("teqachers","teachers2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="teachers" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="teachers" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.teachers}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="teachers">
+
                 <button id="teachers2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -490,12 +548,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("teaching","teaching2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("teaching","teaching2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("teaching","teaching2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("teaching","teaching2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="teaching" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="teaching" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.teaching}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="teaching">
+
                 <button id="teaching2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -515,12 +577,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("studies","studies2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("studies","studies2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("studies","studies2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("studies","studies2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="studies" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="studies" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.studies}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="studies">
+
                 <button id="studies2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -542,12 +608,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("unidoc","unidoc2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("unidoc","unidoc2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("unidoc","unidoc2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("unidoc","unidoc2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="unidoc" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="unidoc" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.unidoc}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="unidoc">
+
                 <button id="unidoc2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -566,12 +636,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("residencelicence","residencelicence2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("residencelicence","residencelicence2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("residencelicence","residencelicence2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("residencelicence","residencelicence2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="residencelicence" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="residencelicence" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.residencelicence}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="residencelicence">
+
                 <button id="residencelicence2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -591,12 +665,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("getresidence","getresidence2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("getresidence","getresidence2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("getresidence","getresidence2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("getresidence","getresidence2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="getresidence" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="getresidence" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.getresidence}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="getresidence">
+
                 <button id="getresidence2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -614,12 +692,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("economicaid","economicaid2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("economicaid","economicaid2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("economicaid","economicaid2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("economicaid","economicaid2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="economicaid" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="economicaid" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.economicaid}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="ecnomicaid">
+
                 <button id="economicaid2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -637,12 +719,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("bankaccount","bankaccount2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("bankaccount","bankaccount2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("bankaccount","bankaccount2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("bankaccount","bankaccount2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="bankaccount" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="bankaccount" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.bankaccount}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="bankaccount">
+
                 <button id="bankaccount2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -664,12 +750,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("costume","costume2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("costume","costume2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("costume","costume2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("costume","costume2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="costume" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="costume" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.costume}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="costume">
+
                 <button id="costume2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -689,12 +779,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("meetings","meetings2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("meetings","meetings2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("meetings","meetings2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("meetings","meetings2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="meetings" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="meetings" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.meetings}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="meetings">
+
                 <button id="meetings2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             
@@ -713,12 +807,16 @@
             <!--The comment owner can modify it -->
             {% ifequal user.username i.username %}
             
-                <a type="submit" class="btn btn-sm btn-default" value="mod" name="qualification" onclick='showText("offices","offices2")'> Modificar </a>
-                <a type="submit" class="btn btn-sm btn-default" value="del" name="delqualification" onclick='hideText("offices","offices2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-sm btn-default" onclick='showText("offices","offices2")'> Modificar </a>
+                <a type="submit" class="btn btn-sm btn-default" onclick='hideText("offices","offices2")'> Cancelar </a>  
                 
                 <br><br>
                  
-                <textarea id="offices" class="form-control" name="new_comment" style ="display:none" row="3" col="5"> Escribe tu nuevo comentario </textarea>
+                <textarea id="offices" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{i.offices}} </textarea>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
+                <input type="hidden" name="category" value="offices">
+
                 <button id="offices2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
             {% endifequal %}
             

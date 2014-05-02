@@ -113,6 +113,92 @@
 		              
             <div class="row">
             
+              
+            </div><!-- /.row -->
+
+
+
+            <div class="page-header">
+              <h1>Una descripción...</h1>
+            </div>
+
+            <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+                <div class="well">
+                  <p>{{uniobj.description}}      
+                    
+                    <!--The comment owner can modify it -->
+                    {% ifequal user.username uniobj.username %}
+                        
+                        <a type="submit" class="btn btn-sm btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
+                        <a type="submit" class="btn btn-sm btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
+                        
+                        <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
+
+                        <input type="hidden" name="commentid" value="{{uniobj.id}}">
+                         
+                        <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                        
+                    {% endifequal %}
+                    
+                  </p>        
+                </div>                                     
+              
+            </form>
+            
+            
+            <br><br><br>
+            
+            <!-- CURIOSITIES ABOUT THE UNIVERSITY -->
+            
+            <div class="jumbotron">
+              <h1>Más cosas</h1>
+            </div><!-- /.jumbotron -->
+            
+            <!-- General information about the website, users, universities, comments, etc -->
+            <div class="page-header">
+              <h2><strong>Algunos datos de interés de {{uniobj.uni}} </strong></h2>
+            </div>
+            
+            <h3>Cuántos TuErasmus tiene </h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% erasmus</span></div>
+            </div>
+            
+            <h3>Alumnos</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% alumnos</span></div>
+            </div>
+            
+            <h3>Profesores</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% profesores</span></div>
+            </div>
+
+            <h3>Chicos y chicas</h3>         
+            <div class="progress">
+              <div class="progress-bar progress-bar-danger" style="width: {{porcentaje_chicos}}%"><span class="sr-only">{{porcentaje_chicos}}% Complete (success)</span></div>
+              <div class="progress-bar progress-bar-warning" style="width: {{porcentaje_chicas}}%"><span class="sr-only">{{porcentaje_chicas}}% Complete (warning)</span></div>
+              <!--<div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>-->
+            </div>
+            
+            <h3>Comentarios que ha recibido</h3>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
+            </div>
+		
+		{% else %}
+      <div class="page-header">
+        <h1>No hay información acerca de la universidad</h1>
+        <h5>Pincha sobre editar perfil y comienza a completar el perfil de la universidad</h5>
+      </div>
+		{% endif %}
+	
+
+{% endblock %}
+
+
+<!-- ALGUNAS LÍNEAS PARA HACER MENÚS O BARRAS DE PROGRESO -->
+
               <!--<div class="page-header">
                 <h1>Dropdown menus</h1>
               </div>
@@ -261,52 +347,21 @@
                   </div>
                 </div>
               </div><!--/.col-sm-4-->
-              
-            </div><!-- /.row -->
 
 
 
-            <div class="page-header">
-              <h1>Una descripción...</h1>
-            </div>
 
-            <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-                <div class="well">
-                  <p>{{uniobj.description}}      
-                    
-                    <!--The comment owner can modify it -->
-                    {% ifequal user.username uniobj.username %}
-                        
-                        <a type="submit" class="btn btn-sm btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
-                        <a type="submit" class="btn btn-sm btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
-                        
-                        <br><br>
-                         
-                        <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
 
-                        <input type="hidden" name="commentid" value="{{uniobj.id}}">
-                         
-                        <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
-                        
-                    {% endifequal %}
-                    
-                  </p>        
-                </div>                                     
-              
-            </form>
-            
 
-              
-		
-		
-		{% else %}
-      <div class="page-header">
-        <h1>No hay información acerca de la universidad</h1>
-        <h5>Pincha sobre editar perfil y comienza a completar el perfil de la universidad</h5>
-      </div>
-		{% endif %}
-	<!--</div>/.row-->
 
-{% endblock %}
+
+
+
+
+
+
+
+
+
 
 
