@@ -335,6 +335,7 @@ def edit_profile(request, user):
                     ctx = {'alerterror':True, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
                     
             else:
+                # Method not POST
                 form = ProfileForm()
                 
                    
@@ -993,8 +994,10 @@ def university(request, uni_name):
 # Name: UNI INFORMATION
 # To see the info of the university
 def uninfo(request, uni_name, type_info):
+
+    # User authenticated
     if request.user.is_authenticated():
-        print "UNINFO: usuario logueado: " + request.user.username
+        print "UNINFO: User authenticated " + request.user.username
         
         # User is student or professor
         t = User.objects.get(username=request.user.username)
@@ -1121,32 +1124,236 @@ def uninfo(request, uni_name, type_info):
                    
 
         elif request.method=="POST":
-        
-            print "se ha hecho un POST"
+            newcomment=""
+            rec_qualification=""
+            rec_specialty=""
+            rec_teachingequipment=""
+            rec_library=""
+            rec_lab=""
+            rec_computerequipment=""
+            rec_others=""
+            rec_dinningroom=""
+            rec_cafeteria=""
+            rec_sportactivities=""
+            rec_asociation=""
+            rec_languagecourse=""
+            rec_schoolyear=""
+            rec_vacations=""
+            rec_compteleco=""
+            rec_teachers=""
+            rec_teaching=""
+            rec_studies=""
+            rec_unidoc=""
+            rec_residencelicence=""
+            rec_getresidence=""
+            rec_economicaid=""
+            rec_bankaccount=""
+            rec_costume=""
+            rec_meetings=""
+            rec_offices=""
             
-            newcomment = request.POST['newcomment']
+            print "se ha hecho un POST"
+            print "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+            #category = request.POST['category']
             commentid = request.POST['commentid']
-            info = request.POST['info']
-            category = request.POST['category']
+            info = request.POST['info']            
+            save = request.POST['button']
+            
+            if save=="qualification":
+                new_qualification = request.POST['new_qualification']
+                newcomment = new_qualification
+                rec_qualification = True
+            elif save=="specialty":
+                new_specialty = request.POST['new_specialty']
+                newcomment = new_specialty
+                rec_specialty = True
+            elif save=="teachingequipment":
+                new_teachingequipment = request.POST['new_teachingequipment']
+                newcomment = new_teachingequipment
+                rec_teachingequipment = True
+            elif save=="library":
+                new_library = request.POST['new_library']
+                newcomment = new_library
+                rec_library = True
+            elif save=="lab":
+                new_lab = request.POST['new_lab']
+                newcomment = new_lab
+                rec_lab = True
+            elif save=="computerequipment":
+                new_computerequipment = request.POST['new_computerequipment']
+                newcomment = new_computerequipment
+                rec_computerequipment = True
+            elif save=="others":
+                new_others = request.POST['new_others']
+                newcomment = new_others
+                rec_others = True
+            elif save=="dinningroom":
+                new_dinningroom = request.POST['new_dinningroom']
+                newcomment = new_dinningroom
+                rec_dinningroom = True
+            elif save=="cafeteria":
+                new_cafeteria = request.POST['new_cafeteria']
+                newcomment = new_cafeteria
+                rec_cafeteria = True
+            elif save=="sportactivities":
+                new_sportactivities = request.POST['new_sportactivities']
+                newcomment = new_sportactivities
+                rec_sportactivities = True
+            elif save=="asociation":
+                new_asociation = request.POST['new_asociation']
+                newcomment = new_asociation
+                rec_asociation = True
+            elif save=="languagecourse":
+                new_languagecourse = request.POST['new_languagecourse']
+                newcomment = new_languagecourse
+                rec_languagecourse = True
+            elif save=="schoolyear":
+                new_schoolyear = request.POST['new_schoolyear']
+                newcomment = new_schoolyear
+                rec_schoolyear = True
+            elif save=="vacations":
+                new_vacations = request.POST['new_vacations']
+                newcomment = new_vacations
+                rec_vacations = True
+            elif save=="compteleco":
+                new_compteleco = request.POST['new_compteleco']
+                newcomment = new_compteleco
+                rec_compteleco = True
+            elif save=="teachers":
+                new_teachers = request.POST['new_teachers']
+                newcomment = new_teachers
+                rec_teachers = True
+            elif save=="teaching":
+                new_teaching = request.POST['new_teaching']
+                newcomment = new_teaching
+                rec_teaching = True
+            elif save=="studies":
+                new_studies = request.POST['new_studies']
+                newcomment = new_studies
+                rec_studies = True
+            elif save=="unidoc":
+                new_unidoc = request.POST['new_unidoc']
+                newcomment = new_unidoc
+                rec_unidoc = True   
+            elif save=="residencelicence":
+                new_residencelicence = request.POST['new_residencelicence']
+                newcomment = new_residencelicence
+                rec_residencelicence = True 
+            elif save=="getresidence":
+                new_getresidence = request.POST['new_getresidence']
+                newcomment = new_getresidence
+                rec_getresidence = True 
+            elif save=="economicaid":
+                new_economicaid = request.POST['new_economicaid']
+                newcomment = new_economicaid
+                rec_economicaid = True 
+            elif save=="bankaccount":
+                new_bankaccount = request.POST['new_bankaccount']
+                newcomment = new_bankaccount
+                rec_bankaccount = True 
+            elif save=="costume":
+                new_costume = request.POST['new_costume']
+                newcomment = new_costume
+                rec_costume = True 
+            elif save=="meetings":
+                new_meetings = request.POST['new_meetings']
+                newcomment = new_meetings
+                rec_meetings = True 
+            elif save=="offices":
+                new_offices = request.POST['new_offices']
+                newcomment = new_offices
+                rec_offices = True                 
+                 
+
+                
+            print "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+            #print category
+            print commentid
+            print info
+            print "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+            print newcomment
+            #print new_teachingequipment
+            #print new_library
+            #print new_lab
+            print  "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+            
+
+            
 # ESTO NO ESTÁ ACABADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 # TENGO QUE TEMRINAR DE HACE RBIEN LO DE LOS REGISTROS!!!!!!!!!!!!!!!!!!!!!!!!!!11
 # EN EL TEMPLATE DE UNI_INFO.HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            print "vamos a imprimir el comentario nuevo que se ha hecho"
-            print newcomment
-            print "vamos a imprimir el id del comentario nuevo que se ha hecho"
-            print commentid
-            print info
-            print category
+            #print "vamos a imprimir el comentario nuevo y los datos correspondientes al mismo que se ha hecho"
+            #print newcomment
+            #print commentid
+            #print info
+            #print category
             
+            print "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
             print "imprimo el id de la universidad que estoy usando ahora mismo"
             print uni.id
             
             if (info=="basic") or (info=="doc") or (info=="subjects"):
                 try: 
                     newinfo = InfoGeneral.objects.get(id=commentid)
-                    print newinfo.specialty
-                    newinfo.category = newcomment
+                    #search_fields = (category)
+                    print "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                    print "Se supone que ha buscado"
+                    if rec_qualification:
+                        newinfo.qualification = newcomment
+                    elif rec_specialty:
+                        newinfo.specialty = newcomment
+                    elif rec_teachingequipment:
+                        newinfo.teachingequipment = newcomment
+                    elif rec_library:
+                        newinfo.library = newcomment
+                    elif rec_lab:
+                        newinfo.lab = newcomment
+                    elif rec_computerequipment:
+                        newinfo.computerequipment = newcomment
+                    elif rec_others:
+                        newinfo.others = newcomment
+                    elif rec_dinningroom:
+                        newinfo.dinningroom = newcomment
+                    elif rec_cafeteria:
+                        newinfo.cafeteria = newcomment
+                    elif rec_sportactivities:
+                        newinfo.sportactivities = newcomment
+                    elif rec_asociation:
+                        newinfo.asociation = newcomment
+                    elif rec_languagecourse:
+                        newinfo.languagecourse = newcomment
+                    elif rec_schoolyear:
+                        newinfo.schoolyear = newcomment
+                    elif rec_vacations:
+                        newinfo.vacations = newcomment
+                    elif rec_compteleco:
+                        newinfo.compteleco = newcomment
+                    elif rec_teachers:
+                        newinfo.teachers = newcomment
+                    elif rec_teaching:
+                        newinfo.teaching = newcomment
+                    elif rec_studies:
+                        newinfo.studies = newcomment
+                    elif rec_unidoc:
+                        newinfo.unidoc = newcomment
+                    elif rec_residencelicence:
+                        newinfo.residencelicence = newcomment
+                    elif rec_getresidence:
+                        newinfo.getresidence = newcomment
+                    elif rec_economicaid:
+                        newinfo.economicaid = newcomment
+                    elif rec_bankaccount:
+                        newinfo.bankaccount = newcomment
+                    elif rec_costume:
+                        newinfo.costume = newcomment
+                    elif rec_meetings:
+                        newinfo.meetings = newcomment
+                    elif rec_offices:
+                        newinfo.offices = newcomment
+                   
                     newinfo.save()
+                    print "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"
+
                 except InfoGeneral.DoesNotExist:
                     print "No hay informacionnnn con ese id"
             elif (info=="hotel"):
@@ -1171,11 +1378,13 @@ def uninfo(request, uni_name, type_info):
                     print "No hay informacionnnn con ese id"
             
             
+            ur = "/tuerasmus/university/" +uni.id+ "/" + info +
+            return HttpResponseRedirect(ur)
             
-            ctx = {'uni':uni, 'no_info': no_info, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+            #ctx = {'uni':uni, 'no_info': no_info, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
         
             # Return the template
-            return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
+            #return render_to_response('university/uni_info.html', ctx, context_instance=RequestContext(request))
 
     else:
         # User no authenticated

@@ -129,14 +129,14 @@
                     <!--The comment owner can modify it -->
                     {% ifequal user.username uniobj.username %}
                         
-                        <a type="submit" class="btn btn-sm btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
-                        <a type="submit" class="btn btn-sm btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
+                        <a type="submit" class="btn btn-xs btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
+                        <a type="submit" class="btn btn-xs btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
                         
                         <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
 
                         <input type="hidden" name="commentid" value="{{uniobj.id}}">
                          
-                        <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+                        <button id="description2" style ="display:none" class="btn btn-xs btn-primary" type="submit"> Guardar </button>
                         
                     {% endifequal %}
                     
@@ -159,7 +159,7 @@
               <h2><strong>Algunos datos de interés de {{uniobj.uni}} </strong></h2>
             </div>
             
-            <h3>Cuántos TuErasmus tiene </h3>
+            <h3>Cuántos TuErasmus tiene</h3>
             <div class="progress">
               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% erasmus</span></div>
             </div>

@@ -44,12 +44,12 @@
     function initialize(){
         var n=1;
         var options = {
-            zoom: 8,
+            zoom: 14,
             center: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
             mapTypeId: google.maps.MapTypeId.ROADMAP};
         var marker = new google.maps.Marker({
                 position: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
-                icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png',
+                // icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png',
                 // True para desplazar el icono               
                 draggable: false, 
                 title: '{{uniname}}'});
@@ -97,36 +97,18 @@
 			  <div id="googleMap" style="width:700px;height:500px;"></div>
 		  </div>
 
-		  <!--<div class="col-xs-3">
-			  <div class="row">
-				  <div class="col-xs-6">
-					  <h2>Hong Kong</h2>
-					  <address>
-						  <strong>HK Business Address</strong><br>
-						  100 Business Address<br>
-						  Kowloon<br>
-						  Hong Kong<br>
-						  Hong Kong<br>
-						  Zip Code N/A<br>
-						  <abbr title="Phone">P:</abbr> 01234 567 890
-					  </address>
-				  </div>
-			  </div>
-			  <div class="row">
-				  <div class="col-xs-6">
-					  <h2>Shenzhen, P.R.C.</h2>
-					  <address>
-						  <strong>SZ Business Address</strong><br>
-						  100 Business Address<br>
-						  Futian District<br>
-						  <br>
-						  Shenzhen, Guangdong<br>
-						  518000<br>
-						  <abbr title="Phone">P:</abbr> 01234 567 890
-					  </address>
-				  </div>
-			  </div>
-		  </div>-->
+           
+
+      <div class="col-lg-3 col-xs-8">
+        <br><br>
+        
+        <address>
+          <br><br>
+          <h3>
+          <strong>{{title}}</strong></h3><br>
+        </address>
+      </div>	
+
 		{% endif %}
 		
 	</div><!--/.row-->

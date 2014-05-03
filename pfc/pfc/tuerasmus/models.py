@@ -183,7 +183,7 @@ class InfoBasic(models.Model):
     username = models.CharField(max_length=30);
     description = models.TextField(help_text='Cómo describirías esta universidad');
     link = models.URLField();
-    name_image = models.CharField(max_length=40);
+    name_image = models.CharField(max_length=400);
     image = models.ImageField(upload_to='universities', verbose_name=u'image_university');
     # Google Maps
     address = models.CharField(max_length=50);
