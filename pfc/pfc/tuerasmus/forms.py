@@ -205,14 +205,14 @@ class WorkForm(forms.Form):
 #----------------------------------------------------------------------------
 class CityForm(forms.Form):
     cityname = forms.CharField(label="Nombre de la ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    prices = forms.CharField(label="Precios", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
+    prices = forms.CharField(label="Coste de la vida", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
     uniarea = forms.CharField(label="La universidad", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
     studentlife = forms.CharField(label="Vida estudiantil", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
     turism = forms.CharField(label="Turismo", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    party = forms.CharField(label="Salir", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
+    party = forms.CharField(label="Salidas nocturnas", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
     culture = forms.CharField(label="Cultura", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    crime = forms.CharField(label="Delincuencia", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    shopping = forms.CharField(label="De compras", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
+    crime = forms.CharField(label="Hay delincuencia o no", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
+    shopping = forms.CharField(label="Ir de tiendas", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
     erasmuslife = forms.CharField(label="Ambiente erasmus", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
     more = forms.CharField(label="Más cosas", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
 

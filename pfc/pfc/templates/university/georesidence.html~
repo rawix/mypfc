@@ -20,52 +20,78 @@
 //        }      
 //    }   
     
-    
-    
+
     function setGoogleMarkers(map, places){
         
+        var titles = [];
+        var markers = [];
+        console.log("Longitud places: ");
+        console.log(places.length);
+        
         for(var i=0; i<places.length; i++){
-            var marker = new google.maps.Marker({
+            console.log(places[i]);
+            
+            markers[i] = new google.maps.Marker({
                 position: new google.maps.LatLng(places[i][1], places[i][2]),
                 map: map,
                 icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png',
-                title: places[i][0]});        
-     
-            google.maps.event.addListener(marker, 'mouseup', function(){
+                title: places[i][0]});
+            console.log("elemento markers completado");
+            
+            var j=0;
+            titles[j] = places[i][0];
+            console.log(titles[j])
+            };        
+            
+             
+            /*google.maps.event.addListener(marker, 'mouseup', function(){
                 var popup = new google.maps.InfoWindow();
                 var note = title;
                 
                 popup.setContent(note);
                 popup.open(map, marker);
+            });*/
+            
+            google.maps.event.addListener(markers[j], "click", function(){
+                console.log("Ha hecho click");
+                var popup = new google.maps.InfoWindow();
+                var note = titles[j];
+                
+                popup.setContent(note);
+                popup.open(map, marker);
             });
-        }
+            
+            j=j+1;
+        
     };
 
+
+
     function initialize(){
-        var n=1;
+        
         var options = {
             zoom: 14,
             center: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
             mapTypeId: google.maps.MapTypeId.ROADMAP};
+            
         var marker = new google.maps.Marker({
                 position: new google.maps.LatLng({{uni.latitud}}, {{uni.longitud}}),
                 // icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png',
                 // True para desplazar el icono               
                 draggable: false, 
                 title: '{{uniname}}'});
+                
         var infoWindow = new google.maps.InfoWindow({content: '{{uniname}}'});
+        
         var map = new google.maps.Map(document.getElementById("googleMap"), options, marker, infoWindow);
         marker.setMap(map);
-        /*setGoogleMarkers(map, {{misPuntos}});*/
+        
         console.log("hola");
         console.log({{mispuntos|safe}});
-/*var misPuntos = [
-    ["Sagrada Familia", "41.403571", "2.174472", "icon1", "<div>html</div>"],
-    ["Plaça Catalunya", "41.387097", "2.170072", "icon2", "<div>html</div>"],
-    ["Estación de Sants", "41.379514", "2.140644", "icon3", "<div>html</div>"],
-];*/
+
         setGoogleMarkers(map, {{mispuntos|safe}});
         infoWindow.open(map, marker);
+        
     };
 
     google.maps.event.addDomListener(window, 'load', initialize);
@@ -92,23 +118,38 @@
     {% else %} 
     
 
+      <div class="row">
+		    <div class="col-xs-9">
+			    <div id="googleMap" style="width:700px;height:500px;"></div>
+		    </div>
+
+      </div><!--/.row -->
     
-		  <div class="col-xs-9">
-			  <div id="googleMap" style="width:700px;height:500px;"></div>
-		  </div>
+      <div class="row">
 
-           
-
-      <div class="col-lg-3 col-xs-8">
-        <br><br>
-        
-        <address>
-          <br><br>
-          <h3>
-          <strong>{{title}}</strong></h3><br>
-        </address>
-      </div>	
-
+          <div class="page-header">
+            <h2>Para conocer más sobre <a href="/tuerasmus/universities/residences" style="color: #424242">las residencias</a></h2>
+          </div>      
+      
+		      {% for i in info_list %}
+			      <div class="row">
+				      <div class="col-xs-6">
+					      <h3>{{i.name}}</h3>
+					      <address>
+                  <h4>
+                    {{i.address}}<br>
+                    {{i.postalcode}}<br>
+                    {{i.city}}<br>
+                    {{i.country}}<br>
+                  <!--<abbr title="Phone">Tlf de contacto: </abbr>--> (+{{i.prefix}}) {{i.phone}}<br>
+                  </h4>
+					      </address>
+				      </div>
+			      </div>
+		      {% endfor %}
+		      
+		      
+      </div><!--/.row -->
 		{% endif %}
 		
 	</div><!--/.row-->

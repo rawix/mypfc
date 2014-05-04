@@ -34,7 +34,8 @@
           </div>
         {% endif %}
         
-        {% if not alertdone %}        
+        {% if not alertdone %} 
+               
           {% if coor %}
             <br>
             <p>

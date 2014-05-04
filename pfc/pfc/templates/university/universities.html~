@@ -67,19 +67,21 @@
               <form action="/tuerasmus/universities/cities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
-                    
+                    {% for u in cits %}
                       <label for="selected_city">Cónoce las ciudades:</label>
                       <select id="selected_city" class="form-control" name="city_selected">
-                      {% for u in cits %}
-                          <option> {{ u.city }} </option>
                       
-                      {% empty %}
+                          <option> {{ u.city }} </option>
+                      </select>
+                      <br>
+                      <button class="btn btn-success btn-sm" type="submit"> VER CIUDAD </button>
+
+                    {% empty %}
                       
                         <h3> Aún no hay ciudades registradas </h3>
-                      {% endfor %}
-                    </select>
-                    <br>
-                    <button class="btn btn-success btn-sm" type="submit"> VER CIUDAD </button>
+                      
+                    {% endfor %}
+                    
 
                   </div><!--/.col-xs-6-->
                 </div><!--/.row-->
@@ -98,17 +100,20 @@
               <form action="/tuerasmus/universities/residences/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
+                    
                       <label for="selected_resi">Cónoce las residencias:</label>
                       <select id="selected_resi" class="form-control" name="resi_selected">
                       {% for u in resis %}
                         <option> {{ u.resi }} </option>
-                       {% empty %}
-                        <h3> Aún no hay residencias registradas </h3>
-                      {% endfor %}
-                    </select>
-                    <br>
-                    <button class="btn btn-success btn-sm" type="submit"> VER RESIDENCIA </button>
 
+                      
+
+                       {% empty %}
+                         <h3> Aún no hay residencias registradas </h3>
+                       {% endfor %}
+                       </select>
+                       <br>
+                       <button class="btn btn-success btn-sm" type="submit"> VER RESIDENCIA </button>
                   </div><!--/.col-xs-6-->
                 </div><!--/.row-->
               </form>   
@@ -132,14 +137,15 @@
                       <select id="selected_subj" class="form-control" name="subj_selected">
                         {% for u in sub %}
                           <option> {{ u.subname }} </option>
-
                         {% empty %}
-                        
+                            
                           <h3> Aún no hay asignaturas registradas </h3>
                         {% endfor %}
+
                       </select>
                       <br>
-                      <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>                    
+                      <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>       
+             
                   </div><!--/.col-xs-6-->
                 </div><!--/.row-->     
               </form> 
@@ -219,8 +225,9 @@
             <div class="progress">
               <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
             </div>
+            
            {% endif %} 
-        
+        </div> <!--./col-xs-12 col-sm-9 -->
 {% endblock %}
 
 
