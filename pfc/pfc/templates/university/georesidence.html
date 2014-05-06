@@ -23,76 +23,91 @@
 
     function setGoogleMarkers(map, places){
         
-        titles = [];
-        markers = [];
+        var titles = new Array({{longitud}});
+        var markers = [];
         
+        console.log(titles.length); //Longitud es dos, que son el número de residencias de la tabla de la DB
         console.log("Longitud places: ");
         console.log(places.length);
         console.log(places);
-        var k=0;
-        var j=0;
-        for (i in places){
-            
-            console.log('places[i]');
-            console.log(places[i]);          
-            console.log(k);
-              
-            markers[j] = new google.maps.Marker({
-                position: new google.maps.LatLng(places[k+1], places[k+2]),
-                map: map,
-                icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png',
-                title: places[k]});
-                titles[j] = places[k];
-            console.log("elemento markers completado");
-            
-            
-            //console.log(places[k]);
-            //titles[j] = places[k];
-            
-            console.log('titles[j]');
-            console.log(titles[j]);
-            //j = j+1;
-            k = k+3;               
-            
-               
-            
-             
-            /*google.maps.event.addListener(marker, 'mouseup', function(){
-                var popup = new google.maps.InfoWindow();
-                var note = title;
-                
-                popup.setContent(note);
-                popup.open(map, marker);
-            });*/
-            
-            google.maps.event.addListener(markers[j], "click", function(){
-                console.log("Ha hecho click");
-                var popup = new google.maps.InfoWindow();
-                var note = titles[j];
-                
-                popup.setContent(note);
-                popup.open(map, markers[j]);
-            });
-            
-            j=j+1;
-            
-        };
-        /*for (i in places){
-            console.log(places[i]);
-            
-            markers[i] = new google.maps.Marker({
-                position: new google.maps.LatLng(places[i][1], places[i][2]),
-                map: map,
-                icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png',
-                title: places[i][0]});
-            console.log("elemento markers completado");
-            
+
+       
             var j=0;
-            titles[j] = places[i][0];
-            console.log(titles[j])
-            };  */
-        
-    };
+            var k=0;
+            
+            while((k < ({{longitud}}*3)) && (j<{{longitud}})){
+            
+                //for (i in places){
+                    
+                    console.log('places[k]');
+                             
+                    console.log(k);
+                    console.log(j);
+                    titles[j] = places[k];
+                    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                    console.log(titles[j]);
+                    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAaaa');
+                    markers[j] = new google.maps.Marker({
+                        position: new google.maps.LatLng(places[k+1], places[k+2]),
+                        map: map,
+                        icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png',
+                        zIndex: 2,
+                        draggable: false,
+                        title: places[k]}
+                    );
+                    
+                    console.log("elemento markers completado");
+                    
+                    
+                    //console.log(places[k]);
+                    //titles[j].push('places[k]')
+                    
+                    //console.log('titles[j]');
+                    //console.log(titles[j]);
+                    //j = j+1;
+                    /*google.maps.event.addListener(marker, 'mouseup', function(){
+                        var popup = new google.maps.InfoWindow();
+                        var note = title;
+                        
+                        popup.setContent(note);
+                        popup.open(map, marker);
+                    });*/
+                    
+                    google.maps.event.addListener(markers[j], "click", function(){
+                        console.log("Ha hecho click");
+                        var popup = new google.maps.InfoWindow(titles[j]);
+                        var note = titles[j];
+                        
+                        //popup.setContent(titles[j]);
+                        popup.open(map, markers[j]);
+                        
+                    });
+                    
+                    console.log(titles[j]);
+                    console.log(k);
+                    console.log(j);
+                    k=k+3;
+                    j=j+1;
+                    console.log(k);
+                    console.log(j);                   
+                //};//for
+            /*for (i in places){
+                console.log(places[i]);
+                
+                markers[i] = new google.maps.Marker({
+                    position: new google.maps.LatLng(places[i][1], places[i][2]),
+                    map: map,
+                    icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png',
+                    title: places[i][0]});
+                console.log("elemento markers completado");
+                
+                var j=0;
+                titles[j] = places[i][0];
+                console.log(titles[j])
+                };  */
+    
+        }; //while
+    };//function
 
     function initialize(){
         
@@ -106,6 +121,7 @@
                 // icon: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png',
                 // True para desplazar el icono               
                 draggable: false, 
+                zIndex : 14, //En caso de haber dos iconos cerca, que éste resalte más
                 title: '{{uniname}}'});
                 
         var infoWindow = new google.maps.InfoWindow({content: '{{uniname}}'});
@@ -201,9 +217,10 @@
           </div>      
       
 		      {% for i in info_list %}
+		        
 			      <div class="row">
 				      <div class="col-xs-6">
-					      <h3>{{i.name}}</h3>
+					      <h3>{{i.id}}. {{i.name}}</h3>
 					      <address>
                   <h4>
                     {{i.address}}<br>
@@ -215,6 +232,7 @@
 					      </address>
 				      </div>
 			      </div>
+			      
 		      {% endfor %}
 		      
 		      
