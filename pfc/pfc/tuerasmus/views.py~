@@ -1,5 +1,5 @@
-#encoding:utf-8
-# -*- coding: utf-8    
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 ##########################################################################
 # @Author : Rawan Nazmi-Issa Khozouz                                     #
@@ -8,6 +8,8 @@
 ##########################################################################
 
 # Libraries.
+import sys
+
 
 # Forms
 from django.forms import ModelForm
@@ -54,6 +56,9 @@ from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CommentForm, Costu
 
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
+
+
+
 #Desactivation of CSRF
 @csrf_exempt
 
@@ -1098,22 +1103,15 @@ def uninfo(request, uni_name, type_info):
                 else:
                     list_empty = False
 
-                    k=0
+                    #k=0
+                    matriz = []
                     for i in info_list:
                         
-                        matriz.append([])
-                        s=""
-                        print "S"
                         
-                        print (type (s))
-                        print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-                        s=str(i.name)
-                        print (type (s))
-                        print "======================================"
-                        s.encode("utf-8")
-                        print "adios"
-                        print (type(s))
-                        matriz[k].append([str(i.name), str(i.latitud), str(i.longitud)])
+                        s=i.name
+                        #s.encode("iso-8859-15")
+                        
+                        matriz.append([str(s), str(i.latitud), str(i.longitud)])
 
                             
                         #for j in range(numero_columnas):
@@ -1126,13 +1124,14 @@ def uninfo(request, uni_name, type_info):
                         #    elif j==2:
                         #        matriz[k].append(str(i.longitud))
                 
-                        k+=1  
+                        #+=1  
                     
+                    print "························"
                     print matriz[0]   
                     print matriz[1]
                     print len(matriz)
 
-                    ctx = {'mispuntos':matriz, 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                    ctx = {'mispuntos':matriz, 'longitud':len(matriz), 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
                 return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
 
             elif type_info=="subjects":
@@ -1550,6 +1549,10 @@ def uninfo(request, uni_name, type_info):
                 try: 
                     newinfo = Comment.objects.get(id=commentid)
 
+                    if rec_text:
+                        newinfo.text = newcomment
+                    newinfo.save()
+                    
                 except Comment.DoesNotExist:
                     print "No hay informacionnnn con ese id"
             

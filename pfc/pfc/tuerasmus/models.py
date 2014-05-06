@@ -169,10 +169,10 @@ class Place(models.Model):
         ordering = ['name']
 
     def __unicode__(self):
-        return self.name;
+        return unicode(self.name);
         
     def __str__(self):
-        return self.name;
+        return str(self.name);
 
 # ------------------------------------------------------------------------------
 #                               InfoBasic class.
