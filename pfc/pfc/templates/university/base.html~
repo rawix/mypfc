@@ -53,10 +53,10 @@
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             
             <div class="form-group">
-            <a href="/tuerasmus/{{user.username}}" style="color:#F2F2F2"><strong><em>  ¡¡ Hola {{user.username}} !!  </em></strong></a>
-            
+              <a style="text-decoration:none; color:#F2F2F2"><i><tt><big><b><strong> {{user.username}}&nbsp;&nbsp;</strong></b></big></tt></i></a>           
+              
+              <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
             </div><!--/.form-group -->
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div><!--/.container -->

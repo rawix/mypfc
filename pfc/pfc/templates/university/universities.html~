@@ -67,21 +67,22 @@
               <form action="/tuerasmus/universities/cities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
-                    {% for u in cits %}
+                    
                       <label for="selected_city">Cónoce las ciudades:</label>
                       <select id="selected_city" class="form-control" name="city_selected">
-                      
-                          <option> {{ u.city }} </option>
+                          {% for u in cits %}
+                            <option> {{ u.city }} </option>
+                          {% empty %}
+                            
+                              <h3> Aún no hay ciudades registradas </h3>
+                            
+                          {% endfor %}
+                    
                       </select>
                       <br>
                       <button class="btn btn-success btn-sm" type="submit"> VER CIUDAD </button>
 
-                    {% empty %}
-                      
-                        <h3> Aún no hay ciudades registradas </h3>
-                      
-                    {% endfor %}
-                    
+
 
                   </div><!--/.col-xs-6-->
                 </div><!--/.row-->

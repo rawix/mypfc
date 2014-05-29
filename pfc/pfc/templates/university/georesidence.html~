@@ -76,7 +76,7 @@
                     google.maps.event.addListener(markers[j], "click", function(){
                         console.log("Ha hecho click");
                         var popup = new google.maps.InfoWindow(titles[j]);
-                        //var note = titles[j];
+                        var note = titles[j];
                         
                         //popup.setContent(titles[j]);
                         popup.open(map, markers[j]);
@@ -220,12 +220,14 @@
 		        
 			      <div class="row">
 				      <div class="col-xs-6">
-					      <h3>{{i.id}}. {{i.name}}</h3>
+					      <h3><a href="">{{i.id}}. {{i.name}}</a></h3>
 					      <address>
                   <h4>
                     {{i.address}}<br>
                     {{i.postalcode}}<br>
                     {{i.city}}<br>
+                    {% ifnotequal i.phone None %}
+                    (+{{uni.prefix}}) {{i.phone}}<br>
                     <!--{{i.country}}<br>
                   <abbr title="Phone">Tlf de contacto: </abbr> (+{{i.prefix}}) {{i.phone}}<br>-->
                   </h4>

@@ -40,6 +40,9 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
+
+
+          
         </div><!--/.navbar-header -->
 
         <div class="navbar-collapse collapse">
@@ -47,7 +50,7 @@
             {% block link_content %}
             {% endblock %}
           </ul>
-          
+         
           <!-- Login user -->
           <form class="navbar-form navbar-right" action="/accounts/profile/" method="post"> {% csrf_token %}
             <div class="form-group">
@@ -86,9 +89,13 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/tuerasmus">TuErasmus</a>
+          
+       
+
         </div><!--/.navbar-header -->
 
         <div class="navbar-collapse collapse">
+
           <ul class="nav navbar-nav">
 
             <li><a href="/tuerasmus">Home</a></li>
@@ -116,17 +123,17 @@
             </li>
             <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
             <li class="active"><a href="/contact">Contacto</a></li>
-          </ul>
-          
+          </ul>             
           <!-- Logout user -->
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             <div class="form-group">
-              <a href="/tuerasmus/{{user.username}}" style="color:#F2F2F2"><strong><em>  ¡¡ Hola {{user.username}} !!  </em></strong></a>
+              <a style="text-decoration:none; color:#F2F2F2"><i><tt><big><b><strong> {{user.username}}&nbsp;&nbsp;</strong></b></big></tt></i></a>
             
-            <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
+              <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
             </div><!--/.form-group -->
           </form>     
         </div><!--/.navbar-collapse -->
+        
       </div><!--/.container -->
     </div><!--/.navbar -->
 

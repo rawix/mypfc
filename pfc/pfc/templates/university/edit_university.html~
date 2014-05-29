@@ -68,7 +68,7 @@
             <!--<button type="button" class="btn btn-lg" style="background:white">Básica</button>-->
             <!--<a href="/tuerasmus/uniedit/{{uni_name}}/basic" class="btn btn-lg btn-warning" type="submit">Datos básicos</a>-->
             <!--<button type="button" class="btn btn-lg btn-danger" name="basic">Básica</button>-->
-            <a href="/tuerasmus/uniedit/{{uni_name}}/doc" class="btn btn-lg btn-warning" type="submit">General</a>
+            <a href="/tuerasmus/uniedit/{{uni_name}}/doc" class="btn btn-lg btn-warning" type="submit">General y Documentación</a>
             <!--<button type="button" class="btn btn-lg btn-primary" name="doc">Documentación y atención</button>-->
             <a href="/tuerasmus/uniedit/{{uni_name}}/hotel" class="btn btn-lg btn-warning" type="submit">Residencias</a>
             <!--<button type="button" class="btn btn-lg btn-info" name="hotel">Alojamientos</button>-->

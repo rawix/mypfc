@@ -11,7 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <a href="#">Modificar contraseña</a>
+              <li><a href="#">Modificar contraseña</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -60,70 +60,48 @@
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>1.Tu universidad</h2>
               <p>Es posible que te hayan concedido una beca Erasmus y otra Munde, así que en ese caso registra ambas universidades.</p>
-            </div><!--/span-->
-
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h2>2.Qué aportar</h2>
-              <p>Rellena la información de la universidad.</p>
-            </div><!--/span-->              
-
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h2>3.Residencias</h2>
-              <p>¿Qué residencias son más cercanas a las universidad?¿Las más aconsejadas?</p>
-            </div><!--/span-->
-
-          </div><!--/row1-->
- 
-          <div class="row">
-            <div class="col-6 col-sm-6 col-lg-4">
               <p><a class="btn btn-success" href="/tuerasmus/uniregister">UniErasmus &raquo;</a></p>
             </div><!--/span-->
 
             <div class="col-6 col-sm-6 col-lg-4">
+              <h2>2.Qué aportar</h2>
+              <p>Rellena la información de la universidad.</p><br><br>
               <p><a class="btn btn-success" href="/tuerasmus/{{user.username}}/myuniversity">MiUniversidad &raquo;</a></p>
             </div><!--/span-->              
 
             <div class="col-6 col-sm-6 col-lg-4">
+              <h2>3.Residencias</h2>
+              <p>¿Qué residencias son más cercanas a las universidad?¿Las más aconsejadas?</p><br>
               <p><a class="btn btn-success" href="/tuerasmus/universities/residences">Residencias &raquo;</a></p>
             </div><!--/span-->
 
-          </div><!--/row2-->  
+          </div><!--/row1-->
+
                  
           <div class="row">
           
             <div class="col-6 col-sm-6 col-lg-4">
               <h2>4.Convenios</h2>
               <p>Sabemos que lo que más cuesta cuando nos vamos de erasmus son los convenios que nos conceden tanto la universidad destino como la de origen. En esta sección podrás conocer las asignaturas que han podido cursar otros compañeros tuyos fuera de la URJC.</p>
-            </div><!--/span-->
-
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h2>5.Quiénes</h2>
-              <p>Seguramente no eres el primero en irte a la universidad que te ha tocado, entra aquí y descubre qué otros alumnos han ido y qué han contado sobre sus experiencias.</p>
-            </div><!--/span-->
-            
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h2>6.Ciudades</h2>
-              <p>A todos nos gusta saber algo más que asignaturas, residencias, todos queremos saber qué sitios son los mejores para las fiestas erasmus, dónde ponen las cervezas más baratas, las cafeterías más de moda.</p>
-            </div><!--/span-->
-            
-          </div><!--/row3-->
-          
-
-          <div class="row">
-   
-            <div class="col-6 col-sm-6 col-lg-4">
               <p><a class="btn btn-success" href="/tuerasmus/universities/subjects">Asignaturas &raquo;</a></p>
             </div><!--/span-->
 
             <div class="col-6 col-sm-6 col-lg-4">
+              <h2>5.Quiénes</h2>
+              <p>Seguramente no eres el primero en irte a la universidad que te ha tocado, entra aquí y descubre qué otros alumnos han ido y qué han contado sobre sus experiencias.</p><br><br>
               <p><a class="btn btn-success" href="/tuerasmus/universities/urerasmus">Los erasmus &raquo;</a></p>
             </div><!--/span-->
             
             <div class="col-6 col-sm-6 col-lg-4">
+              <h2>6.Ciudades</h2>
+              <p>A todos nos gusta saber algo más que asignaturas, residencias, todos queremos saber qué sitios son los mejores para las fiestas erasmus, dónde ponen las cervezas más baratas, las cafeterías más de moda.</p><br>
               <p><a class="btn btn-success" href="/tuerasmus/universities/cities">Las ciudades &raquo;</a></p>
+
             </div><!--/span-->
             
-          </div><!--/row4-->
+          </div><!--/row2-->
+          
+
           
         </div><!--/span-->
 

@@ -220,12 +220,15 @@
 		        
 			      <div class="row">
 				      <div class="col-xs-6">
-					      <h3>{{i.id}}. {{i.name}}</h3>
+					      <h3><a href="">{{i.id}}. {{i.name}}</a></h3>
 					      <address>
                   <h4>
                     {{i.address}}<br>
                     {{i.postalcode}}<br>
                     {{i.city}}<br>
+                    {% ifnotequal i.phone None %}
+                      (+{{uni.prefix}}) {{i.phone}}<br>
+                    {% endifnotequal %}
                     <!--{{i.country}}<br>
                   <abbr title="Phone">Tlf de contacto: </abbr> (+{{i.prefix}}) {{i.phone}}<br>-->
                   </h4>

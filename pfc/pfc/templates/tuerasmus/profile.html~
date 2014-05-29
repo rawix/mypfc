@@ -131,11 +131,11 @@
             
             {% if showuni2 %}
               <li>Universidad Mundus: {{up_obj.uni2}}</li>
-            {% endifnotequal %} 
+            {% endif %} 
             
             {% ifnotequal  user_email "" %}
               <li>Contacto: {{user_email}}</li>
-            {% endif %} 
+            {% endifnotequal %} 
             
             <br><br>
             
