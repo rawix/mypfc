@@ -11,7 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <li><a href="#">Modificar contraseña</a></li>
+              <!--<li><a href="#">Modificar contraseña</a></li>-->
           </ul>
         </li>
         <!--<li class="dropdown">
@@ -60,14 +60,18 @@
 
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
               <br>
-              {% if editpassword %}
+              <!--{% if editpassword %}
                 <p><h2>Modifica tu contraseña:</h2></p>
               {% else %}
                 {% if not alertdone %}
                   <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
                 {% endif %}
-              {% endif %}
+              {% endif %}-->
 
+              {% if not alertdone %}
+                <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
+              {% endif %}
+              
               {% if alerterror %}
                 <div class="alert alert-danger">
                   <center><strong>¡¡ERROR!!</strong>, asegúrate te introducir bien los datos</center>
@@ -80,11 +84,11 @@
                 </div>
               {% endif %}
               
-              {% if alerterrorpass %}
+              <!--{% if alerterrorpass %}
                 <div class="alert alert-danger">
                   <center><strong>¡¡ERROR!!</strong>, las contraseñas no coinciden</center>
                 </div>
-              {% endif %}
+              {% endif %}-->
               <br>
 
               {{form.as_p}}

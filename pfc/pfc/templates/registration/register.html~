@@ -24,18 +24,23 @@
       <div class="row">
 
         <div class="col-lg-5">
-          <h1>Introduce tus datos</h1>
+          <h1>Rellena el formulario</h1>
 
-          {% if msg_username %}
-            <ul><li><h5>{{error_username}}</h5></li></ul>
-          {% endif %}
+          <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
+            
+            {% if alerterror %}
+              <div class="alert alert-danger">
+                <center><strong>¡¡ERROR!!</strong> revisa los datos</center>
+              </div>
+            {% endif %}
 
-          {% if msg_password %}
-            <ul><li><h5>{{error_password}}</h5></li></ul>
-          {% endif %}
-
-            <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-              <p>
+            {% if alertdone %}
+              <div class="alert alert-success">
+                <center><strong>Enhorabuena <big>{{usu}}</big>, ¡ya estás registrado!</strong></center>
+              </div>
+            {% endif %}
+            
+            <p>
               <h2><strong>¡¡Asegúrate de poner la opción correcta!!</strong></h2>
               <div class="radio-inline">
                 <label>
@@ -49,11 +54,11 @@
                   Femenino
                 </label>
               </div>
-              </p>
-              
-              {{ form.as_p }}
-              
-              <p>
+            </p>
+            
+            {{ form.as_p }}
+            
+            <p>
               <div class="radio-inline">
                 <label>
                   <input type="radio" name="type_user" id="optA" value="alumno" checked>
@@ -66,30 +71,16 @@
                   Profesor
                 </label>
               </div>
-              </p>
+            </p>
 
-              <br>
-              <button class="btn btn-primary" type="submit">Registrar</button>
-              <br><br>
-
-              {% if alerterror %}
-	        <div class="alert alert-danger">
-	          <center><strong>¡¡ERROR!!</strong>, asegúrate te introducir bien los datos</center>
-	        </div>
-              {% endif %}
-
-              {% if alertdone %}
-	        <div class="alert alert-success">
-	          <center><strong>Enhorabuena <big>{{usu}}</big>, ¡ya estás registrado!</strong></center>
-	        </div>
-              {% endif %}
-
-              <br><br>
-            </form> 
+            <br>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+            <br><br>
+          </form> 
         </div><!-- ./col-lg-5 -->
 
         <div class="col-lg-7">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh" height="400px" width="600px" onmouseover="this.src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSCMdRe-PdSUx-pc1autZy2whosh-LTx681uhxY1UHNQ0ogjTeeXA';" height="400px" width="600px" onmouseout="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh';" height="400px" width="600px" class="img-responsive" alt="" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh" height="400px" width="600px" onmouseover="this.src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSCMdRe-PdSUx-pc1autZy2whosh-LTx681uhxY1UHNQ0ogjTeeXA';" height="400px" width="600px" onmouseout="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPAiNfMBdIDvDo6M56MEqnCoVeMgFU1Hgg4UJ-1MuolzbtWUjh';" height="200px" width="200px" class="img-responsive" alt="" />
         </div><!-- ./col-lg-7 -->
 
       </div><!-- ./row -->

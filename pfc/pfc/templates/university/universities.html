@@ -17,7 +17,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <li><a href="#">Modificar contraseña</a></li>
+              <!--<li><a href="#">Modificar contraseña</a></li>-->
           </ul>
         </li>
         <!--<li class="active" class="dropdown">
@@ -106,9 +106,6 @@
                       <select id="selected_resi" class="form-control" name="resi_selected">
                       {% for u in resis %}
                         <option> {{ u.resi }} </option>
-
-                      
-
                        {% empty %}
                          <h3> Aún no hay residencias registradas </h3>
                        {% endfor %}
@@ -133,19 +130,23 @@
               <form action="/tuerasmus/universities/subjects/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
                 <div class="row">
                   <div class="col-xs-6">
-                    
-                      <label for="selected_subj">Cónoce las asignaturas:</label>
-                      <select id="selected_subj" class="form-control" name="subj_selected">
-                        {% for u in sub %}
-                          <option> {{ u.subname }} </option>
-                        {% empty %}
-                            
-                          <h3> Aún no hay asignaturas registradas </h3>
-                        {% endfor %}
+                      {% if not sub_empty %}
+                        <label for="selected_subj">Cónoce las asignaturas:</label>
+                        <select id="selected_subj" class="form-control" name="subj_selected">
+                          
+                          {% for u in sub %}
+                            <option> {{ u.subname }} </option>
+                          {% empty %}
+                            <h3> Aún no hay asignaturas registradas </h3>
+                            <option></option>
+                          {% endfor %}
 
-                      </select>
-                      <br>
-                      <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>       
+                        </select>
+                        <br>
+                        <button class="btn btn-success btn-sm" value={{u.subname}} type="submit"> VER ASIGNATURA </button>       
+                      {% else %}
+                        <h3> Aún no hay asignaturas registradas </h3>
+                      {% endif %}
              
                   </div><!--/.col-xs-6-->
                 </div><!--/.row-->     

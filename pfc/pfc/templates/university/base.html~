@@ -53,7 +53,7 @@
           <form class="navbar-form navbar-right" action="/accounts/logout" method="GET"> {% csrf_token %}
             
             <div class="form-group">
-              <a style="text-decoration:none; color:#F2F2F2"><i><tt><big><b><strong> {{user.username}}&nbsp;&nbsp;</strong></b></big></tt></i></a>           
+              <a href="/tuerasmus/{{user.username}}/profile" style="text-decoration:none; color:#F2F2F2"><i><tt><big><b><strong> {{user.username}}&nbsp;&nbsp;</strong></b></big></tt></i></a>           
               
               <button type="submit" class="btn btn-danger" value="logout">Cerrar sesión</button>
             </div><!--/.form-group -->
@@ -96,7 +96,7 @@
       <hr>
 
       <footer>
-        <p><center>&copy; ETSIT-URJC 2013</center></p>
+        <p><center>&copy; ETSIT-URJC 2014</center></p>
       </footer>
 
     </div> <!--/.container theme-showcase -->

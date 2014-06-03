@@ -154,10 +154,6 @@ def register(request):
         alerterror=""
         alertdone=""
         usu=""
-        error_username=""
-        error_password=""
-        msg_username=""
-        msg_password=""
         form = RegisterForm()
 
         # Method request POST
@@ -179,12 +175,8 @@ def register(request):
                        
                 # Cheking the information
                 if (" " in username) or (username==""):
-                    error_username = "Nombre de usuario no puede tener espacios"
-                    msg_username = True
                     alerterror= True
                 elif (" " in password_one) or (password_one=="") or (len(password_one)<6):
-                    error_password = "La contraseña no es válida"
-                    msg_password = True
                     alerterror= True
                 else:
                     # Saving data in DB
@@ -202,7 +194,7 @@ def register(request):
                     usu = username
                 
                 # Return the template                                 
-                ctx = {'form': form, 'error_username':error_username, 'error_password':error_password, 'msg_username':msg_username, 'msg_password':msg_password, 'alertdone':alertdone, 'alerterror': alerterror, 'usu':usu}
+                ctx = {'form': form, 'alertdone':alertdone, 'alerterror': alerterror, 'usu':usu}
                 return render_to_response('registration/register.html', ctx, context_instance=RequestContext(request))
     
             # Form not valid

@@ -11,7 +11,7 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <li><a href="#">Modificar contraseña</a></li>
+              <!--<li><a href="#">Modificar contraseña</a></li>-->
           </ul>
         </li>
         <!--<li class="active" class="dropdown">
@@ -52,17 +52,17 @@
           </div><!--./jumbotron-->
 
           <div class="row">
-            <div class="col-lg-9">
-              <h1>Registra tu/s universidad/es erasmus y munde</h1><br>
+            <div class="col-lg-12 col-xs-3" >
+              <h1>Registra tu universidad erasmus</h1><br>
+              <h3>Si también has disfrutado de una beca munde registra esa universidad</h3><br><br>
+              
               <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
 
                 {% if saved %}
-                  <!--<center><strong>¡¡HAZ CLICK!!</strong>, y edita el perfil de la universidad</center>-->
                   <center><a class="btn btn-success btn-lg" href="/tuerasmus/uniedit/{{ uni_id }}"> {{ uni_name }} </a></center>
                 {% endif %}
 
                 {% if botuni %}
-                  <!--<center><strong>¡¡AHORA!!</strong>, pincha abajo y comienza a ver las universidades</center>-->
                   <center><a class="btn btn-warning btn-lg" href="/tuerasmus/universities/"> UNIVERSIDADES </a></center>
                 {% endif %}
                 
@@ -72,80 +72,70 @@
 	                </div><!--./alerterror-->
                 {% endif %}
 
-                <!--{% if alertwarning %}
-	                <div class="alert alert-warning">
-	                  <center><strong>¡¡CUIDADO!!</strong>, la universidad ya está resgistrada</center>
-	                </div>
-                {% endif %}<!--./alertwarning-->
-
-                <!--{% if alertdone %}
-	              <div class="alert alert-success">
-	                <center><strong>¡¡REGISTRADA!!</strong>, vuelve a registrar si te han concedido otra beca (erasmus/munde)</center>
-	              </div>
-                {% endif %}<!--./alertdone-->
-                {% if not alertdone %}
-                  <h3>Busca tu universidad en el listado, o introdúcela en el recuadro de abajo!!! </h3>
-                  <label for="selected">Selecciona una universidad</label>
-	                <select id="selected" class="form-control" name="uni_selected">  
-                    {% for u in unis %}
-	                  <option> {{ u.country }} - {{ u.noun }} </option>
-                    {% endfor %}
-	                </select>
-                  <br><br>
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <label for="selected">Escribe tu universidad</label>
-	                    <input id="selected" type="text" class="form-control" name="uni_written">  
-                      <br>
-                    </div><!--/.col-xs-6-->
-                    
-                    <div class="col-xs-6">
-                      <label for="selected">Escribe el país de universidad</label>
-	                    <input id="selected" type="text" class="form-control" name="coun_written">  
-                      <br>
-                    </div><!--/.col-xs-6-->
-                  </div><!--/.row-->
-                  
-                  <div class="radio-inline">
-                    <label>
-                      <input type="radio" name="scholarship" id="optA" value="erasmus" checked>
-                      Erasmus
-                    </label>
-                  </div><!--/.radio-inline-->
-                  <div class="radio-inline">
-                    <label>
-                      <input type="radio" name="scholarship" id="optP" value="mundus">
-                      Munde
-                    </label>
-                  </div><!--/.radio-inline-->
-                  <br>
-                  <button class="btn btn-primary" type="submit"> Registrar </button>
-                  <br><br>
-                {% endif %}
-                
-
                 {% if info %}
                   {% if alertamax %}
 	                  <div class="alert alert-info">
-	                    <center>¡¡Ya registraste tus universidades erasmus y munde!!</center>
+	                    <center>¡¡Universidad registrada!!</center>
 	                  </div>
                   {% elif alertaerasmus %}
 	                  <div class="alert alert-info">
-	                    <center><strong>¡¡Ya tienes tu universidad erasmus registrada!!</strong></center>
+	                    <center><strong>¡¡Tu universidad erasmus ya está registrada!!</strong></center>
 	                  </div>
                   {% elif alertamundus %}
 	                  <div class="alert alert-info">
-	                    <center><strong>¡¡Ya tienes tu universidad munde registrada!!</strong></center>
+	                    <center><strong>¡¡Tu universidad munde ya está registrada!!</strong></center>
 	                  </div>
                   {% endif %}
+                {% endif %}                
+                
+                {% if not alertdone %}
+                  <h5>Busca tu universidad en el listado o introdúcela en el recuadro de abajo</h5><br>
+                  <div class="col-lg-6" >
+                    <label for="selected">Selecciona una universidad</label>
+	                  <select id="selected" class="form-control" name="uni_selected">  
+                      {% for u in unis %}
+	                    <option> {{ u.country }} - {{ u.noun }} </option>
+                      {% endfor %}
+	                  </select>
+                    <br><br>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <label for="selected">Nombre universidad</label>
+	                      <input id="selected" type="text" class="form-control" name="uni_written">  
+                        <br>
+                      </div><!--/.col-xs-6-->
+                      
+                      <div class="col-xs-6">
+                        <label for="selected">País universidad</label>
+	                      <input id="selected" type="text" class="form-control" name="coun_written">  
+                        <br>
+                      </div><!--/.col-xs-6-->
+                    </div><!--/.row-->
+                    
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" name="scholarship" id="optA" value="erasmus" checked>
+                        Erasmus
+                      </label>
+                    </div><!--/.radio-inline-->
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" name="scholarship" id="optP" value="mundus">
+                        Munde
+                      </label>
+                    </div><!--/.radio-inline-->
+                    <br>
+                    <button class="btn btn-primary" type="submit"> Guardar </button>
+                    <br><br>
+                  </div>
+                  
                 {% endif %}
-
+                
                 <br><br>
               </form>
               
-            </div><!--./col-lg-6 -->
+             </div><!--./col-lg-12 -->
           </div><!--./row -->
-
         </div><!--./span-->
      
 {% endblock %}

@@ -17,10 +17,10 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <li><a href="#">Modificar contraseña</a></li>
+              <!--<li><a href="#">Modificar contraseña</a></li>-->
           </ul>
         </li>
-        <li class="active" class="dropdown">
+        <!--<li class="active" class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
@@ -29,18 +29,18 @@
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/uniregister">Registrar</a></li>
           </ul>
-        </li>
-        <li class="dropdown">
+        </li>-->
+        <!--<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
             <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
             <li class="divider"></li>
               <li class="dropdown-header">Más</li>
-              <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>-->
+              <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>
               <li><a href="#">Contactar</a></li>
           </ul>
-        </li>
+        </li>-->
         <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
         <!--<li><a href="/contact">Contacto</a></li>-->
   
@@ -106,9 +106,6 @@
                       <select id="selected_resi" class="form-control" name="resi_selected">
                       {% for u in resis %}
                         <option> {{ u.resi }} </option>
-
-                      
-
                        {% empty %}
                          <h3> Aún no hay residencias registradas </h3>
                        {% endfor %}
@@ -136,16 +133,17 @@
                     
                       <label for="selected_subj">Cónoce las asignaturas:</label>
                       <select id="selected_subj" class="form-control" name="subj_selected">
+                        
                         {% for u in sub %}
                           <option> {{ u.subname }} </option>
                         {% empty %}
-                            
                           <h3> Aún no hay asignaturas registradas </h3>
+                          <option></option>
                         {% endfor %}
 
                       </select>
                       <br>
-                      <button class="btn btn-success btn-sm" type="submit"> VER ASIGNATURA </button>       
+                      <button class="btn btn-success btn-sm" value={{u.subname}} type="submit"> VER ASIGNATURA </button>       
              
                   </div><!--/.col-xs-6-->
                 </div><!--/.row-->     

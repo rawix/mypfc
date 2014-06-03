@@ -1309,7 +1309,27 @@
           {% for i in info_list %}
             <li><p><strong>{{i.username}}</strong> 
                 <strong>{{i.title}} {{day_publicated}}</strong>: 
-                <p>{{i.text}}</p>
+                <p>{{i.text}}
+                
+                <!--The comment owner can modify it -->
+                {% ifequal user.username i.username %}
+                
+                    <!-- Information about de comment -->
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
+                    
+                    <!-- Buttons to modify or cancel -->
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("text","text2")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("text","text2")'> Cancelar </a>  
+                    
+                    <br><br>
+                    
+                    <!-- The new comment --> 
+                    <textarea id="text" class="form-control" name="new_text" style ="display:none" row="3" col="5"> {{i.text}} </textarea>
+                    <button id="text2" style ="display:none" class="btn btn-sm btn-primary" value="text" name="button" type="submit"> Guardar </button>
+                {% endifequal %}   
+                
+                </p>
                 </p>
             </li>
           {% empty %}

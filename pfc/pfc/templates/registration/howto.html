@@ -15,7 +15,6 @@
     <div class="jumbotron">
       <div class="container">
         <h1> ¿Qué es <strong>TuErasmus?</strong></h1>
-        <h2><u><strong>Tu web erasmus</strong></u></h2>
       </div>
     </div>
 
@@ -27,9 +26,9 @@
 
       <h3><p>Para poder disfrutar de lo que ofrece la web sólo será necesario que te registres y comenzar a aportar vivencias, experiencias, opiniones, e ir poco a poco adentrándote en el mundo erasmus, incluso sin haberte ido aún!!!</p></h3> 
 
-    {% if not user.is_authenticated %}
-      <center><p><a class="btn btn-success btn-lg" href="/accounts/register">REGISTRARME</a></p></center>
-    {% endif %}
+      {% if not user.is_authenticated %}
+        <center><p><a class="btn btn-success btn-lg" href="/accounts/register">REGISTRARME</a></p></center>
+      {% endif %}
     </div><!-- ./container --> 
  
 {% endblock %}

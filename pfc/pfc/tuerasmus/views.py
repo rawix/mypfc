@@ -306,6 +306,11 @@ def edit_profile(request, user):
                     lastname = form.cleaned_data['lastname']
                     description = form.cleaned_data['description']
                     image = form.cleaned_data['image']
+                    
+                    print name
+                    print lastname
+                    print description
+                    
                     print "la siguiente linea es el nombre de la imagen que se ha introducido en el formulario"
                     print str(image)
                     for u in tp:
@@ -354,7 +359,8 @@ def edit_profile(request, user):
                     # Invalid form
                     print "Formulario invalido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!99999999"
                     form = ProfileForm()
-                    ctx = {'alerterror':True, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                    ctx = {'alerterror':True, 'see_profile':False, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                    return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
                     
             else:
                 # Method not POST
@@ -2456,6 +2462,7 @@ def residences(request):
             print resi_menu
             try:
                 resi_data = Place.objects.filter(name=resi_menu)
+                
                 try:
                     resi_com = Comment.objects.filter(tag=resi_menu).order_by('day_publicated')
                 except Comment.DoesNotExist:
@@ -2526,8 +2533,12 @@ def subjects(request):
                 except Subjects.DoesNotExist:
                     # The subject selected doesn't exist in the DB
                     ctx = {'form_resi':True, 'sub_info':True, 'sub':sub, 'nsub':nsub, 'nuall':nuall, 'uall':uall, 'type_user': type_user, 'username':request.user.username} 
-            return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
-        
+            
+                return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
+            # Option is empty
+            else:
+                ctx = {'sub_empty':True, 'type_user': type_user, 'username':request.user.username}
+                return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
         else:        
             # Method is not POST
                    
