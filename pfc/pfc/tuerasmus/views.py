@@ -186,7 +186,11 @@ def profile(request, user):
             if (tt == str(i.username)):
                 type_user = str(i.type_user)
                 genero = str(i.genero) 
-                user_email = str(i.email)    
+                user_email = str(i.email)  
+                print tt  
+                print type_user
+                print genero
+                print user_email
                 
         # Get the path of the image and the user description
         for j in tp:
@@ -198,8 +202,8 @@ def profile(request, user):
                         path_image ="tuerasmus/male.jpg"
                     elif genero=="female":
                         path_image="tuerasmus/female.jpg"
-                    description = "Mi erasmus será genial"
-                    
+                    description = "Estudiante de la ETSIT"
+                    print "111111111111111111111111111111111111111111111!"
                 # No photo but yes description
                 elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
                     if genero=="male":
@@ -207,17 +211,18 @@ def profile(request, user):
                     elif genero=="female":
                         path_image="tuerasmus/female.jpg"               
                     description = str(j.description)
-                    
+                    print "22222222222222222222222222222222222222222222222"
                 # No description but yes photo
                 elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
                     path_image = "profiles/" + str(j.name_image)
-                    description = "Mi erasmus será genial"
-                    
+                    description = "Estudiante de la ETSIT"
+                    print "33333333333333333333333333333333333333333333333333333333333"
                 # Yes photo and description
                 elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
                     path_image = "profiles/" + str(j.name_image)
                     description = str(j.description)
-
+                    print "44444444444444444444444444444444444444444444444444444444444444444"
+                    
                 if (j.uni1=="") or (j.uni1==None):
                     showuni1 = False
                 elif not (j.uni1=="") and not (j.uni1==None):
@@ -278,8 +283,8 @@ def edit_profile(request, user):
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"
-                        description = "Mi erasmus será genial"
-                        
+                        description = "Estudiante de la ETSIT"
+                        print "!1111111111"
                     # No photo but yes description
                     elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
                         if genero=="male":
@@ -287,45 +292,49 @@ def edit_profile(request, user):
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"               
                         description = str(j.description)
+                        print "2222222222222222222222222"
                         
                     # No description but yes photo
                     elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
                         path_image = "profiles/" + str(j.name_image)
-                        description = "Mi erasmus será genial"
-                        
+                        description = "Estudiante de la ETSIT"
+                        print "3333333333333333333333333333"
                     # Yes photo and description
                     elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
                         path_image = "profiles/" + str(j.name_image)
                         description = str(j.description)
-                
+                        print "44444444444444444444444444444"
+                        
             if request.method=="POST":
                 form = ProfileForm(request.POST, request.FILES) 
                 if form.is_valid():
                     # Valid form
                     name = form.cleaned_data['name']
                     lastname = form.cleaned_data['lastname']
-                    description = form.cleaned_data['description']
+                    form_description = form.cleaned_data['description']
                     image = form.cleaned_data['image']
                     
-                    print name
-                    print lastname
-                    print description
+                    print "name " + name
+                    print "lastname " + lastname
+                    print "description " + form_description
                     
                     print "la siguiente linea es el nombre de la imagen que se ha introducido en el formulario"
-                    print str(image)
+                    print "image " + str(image)
+                    
                     for u in tp:
                         if (str(u.username) == tt):
                             if not (name==""):
                                 u.name = name
                             if not (lastname==""):
                                 u.lastname = lastname
-                            if not (description==""):
-                                u.description = description
-                            if not (str(image)=="") or not (str(image)==None):
-                                print "es name_image vacioooooooooooooooooooooooooooooooooooooooooo"
+                            if not (form_description==""):
+                                u.description = form_description
+                            if not (str(image)=="None"):
+                                print "es name_image no vacioooooooooooooooooooooooooooooooooooooooooo"
                                 print u.name_image
                                 
                                 if (u.name_image=="") or (u.name_image==None):
+                                    
                                     print "name_image es vacio en el usuario "
                                     # Saving the name of the file image.xxx
                                     u.name_image = str(image)
@@ -339,14 +348,21 @@ def edit_profile(request, user):
                                     u.name_image = str(image)
                                     u.image = image
                                     print "ya tenemos guardada la imagen nueva"
+                                    path_image = "profiles/" + u.name_image
+                            else:
+                                print "8888888888888888888888888888888888888888888888888888888888"
                                 
+                                path_image = "tuerasmus/" + genero + ".jpg"
+                           
+                                                                
                             print "recogi la info del form"
                             
                             u.save()
                             print "se han guardado los datos del perfil de usuario"
                             
                             us_image = UserProfile.objects.get(username=u.username)
-                            path_image="profiles/" + str(us_image.name_image)
+                            path_image = "profiles/" + str(us_image.name_image)
+                            description = us_image.description
                             form = ProfileForm()
                             
                             ctx = {'alertdone':True,  'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
@@ -2537,7 +2553,7 @@ def subjects(request):
                 return render_to_response('university/data_info.html', ctx, context_instance=RequestContext(request))
             # Option is empty
             else:
-                ctx = {'sub_empty':True, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'sub_empty':True, 'sub_info':True, 'type_user': type_user, 'username':request.user.username}
                 return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
         else:        
             # Method is not POST

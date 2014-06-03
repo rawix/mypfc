@@ -60,23 +60,29 @@
 
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
               <br>
-              {% if editpassword %}
+              <!--{% if editpassword %}
                 <p><h2>Modifica tu contraseña:</h2></p>
               {% else %}
                 {% if not alertdone %}
                   <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
                 {% endif %}
-              {% endif %}
+              {% endif %}-->
 
+              {% if not alertdone %}
+                <p><h2>Edita tus datos y carga una imagen nueva para tu perfil: </h2></p>
+              {% endif %}
+              
               {% if alerterror %}
                 <div class="alert alert-danger">
                   <center><strong>¡¡ERROR!!</strong>, asegúrate te introducir bien los datos</center>
+                  
                 </div>
               {% endif %}
 
               {% if alertdone %}
                 <div class="alert alert-success">
-                  <center><strong>BIEN!! <big>{{usu}}</big>, tus datos quedaron guardados correctamente!</strong></center>
+                  <center></strong><big>Tus datos quedaron guardados correctamente!</big></strong></center>
+                  <center><a class="btn btn-lg btn-primary" href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</center></a>
                 </div>
               {% endif %}
               
@@ -89,6 +95,11 @@
 
               {{form.as_p}}
               
+              <br>
+              {% if not alertdone %}
+                <h5>Si en lugar de subir una foto prefieres utilizar tu propio avatar créalo</h5>
+                <a class="btn btn-xs btn-danger" href="http://crearunavatar.com/" target="_blank">Mi avatar</a>
+              {% endif %}
               {% if not alertdone %}
                 <br><br>
                 <button class="btn btn-primary" type="submit">Guardar</button>
@@ -114,27 +125,27 @@
 
           <p>
             {% ifequal up_obj.name "" %}
-              <li>Nombre: {{up_obj.username}}</li>
+              <li>Nombre: <strong><big>{{up_obj.username}}</big></strong></li>
             {% else %}
-              <li>Nombre: {{up_obj.name}}</li>
+              <li>Nombre: <strong><big>{{up_obj.name}}</big></strong></li>
             {% endifequal %}
 
             {% ifnotequal up_obj.lastname "" %}
-              <li>Apellidos: {{up_obj.lastname}}</li>
+              <li>Apellidos: <strong><big>{{up_obj.lastname}}</big></strong></li>
             {% endifnotequal %}
             
-            <li>Descripción: {{description}}</li>
+            <li>Descripción: <strong><big>{{description}}</big></strong></li>
 
             {% if showuni1 %}
-              <li>Universidad Erasmus: {{up_obj.uni1}}</li>
+              <li>Universidad Erasmus: <strong><big>{{up_obj.uni1}}</big></strong></li>
             {% endif %} 
             
             {% if showuni2 %}
-              <li>Universidad Mundus: {{up_obj.uni2}}</li>
+              <li>Universidad Mundus: <strong><big>{{up_obj.uni2}}</big></strong></li>
             {% endif %} 
             
             {% ifnotequal  user_email "" %}
-              <li>Contacto: {{user_email}}</li>
+              <li>Contacto: <strong><big>{{user_email}}</big></strong></li>
             {% endifnotequal %} 
             
             <br><br>

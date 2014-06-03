@@ -70,7 +70,7 @@
         {% block content %}
         {% endblock %}
 
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="col-xs-6 sidebar-offcanvas" id="sidebar" role="navigation">
         
           <div class="well sidebar-nav">
             <ul class="nav">
@@ -83,9 +83,9 @@
               <li><a href="/tuerasmus/universities/urerasmus">Los erasmus</a></li>
               
               <li>Curiosidades</li>
-              <li><a href="/tuerasmus/universities/cities">Las ciudades</a></li>
-              <li><a href="/tuerasmus/universities/residences">Las residencias</a></li>
-              <li><a href="/tuerasmus/universities/subjects">Las asignaturas</a></li>
+              <li><a href="/tuerasmus/universities/subjects">Asignaturas</a></li>
+              <li><a href="/tuerasmus/universities/cities">Ciudades</a></li>
+              <li><a href="/tuerasmus/universities/residences">Residencias</a></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

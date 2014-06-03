@@ -62,7 +62,7 @@
 
   <div class="page-header">
     <h1><a href="/tuerasmus/university/{{uni_name}}" style="color: #424242">{{ uniname }}</a></h1>
-    <h6>Pincha sobre el nombre de la universidad para ir al perfil de la universidad</h6>
+    <h6>Pincha sobre el nombre de la universidad para ir a su perfil</h6>
   </div>
   
    

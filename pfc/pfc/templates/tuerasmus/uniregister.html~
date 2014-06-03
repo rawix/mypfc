@@ -52,7 +52,24 @@
           </div><!--./jumbotron-->
 
           <div class="row">
-            <div class="col-lg-12 col-xs-3" >
+            <div class="col-lg-12 col-xs-12" >
+              {% if info %}
+                {% if alertamax %}
+                  <div class="alert alert-info">
+                    <center>¡¡Universidad registrada!!</center>
+                  </div>
+                {% elif alertaerasmus %}
+                  <div class="alert alert-info">
+                    <center><strong>¡¡Tu universidad erasmus ya está registrada!!</strong></center>
+                    <h3><strong><center><a class="btn btn-success btn-lg" href="/tuerasmus/myuniversity/">Mi universidad</a></p></center></strong></h3>
+                  </div>
+                {% elif alertamundus %}
+                  <div class="alert alert-info">
+                    <center><strong>¡¡Tu universidad munde ya está registrada!!</strong></center>
+                  </div>
+                {% endif %}
+              {% endif %}                
+              
               <h1>Registra tu universidad erasmus</h1><br>
               <h3>Si también has disfrutado de una beca munde registra esa universidad</h3><br><br>
               
@@ -72,22 +89,7 @@
 	                </div><!--./alerterror-->
                 {% endif %}
 
-                {% if info %}
-                  {% if alertamax %}
-	                  <div class="alert alert-info">
-	                    <center>¡¡Universidad registrada!!</center>
-	                  </div>
-                  {% elif alertaerasmus %}
-	                  <div class="alert alert-info">
-	                    <center><strong>¡¡Tu universidad erasmus ya está registrada!!</strong></center>
-	                  </div>
-                  {% elif alertamundus %}
-	                  <div class="alert alert-info">
-	                    <center><strong>¡¡Tu universidad munde ya está registrada!!</strong></center>
-	                  </div>
-                  {% endif %}
-                {% endif %}                
-                
+
                 {% if not alertdone %}
                   <h5>Busca tu universidad en el listado o introdúcela en el recuadro de abajo</h5><br>
                   <div class="col-lg-6" >
@@ -136,7 +138,6 @@
               
              </div><!--./col-lg-12 -->
           </div><!--./row -->
-
         </div><!--./span-->
      
 {% endblock %}
