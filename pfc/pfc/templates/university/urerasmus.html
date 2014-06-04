@@ -71,9 +71,8 @@
                         {% for item in uni.list %}
                             {% for i in item.useuni.all %}
                               {% ifnotequal i.username user.username %}
-                                <li><a href="/tuerasmus/{{i.username}}/profile">{{i.username}}</a></li>
-                              {% else %}
-                                <h3>Eres el único erasmus registrado</h3> 
+                                <li><a href="/tuerasmus/{{i.username}}/profile"><strong><big>{{i.username}}</big></strong></a></li>
+                              
                               {% endifnotequal %}
                             {% empty %}
                               <h3><strong> No hay erasmus en esta universidad registrados </strong></h3> 

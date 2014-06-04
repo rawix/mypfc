@@ -41,9 +41,7 @@
           <p>Cada vez recurrimos más y más a esta nueva red social para realizar nuestros desplazamientos de una manera mucho más cómoda. Entra y regístrate para poder organizar y planificar mejor tus viajes.</p>
           <p><a class="btn btn-primary" href="http://www.blablacar.com/" target="_blank">BlaBlaCar &raquo;</a></p>
         </div>
-
       </div><!-- ./row 2 -->
-
     </div><!-- /container -->
 
 	{% endblock %}

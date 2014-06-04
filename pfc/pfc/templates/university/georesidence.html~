@@ -227,7 +227,8 @@
                     {{i.postalcode}}<br>
                     {{i.city}}<br>
                     {% ifnotequal i.phone None %}
-                    (+{{uni.prefix}}) {{i.phone}}<br>
+                      (+{{uni.prefix}}) {{i.phone}}<br>
+                    {% endifnotequal %}
                     <!--{{i.country}}<br>
                   <abbr title="Phone">Tlf de contacto: </abbr> (+{{i.prefix}}) {{i.phone}}<br>-->
                   </h4>

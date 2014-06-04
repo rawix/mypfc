@@ -377,10 +377,10 @@ class UserProfile(models.Model):
     score = models.ForeignKey(Score, null=True, blank=True);
         
     def __unicode__(self):
-        return unicode(self.username);
-        
-    def __str__(self):
         return self.username;
+        
+    #def __str__(self):
+    #    return self.username;
         
 # ------------------------------------------------------------------------------
 #                               UsersUniversity class.

@@ -10,7 +10,6 @@
 # Libraries.
 import sys
 
-
 # Forms
 from django.forms import ModelForm
 from django import forms
@@ -58,7 +57,6 @@ from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CommentForm, Costu
 # ----------------------------------------------------------------------
 
 
-
 #Desactivation of CSRF
 @csrf_exempt
 
@@ -88,30 +86,30 @@ def home(request, user):
             for j in tp:              
                 if (tt == str(j.username)):
                     # No photo and no description
-                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                    if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and ((j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"
-                        description = "Mi erasmus será genial"
+                        description = "Estudiante de la ETSIT"
                         
                     # No photo but yes description
-                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                    elif ((str(j.name_image)=="") or (str(j.name_image)=="None")) and not ((j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"               
-                        description = str(j.description)
+                        description = (j.description)
                         
                     # No description but yes photo
-                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    elif ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                         path_image = "profiles/" + str(j.name_image)
-                        description = "Mi erasmus será genial"
+                        description = "Estudiante de la ETSIT"
                     
                      # Yes photo and description
-                    elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    elif not ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                         path_image = "profiles/" + str(j.name_image)
-                        description = str(j.description)
+                        description = (j.description)
                         
 
             # Return the template
@@ -197,7 +195,7 @@ def profile(request, user):
         
             if (tt == str(j.username)):
                 # No photo and no description
-                if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and ((j.description)==""):
                     if genero=="male":
                         path_image ="tuerasmus/male.jpg"
                     elif genero=="female":
@@ -205,22 +203,22 @@ def profile(request, user):
                     description = "Estudiante de la ETSIT"
                     print "111111111111111111111111111111111111111111111!"
                 # No photo but yes description
-                elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                elif ((str(j.name_image)=="") or (str(j.name_image)=="None")) and not ((j.description)==""):
                     if genero=="male":
                         path_image ="tuerasmus/male.jpg"
                     elif genero=="female":
                         path_image="tuerasmus/female.jpg"               
-                    description = str(j.description)
+                    description = (j.description)
                     print "22222222222222222222222222222222222222222222222"
                 # No description but yes photo
-                elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                elif ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                     path_image = "profiles/" + str(j.name_image)
                     description = "Estudiante de la ETSIT"
                     print "33333333333333333333333333333333333333333333333333333333333"
                 # Yes photo and description
-                elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
+                elif not ((j.description)=="") and (not (str(j.name_image)=="None") or not (str(j.name_image)=="")):
                     path_image = "profiles/" + str(j.name_image)
-                    description = str(j.description)
+                    description = (j.description)
                     print "44444444444444444444444444444444444444444444444444444444444444444"
                     
                 if (j.uni1=="") or (j.uni1==None):
@@ -278,7 +276,7 @@ def edit_profile(request, user):
                 
                 if (tt == str(j.username)):
                     # No photo and no description
-                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                    if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and ((j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
@@ -286,23 +284,23 @@ def edit_profile(request, user):
                         description = "Estudiante de la ETSIT"
                         print "!1111111111"
                     # No photo but yes description
-                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                    elif ((str(j.name_image)=="") or (str(j.name_image)=="None")) and not ((j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"               
-                        description = str(j.description)
+                        description = (j.description)
                         print "2222222222222222222222222"
                         
                     # No description but yes photo
-                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    elif ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                         path_image = "profiles/" + str(j.name_image)
                         description = "Estudiante de la ETSIT"
                         print "3333333333333333333333333333"
                     # Yes photo and description
-                    elif not (str(j.description)=="") and not (str(j.name_image)=="None") or not (str(j.name_image)==""):
+                    elif not ((j.description)=="") and (not (str(j.name_image)=="None") or not (str(j.name_image)=="")):
                         path_image = "profiles/" + str(j.name_image)
-                        description = str(j.description)
+                        description = (j.description)
                         print "44444444444444444444444444444"
                         
             if request.method=="POST":
@@ -1620,28 +1618,28 @@ def myuniversity(request, user):
                     genero = str(i.genero)
             for j in tp:
                 print "nombre de la imagen 7777777777777777777777777: " + str(j.name_image) + str(j.username)
-                print "description 7777777777777777777777777: " + str(j.description) + str(j.username)
+                print "description 7777777777777777777777777: " + (j.description) + str(j.username)
                 if (tt == str(j.username)):
-                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                    if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and ((j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"
-                        description = "Mi erasmus será genial"
+                        description = "Estudiante de la ETSIT"
                         
-                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                    elif ((str(j.name_image)=="") or (str(j.name_image)=="None")) and not ((j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"               
-                        description = str(j.description)
+                        description = (j.description)
                         
-                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    elif ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                         path_image = "profiles/" + str(j.name_image)
-                        description = "Mi erasmus será genial"
-                    elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                        description = "Estudiante de la ETSIT"
+                    elif not ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                         path_image = "profiles/" + str(j.name_image)
-                        description = str(j.description)
+                        description = (j.description)
                         
                 print "voy a imprimir path_image 7777777777777777777777777777777" + str(j.username)
                 print path_image     
@@ -2255,15 +2253,17 @@ def myerasmus(request, user):
             uni2=""
             uu1_list=""
             uu2_list=""
+            uu1_list_empty=""
+            uu2_list_empty=""
             tp = UserProfile.objects.all()
             for j in tp:
                 if (tt==str(j.username)):
-                    if not (j.uni1=="") and not (j.uni2==""):
+                    if (not (j.uni1=="")) and (not (j.uni2=="")):
                         uni1 = j.uni1
                         uni2 = j.uni2   
-                    elif not (j.uni1=="") and (j.uni2==""):
+                    elif (not (j.uni1=="")) and (j.uni2==""):
                         uni1 = j.uni1
-                    elif (j.uni1=="") and not (j.uni2==""):
+                    elif (j.uni1=="") and (not (j.uni2=="")):
                         uni2 = j.uni2
                     elif (j.uni1=="") and (j.uni2==""):
                         uni1=""
@@ -2275,11 +2275,19 @@ def myerasmus(request, user):
             else:       
                 try:
                     u1 = University.objects.get(uni=uni1)
+                    print "u1"
                     try:
                         nuu1 = UsersUniversity.objects.filter(uni=u1).count()
                         print "Campos con el nombre de esa universidad: " + str(nuu1)
                         uu1 = UsersUniversity.objects.get(uni=u1)
                         uu1_list = uu1.useuni.all().order_by('username')
+                        if (uu1_list.count() == 0):
+                            print "no hay alumnnos en uu1_list"
+                            uu1_list_empty = True
+                        else:
+                            print "si hay alumnos"
+                            uu1_list_empty = False
+                            
                         for i in uu1.useuni.all():
                             print i.username
                         
@@ -2289,14 +2297,25 @@ def myerasmus(request, user):
                         uu1 = ""
                 except University.DoesNotExist:
                     u1=""
+                    print "u1 vacio"
                     
                 try:
                     u2 = University.objects.get(uni=uni2)
+                    print "u2"
                     try:
                         nuu2 = UsersUniversity.objects.filter(uni=u2).count()
                         print "Campos con el nombre de esa universidad: " + str(nuu2)
                         uu2 = UsersUniversity.objects.get(uni=u2)
                         uu2_list = uu2.useuni.all().order_by('username')
+                        
+                        if (uu2_list.count() == 0):
+                            print "no hay alumnnos en uu2_list"
+                            uu2_list_empty = True
+                        else:
+                            print "si hay alumnos"
+                            uu2_list_empty = False
+                            
+                            
                         for i in uu2.useuni.all():
                             print i.username
                         
@@ -2306,6 +2325,7 @@ def myerasmus(request, user):
                         uu2 = ""
                 except University.DoesNotExist:
                     u2=""
+                    print "u2 vacio"
 
             print "Vamos a hacer un try para ver como conseguimos los datos que queremos de user"
             try:
@@ -2337,13 +2357,13 @@ def myerasmus(request, user):
                     pass
 
                 if reco1 and not reco2:                
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 elif reco2 and not reco1:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 elif reco1 and reco2:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 else:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 
                     
 
@@ -2640,24 +2660,24 @@ def edit_password(request, user):
                 print "nombre de la imagen 555555555555555555555555: " + str(j.name_image) +" "+ str(j.username)
                 print "description 5555555555555555555555555555: " + str(j.description) +" "+ str(j.username)
                 if (tt == str(j.username)):
-                    if (str(j.name_image)=="") or (str(j.name_image)=="None") and (str(j.description)==""):
+                    if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and (str(j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"
-                        description = "Mi erasmus será genial"
+                        description = "Estudiante de la ETSIT"
                         
-                    elif (str(j.name_image)=="") or (str(j.name_image)=="None") and not (str(j.description)==""):
+                    elif ((str(j.name_image)=="") or (str(j.name_image)=="None")) and not (str(j.description)==""):
                         if genero=="male":
                             path_image ="tuerasmus/male.jpg"
                         elif genero=="female":
                             path_image="tuerasmus/female.jpg"               
                         description = str(j.description)
                         
-                    elif (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                    elif (str(j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                         path_image = "profiles/" + str(j.name_image)
-                        description = "Mi erasmus será genial"
-                    elif not (str(j.description)=="") and not (str(j.name_image)=="") or not (str(j.name_image)=="None"):
+                        description = "Estudiante de la ETSIT"
+                    elif not (str(j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                         path_image = "profiles/" + str(j.name_image)
                         description = str(j.description)
                         
@@ -2731,6 +2751,7 @@ def edit_password(request, user):
         print "EDIT_PASSWORD: usuario no logueado"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
+        
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # Name: COMMENTS
