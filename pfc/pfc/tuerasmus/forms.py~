@@ -59,8 +59,8 @@ class RegisterForm(forms.Form):
 #            Class ProfileForm: to change the user profile 
 #----------------------------------------------------------------------------
 class ProfileForm(forms.Form):
-    name = forms.CharField(label="Nombre", widget=forms.TextInput(), error_messages={'required': 'Debes introducir tu nombre'})
-    lastname = forms.CharField(label="Apellidos", widget=forms.TextInput(), error_messages={'required': 'Debes introducir tus apellidos'})
+    name = forms.CharField(label="Nombre", widget=forms.TextInput(), required=False)
+    lastname = forms.CharField(label="Apellidos", widget=forms.TextInput(), required=False)
     description = forms.CharField(label="Cómo te definirías en pocas palabras", required=False)
     image = forms.ImageField(label="Imagen de perfil", required=False)
 

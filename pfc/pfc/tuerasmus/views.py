@@ -1064,7 +1064,7 @@ def uninfo(request, uni_name, type_info):
             return HttpResponseRedirect(ur) 
             
             
-            
+        uni=""  
         path_image=""
         try:
             
@@ -1152,7 +1152,7 @@ def uninfo(request, uni_name, type_info):
                     print len(matriz)
 
                     ctx = {'mispuntos':matriz, 'longitud':len(matriz), 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
-                return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
+                    return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
 
             elif type_info=="subjects":
                 print "muestro la info subjects"
@@ -1166,8 +1166,8 @@ def uninfo(request, uni_name, type_info):
             elif type_info=="city":
                 print "muestro la info city"
                 info="city"
-                info_city = InfoBasic.objects.get(uni=uniname)
-                print "88888888888888888888888888888888888888888la ciudad que quiero mostrar de la universidad es: " + str(info_city.city)
+                #info_city = InfoBasic.objects.get(uni=uniname)
+                #print "88888888888888888888888888888888888888888la ciudad que quiero mostrar de la universidad es: " + str(info_city.city)
                 info_list=City.objects.filter(uni=uniname)
                 for i in info_list:
                     print i.cityname
