@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+    <!--link rel="shortcut icon" href="../../assets/ico/favicon.png"-->
 
     {% if not user.is_authenticated %}
       <title>Bienvenido a TuErasmus</title> 
@@ -14,10 +14,10 @@
     {% endif %} 
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}/dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}/examples/jumbotron/jumbotron.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,13 +58,13 @@
             </div>
             <button type="submit" class="btn btn-danger" value="login">Entrar</button>
             <div class="form-group">
-              {% if alertlogin %}
-                <!--<div class="alert alert-danger">¡¡ERROR!!</div>-->
-                <div class="alert alert-danger alert-dismissable">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <strong>¡¡Datos erróneos!!</strong>
-                </div>
-              {% endif %}
+            {% if alertlogin %}
+              <!--<div class="alert alert-danger">¡¡ERROR!!</div>-->
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>¡¡Datos erróneos!!</strong>
+              </div>
+            {% endif %}
             </div>
           </form>
           

@@ -1076,10 +1076,12 @@
       {% endifequal %}
 
       {% ifequal info "city" %}  
-        <h3>La ciudad de la universidad: {{i.cityname}}</h3>
+        
           <ul>
           {% for i in info_list %}
-            <p><strong>{{i.username}}</strong> escribió: </p>
+            <h3>La ciudad de la universidad: {{i.cityname}}</h3>
+            
+            <p><strong>{{i.username}}</strong></p>
             <li><p><strong>Coste de la vida</strong>: {{i.prices}}
             
                 <!--The comment owner can modify it -->

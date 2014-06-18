@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-
+    
     # Loading url
     url(r'^loadUniversity/$', 'pfc.views.loadUniversity', name='loadUniversity'),
 

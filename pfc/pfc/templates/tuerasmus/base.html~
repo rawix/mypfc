@@ -13,10 +13,10 @@
 
     
     <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template: Bootstrap offcanvas -->
-    <link href="/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}/examples/offcanvas/offcanvas.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -64,7 +64,7 @@
         {% block content %}
         {% endblock %}
         
-        <div class="col-xs-6 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="col-xs-3 sidebar-offcanvas" id="sidebar" role="navigation">
         
           <div class="well sidebar-nav">
             <ul class="nav">

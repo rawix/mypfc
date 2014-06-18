@@ -6,6 +6,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
+    # Static files
+    url(r'^static/$', '', name=''),
+    
     # Loading url
     url(r'^loadUniversity/$', 'pfc.views.loadUniversity', name='loadUniversity'),
 
@@ -13,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^tuerasmus/$', 'pfc.views.index', name='index'),
     url(r'^contact/$', 'pfc.views.contact', name='contact'),
     url(r'^howto/$', 'pfc.views.howto', name='howto'),
+    url(r'^contactform/$', 'pfc.views.contactform', name='contactform'),
 
     # User auth urls
     url(r'^accounts/logout/$', 'pfc.views.logout', name='logout'),

@@ -101,7 +101,7 @@
                 <address>
                   <br><br>
                   <h3>
-                  <strong>{{uniobj.uni}}</strong></h3><br>
+                  <strong>{{uniobj.uni}}</strong></h3>
                   <h4>
                     {{uniobj.address}}<br>
                     {{uniobj.postalcode}}<br>

@@ -41,5 +41,8 @@ urlpatterns = patterns('',
     
     # URLs enabled to view images
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
+    # URLs enabled to view static files
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT,}),
+
 
 )
