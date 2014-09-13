@@ -304,9 +304,10 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: #F4FA58;
-  /*background-color: #A4A4A4;*/
-  /*background-color: #DF3A01;*/
+  /*background-color: #A4A4A4; gris*/
+  /*background-color: #F4FA58; amarillo*/
+  background-color: #D8D8D8;/*rojo*/
+  
   /*background: url("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTCKd7AOxionaBd7NFN42DCPNLfFbyhI_Jkb2Kqd7MxLrk4Uia1") top left, no-repeat, fixed;*/
   /*background: url("http://walpaper.es/images/wallpapers/Fondos-mapa-mundi-827982.jpeg") top left, no-repeat, fixed;*/
   /*background: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTcwcFMdBRj03bNUOE4QHFRr4RswIu9AXu69JRuh6wok1KKIR_Q") top left, no-repeat, fixed;*/

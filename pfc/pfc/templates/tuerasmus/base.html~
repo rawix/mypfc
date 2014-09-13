@@ -13,10 +13,10 @@
 
     
     <!-- Bootstrap core CSS -->
-    <link href="{{STATIC_URL}}/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/tuerasmus/static/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template: Bootstrap offcanvas -->
-    <link href="{{STATIC_URL}}/examples/offcanvas/offcanvas.css" rel="stylesheet">
+    <link href="/tuerasmus/static/examples/offcanvas/offcanvas.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

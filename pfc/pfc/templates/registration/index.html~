@@ -12,15 +12,15 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Bienvenido a TuErasmus</h1>
-        <p>¡¡Comienza a preparar tu nueva experiencia!! Si aún no te has registrado, haz click en el botón de abajo y comienza a disfrutar.</p>
-        <p><a class="btn btn-success btn-lg" href="/accounts/register">Registrar</a></p>
+        <p>¡¡Comienza a preparar tu nueva experiencia!! Si aún no te has registrado, haz click en Registrarme y comienza a disfrutar.</p>
+        <p><a class="btn btn-success btn-lg" href="/accounts/register">Registrarme</a></p>
       </div>
     </div>
 
     <!-- Web content -->
     <div class="container">
       <br><br>
-      <h2 color="#2E2E2E"> ¡¡Más ideas que podrán serte útiles!! ¡¡Te darán ideas para hacer las cosas de distintas maneras!!</h2>
+      <h2 color="#2E2E2E"> ¡¡Existen diversas webs que podrán serte útiles!! ¡¡Te darán ideas para hacer las cosas de distina manera!!</h2>
       
       <!-- Row 2 of columns -->
       <div class="row">
