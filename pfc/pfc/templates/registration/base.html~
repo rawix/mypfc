@@ -14,10 +14,10 @@
     {% endif %} 
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/tuerasmus/static/dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <link href="/tuerasmus/static/examples/jumbotron/jumbotron.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -134,7 +134,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
+    <!-- script src="/tuerasmus/static/assets/js/jquery.js"></script -->
+    <script src="ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/tuerasmus/static/dist/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -23,94 +23,261 @@
 
 {% block data_info %}
 
+
   <!-- BLOQUE CIUDADES -->  
 
   {% if cityData %}
-    <h2><strong>{{city_menu}}</strong></h2>
-    
-    <h3>Precios:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.prices}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    
-    <h3>Zona universitaria:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Vida estudiantil:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Turismo:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.turism}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Fiestas:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.party}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Cultura de la ciudad:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.culture}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Delincuencia de la ciudad:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.crime}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Compras en la ciudad:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.shopping}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-    
-    <h3>Vida de los erasmus:</h3>
-    <ul>
-      {% for i in city_data %}
-        <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}</p></li>
-      {% empty %}
-        <li><p>Lo siento, pero no hay nada escrito.</p></li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-  
+    <form action="/tuerasmus/university/{{uni_id}}/" enctype="multipart/form-data" method="post"> {% csrf_token %}
+      <h2><strong>{{city_menu}}</strong></h2>
+
+      <h3>Precios:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.prices}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("prices","prices2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("prices","prices2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="prices" class="form-control" name="new_prices" style ="display:none" row="3" col="5"> {{i.prices}} </textarea>
+              <button id="prices2" style ="display:none" class="btn btn-sm btn-primary" value="prices" name="button" type="submit"> Guardar </button>
+                    
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      
+      <h3>Zona universitaria:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.uniarea}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("uniarea","uniarea2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("uniarea","uniarea2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="uniarea" class="form-control" name="new_uniarea" style ="display:none" row="3" col="5"> {{i.uniarea}} </textarea>
+              <button id="uniarea2" style ="display:none" class="btn btn-sm btn-primary" value="uniarea" name="button" type="submit"> Guardar </button>        
+          
+          
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Vida estudiantil:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.studentlife}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("studentlife","studentlife2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("studentlife","studentlife2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="studentlife" class="form-control" name="new_studentlife" style ="display:none" row="3" col="5"> {{i.studentlife}} </textarea>
+              <button id="studentlife2" style ="display:none" class="btn btn-sm btn-primary" value="studentlife" name="button" type="submit"> Guardar </button>         
+          
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Turismo:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.turism}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("turism","turism2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("turism","turism2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="turism" class="form-control" name="new_turism" style ="display:none" row="3" col="5"> {{i.turism}} </textarea>
+              <button id="turism2" style ="display:none" class="btn btn-sm btn-primary" value="turism" name="button" type="submit"> Guardar </button>         
+          
+          
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Fiestas:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.party}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("party","party2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("party","party2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="party" class="form-control" name="new_party" style ="display:none" row="3" col="5"> {{i.party}} </textarea>
+              <button id="party2" style ="display:none" class="btn btn-sm btn-primary" value="party" name="button" type="submit"> Guardar </button>         
+          
+          
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Cultura de la ciudad:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.culture}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("culture","culture2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("culture","culture2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="culture" class="form-control" name="new_culture" style ="display:none" row="3" col="5"> {{i.culture}} </textarea>
+              <button id="culture2" style ="display:none" class="btn btn-sm btn-primary" value="culture" name="button" type="submit"> Guardar </button>         
+          
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Delincuencia de la ciudad:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.crime}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("crime","crime2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("crime","crime2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="crime" class="form-control" name="new_crime" style ="display:none" row="3" col="5"> {{i.crime}} </textarea>
+              <button id="crime2" style ="display:none" class="btn btn-sm btn-primary" value="crime" name="button" type="submit"> Guardar </button>
+                      
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Compras en la ciudad:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.shopping}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("shopping","shopping2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("shopping","shopping2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="shopping" class="form-control" name="new_shopping" style ="display:none" row="3" col="5"> {{i.shopping}} </textarea>
+              <button id="shopping2" style ="display:none" class="btn btn-sm btn-primary" value="shopping" name="button" type="submit"> Guardar </button>        
+          
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+      
+      <h3>Vida de los erasmus:</h3>
+      <ul>
+        {% for i in city_data %}
+          <li><p><strong>{{i.username}}</strong>: {{i.erasmuslife}}
+          
+            <!--The comment owner can modify it -->
+                
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+              
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("erasmuslife","erasmuslife2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("erasmuslife","erasmuslife2")'> Cancelar </a> 
+              
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="erasmuslife" class="form-control" name="new_erasmuslife" style ="display:none" row="3" col="5"> {{i.erasmuslife}} </textarea>
+              <button id="erasmuslife2" style ="display:none" class="btn btn-sm btn-primary" value="erasmuslife" name="button" type="submit"> Guardar </button>             
+          
+          </p></li>
+        {% empty %}
+          <li><p>Lo siento, pero no hay nada escrito.</p></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </form>
   
   
   <!-- BLOQUE RESIDENCIAS -->  
@@ -123,14 +290,31 @@
     
     {% for i in resi_data %}
       <br><br><br>
-      <img src={{i.image}} width="300px" heigth="300px"/><br><br><br>
+      <img src={{i.image}} width="300px" heigth="300px"/><br>
       <li>Comentarios hechos por: <strong>{{i.username}}</strong>
         
           <ul>
           {% for i in resi_com %}
             <li><h3>{{i.title}}</h3>
-                <p>{{i.text}}</p>
-            </li>
+                <p>{{i.text}}
+                
+                <!--The comment owner can modify it -->
+                    
+                  <!-- Information about de comment -->
+                  <input type="hidden" name="commentid" value="{{i.id}}">
+                  <input type="hidden" name="info" value="{{info}}">
+                  
+                  <!-- Buttons to modify or cancel -->
+                  <a type="submit" class="btn btn-xs btn-default" onclick='showText("text","text2")'> Modificar </a>
+                  <a type="submit" class="btn btn-xs btn-default" onclick='hideText("text","text2")'> Cancelar </a> 
+                  
+                  <br><br>
+                   
+                  <!-- The new comment -->
+                  <textarea id="text" class="form-control" name="new_text" style ="display:none" row="3" col="5"> {{i.text}} </textarea>
+                  <button id="text2" style ="display:none" class="btn btn-sm btn-primary" value="text" name="button" type="submit"> Guardar </button>                 
+                
+            </p></li>
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
