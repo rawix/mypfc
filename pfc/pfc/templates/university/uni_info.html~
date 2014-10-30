@@ -928,7 +928,7 @@
                 
                 
                 </p>
-                <p><strong>Asignatura por convenio</strong>: {{i.subnameout1}}
+                <p><strong>Asignatura por convenio</strong>: {{i.subnameout}}
                 
                     <!--The comment owner can modify it -->
 
@@ -938,14 +938,14 @@
                     <input type="hidden" name="info" value="{{info}}">
                     
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("subnameout","subnameout2")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("subnameout","subnameout2")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("subnameout1","subnameout12")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("subnameout1","subnameout12")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="subnameout" class="form-control" name="new_subnameout" style ="display:none" row="3" col="5"> {{i.subnameout}} </textarea>
-                    <button id="subnameout2" style ="display:none" class="btn btn-sm btn-primary" value="subnameout" name="button" type="submit"> Guardar </button>
+                    <textarea id="subnameout1" class="form-control" name="new_subnameout1" style ="display:none" row="3" col="5"> {{i.subnameout}} </textarea>
+                    <button id="subnameout12" style ="display:none" class="btn btn-sm btn-primary" value="subnameout1" name="button" type="submit"> Guardar </button>
 
                 
                 
@@ -991,7 +991,7 @@
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="subnameout3" class="form-control" name="new_more" style ="display:none" row="3" col="5"> {{i.subnameout3}} </textarea>
+                    <textarea id="subnameout3" class="form-control" name="new_subnameout3" style ="display:none" row="3" col="5"> {{i.subnameout3}} </textarea>
                     <button id="subnameout32" style ="display:none" class="btn btn-sm btn-primary" value="subnameout3" name="button" type="submit"> Guardar </button>
 
                 
@@ -1015,7 +1015,7 @@
                     
                     <!-- The new comment --> 
                     <textarea id="works" class="form-control" name="new_works" style ="display:none" row="3" col="5"> {{i.works}} </textarea>
-                    <button id="works2" style ="display:none" class="btn btn-sm btn-primary" value="mor" name="button" type="submit"> Guardar </button>
+                    <button id="works2" style ="display:none" class="btn btn-sm btn-primary" value="works" name="button" type="submit"> Guardar </button>
 
                 
                 
@@ -1061,7 +1061,7 @@
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="difficult" class="form-control" name="new_more" style ="display:none" row="3" col="5"> {{i.difficult}} </textarea>
+                    <textarea id="difficult" class="form-control" name="new_difficult" style ="display:none" row="3" col="5"> {{i.difficult}} </textarea>
                     <button id="difficult2" style ="display:none" class="btn btn-sm btn-primary" value="difficult" name="button" type="submit"> Guardar </button>
 
                 

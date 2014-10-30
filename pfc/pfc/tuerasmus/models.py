@@ -349,7 +349,7 @@ class InfoResidence(models.Model):
         return self.uni;
         
     def __str__(self):
-        return self.uni;
+        return str(self.uni);
 
 # ------------------------------------------------------------------------------
 #                               UserProfile class.
@@ -379,8 +379,8 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.username;
         
-    #def __str__(self):
-    #    return self.username;
+    def __str__(self):
+        return self.username;
         
 # ------------------------------------------------------------------------------
 #                               UsersUniversity class.

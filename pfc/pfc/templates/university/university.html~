@@ -68,7 +68,7 @@
             <div class="page-header">
               <p>
                 <h1>¿¡Qué quieres conocer de esta universidad!?</h1>
-                <a href="/tuerasmus/uniedit/{{uni_name}}" class="btn btn-lg btn-primary" type="submit">Editar perfil</a>
+                <a href="/tuerasmus/uniedit/{{uni_name}}" class="btn btn-sm btn-primary" type="submit">Editar perfil</a>
               </p>
             </div>
             <p>
@@ -95,9 +95,9 @@
             {% block on_georesidence %}
             {% endblock %}
             
-            <!-- To show all the university information:  -->
+            <!-- To show all the university information:  
             {% block all_info %}
-            {% endblock %}      
+            {% endblock %}-->      
 
             <!-- To show specific university information: university/uni_info.html -->
             {% block uni_info %}

@@ -20,7 +20,7 @@ from tuerasmus.models import City, Cities, Comment, Countries, InfoBasic, InfoGe
 class RegisterForm(forms.Form):
     username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un nombre de usuario'})
     email = forms.EmailField(label="Correo electrónico (gmail)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un correo electrónico', 'invalid':u'Introduce un correo válido'})
-    password_one = forms.CharField(label="Contraseña (6 caracteres)", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes introducir una contraseña'})
+    password_one = forms.CharField(label="Contraseña (6 o más caracteres)", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes introducir una contraseña'})
     password_two = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes volver a introducir la contraseña'})
     #day = forms.DateField(label="Fecha de registro", widget=forms.TextInput(), initial=datetime.date.today)
 
@@ -113,60 +113,61 @@ class BasicForm(forms.Form):
     image = forms.ImageField(label="Imagen de universidad", error_messages={'required': 'Debes seleccionar una imagen'})
     description = forms.CharField(label="Descripción breve sobre la universidad", widget=forms.Textarea(), error_messages={'required': 'Debes introducir una breve descripción'})
 
+
+
 #----------------------------------------------------------------------------
 #            Class AreaForm: to change the university profile   
 #----------------------------------------------------------------------------
 class AreaForm(forms.Form):
-    qualification = forms.CharField(label="Titulación impartida", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    specialty = forms.CharField(label="Especialidades", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    teachingequipment = forms.CharField(label="Equipamiento docente", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    qualification = forms.CharField(label="Titulación impartida", widget=forms.Textarea(), required=False)
+    specialty = forms.CharField(label="Especialidades", widget=forms.Textarea(), required=False)
+    teachingequipment = forms.CharField(label="Equipamiento docente", widget=forms.Textarea(), required=False)
     # SubMenu
-    library = forms.CharField(label="Bibliotecas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    lab = forms.CharField(label="Laboratorios", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    computerequipment = forms.CharField(label="Equipos informáticos", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'}) 
+    library = forms.CharField(label="Bibliotecas", widget=forms.Textarea(), required=False)
+    lab = forms.CharField(label="Laboratorios", widget=forms.Textarea(), required=False)
+    computerequipment = forms.CharField(label="Equipos informáticos", widget=forms.Textarea(), required=False)
 
-    others = forms.CharField(label="Otras observaciones", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    others = forms.CharField(label="Otras observaciones", widget=forms.Textarea(), required=False)
     # SubMenu
-    dinningroom = forms.CharField(label="Comedores universitarios", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    cafeteria = forms.CharField(label="Cafeterías", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    sportactivities = forms.CharField(label="Actividades deportivas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    asociation = forms.CharField(label="Asociaciones universitarias", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    languagecourse = forms.CharField(label="Cursos de idiomas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    dinningroom = forms.CharField(label="Comedores universitarios", widget=forms.Textarea(), required=False)
+    cafeteria = forms.CharField(label="Cafeterías", widget=forms.Textarea(), required=False)
+    sportactivities = forms.CharField(label="Actividades deportivas", widget=forms.Textarea(), required=False)
+    asociation = forms.CharField(label="Asociaciones universitarias", widget=forms.Textarea(), required=False)
+    languagecourse = forms.CharField(label="Cursos de idiomas", widget=forms.Textarea(), required=False)
   
-    schoolyear = forms.CharField(label="Periodo lectivo", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    vacations = forms.CharField(label="Vacaciones/Fiestas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    compteleco = forms.CharField(label="Dificultades en los estudios", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    schoolyear = forms.CharField(label="Periodo lectivo", widget=forms.Textarea(), required=False)
+    vacations = forms.CharField(label="Vacaciones/Fiestas", widget=forms.Textarea(), required=False)
+    compteleco = forms.CharField(label="Dificultades en los estudios", widget=forms.Textarea(), required=False)
     # SubMenu
-    teachers = forms.CharField(label="Calidad/Dedicación/Atención de profesorado", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    teaching = forms.CharField(label="Calidad global de la enseñanza", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    studies = forms.CharField(label="Nivel de exigencia de los estudios", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    teachers = forms.CharField(label="Calidad/Dedicación/Atención de profesorado", widget=forms.Textarea(),  required=False)
+    teaching = forms.CharField(label="Calidad global de la enseñanza", widget=forms.Textarea(), required=False)
+    studies = forms.CharField(label="Nivel de exigencia de los estudios", widget=forms.Textarea(), required=False)
   
 #----------------------------------------------------------------------------
 #            Class CostumerServiceForm: to change the university profile   
 #----------------------------------------------------------------------------
 class CostumeServiceForm(forms.Form):
-    costume = forms.CharField(label="Atención a los estudiantes Erasmus", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    costume = forms.CharField(label="Atención a los estudiantes Erasmus", widget=forms.Textarea(), required=False)
     # SubMenu
-    meetings = forms.CharField(label="Reuniones para Erasmus", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    offices = forms.CharField(label="Oficinas de Asuntos Extranjeros", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    meetings = forms.CharField(label="Reuniones para Erasmus", widget=forms.Textarea(), required=False)
+    offices = forms.CharField(label="Oficinas de Asuntos Extranjeros", widget=forms.Textarea(), required=False)
 
 #----------------------------------------------------------------------------
 #            Class DocumentationForm: to change the university profile   
 #----------------------------------------------------------------------------
 class DocumentationForm(forms.Form):
-    unidoc = forms.CharField(label="Documentación necesaria", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    residencelicence = forms.CharField(label="Seguro médico", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    getresidence = forms.CharField(label="Alojamiento", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    economicaid = forms.CharField(label="Ayudas económicas", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    bankaccount = forms.CharField(label="Servicios bancarios", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    unidoc = forms.CharField(label="Documentación necesaria", widget=forms.Textarea(), required=False)
+    residencelicence = forms.CharField(label="Seguro médico", widget=forms.Textarea(), required=False)
+    getresidence = forms.CharField(label="Alojamiento", widget=forms.Textarea(), required=False)
+    economicaid = forms.CharField(label="Ayudas económicas", widget=forms.Textarea(), required=False)
+    bankaccount = forms.CharField(label="Servicios bancarios", widget=forms.Textarea(), required=False)
 
 #----------------------------------------------------------------------------
 #            Class ResidenceForm: to change the university profile   
 #----------------------------------------------------------------------------
 class ResidenceForm(forms.Form):
-    flatshare = forms.CharField(label="Pisos compartidos", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    linktoshare = forms.CharField(label="Páginas web para pisos compartidos", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-
+    flatshare = forms.CharField(label="Pisos compartidos", widget=forms.Textarea(), required=False)
+    linktoshare = forms.CharField(label="Páginas web para pisos compartidos", widget=forms.Textarea(), required=False)
 #----------------------------------------------------------------------------
 #            Class PlaceForm: to change the university profile   
 #----------------------------------------------------------------------------
@@ -187,12 +188,12 @@ class PlaceForm(forms.Form):
 class SubjectsForm(forms.Form):
     subname = forms.CharField(label="Asignatura en la URJC", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
     credits = forms.DecimalField(label="Créditos de la asignatura", widget=forms.TextInput(), error_messages={'required': 'Debes rellenar este campo', 'invalid':u'Debes introducir un número'})
-    subnameout = forms.CharField(label="Asignatura cursada fuera", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    subnameout = forms.CharField(label="Asignatura cursada fuera", widget=forms.Textarea(), required=False)
     subnameout2 = forms.CharField(label="Otra asignatura cursada fuera", widget=forms.Textarea(), required=False)
     subnameout3 = forms.CharField(label="Otra más cursada fuera", widget=forms.Textarea(), required=False)
-    works = forms.CharField(label="Trabajos a entregar", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    practices = forms.CharField(label="Prácticas a realizar", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
-    difficult = forms.CharField(label="Dificultad de la asignatura fuera", widget=forms.Textarea(), error_messages={'required': 'Debes rellenar este campo'})
+    works = forms.CharField(label="Trabajos a entregar", widget=forms.Textarea(), required=False)
+    practices = forms.CharField(label="Prácticas a realizar", widget=forms.Textarea(), required=False)
+    difficult = forms.CharField(label="Dificultad de la asignatura fuera", widget=forms.Textarea(), required=False)
       
 #----------------------------------------------------------------------------
 #            Class WorkForm: to change the university profile   
@@ -207,16 +208,16 @@ class WorkForm(forms.Form):
 #----------------------------------------------------------------------------
 class CityForm(forms.Form):
     cityname = forms.CharField(label="Nombre de la ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    prices = forms.CharField(label="Coste de la vida", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    uniarea = forms.CharField(label="La universidad", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    studentlife = forms.CharField(label="Vida estudiantil", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    turism = forms.CharField(label="Turismo", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    party = forms.CharField(label="Salidas nocturnas", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    culture = forms.CharField(label="Cultura", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    crime = forms.CharField(label="Hay delincuencia o no", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    shopping = forms.CharField(label="Ir de tiendas", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    erasmuslife = forms.CharField(label="Ambiente erasmus", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
-    more = forms.CharField(label="Más cosas", widget=forms.Textarea(), error_messages={'required':'Debes rellenar este campo'})
+    prices = forms.CharField(label="Coste de la vida", widget=forms.Textarea(), required=False)
+    uniarea = forms.CharField(label="La universidad", widget=forms.Textarea(), required=False)
+    studentlife = forms.CharField(label="Vida estudiantil", widget=forms.Textarea(), required=False)
+    turism = forms.CharField(label="Turismo", widget=forms.Textarea(), required=False)
+    party = forms.CharField(label="Salidas nocturnas", widget=forms.Textarea(), required=False)
+    culture = forms.CharField(label="Cultura", widget=forms.Textarea(), required=False)
+    crime = forms.CharField(label="Hay delincuencia o no", widget=forms.Textarea(), required=False)
+    shopping = forms.CharField(label="Ir de tiendas", widget=forms.Textarea(), required=False)
+    erasmuslife = forms.CharField(label="Ambiente erasmus", widget=forms.Textarea(), required=False)
+    more = forms.CharField(label="Más cosas", widget=forms.Textarea(), required=False)
 
 #----------------------------------------------------------------------------
 #            Class OthersForm: to change the university profile   

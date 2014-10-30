@@ -126,26 +126,20 @@
             </div>
 
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-                <div class="well">
+                <div class="well">                                                     
                   <p>{{uniobj.description}}      
-                    
-                    <!--The comment owner can modify it -->
-                    <!--{% ifnotequal user.username uniobj.username %}-->
-                        
-                    <a type="submit" class="btn btn-xs btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
-                    
-                    <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
+                                           
+                  <a type="submit" class="btn btn-xs btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
+                  <a type="submit" class="btn btn-xs btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
+                  
+                  <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
 
-                    <input type="hidden" name="commentid" value="{{uniobj.id}}">
-                     
-                    <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
-                        
-                    <!--{% endifnotequal %}-->
+                  <input type="hidden" name="commentid" value="{{uniobj.id}}">
+                   
+                  <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
                     
-                  </p>        
-                </div>                                     
-              
+                  </p> 
+                </div>   
             </form>
             
             
@@ -184,10 +178,10 @@
               <!--<div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>-->
             </div>
             
-            <h3>Comentarios que ha recibido</h3>
+            <!--<h3>Comentarios que ha recibido</h3>
             <div class="progress">
               <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
-            </div>
+            </div>-->
 		
 		{% else %}
       <div class="page-header">
