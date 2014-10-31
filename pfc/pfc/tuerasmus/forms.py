@@ -18,7 +18,7 @@ from tuerasmus.models import City, Cities, Comment, Countries, InfoBasic, InfoGe
 #            Class RegisterForm: to register the user  
 #----------------------------------------------------------------------------     
 class RegisterForm(forms.Form):
-    username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un nombre de usuario'})
+    username = forms.CharField(label="Nombre de usuario (Sensible a mayúsuculas y minúsculas)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un nombre de usuario'})
     email = forms.EmailField(label="Correo electrónico (gmail)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un correo electrónico', 'invalid':u'Introduce un correo válido'})
     password_one = forms.CharField(label="Contraseña (6 o más caracteres)", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes introducir una contraseña'})
     password_two = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(render_value=False), error_messages={'required': 'Debes volver a introducir la contraseña'})

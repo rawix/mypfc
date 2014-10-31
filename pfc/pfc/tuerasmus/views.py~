@@ -1191,7 +1191,7 @@ def uninfo(request, uni_name, type_info):
                     print matriz[1]
                     print len(matriz)
 
-                    ctx = {'mispuntos':matriz, 'longitud':len(matriz), 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+                    ctx = {'mispuntos':matriz, 'longitud':len(matriz), 'list_empty': list_empty, 'uni':uni, 'info':info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user':g_type_user, 'username':request.user.username}
                     return render_to_response('university/georesidence.html', ctx, context_instance=RequestContext(request))
 
             elif type_info=="subjects":
@@ -1218,8 +1218,15 @@ def uninfo(request, uni_name, type_info):
                 info="others"
                 info_list = Comment.objects.filter(tag=uniname.uni)
                 tmp = 'university/uni_info.html'
+              
+            try:
+                user_editor_list = InfoGeneral.objects.get(uni=uniname) 
+                print "user_editor_list " + user_editor_list.username
                 
-            ctx = {'uni':uni, 'info':info, 'no_info': no_info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': g_type_user, 'username':request.user.username}
+            except InfoGeneral.DoesNotExist:
+                user_editor=""
+                        
+            ctx = {'uni':uni, 'info':info, 'no_info': no_info, 'info_list':info_list, 'user_editor': user_editor_list.username, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': g_type_user, 'username':request.user.username}
                 
 
 
@@ -1462,10 +1469,7 @@ def uninfo(request, uni_name, type_info):
                 new_difficult = request.POST['new_difficult']
                 newcomment = new_difficult
                 rec_difficult = True
-                          
-                 
-
-                
+     
             print "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
             #print category
             print commentid
@@ -1491,57 +1495,83 @@ def uninfo(request, uni_name, type_info):
                     print "Se supone que ha buscado"
                     if rec_qualification:
                         newinfo.qualification = newcomment
+                        newinfo.username=request.user.username
                     elif rec_specialty:
                         newinfo.specialty = newcomment
+                        newinfo.username=request.user.username
                     elif rec_teachingequipment:
                         newinfo.teachingequipment = newcomment
+                        newinfo.username=request.user.username
                     elif rec_library:
                         newinfo.library = newcomment
+                        newinfo.username=request.user.username
                     elif rec_lab:
                         newinfo.lab = newcomment
+                        newinfo.username=request.user.username
                     elif rec_computerequipment:
                         newinfo.computerequipment = newcomment
+                        newinfo.username=request.user.username
                     elif rec_others:
                         newinfo.others = newcomment
+                        newinfo.username=request.user.username
                     elif rec_dinningroom:
                         newinfo.dinningroom = newcomment
+                        newinfo.username=request.user.username
                     elif rec_cafeteria:
                         newinfo.cafeteria = newcomment
+                        newinfo.username=request.user.username
                     elif rec_sportactivities:
                         newinfo.sportactivities = newcomment
+                        newinfo.username=request.user.username
                     elif rec_asociation:
                         newinfo.asociation = newcomment
+                        newinfo.username=request.user.username
                     elif rec_languagecourse:
                         newinfo.languagecourse = newcomment
+                        newinfo.username=request.user.username
                     elif rec_schoolyear:
                         newinfo.schoolyear = newcomment
+                        newinfo.username=request.user.username
                     elif rec_vacations:
                         newinfo.vacations = newcomment
+                        newinfo.username=request.user.username
                     elif rec_compteleco:
                         newinfo.compteleco = newcomment
+                        newinfo.username=request.user.username
                     elif rec_teachers:
                         newinfo.teachers = newcomment
+                        newinfo.username=request.user.username
                     elif rec_teaching:
                         newinfo.teaching = newcomment
+                        newinfo.username=request.user.username
                     elif rec_studies:
                         newinfo.studies = newcomment
+                        newinfo.username=request.user.username
                     elif rec_unidoc:
                         newinfo.unidoc = newcomment
+                        newinfo.username=request.user.username
                     elif rec_residencelicence:
                         newinfo.residencelicence = newcomment
+                        newinfo.username=request.user.username
                     elif rec_getresidence:
                         newinfo.getresidence = newcomment
+                        newinfo.username=request.user.username
                     elif rec_economicaid:
                         newinfo.economicaid = newcomment
+                        newinfo.username=request.user.username
                     elif rec_bankaccount:
                         newinfo.bankaccount = newcomment
+                        newinfo.username=request.user.username
                     elif rec_costume:
                         newinfo.costume = newcomment
+                        newinfo.username=request.user.username
                     elif rec_meetings:
                         newinfo.meetings = newcomment
+                        newinfo.username=request.user.username
                     elif rec_offices:
                         newinfo.offices = newcomment
-                   
+                        newinfo.username=request.user.username
+                    
                     newinfo.save()
                     print "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"
 
@@ -1560,21 +1590,29 @@ def uninfo(request, uni_name, type_info):
 
                     if rec_subname:
                         newinfo.subname = newcomment
+                        newinfo.username=request.user.username
                     elif rec_credits:
                         newinfo.credits = newcomment
+                        newinfo.username=request.user.username
                     elif rec_subnameout1:
                         newinfo.subnameout = newcomment
+                        newinfo.username=request.user.username
                     elif rec_subnameout2:
                         newinfo.subnameout2 = newcomment
+                        newinfo.username=request.user.username
                     elif rec_subnameout3:
                         newinfo.subnameout3 = newcomment
+                        newinfo.username=request.user.username
                     elif rec_works:
                         newinfo.works = newcomment
+                        newinfo.username=request.user.username
                     elif rec_practices:
                         newinfo.practices = newcomment
+                        newinfo.username=request.user.username
                     elif rec_difficult:
                         newinfo.difficult = newcomment
-                    
+                        newinfo.username=request.user.username
+
                     newinfo.save()
                 except Subjects.DoesNotExist:
                     print "No hay informacionnnn con ese id"
@@ -1585,24 +1623,34 @@ def uninfo(request, uni_name, type_info):
 
                     if rec_prices:
                         newinfo.prices = newcomment
+                        newinfo.username=request.user.username
                     elif rec_uniarea:
                         newinfo.uniarea = newcomment
+                        newinfo.username=request.user.username
                     elif rec_studentlife:
                         newinfo.studentlife = newcomment
+                        newinfo.username=request.user.username
                     elif rec_turism:
                         newinfo.turism = newcomment
+                        newinfo.username=request.user.username
                     elif rec_party:
                         newinfo.party = newcomment
+                        newinfo.username=request.user.username
                     elif rec_culture:
                         newinfo.culture = newcomment
+                        newinfo.username=request.user.username
                     elif rec_crime:
                         newinfo.crime = newcomment
+                        newinfo.username=request.user.username
                     elif rec_shopping:
                         newinfo.shopping = newcomment
+                        newinfo.username=request.user.username
                     elif rec_erasmuslife:
                         newinfo.erasmuslife = newcomment
+                        newinfo.username=request.user.username
                     elif rec_more:
                         newinfo.more = newcomment
+                        newinfo.username=request.user.username
                     
                     newinfo.save()
                 except City.DoesNotExist:
@@ -1614,6 +1662,8 @@ def uninfo(request, uni_name, type_info):
 
                     if rec_text:
                         newinfo.text = newcomment
+                        newinfo.username=request.user.username
+                    
                     newinfo.save()
                     
                 except Comment.DoesNotExist:
@@ -1902,8 +1952,8 @@ def unieditform(request, uni_name, type_form):
                     image = request.FILES['image']
                     description = form.cleaned_data['description']                    
                         
-                    print "YA TENEMOSSSSSSSSSSSSSSSSSSSSSSSSS LOS DATOS DE L FORMULARIOOOOOOOOOOOOOOOOOOO"
-                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
+#                    print "YA TENEMOSSSSSSSSSSSSSSSSSSSSSSSSS LOS DATOS DE L FORMULARIOOOOOOOOOOOOOOOOOOO"
+#                    print "DEBO GUARDAR LOS DATOS RECOGIDOS DEL FORMULARIO BASICA"
                     
                     no_user=""
                     name_image=""
@@ -1912,10 +1962,10 @@ def unieditform(request, uni_name, type_form):
                     if data_infobasic:
                     
                     #try: 
-                        # This university is in DB_InfoBasic
-                        print "Estoy en el try que ahora e sun if y he encontrado un item de la universidaddddddddddddddd en InfoBasic"
-                        #un = InfoBasic.objects.get(uni=un_obj)
-                        # el item de infobasic de esa universidad es UNI_DATA
+#                        # This university is in DB_InfoBasic
+#                        print "Estoy en el try que ahora e sun if y he encontrado un item de la universidaddddddddddddddd en InfoBasic"
+#                        #un = InfoBasic.objects.get(uni=un_obj)
+#                        # el item de infobasic de esa universidad es UNI_DATA
                         
                         print "si habia en InfoBasic"
                         print "imprimimos el nombre de la imagen"
@@ -2285,16 +2335,14 @@ def unieditform(request, uni_name, type_form):
 def myerasmus(request, user):
     if request.user.is_authenticated():
         if (request.user.username==user):
-
             print "MYERASMUS: usuario logueado " + user
-            
-            # User is student or professor
+#            # User is student or professor
             t = User.objects.get(username=user)
             tt = t.username
-            tu = Users.objects.all()
-            for i in tu:
-                if (tt == str(i.username)):
-                    type_user = str(i.type_user)
+#            tu = Users.objects.all()
+#            for i in tu:
+#                if (tt == str(i.username)):
+#                    type_user = str(i.type_user)
                     
             uni1=""
             uni2=""
@@ -2317,7 +2365,7 @@ def myerasmus(request, user):
                         uni2=""                        
                                                                
             if (uni1=="") and (uni2==""):
-                ctx = {'no_users':True, 'type_user': type_user, 'username':user}
+                ctx = {'no_users':True, 'type_user': g_type_user, 'username':user}
                 return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
             else:       
                 try:
@@ -2404,19 +2452,19 @@ def myerasmus(request, user):
                     pass
 
                 if reco1 and not reco2:                
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
                 elif reco2 and not reco1:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
                 elif reco1 and reco2:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
                 else:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
                 
                     
 
             except UserProfile.DoesNotExist:
                 print "universidades uni1 y uni2 están vacías!!!!!!!!1"
-                ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'type_user':type_user, 'username': request.user.username}    
+                ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'type_user':g_type_user, 'username': request.user.username}    
 
             return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
         

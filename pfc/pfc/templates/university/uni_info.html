@@ -62,21 +62,25 @@
     <h6>Pincha sobre el nombre de la universidad para ir a su perfil</h6>
   </div>
   
-  <div class="page-header">
-    <h4>¡¡Gracias <strong></strong> por contribuir con TuErasmus!!</h4>
-  </div>
+
   
   {% if not no_info %}
       <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-      
+
+  
+         
       {% ifequal info "basic" %}
         <!-- INFORMACIÓN DE LAS INSTALACIONES DE LA UNIVERSIDAD -->
+        
+        <div class="page-header">
+          <h4>¡¡Gracias <strong>{{user_editor}}</strong> por contribuir con TuErasmus!!</h4>
+        </div> 
         
         <!---------- ITEM ------------> 
         <h3>Titulación impartida:</h3>
           <ul>
             {% for i in info_list %}
-              <li><p><strong>{{i.username}}</strong>: {{i.qualification}} 
+              <li><p>{{i.qualification}} 
                 
               <!-- Information about de comment -->
               <input type="hidden" name="commentid" value="{{i.id}}">
@@ -103,7 +107,7 @@
         <h3>Especialidades:</h3>
           <ul>
             {% for i in info_list %}
-              <li><p><strong>{{i.username}}</strong>: {{i.specialty}}
+              <li><p>{{i.specialty}}
               
               <!-- Information about de comment -->
               <input type="hidden" name="commentid" value="{{i.id}}">
@@ -130,7 +134,7 @@
         <h3>Equipamiento docente:</h3>
           <ul>
             {% for i in info_list %}
-              <li><p><strong>{{i.username}}</strong>: {{i.teachingequipment}}
+              <li><p>{{i.teachingequipment}}
 
               <!--The comment owner can modify it -->
 
@@ -161,7 +165,7 @@
         <h3>Bibliotecas:</h3>
           <ul>
             {% for i in info_list %}
-              <li><p><strong>{{i.username}}</strong>: {{i.library}}
+              <li><p>{{i.library}}
               
               <!--The comment owner can modify it -->
               
@@ -193,7 +197,7 @@
         <h3>Laboratorios:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.lab}}
+            <li><p>{{i.lab}}
 
             <!--The comment owner can modify it -->
 
@@ -224,7 +228,7 @@
         <h3>Equipos informáticos:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.computerequipment}}
+            <li><p>{{i.computerequipment}}
 
             <!--The comment owner can modify it -->
 
@@ -254,7 +258,7 @@
         <h3>Otras observaciones:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.others}}
+            <li><p>{{i.others}}
 
             <!--The comment owner can modify it -->
 
@@ -287,7 +291,7 @@
         <h3>Comedores universitarios:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.dinningroom}}
+            <li><p>{{i.dinningroom}}
 
 
             <!--The comment owner can modify it -->
@@ -318,7 +322,7 @@
         <h3>Cafeterías:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.cafeteria}}
+            <li><p>{{i.cafeteria}}
 
             <!--The comment owner can modify it -->
 
@@ -353,7 +357,7 @@
         <h3>Actividades deportivas:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.sportactivities}}
+            <li><p>{{i.sportactivities}}
 
 
             <!--The comment owner can modify it -->
@@ -384,7 +388,7 @@
         <h3>Asociaciones universitarias</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.asociation}}
+            <li><p>{{i.asociation}}
 
             <!--The comment owner can modify it -->
 
@@ -415,7 +419,7 @@
         <h3>Cursos de idiomas:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.languagecourse}}
+            <li><p>{{i.languagecourse}}
 
             <!--The comment owner can modify it -->
 
@@ -446,7 +450,7 @@
         <h3>Periodo lectivo:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.schoolyear}}
+            <li><p>{{i.schoolyear}}
 
             <!--The comment owner can modify it -->
 
@@ -477,7 +481,7 @@
         <h3>Vacaciones/Fiestas:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.vacations}}
+            <li><p>{{i.vacations}}
             
             <!--The comment owner can modify it -->
 
@@ -508,7 +512,7 @@
         <h3>Dificultades en los estudios:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.compteleco}}
+            <li><p>{{i.compteleco}}
 
             <!--The comment owner can modify it -->
 
@@ -539,7 +543,7 @@
         <h3>Calidad/Dedicación/Atención del profesorado:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.teachers}}
+            <li><p>{{i.teachers}}
 
             <!--The comment owner can modify it -->
 
@@ -570,7 +574,7 @@
         <h3>Calidad global de la enseñanza:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.teaching}}
+            <li><p>{{i.teaching}}
 
             <!--The comment owner can modify it -->
 
@@ -602,7 +606,7 @@
         <h3>Nivel de exigencia de los estudios:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.studies}}
+            <li><p>{{i.studies}}
 
             <!--The comment owner can modify it -->
 
@@ -634,11 +638,15 @@
       <!-- INFORMACIÓN DE DOCUMENTACIÓN -->
       {% ifequal info "doc" %}
       
+        <div class="page-header">
+          <h4>¡¡Gracias <strong>{{user_editor}}</strong> por contribuir con TuErasmus!!</h4>
+        </div> 
+        
         <!---------- ITEM ------------>
         <h3>Documentación necesaria:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.unidoc}}
+            <li><p>{{i.unidoc}}
             <!--The comment owner can modify it -->
 
             
@@ -669,7 +677,7 @@
         <h3>Seguro médico:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.residencelicence}}
+            <li><p>{{i.residencelicence}}
             <!--The comment owner can modify it -->
 
                 
@@ -700,7 +708,7 @@
         <h3>Alojamiento:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.getresidence}}
+            <li><p>{{i.getresidence}}
             
             <!--The comment owner can modify it -->
 
@@ -730,7 +738,7 @@
         <h3>Ayudas económicas:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.economicaid}}
+            <li><p>{{i.economicaid}}
 
             <!--The comment owner can modify it -->
 
@@ -761,7 +769,7 @@
         <h3>Servicios bancarios:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.bankaccount}}
+            <li><p>{{i.bankaccount}}
             <!--The comment owner can modify it -->
 
                 
@@ -795,7 +803,7 @@
         <h3>Atención a los estudiantes erasmus:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.costume}}
+            <li><p>{{i.costume}}
             <!--The comment owner can modify it -->
 
                 
@@ -826,7 +834,7 @@
         <h3>Reuniones para erasmus:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.meetings}}
+            <li><p>{{i.meetings}}
 
             <!--The comment owner can modify it -->
 
@@ -857,7 +865,7 @@
         <h3>Oficinas de asuntos extranjeros:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong>: {{i.offices}}
+            <li><p>{{i.offices}}
 
             <!--The comment owner can modify it -->
 
@@ -892,7 +900,16 @@
         <h3>Las asignaturas impartidas en esta universidad:</h3>
           <ul>
           {% for i in info_list %}
-            <li><p><strong>{{i.username}}</strong> escribió sobre: <br><br><h3>{{i.subname}}</h3></p>
+            
+            
+            <div class="page-header">
+              <h4>¡¡Gracias <strong>{{i.username}}</strong> por contribuir con TuErasmus!!</h4>
+            </div> 
+            
+            <li><h3>{{i.subname}}</h3>
+            
+            
+                
                 <p><strong>Créditos de la asignatura</strong>: {{i.credits}}
                 
                     <!--The comment owner can modify it -->
@@ -1067,11 +1084,15 @@
 
       {% ifequal info "city" %}  
         
-          <ul>
+          
           {% for i in info_list %}
             <h3>La ciudad de la universidad: {{i.cityname}}</h3>
             
-            <p><strong>{{i.username}}</strong></p>
+            <div class="page-header">
+              <h4>¡¡Gracias <strong>{{i.username}}</strong> por contribuir con TuErasmus!!</h4>
+            </div>
+            
+            <ul>
             <li><p><strong>Coste de la vida</strong>: {{i.prices}}
             
                 <!--The comment owner can modify it -->
