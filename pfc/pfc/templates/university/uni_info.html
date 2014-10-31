@@ -2,9 +2,7 @@
 
 {% block java_script %}
 
-	<script
-	  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGRcmWHBZafJje424IkNT6Ez195Y1OdM4&sensor=false">
-	</script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGRcmWHBZafJje424IkNT6Ez195Y1OdM4&sensor=false"></script>
 
 	<!--Llamamos a la API de Google Maps-->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -57,7 +55,6 @@
   <img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/>
 {% endblock %}
 
-
 {% block uni_info %}
 
   <div class="page-header">
@@ -65,7 +62,10 @@
     <h6>Pincha sobre el nombre de la universidad para ir a su perfil</h6>
   </div>
   
-   
+  <div class="page-header">
+    <h4>¡¡Gracias <strong>{{i.username}}</strong> por contribuir con TuErasmus!!</h4>
+  </div>
+  
   {% if not no_info %}
       <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
       
@@ -77,25 +77,20 @@
           <ul>
             {% for i in info_list %}
               <li><p><strong>{{i.username}}</strong>: {{i.qualification}} 
-              
-              <!--The comment owner can modify it -->
-              <!-- {% ifnotequal user.username i.username %} -->
-                  
-                <!-- Information about de comment -->
-                <input type="hidden" name="commentid" value="{{i.id}}">
-                <input type="hidden" name="info" value="{{info}}">
                 
-                <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("qualification","qualification2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("qualification","qualification2")'> Cancelar </a> 
-                
-                <br><br>
-                 
-                <!-- The new comment -->
-                <textarea id="qualification" class="form-control" name="new_qualification" style ="display:none" row="3" col="5"> {{i.qualification}} </textarea>
-                <button id="qualification2" style ="display:none" class="btn btn-sm btn-primary" value="qualification" name="button" type="submit"> Guardar </button>
-                  
-              <!-- {% endifnotequal %} -->
+              <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
+              <input type="hidden" name="info" value="{{info}}">
+
+              <!-- Buttons to modify or cancel -->
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("qualification","qualification2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("qualification","qualification2")'> Cancelar </a> 
+
+              <br><br>
+               
+              <!-- The new comment -->
+              <textarea id="qualification" class="form-control" name="new_qualification" style ="display:none" row="3" col="5"> {{i.qualification}} </textarea>
+              <button id="qualification2" style ="display:none" class="btn btn-sm btn-primary" value="qualification" name="button" type="submit"> Guardar </button>
               
               </p></li>        
                                                   
@@ -110,9 +105,6 @@
             {% for i in info_list %}
               <li><p><strong>{{i.username}}</strong>: {{i.specialty}}
               
-              <!--The comment owner can modify it -->
-              <!--{% ifnotequal user.username i.username %}-->
-              
               <!-- Information about de comment -->
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -120,15 +112,13 @@
               <!-- Buttons to modify or cancel -->                  
               <a type="submit" class="btn btn-xs btn-default" onclick='showText("specialty","specialty2")'> Modificar </a>
               <a type="submit" class="btn btn-xs btn-default" onclick='hideText("specialty","specialty2")'> Cancelar </a>  
-              
+
               <br><br>
                
               <!-- The new comment -->
               <textarea id="specialty" class="form-control" name="new_specialty" style ="display:none" row="3" col="5"> {{i.specialty}} </textarea>
               <button id="specialty2" style ="display:none" value="specialty" name="button" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
-              
-              <!--{% endifnotequal %}-->
-              
+
               </p></li>  
               
             {% empty %}

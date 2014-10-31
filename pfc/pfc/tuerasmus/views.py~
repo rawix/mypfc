@@ -48,7 +48,6 @@ from tuerasmus.models import City, Cities, Comment, Countries, InfoBasic, InfoGe
 from tuerasmus.forms import ProfileForm, BasicForm, AreaForm, CommentForm, CostumeServiceForm, DocumentationForm, ImageForm, ResidenceForm, PasswordForm, PlaceForm, SubjectsForm, WorkForm, CityForm, OthersForm
 
 
-
 # =======================================================================
 #                       TuErasmus methods
 # =======================================================================
@@ -61,7 +60,7 @@ g_path_image=""
 g_description=""
 g_genero=""
 g_user_email=""
-
+g_user_user=""
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 #Desactivation of CSRF
@@ -85,6 +84,7 @@ def def_profile(user):
             type_user = str(i.type_user)
             genero = str(i.genero)
             user_email = str(i.email)
+            user_user = str(i.username)
             
     # Get the path of the image and the user description  
     for j in tp:              
@@ -119,16 +119,14 @@ def def_profile(user):
     g_type_user = type_user
     g_description = description
     g_path_image = path_image
+    g_user_user = user_user
     
     global g_genero
     global g_type_user
     global g_description
     global g_path_image
+    global g_user_user
 
-    print g_genero
-    print g_type_user
-    print g_description
-    print g_path_image
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------  
 # Name : HOME USER
@@ -161,21 +159,21 @@ def myprofile(request, user):
 
     if request.user.is_authenticated():
         if (request.user.username==user):
-            print "MYPROFILE: user authenticated " + request.user.username
-            print "MYPROFILE: user requested " + user
+            # print "MYPROFILE: user authenticated " + request.user.username
+            # print "MYPROFILE: user requested " + user
             # Concatenate URL + username
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect url
             return HttpResponseRedirect(ur)
         else:
             # User authenticated and user requested are differents
-            print "MYPROFILE: User authenticated and user requested are differents"
+            # print "MYPROFILE: User authenticated and user requested are differents"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
     else:
         # User no authenticated
-        print "MYPROFILE: User no authenticated"
+        # print "MYPROFILE: User no authenticated"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
 
@@ -186,8 +184,8 @@ def myprofile(request, user):
 def profile(request, user):
 
     if request.user.is_authenticated():
-        print "PROFILE: user authenticated " + request.user.username
-        print "PROFILE: user requested " + user
+        # print "PROFILE: user authenticated " + request.user.username
+        # print "PROFILE: user requested " + user
         # User is professor or student
         # User has a profile image
         type_user=""
@@ -252,14 +250,14 @@ def profile(request, user):
 
     else:
         # User no authenticated
-        print "PROFILE: User no authenticated"
+        # print "PROFILE: User no authenticated"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
         
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 # Name : EDIT_PROFILE
-def edit_profile(request, user):
+def edit_profile(request,user):
 
     if request.user.is_authenticated():
         if (request.user.username==user):
@@ -274,8 +272,10 @@ def edit_profile(request, user):
             # User is professor or student
             # User has a profile image
             type_user=""
+            genero=""
             path_image=""
             description=""
+            
             t = User.objects.get(username=user)
             tt = t.username
             tu = Users.objects.all()
@@ -311,9 +311,13 @@ def edit_profile(request, user):
                     elif not ((j.description)=="") and (not (str(j.name_image)=="None") or not (str(j.name_image)=="")):
                         path_image = "profiles/" + str(j.name_image)
                         description = (j.description)
-
-                        
+                         
+                    print "Imprimimos las variables desc e imag"
+                    print description + " " + path_image
+                               
             if request.method=="POST":
+            
+                
                 form = ProfileForm(request.POST, request.FILES) 
                 if form.is_valid():
                     # Valid form
@@ -329,6 +333,7 @@ def edit_profile(request, user):
                     print "la siguiente linea es el nombre de la imagen que se ha introducido en el formulario"
                     print "image " + str(image)
                     
+                    tp = UserProfile.objects.all()
                     for u in tp:
                         if (str(u.username) == tt):
                             if not (name==""):
@@ -368,11 +373,15 @@ def edit_profile(request, user):
                             u.save()
                             print "se han guardado los datos del perfil de usuario"
                             
-                            us_image = UserProfile.objects.get(username=u.username)
-                            path_image = "profiles/" + str(us_image.name_image)
-                            description = us_image.description
-                            form = ProfileForm()
+                            print "1." + description + " " + path_image
                             
+                            us_image = UserProfile.objects.get(username=u.username)
+                            #path_image = "profiles/" + str(us_image.name_image)
+                            #description = us_image.description
+                            
+                            print "2." + description + " " + path_image
+                            form = ProfileForm()
+                           
                             ctx = {'alertdone':True,  'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
                             
                             return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
@@ -386,14 +395,19 @@ def edit_profile(request, user):
                     ctx = {'alerterror':True, 'see_profile':False, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
                     return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
                     
-            else:
+            if request.method=="GET":
+                print "ESTOY EN ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                
+                print type_user
+                print genero
+                print path_image
+                print description
+                
                 # Method not POST
                 form = ProfileForm()
-                
-                   
-            # Return the template
-            ctx = {'form':form, 'username': user, 'type_user': type_user, 'genero':genero, 'path_image':path_image, 'description':description}
-            return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
+                # Return the template
+                ctx = {'form':form, 'username': user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
                 
         else:
             # User authenticated and user requested are differents
@@ -896,13 +910,13 @@ def university(request, uni_name):
 
 
         # User is student or professor
-        type_user=""
-        t = User.objects.get(username=request.user.username)
-        tt = t.username
-        tu = Users.objects.all()
-        for i in tu:
-            if (tt == str(i.username)):
-                type_user = str(i.type_user)
+        #type_user=""
+        #t = User.objects.get(username=request.user.username)
+        #tt = t.username
+        #tu = Users.objects.all()
+        #for i in tu:
+        #    if (tt == str(i.username)):
+        #        type_user = str(i.type_user)
 
 
         
@@ -1001,51 +1015,53 @@ def university(request, uni_name):
             except InfoBasic.DoesNotExist:
                 path_image="tuerasmus/universidad.png"
                 print "No se encontró el nombre de la universidad en la tabla InfoBasic"
-                ctx = {'no_info':True, 'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+                ctx = {'no_info':True, 'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': g_type_user, 'username':request.user.username}
                 # Return the template
                 return render_to_response('university/geouniversity.html', ctx, context_instance=RequestContext(request))
             
         except University.DoesNotExist:
             print "No se han encontrado ningun objecto con ese id" 
-            ctx = {'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+            ctx = {'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': g_type_user, 'username':request.user.username}
             return render_to_response('university/universities.html', ctx, context_instance=RequestContext(request))
 
 
         if request.method=="POST":
         
-            print "se ha hecho un POST"
+#            print "se ha hecho un POST"
             
             newcomment = request.POST['newcomment']
             commentid = request.POST['commentid']
             
-            # Se pueden borrar estas líneas #
-            #print "vamos a imprimir el comentario nuevo que se ha hecho"
-            #print newcomment
-            #print "vamos a imprimir el id del comentario nuevo que se ha hecho"
-            #print commentid
-            #print "imprimo el id de la universidad que estoy usando ahora mismo"
-            #print uniobj.id
-            ###############################
+#            # Se pueden borrar estas líneas #
+#            #print "vamos a imprimir el comentario nuevo que se ha hecho"
+#            #print newcomment
+#            #print "vamos a imprimir el id del comentario nuevo que se ha hecho"
+#            #print commentid
+#            #print "imprimo el id de la universidad que estoy usando ahora mismo"
+#            #print uniobj.id
+#            ###############################
             
             try: 
                 newinfo = InfoBasic.objects.get(id=commentid)
-                #print newinfo.description
                 newinfo.description = newcomment
+                newinfo.username = request.user.username
                 newinfo.save()
                 
                 uniobj = InfoBasic.objects.get(uni=uniname)
+                
             except InfoBasic.DoesNotExist:
-                print "No hay informacionnnn con ese id"
-                #return HttpResponseRedirect('/tuerasmus/')
+                print "No hay informacion con ese id"
+                url = "/tuerasmus/university/" + uni_name
+                return HttpResponseRedirect(url)
 
             
-        #print "Voy a imprimir el valor de la variable uniname"
-        #print uniname
-        ctx = {'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uniobj':uniobj, 'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user': type_user, 'username':request.user.username}
+#        #print "Voy a imprimir el valor de la variable uniname"
+#        #print uniname
+        ctx = {'porcentaje_usuarios':porcentaje_usuarios, 'porcentaje_alumnos':porcentaje_alumnos, 'porcentaje_profesores':porcentaje_profesores, 'porcentaje_chicos':porcentaje_chicos, 'porcentaje_chicas':porcentaje_chicas, 'uniobj':uniobj, 'path_image':path_image, 'uni_name':uni_name, 'uniname':uniname, 'type_user':g_type_user, 'username':request.user.username}
         # Return the template
         return render_to_response('university/geouniversity.html', ctx, context_instance=RequestContext(request))
     else:
-        print "UNIVERSITY: el usuario no esta logueado"
+#        print "UNIVERSITY: el usuario no esta logueado"
         return HttpResponseRedirect('/tuerasmus')
 
 # ----------------------------------------------------------------------
@@ -1059,24 +1075,24 @@ def uninfo(request, uni_name, type_info):
         print "UNINFO: User authenticated " + request.user.username
         
         # User is student or professor
-        t = User.objects.get(username=request.user.username)
-        tt = t.username
-        tu = Users.objects.all()
-        for i in tu:
-            if (tt == str(i.username)):
-                type_user = str(i.type_user)
+#        t = User.objects.get(username=request.user.username)
+#        tt = t.username
+#        tu = Users.objects.all()
+#        for i in tu:
+#            if (tt == str(i.username)):
+#                type_user = str(i.type_user)
 
-        print "uni_name: " + str(uni_name)
-        print "type_info: " + str(type_info)
+#        print "uni_name: " + str(uni_name)
+#        print "type_info: " + str(type_info)
         
         # With uni id we can get the name
         try:
             uniname = University.objects.get(id=uni_name)
-            print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
-            #uni = uniname.uni
+#           print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)
+#            #uni = uniname.uni
             
         except University.DoesNotExist:
-            print "No se han encontrado ningun objecto con ese id"  
+#            print "No se han encontrado ningun objecto con ese id"  
             ur = "/tuerasmus/" + tt + "/myuniversity" 
             return HttpResponseRedirect(ur) 
             
@@ -1196,7 +1212,7 @@ def uninfo(request, uni_name, type_info):
                 info_list = Comment.objects.filter(tag=uniname.uni)
                 tmp = 'university/uni_info.html'
                 
-            ctx = {'uni':uni, 'info':info, 'no_info': no_info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': type_user, 'username':request.user.username}
+            ctx = {'uni':uni, 'info':info, 'no_info': no_info, 'info_list':info_list, 'path_image':path_image, 'uniname':uniname.uni,  'uni_name':uni_name, 'type_user': g_type_user, 'username':request.user.username}
                 
 
 
@@ -2292,7 +2308,7 @@ def myerasmus(request, user):
                         uni2=""                        
                                                                
             if (uni1=="") and (uni2==""):
-                ctx = {'no_users':True, 'type_user': g_type_user, 'username':user}
+                ctx = {'no_users':True, 'type_user': type_user, 'username':user}
                 return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
             else:       
                 try:
@@ -2379,19 +2395,19 @@ def myerasmus(request, user):
                     pass
 
                 if reco1 and not reco2:                
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 elif reco2 and not reco1:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 elif reco1 and reco2:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 else:
-                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':g_type_user, 'username': request.user.username}
+                    ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'uu1_list_empty':uu1_list_empty, 'uu2_list_empty':uu2_list_empty, 'type_user':type_user, 'username': request.user.username}
                 
                     
 
             except UserProfile.DoesNotExist:
                 print "universidades uni1 y uni2 están vacías!!!!!!!!1"
-                ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'type_user':g_type_user, 'username': request.user.username}    
+                ctx = {'uu1_list':uu1_list, 'uu2_list':uu2_list, 'type_user':type_user, 'username': request.user.username}    
 
             return render_to_response('tuerasmus/myerasmus.html', ctx, context_instance=RequestContext(request))
         

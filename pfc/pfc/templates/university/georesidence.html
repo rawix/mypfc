@@ -1,18 +1,16 @@
 {% extends "university/university.html" %}
 
 {% block java_script %}
-
-	<!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVhEUFDeVH_RZKiww16p2NC4afR5O70to&sensor=false"></script>-->
 	
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGRcmWHBZafJje424IkNT6Ez195Y1OdM4&sensor=false">
-	</script>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGRcmWHBZafJje424IkNT6Ez195Y1OdM4&sensor=false"></script>
 	
-	<!--Llamamos a la API de Google Maps-->
+	<!-- Calling Google Maps API-->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
 	<!--Plugin GMaps-->
 	<script type="text/javascript" src="/tuerasmus/static/js/gmaps.js"></script>
 
+  <!-- Function to print locations -->
 	<script type="text/javascript">
 
 
@@ -182,8 +180,6 @@
     {% if list_empty %}
       <h3><center>No hay residencias registradas para esta universidad</center></h3>
     {% else %} 
-    
-
       <div class="row">
 		    <div class="col-xs-9">
 			    <div id="googleMap" style="width:700px;height:500px;">
@@ -193,28 +189,20 @@
 			        var m = 0;
 			        {% for i in mispuntos %}
 			            {% for k in i %}
-			              
-			              
 			                  console.log("GGGGGGGGGGGG");
 			                  console.log('{{k}}');
-                        
-                        
                         datos.push('{{ k }}');
-              
-                        
-                   
-            
                   {% endfor %}
                   m = m + 1;
 			        {% endfor %}
 			      </script>
-			    </div>
-		    </div>
-
+			      
+			    </div><!--/.googleMap-->
+			    
+		    </div><!--/.col -->
       </div><!--/.row -->
     
       <div class="row">
-
           <div class="page-header">
             <h2>Para conocer más sobre <a href="/tuerasmus/universities/residences" style="color: #424242">las residencias</a></h2>
           </div>      
@@ -241,11 +229,9 @@
 			      
 		      {% endfor %}
 		      
-		      
       </div><!--/.row -->
 		{% endif %}
 		
 	</div><!--/.row-->
-
 {% endblock %}
 

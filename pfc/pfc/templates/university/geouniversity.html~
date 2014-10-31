@@ -2,9 +2,7 @@
 
 {% block java_script %}
 
-	<!--<script
-	  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVhEUFDeVH_RZKiww16p2NC4afR5O70to&sensor=false">
-	</script>-->
+	<!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVhEUFDeVH_RZKiww16p2NC4afR5O70to&sensor=false"></script>-->
 	
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGRcmWHBZafJje424IkNT6Ez195Y1OdM4&sensor=false">
 	</script>
@@ -123,6 +121,7 @@
 
             <div class="page-header">
               <h1>Una descripción...</h1>
+              <h4>¡¡Gracias <strong>{{uniobj.username}}</strong> por editar la descripción!!</h4>
             </div>
 
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
