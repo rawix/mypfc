@@ -128,20 +128,15 @@
             <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
                 <div class="well">                                                     
                   <p>{{uniobj.description}}      
-                    
-                    <!--The comment owner can modify it -->
-                    {% ifequal user.username uniobj.username %}
-                        
-                        <a type="submit" class="btn btn-xs btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
-                        <a type="submit" class="btn btn-xs btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
-                        
-                        <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
+                                           
+                  <a type="submit" class="btn btn-xs btn-default" name="description" onclick='showText("description","description2")'> Modificar </a>
+                  <a type="submit" class="btn btn-xs btn-default" onclick='hideText("description","description2")'> Cancelar </a> 
+                  
+                  <textarea id="description" class="form-control" name="newcomment" style ="display:none" row="3" col="5"> {{uniobj.description}} </textarea>
 
-                        <input type="hidden" name="commentid" value="{{uniobj.id}}">
-                         
-                        <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
-                        
-                    {% endifequal %}
+                  <input type="hidden" name="commentid" value="{{uniobj.id}}">
+                   
+                  <button id="description2" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
                     
                   </p> 
                 </div>   
