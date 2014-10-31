@@ -50,6 +50,7 @@
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-danger btn-xs" data-toggle="offcanvas">Menú</button>
           </p>
+          
           <div class="jumbotron">    
             <center><img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/></center>
             <!--<img src="http://placehold.it/150x150"/> -->
@@ -81,8 +82,8 @@
 
               {% if alertdone %}
                 <div class="alert alert-success">
-                  <center></strong><big>Tus datos quedaron guardados correctamente!</big></strong></center>
-                  <center><a class="btn btn-lg btn-primary" href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</center></a>
+                  <center></strong><big>Tus datos quedaron guardados correctamente!</big></strong></center><br>
+                  <center><a class="btn btn-lg btn-success" href="/tuerasmus/{{user.username}}/myprofile">Mi perfil</center></a>
                 </div>
               {% endif %}
               
@@ -124,6 +125,12 @@
           </div>
 
           <p>
+            {% ifequal up_obj.username "" %}
+              <li>Nombre: <strong><big>{{up_obj.username}}</big></strong></li>
+            {% else %}
+              <li>Nombre: <strong><big>{{up_obj.name}}</big></strong></li>
+            {% endifequal %}
+          
             {% ifequal up_obj.name "" %}
               <li>Nombre: <strong><big>{{up_obj.username}}</big></strong></li>
             {% else %}

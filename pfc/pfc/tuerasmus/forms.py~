@@ -94,13 +94,7 @@ class ImageForm(forms.Form):
 #----------------------------------------------------------------------------
 #            Class BasicForm: to change the university profile   
 #----------------------------------------------------------------------------
-class BasicForm(forms.Form):
-  
-#class BasicForm(forms.ModelForm):
-    #class Meta:
-    #    model = InfoBasic
-    #    fields = ('address', 'city', 'country', 'latitud', 'longitud', 'link', 'image', 'description')
-        
+class BasicForm(forms.Form): 
     address = forms.CharField(label="Dirección", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la dirección'})
     postalcode = forms.IntegerField(label="Código postal", widget=forms.TextInput(), required=False)
     phone = forms.IntegerField(label="Teléfono de contacto", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un teléfono de contacto', 'invalid':u'Introduce el teléfono sin el prefijo'})

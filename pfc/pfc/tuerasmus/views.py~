@@ -61,6 +61,7 @@ g_description=""
 g_genero=""
 g_user_email=""
 g_user_user=""
+
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 #Desactivation of CSRF
@@ -71,7 +72,7 @@ g_user_user=""
 # Name: DEF_PROFILE
 # Definning the profile of each user
 def def_profile(user):
-    print "ESTOY DENTRO DEL NUEVO MÉTODO QUE ACABO DE HACER"
+    print "DEF_PROFILE"
     # User is professor or student
     # User has a profile image
 
@@ -114,6 +115,12 @@ def def_profile(user):
             elif not ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
                 path_image = "profiles/" + str(j.name_image)
                 description = (j.description)
+
+    global g_genero
+    global g_type_user
+    global g_description
+    global g_path_image
+    global g_user_user
     
     g_genero = genero
     g_type_user = type_user
@@ -121,12 +128,6 @@ def def_profile(user):
     g_path_image = path_image
     g_user_user = user_user
     
-    global g_genero
-    global g_type_user
-    global g_description
-    global g_path_image
-    global g_user_user
-
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------  
 # Name : HOME USER
@@ -156,24 +157,22 @@ def home(request, user):
 # Name : MYPROFILE
 # Get the user information to profile page
 def myprofile(request, user):
-
     if request.user.is_authenticated():
         if (request.user.username==user):
-            # print "MYPROFILE: user authenticated " + request.user.username
-            # print "MYPROFILE: user requested " + user
+            print "MYPROFILE: user authenticated(request.user.username) " + request.user.username
             # Concatenate URL + username
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect url
             return HttpResponseRedirect(ur)
         else:
             # User authenticated and user requested are differents
-            # print "MYPROFILE: User authenticated and user requested are differents"
+            print "MYPROFILE: User authenticated and user requested are differents"
             ur = "/tuerasmus/" + user + "/profile"
             # Redirect to main URL
             return HttpResponseRedirect(ur)
     else:
         # User no authenticated
-        # print "MYPROFILE: User no authenticated"
+        print "MYPROFILE: User no authenticated"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
 
@@ -182,10 +181,8 @@ def myprofile(request, user):
 # Name : PROFILE
 # Get the information to profile page for other user
 def profile(request, user):
-
     if request.user.is_authenticated():
-        # print "PROFILE: user authenticated " + request.user.username
-        # print "PROFILE: user requested " + user
+        print "PROFILE: user authenticated(request.user.username) " + request.user.username
         # User is professor or student
         # User has a profile image
         type_user=""
@@ -196,7 +193,7 @@ def profile(request, user):
             t = User.objects.get(username=user)
         except User.DoesNotExist:
             return HttpResponseRedirect("/tuerasmus")
-            
+  
         tt = t.username
         tu = Users.objects.all()
         tp = UserProfile.objects.all()
@@ -250,7 +247,7 @@ def profile(request, user):
 
     else:
         # User no authenticated
-        # print "PROFILE: User no authenticated"
+        print "PROFILE: User no authenticated"
         # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
         
@@ -258,16 +255,11 @@ def profile(request, user):
 # ----------------------------------------------------------------------
 # Name : EDIT_PROFILE
 def edit_profile(request,user):
-
     if request.user.is_authenticated():
         if (request.user.username==user):
-
-            print "EDIT_PROFILE: user authenticated " + request.user.username
-            print "EDIT_PROFILE: user requested: " + user
-                
+            print "EDIT_PROFILE: user authenticated(request.user.username) " + request.user.username
             # Concatenate the URL with username
             ur = '/tuerasmus/' + user + '/edit_profile/'
-            print "EDIT_PROFILE: " + ur
             
             # User is professor or student
             # User has a profile image
@@ -278,6 +270,7 @@ def edit_profile(request,user):
             
             t = User.objects.get(username=user)
             tt = t.username
+            
             tu = Users.objects.all()
             tp = UserProfile.objects.all()
             for i in tu:
@@ -287,7 +280,6 @@ def edit_profile(request,user):
                     
             # Get the path of the image and the user description
             for j in tp:
-                
                 if (tt == str(j.username)):
                     # No photo and no description
                     if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and ((j.description)==""):
@@ -313,29 +305,37 @@ def edit_profile(request,user):
                         description = (j.description)
                          
                     print "Imprimimos las variables desc e imag"
-                    print description + " " + path_image
+                    print "0." + description + " " + path_image
                                
             if request.method=="POST":
-            
-                
+                print "POST"
                 form = ProfileForm(request.POST, request.FILES) 
                 if form.is_valid():
                     # Valid form
+                    nickname = form.cleaned_data['nickname']
                     name = form.cleaned_data['name']
                     lastname = form.cleaned_data['lastname']
                     form_description = form.cleaned_data['description']
                     image = form.cleaned_data['image']
                     
+                    print "nickname " + nickname
                     print "name " + name
                     print "lastname " + lastname
                     print "description " + form_description
-                    
                     print "la siguiente linea es el nombre de la imagen que se ha introducido en el formulario"
                     print "image " + str(image)
                     
                     tp = UserProfile.objects.all()
                     for u in tp:
-                        if (str(u.username) == tt):
+                        print "recorro la lista tp: " + str(u.username)
+                        print "tt es: " + str(tt)
+                        if str(u.username) == str(tt):
+                            print "son iguales"
+                            if not (nickname==""):
+                                nicki = User.objects.get(username=tt)
+                                nicki.username = nickname
+                                nicki.save()
+                                
                             if not (name==""):
                                 u.name = name
                             if not (lastname==""):
@@ -346,8 +346,7 @@ def edit_profile(request,user):
                                 print "es name_image no vacioooooooooooooooooooooooooooooooooooooooooo"
                                 print u.name_image
                                 
-                                if (u.name_image=="") or (u.name_image==None):
-                                    
+                                if (u.name_image=="") or (u.name_image==None):                                   
                                     print "name_image es vacio en el usuario "
                                     # Saving the name of the file image.xxx
                                     u.name_image = str(image)
@@ -360,52 +359,60 @@ def edit_profile(request,user):
                                     print "esta es la nueva imagen: " + str(image)
                                     u.name_image = str(image)
                                     u.image = image
-                                    print "ya tenemos guardada la imagen nueva"
+    #                                    print "ya tenemos guardada la imagen nueva"
                                     path_image = "profiles/" + u.name_image
-                            else:
-                                print "8888888888888888888888888888888888888888888888888888888888"
-                                
-                                path_image = "tuerasmus/" + genero + ".jpg"
-                           
-                                                                
-                            print "recogi la info del form"
+                            #else:
+    #                                print "8888888888888888888888888888888888888888888888888888888888"
+                            #    try:
+                            #        us_image = UserProfile.objects.get(username=u.username)
+                            #        path_image = "profiles/" + str(us_image.name_image)
+                            #    except UserProfile.DoesNotExist:
+                            #        
+                            #        print "3." + description + " " + path_image    
+                                    
+                            if (str(image)=="None"):       
+                                print "imagen vacia, por tanto por defecto: " + path_image
+                                path_image = "tuerasmus/" + genero + ".jpg"                              
+    #                            print "recogi la info del form"
                             
                             u.save()
-                            print "se han guardado los datos del perfil de usuario"
+    #                            print "se han guardado los datos del perfil de usuario"
                             
                             print "1." + description + " " + path_image
                             
-                            us_image = UserProfile.objects.get(username=u.username)
-                            #path_image = "profiles/" + str(us_image.name_image)
-                            #description = us_image.description
-                            
+                            #try:
+                            #    us_image = UserProfile.objects.get(username=u.username)
+                            #    path_image = "profiles/" + str(us_image.name_image)
+                            #    description = us_image.description
+                            #except UserProfile.DoesNotExist:
+                                
+                            #    if genero=="male":
+                            #        path_image ="tuerasmus/male.jpg"
+                            #    elif genero=="female":
+                            #        path_image="tuerasmus/female.jpg"  
+                            #    print "3." + description + " " + path_image
+
+                                
                             print "2." + description + " " + path_image
                             form = ProfileForm()
                            
                             ctx = {'alertdone':True,  'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
                             
                             return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
-                        else:
-                            print "No existe el usuario"
-                            ctx = {'alerterror':True, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                        
+                        #else:
+                        #    print "no son iguales"
+                        #    print "No existe el usuario"
+                            #ctx = {'alerterror':True, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
+                            #return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
                 else:
                     # Invalid form
-                    print "Formulario invalido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!99999999"
                     form = ProfileForm()
                     ctx = {'alerterror':True, 'see_profile':False, 'form': form, 'username':user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
                     return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
                     
             if request.method=="GET":
-                print "ESTOY EN ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                
-                print type_user
-                print genero
-                print path_image
-                print description
-                
-                # Method not POST
                 form = ProfileForm()
-                # Return the template
                 ctx = {'form':form, 'username': user, 'type_user':type_user, 'genero':genero, 'path_image':path_image, 'description':description}
                 return render_to_response('tuerasmus/profile.html', ctx, context_instance=RequestContext(request))
                 
@@ -413,44 +420,35 @@ def edit_profile(request,user):
             # User authenticated and user requested are differents
             print "EDIT_PROFILE: User authenticated and user requested are differents"
             ur = "/tuerasmus/" + user + "/profile"
-            # Redirect to main URL
             return HttpResponseRedirect(ur)
     else:
         # User no authenticated
         print "EDIT_PROFILE: usuario no logueado"
-        # Redirect to main URL
         return HttpResponseRedirect('/tuerasmus')
-
-       
-
-
-       
+      
 # ----------------------------------------------------------------------
 #-----------------------------------------------------------------------
 # Name: UNIREGISTER
 # Register new university
 def uniregister(request):
-
     if request.user.is_authenticated():
-        
-
         user = request.user.username
         print "UNIREGISTER: el usuario esta logueado: " + user
-        print "g_type_user" + g_type_user
-        print "TESTER VA A REGISTAR UNA UNIVERSIDADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
-        #def_profile(user)
-        # User is professor or student
-        # User has a profile image
-        #type_user=""
-        #path_image=""
-        #description=""
+#        print "g_type_user" + g_type_user
+#        print "TESTER VA A REGISTAR UNA UNIVERSIDADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+#        #def_profile(user)
+#        # User is professor or student
+#        # User has a profile image
+#        #type_user=""
+#        #path_image=""
+#        #description=""
         t = User.objects.get(username=user)
         tt = t.username
-        #tu = Users.objects.all()
-        #tp = UserProfile.objects.all()
-        #for i in tu:
-        #    if (tt == str(i.username)):
-        #        type_user = str(i.type_user)
+#        #tu = Users.objects.all()
+#        #tp = UserProfile.objects.all()
+#        #for i in tu:
+#        #    if (tt == str(i.username)):
+#        #        type_user = str(i.type_user)
                 
 
         # Variable 'unis' has all the universities
@@ -459,28 +457,27 @@ def uniregister(request):
         # Variable 'countries' has all the unis countries        
         countries = Countries.objects.all()
         countries = countries.extra(order_by=['country'])
-        
 
         if request.method=="POST": 
             form = BasicForm(request.POST)       
             uni=""
             coun=""
             
-            print "METODO POST"
+#            print "METODO POST"
 
             ### We get uni and scholarship
             unimenu = request.POST['uni_selected'] 
             unitext = request.POST['uni_written']
 
-            print "UNI_SELECTED: " + unimenu
-            print "UNI_WRITTEN: " + unitext
+#            print "UNI_SELECTED: " + unimenu
+#            print "UNI_WRITTEN: " + unitext
 
             
             menu = unimenu.split(" - ")
             if unitext=="":
                 
-                print menu[0]
-                print menu[1]
+#                print menu[0]
+#                print menu[1]
                 
                 uni=menu[1]
             else:
@@ -489,9 +486,9 @@ def uniregister(request):
             
             countext = request.POST['coun_written']
             
-            print "Imprimo en la siguiente line el country del menu"
+#            print "Imprimo en la siguiente line el country del menu"
             
-            print "COUN_WRITTEN: " + countext
+#            print "COUN_WRITTEN: " + countext
             
             if countext=="":
                 coun=menu[0]
@@ -500,7 +497,7 @@ def uniregister(request):
                 
             scholarship = request.POST['scholarship']
                                    
-            print "LA OPCION DE SCHOLARSHIP HA SIDO LA SIGUIENTE: " + scholarship
+#            print "LA OPCION DE SCHOLARSHIP HA SIDO LA SIGUIENTE: " + scholarship
             es=""
             ms=""
             if scholarship=="erasmus":
@@ -515,14 +512,14 @@ def uniregister(request):
 
             ### No se ha seleccionado ninguna universidad
             if uni=="":
-                print "uni es vacio, no se ha seleccionado ninguna universidad"
+#                print "uni es vacio, no se ha seleccionado ninguna universidad"
                 error_msg="Debes introducir o seleccionar una universidad"
                 ctx = {'alerterror':True, 'msg':True, 'error_msg': error_msg, 'countries': countries, 'unis': unis, 'username': user, 'type_user': type_user}
                 return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
 
             # Se ha seleccionado una universidad
             else:
-                print "la universidad seleccionada es: " + uni
+#                print "la universidad seleccionada es: " + uni
 
                 try:
                     print "ESTOY EN EL TRY"
@@ -539,30 +536,30 @@ def uniregister(request):
             nu = UserProfile.objects.all()
             for i in nu:
                 if (tt == str(i.username)):
-                    print "N_UNIVERSITY: " + str(i.n_university)
+#                    print "N_UNIVERSITY: " + str(i.n_university)
                     n_university = i.n_university
-                    print "4444444444444444444444444444444444444444444444444444444444444444444"
+#                    print "4444444444444444444444444444444444444444444444444444444444444444444"
 
                     
                     # Aún no ha registrado
                     if n_university==0:
-                        print "N_UNIVERSITY ES 00000000000000000000000"
-                        print "PONEMOS DONE EN TRUE PARA QUE SE GUARDE LA UNIVERSIDAD"     
+#                        print "N_UNIVERSITY ES 00000000000000000000000"
+#                        print "PONEMOS DONE EN TRUE PARA QUE SE GUARDE LA UNIVERSIDAD"     
                         nusers = 0
 
                         # Es una universidad nueva
                         if not warning:
-                            print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
+#                            print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
                             un = University(uni=uni, username=request.user.username, scholarship=scholarship, country=coun)
                             un.save()       
-                            print "un.save()"
+#                            print "un.save()"
 
                             # Incrementamos el número de usuarios de esa universidad
                             nusers += 1
-                            print "nusers: " + str(nusers)
+#                            print "nusers: " + str(nusers)
                             
                             unu = UsersUniversity(uni=un, nusers=nusers)
-                            print "unu.nusers: " + str(unu.nusers) 
+#                            print "unu.nusers: " + str(unu.nusers) 
                             unu.save()
                             
                             try:
@@ -572,22 +569,22 @@ def uniregister(request):
                             except UsersUniversity.DoesNotExist:
                                 unu_user=""
                            
-                            #unu_user.useuni.add(i.username)
-                            #une = UniErasmus(uni=uni, scholarship=scholarship) 
-                            #une.save()
-                            #print "une.save()"
-                            #i.university.add(uni)
-                            #print "i.university.add(un.uni)"
+#                            #unu_user.useuni.add(i.username)
+#                            #une = UniErasmus(uni=uni, scholarship=scholarship) 
+#                            #une.save()
+#                            #print "une.save()"
+#                            #i.university.add(uni)
+#                            #print "i.university.add(un.uni)"
                             
                             
-                            #unu.save()
-                            #print "unu.save()"
+#                            #unu.save()
+#                            #print "unu.save()"
 
 
-                            print "GUARDAMOS EN LAS BASES DE DATOS"
+#                            print "GUARDAMOS EN LAS BASES DE DATOS"
 
 
-                            print "SE SUPONE QUE MI USUARIO AHORA TIENE SU UNIVERSIDAD GUARDADA"
+#                            print "SE SUPONE QUE MI USUARIO AHORA TIENE SU UNIVERSIDAD GUARDADA"
                             try:
                                 uu_saved = University.objects.get(uni=uni)
                             except University.DoesNotExist:
@@ -600,66 +597,66 @@ def uniregister(request):
                             uss = UsersUniversity.objects.all()
                             for j in uss:
                                 if str(j.uni)==(unu.uni):
-                                    print "antes de incrementar: j.nusers: " + str(j.nusers)
+#                                    print "antes de incrementar: j.nusers: " + str(j.nusers)
                                     j.nusers += 1
                                     j.useuni.add(i.username)
-                                    print "despues de incrementar: j.nusers: " + str(j.nusers)
+#                                    print "despues de incrementar: j.nusers: " + str(j.nusers)
                                     j.save()
 
                         
                         if done:
                             # Done es True, con lo cual acabamos de registrarla
-                            print "ESTOY EN ALERTAS DE DONEEEEEEEEEEEEE"
+#                            print "ESTOY EN ALERTAS DE DONEEEEEEEEEEEEE"
                             ctx = {'alertdone':True, 'uni_name':uni, 'uni_id':uu_saved.id, 'saved':True, 'countries':countries, 'unis':unis, 'username':user, 'type_user':g_type_user}
                         else:
                             # La universidad ya existe, y no la hemos registrado
-                            print "ESTOY EN ALERTAS DE WARNINGGGGGGGGGGGGGGGGGGGGGGGG"
+#                            print "ESTOY EN ALERTAS DE WARNINGGGGGGGGGGGGGGGGGGGGGGGG"
                             ctx = {'alertwarning':True, 'uni_name':u_saved, 'uni_id':u_saved.id, 'saved':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': g_type_user}
                          
 
-                        print "Guardo en la base de datos el valor de uni1"
+#                        print "Guardo en la base de datos el valor de uni1"
                         i.uni1 = uni
                         i.save()
                            
                         
-                        print "sin incrementarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: " + str(n_university)
+#                        print "sin incrementarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: " + str(n_university)
                         i.n_university += 1
                         if es:
                             i.sserasmus=scholarship
                         if ms:
                             i.ssmundus=scholarship
-                        print "incrementadoooooooooooooooo: " + str(i.n_university)
+#                        print "incrementadoooooooooooooooo: " + str(i.n_university)
                         i.save()
-                        print "HEMOS INCREMENTADO LA VARIABLE N_UNIVERSITY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+#                        print "HEMOS INCREMENTADO LA VARIABLE N_UNIVERSITY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                          
 
                     # Tiene una universidad registrada
                     if n_university==1:
-                        print "N_UNIVERSITY ES 11111111111111111111111"
+#                        print "N_UNIVERSITY ES 11111111111111111111111"
 
                         # Comprobamos si la universidad que tiene es erasmus o mundus
                         # variable i es del for que se recorre "nu" que contiene todos los objetos de UserProfile
                         save=""
-                        print "SSERASMUS: " + str(i.sserasmus)
-                        print "SSMUNDUS: " + str(i.ssmundus)
+#                        print "SSERASMUS: " + str(i.sserasmus)
+#                        print "SSMUNDUS: " + str(i.ssmundus)
                         if es:
                             if (i.sserasmus=="") or (i.sserasmus==None):
                                 i.sserasmus=scholarship
                                 i.save()
-                                print "SSERAMUS ESTÁ VACÍOOOOOOOOOOOOOOOOOOOOOOOOOO    GUARDAMOS EN LAS BASES DE DATOS"
+#                                print "SSERAMUS ESTÁ VACÍOOOOOOOOOOOOOOOOOOOOOOOOOO    GUARDAMOS EN LAS BASES DE DATOS"
                                 save=True
                             else:
-                                print "YA TIENES LA UNIVERSIDAD ERASMUS REGISTRADA!!!!!!!!!!!!!!!!!!"
+#                                print "YA TIENES LA UNIVERSIDAD ERASMUS REGISTRADA!!!!!!!!!!!!!!!!!!"
                                 ctx = {'info':True, 'alertaerasmus':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': g_type_user}
                                 return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
                         if ms:
                             if (i.ssmundus=="") or (i.ssmundus==None):
                                 i.ssmundus=scholarship
                                 i.save()
-                                print "SSMUNDUS ESTÁ VACÍOOOOOOOOOOOO GUARDAMOS EN LAS BASES DE DATOS"
+#                                print "SSMUNDUS ESTÁ VACÍOOOOOOOOOOOO GUARDAMOS EN LAS BASES DE DATOS"
                                 save=True
                             else:
-                                print "YA TIENES LA UNIVERSIDAD MUNDUS REGISTRADA!!!!!!!!!!!!!!!!!!"
+#                                print "YA TIENES LA UNIVERSIDAD MUNDUS REGISTRADA!!!!!!!!!!!!!!!!!!"
                                 ctx = {'info':True, 'alertamundus':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': g_type_user}
                                 return render_to_response('tuerasmus/uniregister.html', ctx, context_instance=RequestContext(request))
 
@@ -667,27 +664,27 @@ def uniregister(request):
                         nusers = 0
                         # Es una universidad nueva
                         if not warning:
-                            print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
+#                            print "WARNING FALSEEEEEEEE: LA UNIVERSIDAD NO ESTÁ REGISTRADA"
                             un = University(uni=uni, username=request.user.username, scholarship=scholarship, country=coun)
                             un.save()
-                            print "un.save()"
-                            #une = UniErasmus(uni=uni, scholarship=scholarship) 
-                            #une.save()
-                            #print "une.save()"
-                            #i.university.add(uni)
-                            #print "i.university.add(un.uni)"
+#                            print "un.save()"
+#                            #une = UniErasmus(uni=uni, scholarship=scholarship) 
+#                            #une.save()
+#                            #print "une.save()"
+#                            #i.university.add(uni)
+#                            #print "i.university.add(un.uni)"
 
 
                             # Incrementamos el número de usuarios de esa universidad
                             nusers += 1
-                            print "nusers: " + str(nusers)
+#                            print "nusers: " + str(nusers)
                             unu = UsersUniversity(uni=un, nusers=nusers)
-                            print "unu.nusers: " + str(unu.nusers) 
+#                            print "unu.nusers: " + str(unu.nusers) 
                             unu.save()
-                            print "unu.save()"
+#                            print "unu.save()"
                             # Incrementamos el número de usuarios de esa universidad
                             nusers += 1
-                            print "nusers: " + str(nusers)
+#                            print "nusers: " + str(nusers)
 
                             
                             try:
@@ -697,10 +694,10 @@ def uniregister(request):
                             except UsersUniversity.DoesNotExist:
                                 unu_user=""
 
-                            print "GUARDAMOS EN LAS BASES DE DATOS"
+#                            print "GUARDAMOS EN LAS BASES DE DATOS"
 
 
-                            print "SE SUPONE QUE MI USUARIO AHORA TIENE SU UNIVERSIDAD GUARDADA"
+#                            print "SE SUPONE QUE MI USUARIO AHORA TIENE SU UNIVERSIDAD GUARDADA"
                             try:
                                 uu_saved = University.objects.get(uni=uni)
                             except University.DoesNotExist:
@@ -714,9 +711,9 @@ def uniregister(request):
                             uss = UsersUniversity.objects.all()
                             for j in uss:
                                 if str(j.uni)==(unu.uni):
-                                    print "antes de incrementar: j.nusers: " + str(j.nusers)
+#                                    print "antes de incrementar: j.nusers: " + str(j.nusers)
                                     j.nusers += 1
-                                    print "despues de incrementar: j.nusers: " + str(j.nusers)
+#                                    print "despues de incrementar: j.nusers: " + str(j.nusers)
                                     j.useuni.add(i.username)
                                     j.save()
 
@@ -725,20 +722,20 @@ def uniregister(request):
                         
                         if done:
                             # Done es True, con lo cual acabamos de registrarla
-                            print "ESTOY EN ALERTAS DE DONEEEEEEEEEEEEE"
+#                            print "ESTOY EN ALERTAS DE DONEEEEEEEEEEEEE"
                             ctx = {'alertdone':True, 'uni_name':uni, 'uni_id':uu_saved.id, 'saved':True, 'countries':countries, 'unis':unis, 'username':user, 'type_user':g_type_user}
                         else:
                             # La universidad ya existe, y no la hemos registrado
-                            print "ESTOY EN ALERTAS DE WARNINGGGGGGGGGGGGGGGGGGGGGGGG"
+#                            print "ESTOY EN ALERTAS DE WARNINGGGGGGGGGGGGGGGGGGGGGGGG"
                             ctx = {'alertwarning':True, 'uni_name':u_saved, 'uni_id':u_saved.id, 'saved':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': g_type_user}
                        
 
                              
-                        print "Guardo en la base de datos el valor de uni2"
+#                        print "Guardo en la base de datos el valor de uni2"
                         i.uni2 = uni
                         i.save()
    
-                        print "sin incrementarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: " + str(n_university)
+#                        print "sin incrementarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: " + str(n_university)
                         
                         if es and save:
                             i.sserasmus=scholarship
@@ -746,14 +743,14 @@ def uniregister(request):
                         if ms and save:
                             i.ssmundus=scholarship
                             i.n_university += 1
-                        print "incrementadoooooooooooooooo: " + str(i.n_university)
+#                        print "incrementadoooooooooooooooo: " + str(i.n_university)
                         i.save()
-                        print "HEMOS INCREMENTADO LA VARIABLE N_UNIVERSITY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+#                        print "HEMOS INCREMENTADO LA VARIABLE N_UNIVERSITY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                          
 
                     # El usuario no puede registrar más universidades
                     if n_university>=2: 
-                        print "N_UNIVERSITY ES 2222222222222222 O DISTINTO Y NO PODEMOS REGISTRAR NI SE GUARDAN UNIVERSIDADES"
+#                        print "N_UNIVERSITY ES 2222222222222222 O DISTINTO Y NO PODEMOS REGISTRAR NI SE GUARDAN UNIVERSIDADES"
                         # botuni es para mostrar el boton para ir a las universidades
                         ctx = {'info':True, 'alertamax':True, 'botuni':True, 'countries': countries, 'unis': unis, 'username': user, 'type_user': g_type_user}
 
@@ -841,15 +838,20 @@ def universities(request):
             # Porcentajes de la web:
             
             nusuarios = Users.objects.all().count()
-            porcentaje_usuarios = nusuarios/float(50)
+#            porcentaje_usuarios = nusuarios/float(10)
+            porcentaje_usuarios = nusuarios
             nalumnos = Users.objects.all().filter(type_user="alumno").count()
-            porcentaje_alumnos = nalumnos/float(nusuarios)
+#            porcentaje_alumnos = nalumnos/float(nusuarios)
+            porcentaje_alumnos = nalumnos
             nprofesores = Users.objects.all().filter(type_user="profesor").count()
-            porcentaje_profesores = nprofesores/float(nusuarios)
+#            porcentaje_profesores = nprofesores/float(nusuarios)
+            porcentaje_profesores = nprofesores
             nchicos = Users.objects.all().filter(genero="male").count()
-            porcentaje_chicos = nchicos/float(nusuarios)
+#            porcentaje_chicos = nchicos/float(nusuarios)
+            porcentaje_chicos = nchicos
             nchicas = Users.objects.all().filter(genero="female").count()
-            porcentaje_chicas = nchicas/float(nusuarios)
+#            porcentaje_chicas = nchicas/float(nusuarios)
+            porcentaje_chicas = nchicas
             
             print "voy a imprimir los tres porcentajes que acabo de calcular"
             print nusuarios
@@ -972,15 +974,20 @@ def university(request, uni_name):
             print nchicas
             print nalumnos
             print nprofesores
-            porcentaje_usuarios = nuniname_users/float(nusuarios)
+#            porcentaje_usuarios = nuniname_users/float(nusuarios)
+            porcentaje_usuarios = nuniname_users
             #nalumnos = Users.objects.all().filter(type_user="alumno").count()
-            porcentaje_alumnos = nalumnos/float(nuniname_users)
+#            porcentaje_alumnos = nalumnos/float(nuniname_users)
+            porcentaje_alumnos = nalumnos
             #nprofesores = Users.objects.all().filter(type_user="profesor").count()
-            porcentaje_profesores = nprofesores/float(nuniname_users)
+#            porcentaje_profesores = nprofesores/float(nuniname_users)
+            porcentaje_profesores = nprofesores
             #nchicos = Users.objects.all().filter(genero="male").count()
-            porcentaje_chicos = nchicos/float(nuniname_users)
+#            porcentaje_chicos = nchicos/float(nuniname_users)
+            porcentaje_chicos = nchicos
             #nchicas = Users.objects.all().filter(genero="female").count()
-            porcentaje_chicas = nchicas/float(nuniname_users)
+#            porcentaje_chicas = nchicas/float(nuniname_users)
+            porcentaje_chicas = nchicas
             
             #print "voy a imprimir los tres porcentajes que acabo de calcular"
             #print nusuarios
@@ -1638,49 +1645,54 @@ def myuniversity(request, user):
         if (request.user.username==user):
 
             print "MYUNIVERSITY: el usuario esta logueado " +  user
-
-            # User is professor or student
-            # User has a profile image
-            type_user=""
-            path_image=""
-            description=""
-            t = User.objects.get(username=user)
-            tt = t.username
-            tu = Users.objects.all()
-            tp = UserProfile.objects.all()
-            for i in tu:
-                if (tt == str(i.username)):
-                    type_user = str(i.type_user)
-                    genero = str(i.genero)
-            for j in tp:
-                print "nombre de la imagen 7777777777777777777777777: " + str(j.name_image) + str(j.username)
-                print "description 7777777777777777777777777: " + (j.description) + str(j.username)
-                if (tt == str(j.username)):
-                    if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and ((j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"
-                        description = "Estudiante de la ETSIT"
+            def_profile(user)
+            
+            print g_type_user
+            print g_genero
+            print g_path_image
+            print g_description
+#            # User is professor or student
+#            # User has a profile image
+#            type_user=""
+#            path_image=""
+#            description=""
+#            t = User.objects.get(username=user)
+#            tt = t.username
+#            tu = Users.objects.all()
+#            tp = UserProfile.objects.all()
+#            for i in tu:
+#                if (tt == str(i.username)):
+#                    type_user = str(i.type_user)
+#                    genero = str(i.genero)
+#            for j in tp:
+#                print "nombre de la imagen 7777777777777777777777777: " + str(j.name_image) + str(j.username)
+#                print "description 7777777777777777777777777: " + (j.description) + str(j.username)
+#                if (tt == str(j.username)):
+#                    if ((str(j.name_image)=="") or (str(j.name_image)=="None")) and ((j.description)==""):
+#                        if genero=="male":
+#                            path_image ="tuerasmus/male.jpg"
+#                        elif genero=="female":
+#                            path_image="tuerasmus/female.jpg"
+#                        description = "Estudiante de la ETSIT"
+#                        
+#                    elif ((str(j.name_image)=="") or (str(j.name_image)=="None")) and not ((j.description)==""):
+#                        if genero=="male":
+#                            path_image ="tuerasmus/male.jpg"
+#                        elif genero=="female":
+#                            path_image="tuerasmus/female.jpg"               
+#                        description = (j.description)
+#                        
+#                    elif ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
+#                        path_image = "profiles/" + str(j.name_image)
+#                        description = "Estudiante de la ETSIT"
+#                    elif not ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
+#                        path_image = "profiles/" + str(j.name_image)
+#                        description = (j.description)
                         
-                    elif ((str(j.name_image)=="") or (str(j.name_image)=="None")) and not ((j.description)==""):
-                        if genero=="male":
-                            path_image ="tuerasmus/male.jpg"
-                        elif genero=="female":
-                            path_image="tuerasmus/female.jpg"               
-                        description = (j.description)
-                        
-                    elif ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = "Estudiante de la ETSIT"
-                    elif not ((j.description)=="") and (not (str(j.name_image)=="") or not (str(j.name_image)=="None")):
-                        path_image = "profiles/" + str(j.name_image)
-                        description = (j.description)
-                        
-                print "voy a imprimir path_image 7777777777777777777777777777777" + str(j.username)
-                print path_image     
+#                print "voy a imprimir path_image 7777777777777777777777777777777" + str(j.username)
+#                print path_image     
                        
-            print "Vamos a hacer un try para ver como conseguimos los datos que queremos de user"
+#            print "Vamos a hacer un try para ver como conseguimos los datos que queremos de user"
             try:
                 reco1=""
                 reco2=""
@@ -1691,55 +1703,52 @@ def myuniversity(request, user):
                 try:
                     rec1 = University.objects.get(uni=record.uni1)
                 
-                    print "rec1.id: " + str(rec1.id)
+#                    print "rec1.id: " + str(rec1.id)
 
-                    print record.uni1
+#                    print record.uni1
 
-                    #if ("-" in record.uni1):
-                    #    record.uni1=record.uni1.split(" - ")[1]
-                    #else:
-                    #    record.uni1=record.uni1
+#                    #if ("-" in record.uni1):
+#                    #    record.uni1=record.uni1.split(" - ")[1]
+#                    #else:
+#                    #    record.uni1=record.uni1
 
-                    #print record.uni1
+#                    #print record.uni1
                     reco1 = True
-
-                        
                 except University.DoesNotExist:
                     pass
                    
 
                 try:
                     rec2 = University.objects.get(uni=record.uni2)
-                    print "rec2.id: " + str(rec2.id)
+#                    print "rec2.id: " + str(rec2.id)
+#                    print record.uni2
+                   
+#                    #if ("-" in record.uni2):
+#                    #    record.uni2=record.uni2.split(" - ")[1]
+#                   #else:
+#                    #    record.uni2=record.uni2
 
-                    print record.uni2
-                    
-                    #if ("-" in record.uni2):
-                    #    record.uni2=record.uni2.split(" - ")[1]
-                    #else:
-                    #    record.uni2=record.uni2
-
-                    #print record.uni2
+#                    #print record.uni2
                     reco2 = True
 
                 except University.DoesNotExist:
                     pass
 
                 if reco1 and not reco2:                
-                    ctx = {'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'type_user':type_user, 'genero':genero, 'username': request.user.username, 'path_image':path_image, 'description':description}
+                    ctx = {'reco1':reco1, 'uni1':record.uni1, 'uni1id':rec1.id, 'type_user':g_type_user, 'genero':g_genero, 'username': request.user.username, 'path_image':g_path_image, 'description':g_description}
                 elif reco2 and not reco1:
-                    ctx = {'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'genero':genero, 'username': request.user.username, 'path_image':path_image, 'description':description}
+                    ctx = {'reco2':reco2, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':g_type_user, 'genero':g_genero, 'username': request.user.username, 'path_image':g_path_image, 'description':g_description}
                 elif reco1 and reco2:
                     print "reco1 y reco2 son True!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                    ctx = {'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':type_user, 'genero':genero, 'username': request.user.username, 'path_image':path_image, 'description':description}
+                    ctx = {'reco1':reco1, 'reco2':reco2, 'uni1':record.uni1, 'uni1id':rec1.id, 'uni2':record.uni2, 'uni2id':rec2.id, 'type_user':g_type_user, 'genero':g_genero, 'username': request.user.username, 'path_image':g_path_image, 'description':g_description}
                 else:
-                    ctx = {'type_user':type_user, 'genero':genero, 'username': request.user.username, 'path_image':path_image, 'description':description}
+                    ctx = {'type_user':g_type_user, 'genero':g_genero, 'username': request.user.username, 'path_image':g_path_image, 'description':g_description}
                 
                     
 
             except UserProfile.DoesNotExist:
                 print "universidades uni1 y uni2 están vacías!!!!!!!!1"
-                ctx = {'type_user':type_user, 'genero':genero, 'username': request.user.username, 'path_image':path_image, 'description':description}    
+                ctx = {'type_user':g_type_user, 'genero':g_genero, 'username': request.user.username, 'path_image':g_path_image, 'description':g_description}    
 
 
             return render_to_response('tuerasmus/myuniversity.html', ctx, context_instance=RequestContext(request))

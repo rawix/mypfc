@@ -61,7 +61,7 @@
               </div><!--/.jumbotron -->
 
               <div class="page-header">
-                <h1>¿Qué ciudades son las que se asignan para los erasmus?</h1>
+                <h1>¿Cuáles son las ciudades erasmus?</h1>
               </div>
               
               <form action="/tuerasmus/universities/cities/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
@@ -203,17 +203,17 @@
             
             <h3>Usuarios de TuErasmus</h3>
             <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% erasmus</span></div>
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{porcentaje_usuarios}}" aria-valuemin="0" aria-valuemax="10" style="width: {{porcentaje_usuarios}}%;"><span class="sr-only">{{porcentaje_usuarios}}% erasmus</span></div>
             </div>
             
             <h3>Usuarios alumnos</h3>
             <div class="progress">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% alumnos</span></div>
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_alumnos}}" aria-valuemin="0" aria-valuemax="10" style="width: {{porcentaje_alumnos}}%"><span class="sr-only">{{porcentaje_alumnos}}% alumnos</span></div>
             </div>
             
             <h3>Usuarios profesores</h3>
             <div class="progress">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% profesores</span></div>
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{porcentaje_profesores}}" aria-valuemin="0" aria-valuemax="10" style="width: {{porcentaje_profesores}}%"><span class="sr-only">{{porcentaje_profesores}}% profesores</span></div>
             </div>
 
             <h3>Usuarios masculinos y usuarios femeninas</h3>         
@@ -223,12 +223,13 @@
               <!--<div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>-->
             </div>
             
-            <h3>Comentarios realizados</h3>
+            <!-- <h3>Comentarios realizados</h3>
             <div class="progress">
-              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
-            </div>
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{porcentaje_comentarios}}" aria-valuemin="0" aria-valuemax="10" style="width: {{porcentaje_comentarios}}%"><span class="sr-only">{{porcentaje_comentarios}}% Complete (warning)</span></div>
+            </div> -->
             
-           {% endif %} 
+           {% endif %}
+            
         </div> <!--./col-xs-12 col-sm-9 -->
 {% endblock %}
 

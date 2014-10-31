@@ -63,7 +63,7 @@
   </div>
   
   <div class="page-header">
-    <h4>¡¡Gracias <strong>{{i.username}}</strong> por editar la descripción!!</h4>
+    <h4>¡¡Gracias <strong></strong> por contribuir con TuErasmus!!</h4>
   </div>
   
   {% if not no_info %}

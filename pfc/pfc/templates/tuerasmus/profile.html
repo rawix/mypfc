@@ -50,6 +50,7 @@
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-danger btn-xs" data-toggle="offcanvas">Menú</button>
           </p>
+          
           <div class="jumbotron">    
             <center><img src ="/tuerasmus/media/{{path_image}}" width="300px" heigth="300px"/></center>
             <!--<img src="http://placehold.it/150x150"/> -->
@@ -123,7 +124,7 @@
             <p><center><strong> {{description}} </strong></center></p>
           </div>
 
-          <p>
+          <p>          
             {% ifequal up_obj.name "" %}
               <li>Nombre: <strong><big>{{up_obj.username}}</big></strong></li>
             {% else %}
