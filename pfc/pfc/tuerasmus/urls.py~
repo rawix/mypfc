@@ -27,6 +27,11 @@ urlpatterns = patterns('',
     url(r'^uniedit/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.uniedit', name='uniedit'),
     url(r'^university/(?P<uni_name>[\S]+)/$', 'tuerasmus.views.university', name='university'),
 
+    # URLs enabled to view images
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
+    # URLs enabled to view static files
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT,}),
+
     # Comments urls
     #url(r'^comments/$', 'tuerasmus.views.comments', name='comments'),
 
@@ -39,10 +44,6 @@ urlpatterns = patterns('',
     url(r'^(?P<user>[\S]+)/myerasmus/$', 'tuerasmus.views.myerasmus', name='myerasmus'),
     url(r'^(?P<user>[\S]+)/$', 'tuerasmus.views.home', name='home'),
     
-    # URLs enabled to view images
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
-    # URLs enabled to view static files
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT,}),
 
 
 )

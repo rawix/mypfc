@@ -1,11 +1,5 @@
 {% extends "university/base.html" %}
 
-
-{% block java_script %}
-  <!-- university/geouniversity.html -->
-  <!-- university/georesidence.html -->
-{% endblock %}
-
 {% block link_content %}
 
         <li><a href="/tuerasmus">Home</a></li>
@@ -16,34 +10,9 @@
             <li class="divider"></li>
               <li class="dropdown-header">Más</li>
               <li><a href="/tuerasmus/{{user.username}}/edit_profile">Editar perfil</a></li>
-              <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
-              <!--<li><a href="#">Modificar contraseña</a></li>-->
           </ul>
-        </li>
-        <!--<li class="active" class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
-            <li><a href="/tuerasmus/universities">Las universidades</a></li>
-            <li class="divider"></li>
-              <li class="dropdown-header">Más</li>
-              <li><a href="/tuerasmus/uniregister">Registrar</a></li>
-          </ul>
-        </li>-->
-        <!--<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-            <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
-            <li class="divider"></li>
-              <li class="dropdown-header">Más</li>
-              <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>
-              <li><a href="#">Contactar</a></li>
-          </ul>
-        </li>-->
-        <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
-        <!--<li><a href="/contact">Contacto</a></li>-->
-  
+        </li> 
+         
 {% endblock %}
 
 {% block content %}
@@ -59,7 +28,6 @@
                   <p>{% block pathimage %}{% endblock %}</p>
                 </div>
                 <div class="col-lg-7 col-ms-7 col-xs-7">
-                  <!--<p><a href="/tuerasmus/university/{{uni_name}}" style="color:#151515" ><h1>{{ uniname }}</h1></a></p>-->
                   <h1>{{ uniname }}</h1>
                 </div>
               </div>
@@ -71,20 +39,13 @@
                 <a href="/tuerasmus/uniedit/{{uni_name}}" class="btn btn-sm btn-primary" type="submit">Editar perfil</a>
               </p>
             </div>
+            
             <p>
-              <!--<button type="button" class="btn btn-lg" style="background:white">Básica</button>-->
               <a href="/tuerasmus/university/{{uni_name}}/basic" class="btn btn-lg btn-warning" type="submit">General</a>
-              <!--<button type="button" class="btn btn-lg btn-danger" name="basic">Básica</button>-->
               <a href="/tuerasmus/university/{{uni_name}}/doc" class="btn btn-lg btn-warning" type="submit">Documentación</a>
-              <!--<button type="button" class="btn btn-lg btn-primary" name="doc">Documentación y atención</button>-->
               <a href="/tuerasmus/university/{{uni_name}}/hotel" class="btn btn-lg btn-warning" type="submit">Residencias</a>
-              <!--<button type="button" class="btn btn-lg btn-info" name="hotel">Alojamientos</button>-->
               <a href="/tuerasmus/university/{{uni_name}}/subjects" class="btn btn-lg btn-warning" type="submit">Asignaturas</a>
-              <!--<button type="button" class="btn btn-lg btn-success" name="subjects">Asignaturas y Prácticas</button>-->
               <a href="/tuerasmus/university/{{uni_name}}/city" class="btn btn-lg btn-warning" type="submit">La ciudad</a>
-              <!--<button type="button" class="btn btn-lg btn-warning" name="city">La ciudad</button>-->
-              <a href="/tuerasmus/university/{{uni_name}}/others" class="btn btn-lg btn-warning" type="submit">Comentarios</a>
-              <!--<button type="button" class="btn btn-lg btn-default" name="others">Varios</button>-->
             </p>
             
             <!-- To show university in Google Maps: university/geouniversity.html -->
@@ -94,10 +55,6 @@
             <!-- To show all the residences in Google Maps: university/georesidence.html -->
             {% block on_georesidence %}
             {% endblock %}
-            
-            <!-- To show all the university information:  
-            {% block all_info %}
-            {% endblock %}-->      
 
             <!-- To show specific university information: university/uni_info.html -->
             {% block uni_info %}

@@ -1,7 +1,6 @@
 {% extends "tuerasmus/base.html" %}
 
 {% block link_content%}
-
         <li><a href="/tuerasmus">Home</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi perfil<b class="caret"></b></a>
@@ -13,35 +12,10 @@
               <!--<li><a href="/tuerasmus/{{user.username}}/edit_password">Modificar contraseña</a></li>-->
               <!--<li><a href="#">Modificar contraseña</a></li>-->
           </ul>
-        </li>
-        <!--<li class="active" class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">UniErasmus<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="/tuerasmus/{{user.username}}/myuniversity">Mi universidad</a></li>
-            <li><a href="/tuerasmus/universities">Las universidades</a></li>
-            <li class="divider"></li>
-              <li class="dropdown-header">Más</li>
-              <li><a href="/tuerasmus/uniregister">Registrar</a></li>
-          </ul>
-        </li>-->
-        <!--<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">LosErasmus<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="/tuerasmus/{{user.username}}/myerasmus">MisErasmus</a></li>
-            <li><a href="/tuerasmus/universities/urerasmus">TusErasmus</a></li>
-            <li class="divider"></li>
-              <li class="dropdown-header">Más</li>
-              <!--<li><a href="/tuerasmus/{{user.username}}/contact">Contactar</a></li>
-              <li><a href="#">Contactar</a></li>
-          </ul>
-        </li>-->
-        <!--<li class="active"><a href="/tuerasmus/comments">TusComentarios</a></li>-->
-        <!--<li><a href="/contact">Contacto</a></li>-->
-            
+        </li>         
 {% endblock %}
 
 {% block content %}
-
         <div class="col-xs-12 col-sm-9">
         
           <p class="pull-right visible-xs">
@@ -61,21 +35,17 @@
             {% if reco1 and not reco2%}
               <h3><strong><center><a class="btn btn-warning btn-lg" href="/tuerasmus/university/{{uni1id}}" name="uni_selected" value={{uni1}}>{{uni1}}</a></p></center></strong></h3>
               <br>
-              <!--<center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni1id}}" name="uni_selected" value={{uni1}}>Editar perfil</a></center>-->
             {% elif reco2 and not reco1%}
               <h3><strong><center><a class="btn btn-warning btn-lg" href="/tuerasmus/university/{{uni2id}}" name="uni_selected" value={{uni2}}>{{uni2}}</a></p></center></strong></h3>
               <br>
-              <!--<center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni2id}}" name="uni_selected" value={{uni2}}>Editar perfil</a></center>-->
              {% elif reco2 and reco1 %} 
                <div class="col-lg-6">
                  <h3><strong><center><a class="btn btn-warning btn-lg" href="/tuerasmus/university/{{uni1id}}" name="uni_selected" value={{uni1}}>{{uni1}}</a></p></center></strong></h3>
                  <br>
-                 <!--<center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni1id}}" name="uni_selected" value={{uni1}}>Editar perfil</a></center>-->
                </div><!-- /.col-lg-6 -->
                <div class="col-lg-6">
                  <h3><strong><center><a class="btn btn-warning btn-lg" href="/tuerasmus/university/{{uni2id}}" name="uni_selected" value={{uni2}}>{{uni2}}</a></p></center></strong></h3>
                  <br>
-                 <!--<center><p><a class="btn btn-primary btn-lg" href="/tuerasmus/uniedit/{{uni2id}}" name="uni_selected" value={{uni2}}>Editar perfil</a></center>-->
                </div><!-- /.col-lg-6 -->
             {% else %}
               <h3>Registra tu universidad erasmus</h3>
@@ -83,7 +53,5 @@
             {% endif %}
             
           </div><!-- /.row -->
-          
          </div><!--/span-->
-     
 {% endblock %}

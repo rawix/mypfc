@@ -91,6 +91,7 @@
 
 
                 {% if not alertdone %}
+                  <br><br>
                   <h5>Busca tu universidad en el listado o introdúcela en el recuadro de abajo</h5><br>
                   <div class="col-lg-6" >
                     <label for="selected">Selecciona una universidad</label>

@@ -87,11 +87,6 @@
                 </div>
               {% endif %}
               
-              <!--{% if alerterrorpass %}
-                <div class="alert alert-danger">
-                  <center><strong>¡¡ERROR!!</strong>, las contraseñas no coinciden</center>
-                </div>
-              {% endif %}-->
               <br>
 
               {{form.as_p}}
@@ -124,13 +119,7 @@
             <p><center><strong> {{description}} </strong></center></p>
           </div>
 
-          <p>
-            {% ifequal up_obj.username "" %}
-              <li>Nombre: <strong><big>{{up_obj.username}}</big></strong></li>
-            {% else %}
-              <li>Nombre: <strong><big>{{up_obj.name}}</big></strong></li>
-            {% endifequal %}
-          
+          <p>          
             {% ifequal up_obj.name "" %}
               <li>Nombre: <strong><big>{{up_obj.username}}</big></strong></li>
             {% else %}

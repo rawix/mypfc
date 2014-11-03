@@ -4,7 +4,7 @@
 
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGRcmWHBZafJje424IkNT6Ez195Y1OdM4&sensor=false"></script>
 
-	<!--Llamamos a la API de Google Maps-->
+	<!--Calling Google Maps API-->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
 	<!--Plugin GMaps-->
@@ -27,7 +27,7 @@
 	    marker.setMap(map);
 	    infoWindow.open(map, marker);
 		  }
-		  google.maps.event.addDomListener(window, 'load', marcando);
+	  google.maps.event.addDomListener(window, 'load', marcando);
 	</script>
 
   <script type="text/javascript">
@@ -62,16 +62,11 @@
     <h6>Pincha sobre el nombre de la universidad para ir a su perfil</h6>
   </div>
   
-
-  
   {% if not no_info %}
       <form action="" enctype="multipart/form-data" method="post"> {% csrf_token %}
-
   
-         
       {% ifequal info "basic" %}
         <!-- INFORMACIÓN DE LAS INSTALACIONES DE LA UNIVERSIDAD -->
-        
         <div class="page-header">
           <h4>¡¡Gracias <strong>{{user_editor}}</strong> por contribuir con TuErasmus!!</h4>
         </div> 
@@ -182,10 +177,7 @@
 
               <!-- The new comment -->
               <textarea id="library" class="form-control" name="new_library" style ="display:none" row="3" col="5"> {{i.library}} </textarea>
-              <button id="library2" style ="display:none" class="btn btn-sm btn-primary" value="library" name="button" type="submit"> Guardar </button>
-                  
-              
-              
+              <button id="library2" style ="display:none" class="btn btn-sm btn-primary" value="library" name="button" type="submit"> Guardar </button>                 
               </p></li>  
               
             {% empty %}
@@ -198,10 +190,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.lab}}
-
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -216,7 +204,6 @@
             <textarea id="lab" class="form-control" name="new_lab" style ="display:none" row="3" col="5"> {{i.lab}} </textarea>
             <button id="lab2" style ="display:none" class="btn btn-sm btn-primary" value="lab" name="button" type="submit"> Guardar </button>
 
-            
             </p></li>  
 
           {% empty %}
@@ -230,9 +217,6 @@
           {% for i in info_list %}
             <li><p>{{i.computerequipment}}
 
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -247,8 +231,8 @@
             <textarea id="computerequipment" class="form-control" name="new_computerequipment" style ="display:none" row="3" col="5"> {{i.computerequipment}} </textarea>
             <button id="computerequipment2" style ="display:none" class="btn btn-sm btn-primary" value="computerequipment" name="button" type="submit"> Guardar </button>
 
-            
-            </p></li>  
+            </p></li> 
+             
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
@@ -260,9 +244,6 @@
           {% for i in info_list %}
             <li><p>{{i.others}}
 
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -292,11 +273,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.dinningroom}}
-
-
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -323,10 +299,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.cafeteria}}
-
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -359,10 +331,6 @@
           {% for i in info_list %}
             <li><p>{{i.sportactivities}}
 
-
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -390,9 +358,6 @@
           {% for i in info_list %}
             <li><p>{{i.asociation}}
 
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -420,10 +385,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.languagecourse}}
-
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -451,10 +412,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.schoolyear}}
-
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -482,10 +439,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.vacations}}
-            
-            <!--The comment owner can modify it -->
 
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -513,10 +467,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.compteleco}}
-
-            <!--The comment owner can modify it -->
-
-
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -530,8 +480,6 @@
             <!-- The new comment -->
             <textarea id="compteleco" class="form-control" name="new_compteleco" style ="display:none" row="3" col="5"> {{i.compteleco}} </textarea>
             <button id="compteleco2" style ="display:none" class="btn btn-sm btn-primary" value="compteleco" name="button" type="submit"> Guardar </button>
-
-            
             </p></li>  
 
           {% empty %}
@@ -545,9 +493,6 @@
           {% for i in info_list %}
             <li><p>{{i.teachers}}
 
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -561,7 +506,6 @@
             <!-- The new comment --> 
             <textarea id="teachers" class="form-control" name="new_teachers" style ="display:none" row="3" col="5"> {{i.teachers}} </textarea>
             <button id="teachers2" style ="display:none" class="btn btn-sm btn-primary" value="teachers" name="button" type="submit"> Guardar </button>
-
             
             </p></li>  
 
@@ -575,10 +519,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.teaching}}
-
-            <!--The comment owner can modify it -->
-
-                
+   
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -593,9 +534,7 @@
             <textarea id="teaching" class="form-control" name="new_teaching" style ="display:none" row="3" col="5"> {{i.teaching}} </textarea>
             <button id="teaching2" style ="display:none" class="btn btn-sm btn-primary" value="teaching" name="button" type="submit"> Guardar </button>
 
-            
             </p></li>  
-
 
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -608,9 +547,6 @@
           {% for i in info_list %}
             <li><p>{{i.studies}}
 
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -625,7 +561,6 @@
             <textarea id="studies" class="form-control" name="new_studies" style ="display:none" row="3" col="5"> {{i.studies}} </textarea>
             <button id="studies2" style ="display:none" class="btn btn-sm btn-primary" value="studies" name="button" type="submit"> Guardar </button>
 
-            
             </p></li>  
 
           {% empty %}
@@ -647,9 +582,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.unidoc}}
-            <!--The comment owner can modify it -->
 
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -662,12 +595,8 @@
             
             <!-- The new comment --> 
             <textarea id="unidoc" class="form-control" name="new_unidoc" style ="display:none" row="3" col="5"> {{i.unidoc}} </textarea>
-            <button id="unidoc2" style ="display:none" class="btn btn-sm btn-primary" value="unidoc" name="button" type="submit"> Guardar </button>
-
-            
+            <button id="unidoc2" style ="display:none" class="btn btn-sm btn-primary" value="unidoc" name="button" type="submit"> Guardar </button>            
             </p></li>  
-
-
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
@@ -678,9 +607,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.residencelicence}}
-            <!--The comment owner can modify it -->
 
-                
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -695,10 +622,7 @@
             <textarea id="residencelicence" class="form-control" name="new_residencelicence" style ="display:none" row="3" col="5"> {{i.residencelicence}} </textarea>
             <button id="residencelicence2" style ="display:none" class="btn btn-sm btn-primary" value="residencelicence" name="button" type="submit"> Guardar </button>
 
-            
             </p></li>  
-
-
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
@@ -709,10 +633,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.getresidence}}
-            
-            <!--The comment owner can modify it -->
-
-                
+   
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -739,10 +660,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.economicaid}}
-
-            <!--The comment owner can modify it -->
-
-                
+   
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -770,9 +688,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.bankaccount}}
-            <!--The comment owner can modify it -->
-
-                
+ 
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -785,11 +701,8 @@
            
             <!-- The new comment -->  
             <textarea id="bankaccount" class="form-control" name="new_bankaccount" style ="display:none" row="3" col="5"> {{i.bankaccount}} </textarea>
-            <button id="bankaccount2" style ="display:none" class="btn btn-sm btn-primary" value="bankaccount" name="button" type="submit"> Guardar </button>
-
-            
+            <button id="bankaccount2" style ="display:none" class="btn btn-sm btn-primary" value="bankaccount" name="button" type="submit"> Guardar </button>         
             </p></li>  
-
 
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -804,9 +717,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.costume}}
-            <!--The comment owner can modify it -->
-
-                
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -821,10 +731,7 @@
             <textarea id="costume" class="form-control" name="new_costume" style ="display:none" row="3" col="5"> {{i.costume}} </textarea>
             <button id="costume2" style ="display:none" class="btn btn-sm btn-primary" value="costume" name="button" type="submit"> Guardar </button>
 
-            
             </p></li>  
-
-
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
@@ -835,10 +742,7 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.meetings}}
-
-            <!--The comment owner can modify it -->
-
-                
+ 
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -852,10 +756,7 @@
             <!-- The new comment --> 
             <textarea id="meetings" class="form-control" name="new_meetings" style ="display:none" row="3" col="5"> {{i.meetings}} </textarea>
             <button id="meetings2" style ="display:none" class="btn btn-sm btn-primary" value="meetings" name="button" type="submit"> Guardar </button>
-
-            
             </p></li>  
-
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
@@ -866,10 +767,6 @@
           <ul>
           {% for i in info_list %}
             <li><p>{{i.offices}}
-
-            <!--The comment owner can modify it -->
-
-            
             <!-- Information about de comment -->
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -884,7 +781,6 @@
             <textarea id="offices" class="form-control" name="new_offices" style ="display:none" row="3" col="5"> {{i.offices}} </textarea>
             <button id="offices2" style ="display:none" class="btn btn-sm btn-primary" value="offices" name="button" type="submit"> Guardar </button>
 
-            
             </p></li>  
 
           {% empty %}
@@ -898,7 +794,7 @@
       <!-- ASIGNATURAS -->
       {% ifequal info "subjects" %}  
         <h3>Las asignaturas impartidas en esta universidad:</h3>
-          <ul>
+
           {% for i in info_list %}
             
             
@@ -907,14 +803,9 @@
             </div> 
             
             <li><h3>{{i.subname}}</h3>
-            
-            
-                
-                <p><strong>Créditos de la asignatura</strong>: {{i.credits}}
-                
-                    <!--The comment owner can modify it -->
 
-                    
+                <p><strong>Créditos de la asignatura</strong>: {{i.credits}}
+
                     <!-- Information about de comment -->
                     <input type="hidden" name="commentid" value="{{i.id}}">
                     <input type="hidden" name="info" value="{{info}}">
@@ -929,16 +820,8 @@
                     <textarea id="credits" class="form-control" name="new_credits" style ="display:none" row="3" col="5"> {{i.credits}} </textarea>
                     <button id="credits2" style ="display:none" class="btn btn-sm btn-primary" value="credits" name="button" type="submit"> Guardar </button>
 
-                
-                
-                
-                
-                
                 </p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout}}
-                
-                    <!--The comment owner can modify it -->
-
                     
                     <!-- Information about de comment -->
                     <input type="hidden" name="commentid" value="{{i.id}}">
@@ -954,16 +837,9 @@
                     <textarea id="subnameout1" class="form-control" name="new_subnameout1" style ="display:none" row="3" col="5"> {{i.subnameout}} </textarea>
                     <button id="subnameout12" style ="display:none" class="btn btn-sm btn-primary" value="subnameout1" name="button" type="submit"> Guardar </button>
 
-                
-                
-                
-                
                 </p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout2}}
-                
-                    <!--The comment owner can modify it -->
 
-                    
                     <!-- Information about de comment -->
                     <input type="hidden" name="commentid" value="{{i.id}}">
                     <input type="hidden" name="info" value="{{info}}">
@@ -978,15 +854,8 @@
                     <textarea id="subnameout2" class="form-control" name="new_subnameout2" style ="display:none" row="3" col="5"> {{i.subnameout2}} </textarea>
                     <button id="subnameout22" style ="display:none" class="btn btn-sm btn-primary" value="subnameout2" name="button" type="submit"> Guardar </button>
 
-                
-                
-                
                 </p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout3}}
-               
-                    <!--The comment owner can modify it -->
-
-                    
                     <!-- Information about de comment -->
                     <input type="hidden" name="commentid" value="{{i.id}}">
                     <input type="hidden" name="info" value="{{info}}">
@@ -1001,15 +870,8 @@
                     <textarea id="subnameout3" class="form-control" name="new_subnameout3" style ="display:none" row="3" col="5"> {{i.subnameout3}} </textarea>
                     <button id="subnameout32" style ="display:none" class="btn btn-sm btn-primary" value="subnameout3" name="button" type="submit"> Guardar </button>
 
-                
-                
-                
                 </p>
                 <p><strong>Trabajos que realizar</strong>: {{i.works}}
-                
-                    <!--The comment owner can modify it -->
-
-                
                     <!-- Information about de comment -->
                     <input type="hidden" name="commentid" value="{{i.id}}">
                     <input type="hidden" name="info" value="{{info}}">
@@ -1023,16 +885,9 @@
                     <!-- The new comment --> 
                     <textarea id="works" class="form-control" name="new_works" style ="display:none" row="3" col="5"> {{i.works}} </textarea>
                     <button id="works2" style ="display:none" class="btn btn-sm btn-primary" value="works" name="button" type="submit"> Guardar </button>
-
-                
-                
- 
                 </p>
                 <p><strong>Prácticas a realizar</strong>: {{i.practices}}
-                
-                    <!--The comment owner can modify it -->
 
-                    
                     <!-- Information about de comment -->
                     <input type="hidden" name="commentid" value="{{i.id}}">
                     <input type="hidden" name="info" value="{{info}}">
@@ -1047,16 +902,9 @@
                     <textarea id="practices" class="form-control" name="new_practices" style ="display:none" row="3" col="5"> {{i.practices}} </textarea>
                     <button id="practices2" style ="display:none" class="btn btn-sm btn-primary" value="practices" name="button" type="submit"> Guardar </button>
 
-                
-                
-                
-                
                 </p>
                 <p><strong>Dificultad que presenta respecto a tu universidad de origen</strong>: {{i.difficult}}
-                
-                    <!--The comment owner can modify it -->
 
-                    
                     <!-- Information about de comment -->
                     <input type="hidden" name="commentid" value="{{i.id}}">
                     <input type="hidden" name="info" value="{{info}}">
@@ -1071,33 +919,32 @@
                     <textarea id="difficult" class="form-control" name="new_difficult" style ="display:none" row="3" col="5"> {{i.difficult}} </textarea>
                     <button id="difficult2" style ="display:none" class="btn btn-sm btn-primary" value="difficult" name="button" type="submit"> Guardar </button>
 
-                
-                
-                
                 </p>
             </li>
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
-          </ul>
+
+          
+          <div class="page-header">
+            <p>
+              <a href="/tuerasmus/uniedit/{{uni_name}}/subjects" class="btn btn-sm btn-primary" type="submit">Agregar asignatura</a>
+            </p>
+          </div>
+          
       {% endifequal %}
 
-      {% ifequal info "city" %}  
-        
-          
+      {% ifequal info "city" %}            
           {% for i in info_list %}
-            <h3>La ciudad de la universidad: {{i.cityname}}</h3>
+            <h2>Ciudad: {{i.cityname}}</h2>
             
             <div class="page-header">
               <h4>¡¡Gracias <strong>{{i.username}}</strong> por contribuir con TuErasmus!!</h4>
             </div>
             
-            <ul>
-            <li><p><strong>Coste de la vida</strong>: {{i.prices}}
             
-                <!--The comment owner can modify it -->
+            <li><p><strong>Coste de la vida</strong>: {{i.prices}}
 
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1117,9 +964,6 @@
             
             <li><p><strong>La zona de la universidad</strong>: {{i.uniarea}}
 
-                <!--The comment owner can modify it -->
-
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1132,17 +976,10 @@
                 
                 <!-- The new comment --> 
                 <textarea id="uniarea" class="form-control" name="new_uniarea" style ="display:none" row="3" col="5"> {{i.uniarea}} </textarea>
-                <button id="uniarea2" style ="display:none" class="btn btn-sm btn-primary" value="uniarea" name="button" type="submit"> Guardar </button>
-
-            
-            
-            
+                <button id="uniarea2" style ="display:none" class="btn btn-sm btn-primary" value="uniarea" name="button" type="submit"> Guardar </button>            
             </p></li>
             <li><p><strong>La vida estudiantil</strong>: {{i.studentlife}}
-            
-                <!--The comment owner can modify it -->
 
-            
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1160,10 +997,7 @@
                             
             </p></li>
             <li><p><strong>El turismo en la ciudad</strong>: {{i.turism}}
-            
-                <!--The comment owner can modify it -->
 
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1177,15 +1011,10 @@
                 <!-- The new comment --> 
                 <textarea id="turism" class="form-control" name="new_turism" style ="display:none" row="3" col="5"> {{i.turism}} </textarea>
                 <button id="turism2" style ="display:none" class="btn btn-sm btn-primary" value="turism" name="button" type="submit"> Guardar </button>
-
-            
             
             </p></li>
             <li><p><strong>Las salidas nocturnas</strong>: {{i.party}}
-            
-                <!--The comment owner can modify it -->
 
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1200,14 +1029,9 @@
                 <textarea id="party" class="form-control" name="new_party" style ="display:none" row="3" col="5"> {{i.party}} </textarea>
                 <button id="party2" style ="display:none" class="btn btn-sm btn-primary" value="party" name="button" type="submit"> Guardar </button>
 
-                            
-            
             </p></li>
             <li><p><strong>Cultura de la ciudad</strong>: {{i.culture}}
-            
-                <!--The comment owner can modify it -->
 
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1226,10 +1050,7 @@
             </p></li>
             
             <li><p><strong>Hay delincuencia</strong>: {{i.crime}}
-            
-                <!--The comment owner can modify it -->
 
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1247,10 +1068,6 @@
                             
             </p></li>
             <li><p><strong>Ir de tiendas</strong>: {{i.shopping}}
-            
-                <!--The comment owner can modify it -->
-
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1268,10 +1085,7 @@
             
             </p></li>
             <li><p><strong>La vida de los erasmus</strong>: {{i.erasmuslife}}
-            
-                <!--The comment owner can modify it -->
 
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1289,10 +1103,6 @@
                             
             </p></li>
             <li><p><strong>Temas varios</strong>: {{i.more}}
-            
-                <!--The comment owner can modify it -->
-
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1306,14 +1116,17 @@
                 <!-- The new comment --> 
                 <textarea id="more" class="form-control" name="new_more" style ="display:none" row="3" col="5"> {{i.more}} </textarea>
                 <button id="more2" style ="display:none" class="btn btn-sm btn-primary" value="more" name="button" type="submit"> Guardar </button>
-
-                            
             </p></li>
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
           {% endfor %}
-          </ul>      
-      
+
+          <div class="page-header">
+            <p>
+              <a href="/tuerasmus/uniedit/{{uni_name}}/city" class="btn btn-sm btn-primary" type="submit">Agregar ciudad</a>
+            </p>
+          </div>
+          
       {% endifequal %}
 
       {% ifequal info "others" %}  
@@ -1323,10 +1136,7 @@
             <li><p><strong>{{i.username}}</strong> 
                 <strong>{{i.title}} {{day_publicated}}</strong>: 
                 <p>{{i.text}}
-                
-                <!--The comment owner can modify it -->
 
-                
                 <!-- Information about de comment -->
                 <input type="hidden" name="commentid" value="{{i.id}}">
                 <input type="hidden" name="info" value="{{info}}">
@@ -1340,8 +1150,6 @@
                 <!-- The new comment --> 
                 <textarea id="text" class="form-control" name="new_text" style ="display:none" row="3" col="5"> {{i.text}} </textarea>
                 <button id="text2" style ="display:none" class="btn btn-sm btn-primary" value="text" name="button" type="submit"> Guardar </button>
-
-                
                 </p>
                 </p>
             </li>
