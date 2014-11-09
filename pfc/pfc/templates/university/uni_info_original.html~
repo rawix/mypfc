@@ -31,11 +31,10 @@
 	</script>
 
   <script type="text/javascript">
-      function showText(ident, ident2)
+      function showText(ident)
         {
           console.log("HOLA ESTOY EN SHOWTEXT");
           console.log(ident);
-          console.log(ident2);
           //document.getElementById("bt").style.visibility = "visible";
           //document.getElementById("bt2").style.visibility = "visible";
           document.getElementById(ident).style.display = "block";
@@ -43,9 +42,6 @@
         }
       function hideText(ident, ident2)
         {
-          console.log("VAMOS A HACER HIDDEN PARA EL BUTTON");
-          console.log(ident);
-          console.log(ident2);
           //document.getElementById("bt").style.visibility = "hidden";
           //document.getElementById("bt2").style.visibility = "hidden";
           document.getElementById(ident).style.display = "none";
@@ -149,8 +145,8 @@
               <br><br>
 
               <!-- The new comment -->
-              <textarea id="{{i.id}}_teachingequipment" class="form-control" name="new_teachingequipment" style ="display:none" row="3" col="5"> {{i.teachingequipment}} </textarea>
-              <button id="{{i.id}}_teachingequipment2" value="{{i.id}}_teachingequipment" name="button" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
+              <textarea id="teachingequipment" class="form-control" name="new_teachingequipment" style ="display:none" row="3" col="5"> {{i.teachingequipment}} </textarea>
+              <button id="teachingequipment2" value="teachingequipment" name="button" style ="display:none" class="btn btn-sm btn-primary" type="submit"> Guardar </button>
                   
               
               </p></li>  
@@ -170,17 +166,18 @@
               
               
               <!-- Information about de comment -->
+              <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
           
               <!-- Buttons to modify or cancel -->
-              <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_library","{{i.id}}_library2")'> Modificar </a>
-              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_library","{{i.id}}_library2")'> Cancelar </a> 
+              <a type="submit" class="btn btn-xs btn-default" onclick='showText("library","library2")'> Modificar </a>
+              <a type="submit" class="btn btn-xs btn-default" onclick='hideText("library","library2")'> Cancelar </a> 
               
               <br><br>
 
               <!-- The new comment -->
-              <textarea id="{{i.id}}_library" class="form-control" name="{{i.id}}_new_library" style ="display:none" row="3" col="5"> {{i.library}} </textarea>
-              <button id="{{i.id}}_library2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_library" name="button" type="submit"> Guardar </button>                 
+              <textarea id="library" class="form-control" name="new_library" style ="display:none" row="3" col="5"> {{i.library}} </textarea>
+              <button id="library2" style ="display:none" class="btn btn-sm btn-primary" value="library" name="button" type="submit"> Guardar </button>                 
               </p></li>  
               
             {% empty %}
@@ -194,17 +191,18 @@
           {% for i in info_list %}
             <li><p>{{i.lab}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
         
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default"onclick='showText("{{i.id}}_lab","{{i.id}}_lab2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_lab","{{i.id}}_lab2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default"onclick='showText("lab","lab2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("lab","lab2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_lab" class="form-control" name="{{i.id}}_new_lab" style ="display:none" row="3" col="5"> {{i.lab}} </textarea>
-            <button id="{{i.id}}_lab2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_lab" name="button" type="submit"> Guardar </button>
+            <textarea id="lab" class="form-control" name="new_lab" style ="display:none" row="3" col="5"> {{i.lab}} </textarea>
+            <button id="lab2" style ="display:none" class="btn btn-sm btn-primary" value="lab" name="button" type="submit"> Guardar </button>
 
             </p></li>  
 
@@ -220,17 +218,18 @@
             <li><p>{{i.computerequipment}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
 
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_computerequipment","{{i.id}}_computerequipment2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_computerequipment","{{i.id}}_computerequipment2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("computerequipment","computerequipment2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("computerequipment","computerequipment2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_computerequipment" class="form-control" name="{{i.id}}_new_computerequipment" style ="display:none" row="3" col="5"> {{i.computerequipment}} </textarea>
-            <button id="{{i.id}}_computerequipment2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_computerequipment" name="button" type="submit"> Guardar </button>
+            <textarea id="computerequipment" class="form-control" name="new_computerequipment" style ="display:none" row="3" col="5"> {{i.computerequipment}} </textarea>
+            <button id="computerequipment2" style ="display:none" class="btn btn-sm btn-primary" value="computerequipment" name="button" type="submit"> Guardar </button>
 
             </p></li> 
              
@@ -246,17 +245,18 @@
             <li><p>{{i.others}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
 
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_others","{{i.id}}_others2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_others","{{i.id}}_others2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("others","others2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("others","others2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_others" class="form-control" name="{{i.id}}_new_others" style ="display:none" row="3" col="5"> {{i.others}} </textarea>
-            <button id="{{i.id}}_others2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_others" name="button" type="submit"> Guardar </button>
+            <textarea id="others" class="form-control" name="new_others" style ="display:none" row="3" col="5"> {{i.others}} </textarea>
+            <button id="others2" style ="display:none" class="btn btn-sm btn-primary" value="others" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -274,17 +274,18 @@
           {% for i in info_list %}
             <li><p>{{i.dinningroom}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_dinningroom","{{i.id}}_dinningroom2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_dinningroom","{{i.id}}_dinningroom2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("dinningroom","dinningroom2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("dinningroom","dinningroom2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_dinningroom" class="form-control" name="{{i.id}}_new_dinningroom" style ="display:none" row="3" col="5"> {{i.dinningroom}} </textarea>
-            <button id="{{i.id}}_dinningroom2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_dinningroom" name="button" type="submit"> Guardar </button>
+            <textarea id="dinningroom" class="form-control" name="new_dinningroom" style ="display:none" row="3" col="5"> {{i.dinningroom}} </textarea>
+            <button id="dinningroom2" style ="display:none" class="btn btn-sm btn-primary" value="dinningroom" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -299,17 +300,18 @@
           {% for i in info_list %}
             <li><p>{{i.cafeteria}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_cafeteria","{{i.id}}_cafeteria2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_cafeteria","{{i.id}}_cafeteria2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("cafeteria","cafeteria2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("cafeteria","cafeteria2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_cafeteria" class="form-control" name="{{i.id}}_new_cafeteria" style ="display:none" row="3" col="5"> {{i.cafeteria}} </textarea>
-            <button id="{{i.id}}_cafeteria2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_cafeteria" name="button" type="submit"> Guardar </button>
+            <textarea id="cafeteria" class="form-control" name="new_cafeteria" style ="display:none" row="3" col="5"> {{i.cafeteria}} </textarea>
+            <button id="cafeteria2" style ="display:none" class="btn btn-sm btn-primary" value="cafeteria" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -330,17 +332,18 @@
             <li><p>{{i.sportactivities}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_sportactivities","{{i.id}}_sportactivities2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_sportactivities","{{i.id}}_sportactivities2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("sportactivities","sportactivities2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("sportactivities","sportactivities2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_sportactivities" class="form-control" name="{{i.id}}_new_sportactivities" style ="display:none" row="3" col="5"> {{i.sportactivities}} </textarea>
-            <button id="{{i.id}}_sportactivities2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_sportactivities" name="button" type="submit"> Guardar </button>
+            <textarea id="sportactivities" class="form-control" name="new_sportactivities" style ="display:none" row="3" col="5"> {{i.sportactivities}} </textarea>
+            <button id="sportactivities2" style ="display:none" class="btn btn-sm btn-primary" value="sportactivities" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -356,17 +359,18 @@
             <li><p>{{i.asociation}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
         
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_asociation","{{i.id}}_asociation2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_asociation","{{i.id}}_asociation2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("asociation","asociation2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("asociation","asociation2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_asociation" class="form-control" name="{{i.id}}_new_asociation" style ="display:none" row="3" col="5"> {{i.asociation}} </textarea>
-            <button id="{{i.id}}_asociation2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_asociation" name="button" type="submit"> Guardar </button>
+            <textarea id="asociation" class="form-control" name="new_asociation" style ="display:none" row="3" col="5"> {{i.asociation}} </textarea>
+            <button id="asociation2" style ="display:none" class="btn btn-sm btn-primary" value="asociation" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -382,17 +386,18 @@
           {% for i in info_list %}
             <li><p>{{i.languagecourse}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_languagecourse","{{i.id}}_languagecourse2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_languagecourse","{{i.id}}_languagecourse2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("languagecourse","languagecourse2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("languagecourse","languagecourse2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_languagecourse" class="form-control" name="{{i.id}}_new_languagecourse" style ="display:none" row="3" col="5"> {{i.languagecourse}} </textarea>
-            <button id="{{i.id}}_languagecourse2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_languagecourse" name="button" type="submit"> Guardar </button>
+            <textarea id="languagecourse" class="form-control" name="new_languagecourse" style ="display:none" row="3" col="5"> {{i.languagecourse}} </textarea>
+            <button id="languagecourse2" style ="display:none" class="btn btn-sm btn-primary" value="languagecourse" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -408,17 +413,18 @@
           {% for i in info_list %}
             <li><p>{{i.schoolyear}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_schoolyear","{{i.id}}_schoolyear2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_schoolyear","{{i.id}}_schoolyear2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("schoolyear","schoolyear2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("schoolyear","schoolyear2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_schoolyear" class="form-control" name="{{i.id}}_new_schoolyear" style ="display:none" row="3" col="5"> {{i.schoolyear}} </textarea>
-            <button id="{{i.id}}_schoolyear2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_schoolyear" name="button" type="submit"> Guardar </button>
+            <textarea id="schoolyear" class="form-control" name="new_schoolyear" style ="display:none" row="3" col="5"> {{i.schoolyear}} </textarea>
+            <button id="schoolyear2" style ="display:none" class="btn btn-sm btn-primary" value="schoolyear" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -435,17 +441,18 @@
             <li><p>{{i.vacations}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_vacations","{{i.id}}_vacations2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_vacations","{{i.id}}_vacations2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("vacations","vacations2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("vacations","vacations2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_vacations" class="form-control" name="{{i.id}}_new_vacations" style ="display:none" row="3" col="5"> {{i.vacations}} </textarea>
-            <button id="{{i.id}}_vacations2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_vacations" name="button" type="submit"> Guardar </button>
+            <textarea id="vacations" class="form-control" name="new_vacations" style ="display:none" row="3" col="5"> {{i.vacations}} </textarea>
+            <button id="vacations2" style ="display:none" class="btn btn-sm btn-primary" value="vacations" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -461,17 +468,18 @@
           {% for i in info_list %}
             <li><p>{{i.compteleco}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
                         
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_compteleco","{{i.id}}_compteleco2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_compteleco","{{i.id}}_compteleco2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("compteleco","compteleco2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("compteleco","compteleco2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_compteleco" class="form-control" name="{{i.id}}_new_compteleco" style ="display:none" row="3" col="5"> {{i.compteleco}} </textarea>
-            <button id="{{i.id}}_compteleco2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_compteleco" name="button" type="submit"> Guardar </button>
+            <textarea id="compteleco" class="form-control" name="new_compteleco" style ="display:none" row="3" col="5"> {{i.compteleco}} </textarea>
+            <button id="compteleco2" style ="display:none" class="btn btn-sm btn-primary" value="compteleco" name="button" type="submit"> Guardar </button>
             </p></li>  
 
           {% empty %}
@@ -486,17 +494,18 @@
             <li><p>{{i.teachers}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_teachers","{{i.id}}_teachers2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_teachers","{{i.id}}_teachers2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("teachers","teachers2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("teqachers","teachers2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_teachers" class="form-control" name="{{i.id}}_new_teachers" style ="display:none" row="3" col="5"> {{i.teachers}} </textarea>
-            <button id="{{i.id}}_teachers2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_teachers" name="button" type="submit"> Guardar </button>
+            <textarea id="teachers" class="form-control" name="new_teachers" style ="display:none" row="3" col="5"> {{i.teachers}} </textarea>
+            <button id="teachers2" style ="display:none" class="btn btn-sm btn-primary" value="teachers" name="button" type="submit"> Guardar </button>
             
             </p></li>  
 
@@ -512,17 +521,18 @@
             <li><p>{{i.teaching}}
    
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_teaching","{{i.id}}_teaching2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_teaching","{{i.id}}_teaching2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("teaching","teaching2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("teaching","teaching2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_teaching" class="form-control" name="{{i.id}}_new_teaching" style ="display:none" row="3" col="5"> {{i.teaching}} </textarea>
-            <button id="{{i.id}}_teaching2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_teaching" name="button" type="submit"> Guardar </button>
+            <textarea id="teaching" class="form-control" name="new_teaching" style ="display:none" row="3" col="5"> {{i.teaching}} </textarea>
+            <button id="teaching2" style ="display:none" class="btn btn-sm btn-primary" value="teaching" name="button" type="submit"> Guardar </button>
 
             </p></li>  
 
@@ -538,17 +548,18 @@
             <li><p>{{i.studies}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_studies","{{i.id}}_studies2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_studies","{{i.id}}_studies2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("studies","studies2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("studies","studies2")'> Cancelar </a>  
             
             <br><br>
              
             <!-- The new comment -->
-            <textarea id="{{i.id}}_studies" class="form-control" name="{{i.id}}_new_studies" style ="display:none" row="3" col="5"> {{i.studies}} </textarea>
-            <button id="{{i.id}}_studies2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_studies" name="button" type="submit"> Guardar </button>
+            <textarea id="studies" class="form-control" name="new_studies" style ="display:none" row="3" col="5"> {{i.studies}} </textarea>
+            <button id="studies2" style ="display:none" class="btn btn-sm btn-primary" value="studies" name="button" type="submit"> Guardar </button>
 
             </p></li>  
 
@@ -573,17 +584,18 @@
             <li><p>{{i.unidoc}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_unidoc","{{i.id}}_unidoc2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_unidoc","{{i.id}}_unidoc2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("unidoc","unidoc2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("unidoc","unidoc2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_unidoc" class="form-control" name="{{i.id}}_new_unidoc" style ="display:none" row="3" col="5"> {{i.unidoc}} </textarea>
-            <button id="{{i.id}}_unidoc2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_unidoc" name="button" type="submit"> Guardar </button>            
+            <textarea id="unidoc" class="form-control" name="new_unidoc" style ="display:none" row="3" col="5"> {{i.unidoc}} </textarea>
+            <button id="unidoc2" style ="display:none" class="btn btn-sm btn-primary" value="unidoc" name="button" type="submit"> Guardar </button>            
             </p></li>  
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -597,17 +609,18 @@
             <li><p>{{i.residencelicence}}
 
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_residencelicence","{{i.id}}_residencelicence2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_residencelicence","{{i.id}}_residencelicence2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("residencelicence","residencelicence2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("residencelicence","residencelicence2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_residencelicence" class="form-control" name="{{i.id}}_new_residencelicence" style ="display:none" row="3" col="5"> {{i.residencelicence}} </textarea>
-            <button id="{{i.id}}_residencelicence2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_residencelicence" name="button" type="submit"> Guardar </button>
+            <textarea id="residencelicence" class="form-control" name="new_residencelicence" style ="display:none" row="3" col="5"> {{i.residencelicence}} </textarea>
+            <button id="residencelicence2" style ="display:none" class="btn btn-sm btn-primary" value="residencelicence" name="button" type="submit"> Guardar </button>
 
             </p></li>  
           {% empty %}
@@ -622,17 +635,18 @@
             <li><p>{{i.getresidence}}
    
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_getresidence","{{i.id}}_getresidence2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_getresidence","{{i.id}}_getresidence2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("getresidence","getresidence2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("getresidence","getresidence2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_getresidence" class="form-control" name="{{i.id}}_new_getresidence" style ="display:none" row="3" col="5"> {{i.getresidence}} </textarea>
-            <button id="{{i.id}}_getresidence2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_getresidence" name="button" type="submit"> Guardar </button>
+            <textarea id="getresidence" class="form-control" name="new_getresidence" style ="display:none" row="3" col="5"> {{i.getresidence}} </textarea>
+            <button id="getresidence2" style ="display:none" class="btn btn-sm btn-primary" value="getresidence" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -648,17 +662,18 @@
             <li><p>{{i.economicaid}}
    
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_economicaid","{{i.id}}_economicaid2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_economicaid","{{i.id}}_economicaid2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("economicaid","economicaid2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("economicaid","economicaid2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_economicaid" class="form-control" name="{{i.id}}_new_economicaid" style ="display:none" row="3" col="5"> {{i.economicaid}} </textarea>
-            <button id="{{i.id}}_economicaid2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_economicaid" name="button" type="submit"> Guardar </button>
+            <textarea id="economicaid" class="form-control" name="new_economicaid" style ="display:none" row="3" col="5"> {{i.economicaid}} </textarea>
+            <button id="economicaid2" style ="display:none" class="btn btn-sm btn-primary" value="economicaid" name="button" type="submit"> Guardar </button>
 
             
             </p></li>  
@@ -675,17 +690,18 @@
             <li><p>{{i.bankaccount}}
  
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_bankaccount","{{i.id}}_bankaccount2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_bankaccount","{{i.id}}_bankaccount2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("bankaccount","bankaccount2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("bankaccount","bankaccount2")'> Cancelar </a>  
             
             <br><br>
            
             <!-- The new comment -->  
-            <textarea id="{{i.id}}_bankaccount" class="form-control" name="{{i.id}}_new_bankaccount" style ="display:none" row="3" col="5"> {{i.bankaccount}} </textarea>
-            <button id="{{i.id}}_bankaccount2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_bankaccount" name="button" type="submit"> Guardar </button>         
+            <textarea id="bankaccount" class="form-control" name="new_bankaccount" style ="display:none" row="3" col="5"> {{i.bankaccount}} </textarea>
+            <button id="bankaccount2" style ="display:none" class="btn btn-sm btn-primary" value="bankaccount" name="button" type="submit"> Guardar </button>         
             </p></li>  
 
           {% empty %}
@@ -702,17 +718,18 @@
           {% for i in info_list %}
             <li><p>{{i.costume}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_costume","{{i.id}}_costume2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_costume","{{i.id}}_costume2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("costume","costume2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("costume","costume2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_costume" class="form-control" name="{{i.id}}_new_costume" style ="display:none" row="3" col="5"> {{i.costume}} </textarea>
-            <button id="{{i.id}}_costume2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_costume" name="button" type="submit"> Guardar </button>
+            <textarea id="costume" class="form-control" name="new_costume" style ="display:none" row="3" col="5"> {{i.costume}} </textarea>
+            <button id="costume2" style ="display:none" class="btn btn-sm btn-primary" value="costume" name="button" type="submit"> Guardar </button>
 
             </p></li>  
           {% empty %}
@@ -727,17 +744,18 @@
             <li><p>{{i.meetings}}
  
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_meetings","{{i.id}}_meetings2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_meetings","{{i.id}}_meetings2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("meetings","meetings2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("meetings","meetings2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_meetings" class="form-control" name="{{i.id}}_new_meetings" style ="display:none" row="3" col="5"> {{i.meetings}} </textarea>
-            <button id="{{i.id}}_meetings2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_meetings" name="button" type="submit"> Guardar </button>
+            <textarea id="meetings" class="form-control" name="new_meetings" style ="display:none" row="3" col="5"> {{i.meetings}} </textarea>
+            <button id="meetings2" style ="display:none" class="btn btn-sm btn-primary" value="meetings" name="button" type="submit"> Guardar </button>
             </p></li>  
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -750,17 +768,18 @@
           {% for i in info_list %}
             <li><p>{{i.offices}}
             <!-- Information about de comment -->
+            <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
             
             <!-- Buttons to modify or cancel -->
-            <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_offices","{{i.id}}_offices2")'> Modificar </a>
-            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_offices","{{i.id}}_offices2")'> Cancelar </a>  
+            <a type="submit" class="btn btn-xs btn-default" onclick='showText("offices","offices2")'> Modificar </a>
+            <a type="submit" class="btn btn-xs btn-default" onclick='hideText("offices","offices2")'> Cancelar </a>  
             
             <br><br>
             
             <!-- The new comment --> 
-            <textarea id="{{i.id}}_offices" class="form-control" name="{{i.id}}_new_offices" style ="display:none" row="3" col="5"> {{i.offices}} </textarea>
-            <button id="{{i.id}}_offices2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_offices" name="button" type="submit"> Guardar </button>
+            <textarea id="offices" class="form-control" name="new_offices" style ="display:none" row="3" col="5"> {{i.offices}} </textarea>
+            <button id="offices2" style ="display:none" class="btn btn-sm btn-primary" value="offices" name="button" type="submit"> Guardar </button>
 
             </p></li>  
 
@@ -788,110 +807,122 @@
                 <p><strong>Créditos de la asignatura</strong>: {{i.credits}}
 
                     <!-- Information about de comment -->
-                    <input type="hidden" name="info" value={{info}}>
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
+                    
+                  	<script type="text/javascript">
+                    
+                      console.log({{i.id}});
+                    </script>
                    
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_credits","{{i.id}}_credits2")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_credits","{{i.id}}_credits2")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("credits","credits2")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("credits","credits2")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="{{i.id}}_credits" class="form-control" name="{{i.id}}_new_credits" style ="display:none" row="3" col="5"> {{i.credits}} </textarea>
-                    <button id="{{i.id}}_credits2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_credits" name="button" type="submit"> Guardar </button>
+                    <textarea id="credits" class="form-control" name="new_credits" style ="display:none" row="3" col="5"> {{i.credits}} </textarea>
+                    <button id="credits2" style ="display:none" class="btn btn-sm btn-primary" value="credits" name="button" type="submit"> Guardar </button>
 
                 </p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout}}
                     
                     <!-- Information about de comment -->
-                    <input type="hidden" name="info" value={{info}}>
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
                     
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_subnameout1","{{i.id}}_subnameout12")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_subnameout1","{{i.id}}_subnameout12")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("subnameout1","subnameout12")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("subnameout1","subnameout12")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="{{i.id}}_subnameout1" class="form-control" name="{{i.id}}_new_subnameout1" style ="display:none" row="3" col="5"> {{i.subnameout}} </textarea>
-                    <button id="{{i.id}}_subnameout12" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_subnameout1" name="button" type="submit"> Guardar </button>
+                    <textarea id="subnameout1" class="form-control" name="new_subnameout1" style ="display:none" row="3" col="5"> {{i.subnameout}} </textarea>
+                    <button id="subnameout12" style ="display:none" class="btn btn-sm btn-primary" value="subnameout1" name="button" type="submit"> Guardar </button>
 
                 </p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout2}}
 
                     <!-- Information about de comment -->
-                    <input type="hidden" name="info" value={{info}}>
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
                     
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_subnameout2","{{i.id}}_subnameout22")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_subnameout2","{{i.id}}_subnameout22")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("subnameout2","subnameout22")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("subnameout2","subnameout22")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="{{i.id}}_subnameout2" class="form-control" name="{{i.id}}_new_subnameout2" style ="display:none" row="3" col="5"> {{i.subnameout2}} </textarea>
-                    <button id="{{i.id}}_subnameout22" class="btn btn-sm btn-primary" value="{{i.id}}_subnameout2" name="button" style ="display:none"  type="submit"> Guardar </button>
+                    <textarea id="subnameout2" class="form-control" name="new_subnameout2" style ="display:none" row="3" col="5"> {{i.subnameout2}} </textarea>
+                    <button id="subnameout22" style ="display:none" class="btn btn-sm btn-primary" value="subnameout2" name="button" type="submit"> Guardar </button>
 
                 </p>
                 <p><strong>Asignatura por convenio</strong>: {{i.subnameout3}}
                     <!-- Information about de comment -->
-                    <input type="hidden" name="info" value={{info}}>
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
                     
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_subnameout3","{{i.id}}_subnameout32")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_subnameout3","{{i.id}}_subnameout32")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("subnameout3","subnameout32")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("subnameout3","subnameout32")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="{{i.id}}_subnameout3" class="form-control" name="{{i.id}}_new_subnameout3" style ="display:none" row="3" col="5"> {{i.subnameout3}} </textarea>
-                    <button id="{{i.id}}_subnameout32" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_subnameout3" name="button" type="submit"> Guardar </button>
+                    <textarea id="subnameout3" class="form-control" name="new_subnameout3" style ="display:none" row="3" col="5"> {{i.subnameout3}} </textarea>
+                    <button id="subnameout32" style ="display:none" class="btn btn-sm btn-primary" value="subnameout3" name="button" type="submit"> Guardar </button>
 
                 </p>
                 <p><strong>Trabajos que realizar</strong>: {{i.works}}
                     <!-- Information about de comment -->
-                    <input type="hidden" name="info" value={{info}}>
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
                     
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_works","{{i.id}}_works2")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_works","{{i.id}}_works2")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("works","works2")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("works","works2")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="{{i.id}}_works" class="form-control" name="{{i.id}}_new_works" style ="display:none" row="3" col="5"> {{i.works}} </textarea>
-                    <button id="{{i.id}}_works2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_works" name="button" type="submit"> Guardar </button>
+                    <textarea id="works" class="form-control" name="new_works" style ="display:none" row="3" col="5"> {{i.works}} </textarea>
+                    <button id="works2" style ="display:none" class="btn btn-sm btn-primary" value="works" name="button" type="submit"> Guardar </button>
                 </p>
                 <p><strong>Prácticas a realizar</strong>: {{i.practices}}
 
                     <!-- Information about de comment -->
-                    <input type="hidden" name="info" value={{info}}>
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
                     
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_practices","{{i.id}}_practices2")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_practices","{{i.id}}_practices2")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("practices","practices2")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("practices","practices2")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="{{i.id}}_practices" class="form-control" name="{{i.id}}_new_practices" style ="display:none" row="3" col="5"> {{i.practices}} </textarea>
-                    <button id="{{i.id}}_practices2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_practices" name="button" type="submit"> Guardar </button>
+                    <textarea id="practices" class="form-control" name="new_practices" style ="display:none" row="3" col="5"> {{i.practices}} </textarea>
+                    <button id="practices2" style ="display:none" class="btn btn-sm btn-primary" value="practices" name="button" type="submit"> Guardar </button>
 
                 </p>
                 <p><strong>Dificultad que presenta respecto a tu universidad de origen</strong>: {{i.difficult}}
 
                     <!-- Information about de comment -->
-                    <input type="hidden" name="info" value={{info}}>
+                    <input type="hidden" name="commentid" value="{{i.id}}">
+                    <input type="hidden" name="info" value="{{info}}">
                     
                     <!-- Buttons to modify or cancel -->
-                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_difficult","{{i.id}}_difficult2")'> Modificar </a>
-                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_difficult","{{i.id}}_difficult2")'> Cancelar </a>  
+                    <a type="submit" class="btn btn-xs btn-default" onclick='showText("difficult","difficult2")'> Modificar </a>
+                    <a type="submit" class="btn btn-xs btn-default" onclick='hideText("difficult","difficult2")'> Cancelar </a>  
                     
                     <br><br>
                     
                     <!-- The new comment --> 
-                    <textarea id="{{i.id}}_difficult" class="form-control" name="{{i.id}}_new_difficult" style ="display:none" row="3" col="5"> {{i.difficult}} </textarea>
-                    <button id="{{i.id}}_difficult2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_difficult" name="button" type="submit"> Guardar </button>
+                    <textarea id="difficult" class="form-control" name="new_difficult" style ="display:none" row="3" col="5"> {{i.difficult}} </textarea>
+                    <button id="difficult2" style ="display:none" class="btn btn-sm btn-primary" value="difficult" name="button" type="submit"> Guardar </button>
 
                 </p>
             </li>
@@ -920,17 +951,18 @@
             <li><p><strong>Coste de la vida</strong>: {{i.prices}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_prices","{{i.id}}_prices2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_prices","{{i.id}}_prices2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("prices","prices2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("prices","prices2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_prices" class="form-control" name="{{i.id}}_new_prices" style ="display:none" row="3" col="5"> {{i.prices}} </textarea>
-                <button id="{{i.id}}_prices2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_prices" name="button" type="submit"> Guardar </button>
+                <textarea id="prices" class="form-control" name="new_prices" style ="display:none" row="3" col="5"> {{i.prices}} </textarea>
+                <button id="prices2" style ="display:none" class="btn btn-sm btn-primary" value="prices" name="button" type="submit"> Guardar </button>
 
             </p></li>
             
@@ -938,81 +970,86 @@
             <li><p><strong>La zona de la universidad</strong>: {{i.uniarea}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_uniarea","{{i.id}}_uniarea2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_uniarea","{{i.id}}_uniarea2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("uniarea","uniarea2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("uniarea","uniarea2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_uniarea" class="form-control" name="{{i.id}}_new_uniarea" style ="display:none" row="3" col="5"> {{i.uniarea}} </textarea>
-                <button id="{{i.id}}_uniarea2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_uniarea" name="button" type="submit"> Guardar </button>            
+                <textarea id="uniarea" class="form-control" name="new_uniarea" style ="display:none" row="3" col="5"> {{i.uniarea}} </textarea>
+                <button id="uniarea2" style ="display:none" class="btn btn-sm btn-primary" value="uniarea" name="button" type="submit"> Guardar </button>            
             </p></li>
             <li><p><strong>La vida estudiantil</strong>: {{i.studentlife}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_studentlife","{{i.id}}_studentlife2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_udentlife","{{i.id}}_studentlife2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("studentlife","studentlife2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("studentlife","studentlife2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_studentlife" class="form-control" name="{{i.id}}_new_studentlife" style ="display:none" row="3" col="5"> {{i.studentlife}} </textarea>
-                <button id="{{i.id}}_studentlife2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_studentlife" name="button" type="submit"> Guardar </button>
+                <textarea id="studentlife" class="form-control" name="new_studentlife" style ="display:none" row="3" col="5"> {{i.studentlife}} </textarea>
+                <button id="studentlife2" style ="display:none" class="btn btn-sm btn-primary" value="studentlife" name="button" type="submit"> Guardar </button>
 
                             
             </p></li>
             <li><p><strong>El turismo en la ciudad</strong>: {{i.turism}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_turism","{{i.id}}_turism2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_turism","{{i.id}}_turism2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("turism","turism2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("turism","turism2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_turism" class="form-control" name="{{i.id}}_new_turism" style ="display:none" row="3" col="5"> {{i.turism}} </textarea>
-                <button id="{{i.id}}_turism2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_turism" name="button" type="submit"> Guardar </button>
+                <textarea id="turism" class="form-control" name="new_turism" style ="display:none" row="3" col="5"> {{i.turism}} </textarea>
+                <button id="turism2" style ="display:none" class="btn btn-sm btn-primary" value="turism" name="button" type="submit"> Guardar </button>
             
             </p></li>
             <li><p><strong>Las salidas nocturnas</strong>: {{i.party}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_party","{{i.id}}_party2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_party","{{i.id}}_party2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("party","party2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("party","party2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_party" class="form-control" name="{{i.id}}_new_party" style ="display:none" row="3" col="5"> {{i.party}} </textarea>
-                <button id="{{i.id}}_party2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_party" name="button" type="submit"> Guardar </button>
+                <textarea id="party" class="form-control" name="new_party" style ="display:none" row="3" col="5"> {{i.party}} </textarea>
+                <button id="party2" style ="display:none" class="btn btn-sm btn-primary" value="party" name="button" type="submit"> Guardar </button>
 
             </p></li>
             <li><p><strong>Cultura de la ciudad</strong>: {{i.culture}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_culture","{{i.id}}_culture2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_culture","{{i.id}}_culture2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("culture","culture2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("culture","culture2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_culture" class="form-control" name="{{i.id}}_new_culture" style ="display:none" row="3" col="5"> {{i.culture}} </textarea>
-                <button id="{{i.id}}_culture2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_culture" name="button" type="submit"> Guardar </button>
+                <textarea id="culture" class="form-control" name="new_culture" style ="display:none" row="3" col="5"> {{i.culture}} </textarea>
+                <button id="culture2" style ="display:none" class="btn btn-sm btn-primary" value="culture" name="button" type="submit"> Guardar </button>
 
                 
             </p></li>
@@ -1020,66 +1057,70 @@
             <li><p><strong>Hay delincuencia</strong>: {{i.crime}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_crime","{{i.id}}_crime2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_crime","{{i.id}}_crime2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("crime","crime2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("crime","crime2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_crime" class="form-control" name="{{i.id}}_new_crime" style ="display:none" row="3" col="5"> {{i.crime}} </textarea>
-                <button id="{{i.id}}_crime2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_crime" name="button" type="submit"> Guardar </button>
+                <textarea id="crime" class="form-control" name="new_crime" style ="display:none" row="3" col="5"> {{i.crime}} </textarea>
+                <button id="crime2" style ="display:none" class="btn btn-sm btn-primary" value="crime" name="button" type="submit"> Guardar </button>
 
                             
             </p></li>
             <li><p><strong>Ir de tiendas</strong>: {{i.shopping}}
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_shopping","{{i.id}}_shopping2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_shopping","{{i.id}}_shopping2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("shopping","shopping2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("shopping","shopping2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_shopping" class="form-control" name="{{i.id}}_new_shopping" style ="display:none" row="3" col="5"> {{i.shopping}} </textarea>
-                <button id="{{i.id}}_shopping2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_shopping" name="button" type="submit"> Guardar </button>
+                <textarea id="shopping" class="form-control" name="new_shopping" style ="display:none" row="3" col="5"> {{i.shopping}} </textarea>
+                <button id="shopping2" style ="display:none" class="btn btn-sm btn-primary" value="shopping" name="button" type="submit"> Guardar </button>
 
             
             </p></li>
             <li><p><strong>La vida de los erasmus</strong>: {{i.erasmuslife}}
 
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_erasmuslife","{{i.id}}_erasmuslife2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_erasmuslife","{{i.id}}_erasmuslife2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("erasmuslife","erasmuslife2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("erasmuslife","erasmuslife2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_erasmuslife" class="form-control" name="{{i.id}}_new_erasmuslife" style ="display:none" row="3" col="5"> {{i.erasmuslife}} </textarea>
-                <button id="{{i.id}}_erasmuslife2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_erasmuslife" name="button" type="submit"> Guardar </button>
+                <textarea id="erasmuslife" class="form-control" name="new_erasmuslife" style ="display:none" row="3" col="5"> {{i.erasmuslife}} </textarea>
+                <button id="erasmuslife2" style ="display:none" class="btn btn-sm btn-primary" value="erasmuslife" name="button" type="submit"> Guardar </button>
 
                             
             </p></li>
             <li><p><strong>Temas varios</strong>: {{i.more}}
                 <!-- Information about de comment -->
-                <input type="hidden" name="info" value={{info}}>
+                <input type="hidden" name="commentid" value="{{i.id}}">
+                <input type="hidden" name="info" value="{{info}}">
                 
                 <!-- Buttons to modify or cancel -->
-                <a type="submit" class="btn btn-xs btn-default" onclick='showText("{{i.id}}_more","{{i.id}}_more2")'> Modificar </a>
-                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("{{i.id}}_more","{{i.id}}_more2")'> Cancelar </a>  
+                <a type="submit" class="btn btn-xs btn-default" onclick='showText("more","more2")'> Modificar </a>
+                <a type="submit" class="btn btn-xs btn-default" onclick='hideText("more","more2")'> Cancelar </a>  
                 
                 <br><br>
                 
                 <!-- The new comment --> 
-                <textarea id="{{i.id}}_more" class="form-control" name="{{i.id}}_new_more" style ="display:none" row="3" col="5"> {{i.more}} </textarea>
-                <button id="{{i.id}}_more2" style ="display:none" class="btn btn-sm btn-primary" value="{{i.id}}_more" name="button" type="submit"> Guardar </button>
+                <textarea id="more" class="form-control" name="new_more" style ="display:none" row="3" col="5"> {{i.more}} </textarea>
+                <button id="more2" style ="display:none" class="btn btn-sm btn-primary" value="more" name="button" type="submit"> Guardar </button>
             </p></li>
           {% empty %}
             <li><p>Lo siento, pero no hay nada escrito.</p></li>

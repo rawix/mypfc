@@ -1076,8 +1076,7 @@ def uninfo(request, uni_name, type_info):
             
         uni=""  
         path_image=""
-        try:
-            
+        try:  
             uni = InfoBasic.objects.get(uni=uniname)
             print str(uni.image)
             print uni.latitud
@@ -1085,7 +1084,6 @@ def uninfo(request, uni_name, type_info):
             path_image = str(uni.image) 
             print path_image
             no_info = False
-            
         except InfoBasic.DoesNotExist:
             path_image = "tuerasmus/universidad.png"
             no_info = True
@@ -1147,6 +1145,10 @@ def uninfo(request, uni_name, type_info):
                 info="subjects"
                 info_obj = InfoGeneral.objects.filter(uni=uniname.uni)
                 info_list = Subjects.objects.filter(uni=uniname.uni)
+                for i in info_list:
+                  print i.id
+                  print i.subname
+                  
                 tmp = 'university/uni_info.html'    
 
             elif type_info=="city":
@@ -1176,6 +1178,7 @@ def uninfo(request, uni_name, type_info):
             return render_to_response(tmp, ctx, context_instance=RequestContext(request))
 
         elif request.method=="POST":
+            print "ESTAMOS EN REQUEST POST 2222222222222222222222222222222222222222222222"
             newcomment=""
             rec_qualification=""
             rec_specialty=""
@@ -1222,214 +1225,231 @@ def uninfo(request, uni_name, type_info):
             rec_practices=""
             rec_difficult=""
             
-            #category = request.POST['category']
-            commentid = request.POST['commentid']
-            info = request.POST['info']            
-            save = request.POST['button']
+            info = request.POST['info']  
+            print "info: " +info                 
+   
+                 
+            ff = request.POST['button']
+            print "button: " + ff
+            but = ff
+            but = but.split("_")
+            
+            commentid = but[0]
+            field = but[1]
+            
+            print "but[0]" + commentid
+            print "but[1]" + field
+            
+            save = field
+            print "save: " + save
+
+
+            key = commentid + "_new_" + save
+            print "key: " + key
+
+            
             
             if save=="qualification":
-                new_qualification = request.POST['new_qualification']
+                new_qualification = request.POST[key]
                 newcomment = new_qualification
                 rec_qualification = True
             elif save=="specialty":
-                new_specialty = request.POST['new_specialty']
+                new_specialty = request.POST[key]
                 newcomment = new_specialty
                 rec_specialty = True
             elif save=="teachingequipment":
-                new_teachingequipment = request.POST['new_teachingequipment']
+                new_teachingequipment = request.POST[key]
                 newcomment = new_teachingequipment
                 rec_teachingequipment = True
             elif save=="library":
-                new_library = request.POST['new_library']
+                new_library = request.POST[key]
                 newcomment = new_library
                 rec_library = True
             elif save=="lab":
-                new_lab = request.POST['new_lab']
+                new_lab = request.POST[key]
                 newcomment = new_lab
                 rec_lab = True
             elif save=="computerequipment":
-                new_computerequipment = request.POST['new_computerequipment']
+                new_computerequipment = request.POST[key]
                 newcomment = new_computerequipment
                 rec_computerequipment = True
             elif save=="others":
-                new_others = request.POST['new_others']
+                new_others = request.POST[key]
                 newcomment = new_others
                 rec_others = True
             elif save=="dinningroom":
-                new_dinningroom = request.POST['new_dinningroom']
+                new_dinningroom = request.POST[key]
                 newcomment = new_dinningroom
                 rec_dinningroom = True
             elif save=="cafeteria":
-                new_cafeteria = request.POST['new_cafeteria']
+                new_cafeteria = request.POST[key]
                 newcomment = new_cafeteria
                 rec_cafeteria = True
             elif save=="sportactivities":
-                new_sportactivities = request.POST['new_sportactivities']
+                new_sportactivities = request.POST[key]
                 newcomment = new_sportactivities
                 rec_sportactivities = True
             elif save=="asociation":
-                new_asociation = request.POST['new_asociation']
+                new_asociation = request.POST[key]
                 newcomment = new_asociation
                 rec_asociation = True
             elif save=="languagecourse":
-                new_languagecourse = request.POST['new_languagecourse']
+                new_languagecourse = request.POST[key]
                 newcomment = new_languagecourse
                 rec_languagecourse = True
             elif save=="schoolyear":
-                new_schoolyear = request.POST['new_schoolyear']
+                new_schoolyear = request.POST[key]
                 newcomment = new_schoolyear
                 rec_schoolyear = True
             elif save=="vacations":
-                new_vacations = request.POST['new_vacations']
+                new_vacations = request.POST[key]
                 newcomment = new_vacations
                 rec_vacations = True
             elif save=="compteleco":
-                new_compteleco = request.POST['new_compteleco']
+                new_compteleco = request.POST[key]
                 newcomment = new_compteleco
                 rec_compteleco = True
             elif save=="teachers":
-                new_teachers = request.POST['new_teachers']
+                new_teachers = request.POST[key]
                 newcomment = new_teachers
                 rec_teachers = True
             elif save=="teaching":
-                new_teaching = request.POST['new_teaching']
+                new_teaching = request.POST[key]
                 newcomment = new_teaching
                 rec_teaching = True
             elif save=="studies":
-                new_studies = request.POST['new_studies']
+                new_studies = request.POST[key]
                 newcomment = new_studies
                 rec_studies = True
             elif save=="unidoc":
-                new_unidoc = request.POST['new_unidoc']
+                new_unidoc = request.POST[key]
                 newcomment = new_unidoc
                 rec_unidoc = True   
             elif save=="residencelicence":
-                new_residencelicence = request.POST['new_residencelicence']
+                new_residencelicence = request.POST[key]
                 newcomment = new_residencelicence
                 rec_residencelicence = True 
             elif save=="getresidence":
-                new_getresidence = request.POST['new_getresidence']
+                new_getresidence = request.POST[key]
                 newcomment = new_getresidence
                 rec_getresidence = True 
             elif save=="economicaid":
-                new_economicaid = request.POST['new_economicaid']
+                new_economicaid = request.POST[key]
                 newcomment = new_economicaid
                 rec_economicaid = True 
             elif save=="bankaccount":
-                new_bankaccount = request.POST['new_bankaccount']
+                new_bankaccount = request.POST[key]
                 newcomment = new_bankaccount
                 rec_bankaccount = True 
             elif save=="costume":
-                new_costume = request.POST['new_costume']
+                new_costume = request.POST[key]
                 newcomment = new_costume
                 rec_costume = True 
             elif save=="meetings":
-                new_meetings = request.POST['new_meetings']
+                new_meetings = request.POST[key]
                 newcomment = new_meetings
                 rec_meetings = True 
             elif save=="offices":
-                new_offices = request.POST['new_offices']
+                new_offices = request.POST[key]
                 newcomment = new_offices
                 rec_offices = True  
             elif save=="prices":
-                new_prices = request.POST['new_prices']
+                new_prices = request.POST[key]
                 newcomment = new_prices
                 rec_prices = True 
             elif save=="uniarea":
-                new_uniarea = request.POST['new_uniarea']
+                new_uniarea = request.POST[key]
                 newcomment = new_uniarea
                 rec_uniarea = True
             elif save=="studentlife":
-                new_studentlife = request.POST['new_studentlife']
+                new_studentlife = request.POST[key]
                 newcomment = new_studentlife
                 rec_studentlife = True
             elif save=="turism":
-                new_turism = request.POST['new_turism']
+                new_turism = request.POST[key]
                 newcomment = new_turism
                 rec_turism = True
             elif save=="party":
-                new_party = request.POST['new_party']
+                new_party = request.POST[key]
                 newcomment = new_party
                 rec_party = True
             elif save=="culture":
-                new_culture = request.POST['new_culture']
+                new_culture = request.POST[key]
                 newcomment = new_culture
                 rec_culture = True
             elif save=="crime":
-                new_crime = request.POST['new_crime']
+                new_crime = request.POST[key]
                 newcomment = new_crime
                 rec_crime = True
             elif save=="shopping":
-                new_shopping = request.POST['new_shopping']
+                new_shopping = request.POST[key]
                 newcomment = new_shopping
                 rec_shopping = True
             elif save=="erasmuslife":
-                new_erasmuslife = request.POST['new_erasmuslife']
+                new_erasmuslife = request.POST[key]
                 newcomment = new_erasmuslife
                 rec_erasmuslife = True
             elif save=="more":
-                new_more = request.POST['new_more']
+                new_more = request.POST[key]
                 newcomment = new_more
                 rec_more = True
             elif save=="subname":
-                new_subname = request.POST['new_subname']
+                new_subname = request.POST[key]
                 newcomment = new_subname
                 rec_subname = True
             elif save=="credits":
-                new_credits = request.POST['new_credits']
+                new_credits = request.POST[key]
+                print new_credits + "new_credits"
                 newcomment = new_credits
                 rec_credits = True
             elif save=="subnameout1":
-                new_subnameout1 = request.POST['new_subnameout1']
+                new_subnameout1 = request.POST[key]
                 print "subnameout1"
                 newcomment = new_subnameout1
                 rec_subnameout1 = True
             elif save=="subnameout2":
-                new_subnameout2 = request.POST['new_subnameout2']
+                new_subnameout2 = request.POST[key]
                 print "subnameout2"
                 newcomment = new_subnameout2
                 rec_subnameout2 = True
             elif save=="subnameout3":
                 print "subnameout3"
-                new_subnameout3 = request.POST['new_subnameout3']
+                new_subnameout3 = request.POST[key]
                 newcomment = new_subnameout3
                 rec_subnameout3 = True
             elif save=="works":
-                new_works = request.POST['new_works']
+                new_works = request.POST[key]
                 newcomment = new_works
                 rec_works = True
             elif save=="practices":
-                new_practices = request.POST['new_practices']
+                new_practices = request.POST[key]
                 newcomment = new_practices
                 rec_practices = True
             elif save=="difficult":
-                new_difficult = request.POST['new_difficult']
+                new_difficult = request.POST[key]
                 newcomment = new_difficult
                 rec_difficult = True
      
-#            print "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+            print "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
 #            #print category
-#            print commentid
-#            print info
-#            print "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
-#            print newcomment
-#            #print new_teachingequipment
-#            #print new_library
-#            #print new_lab
-#            print  "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+#            print comId
+            print info
+            print "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+            print newcomment
+            #print new_teachingequipment
+            #print new_library
+            #print new_lab
+            print  "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
             
 
             
-#            print "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-#            print "imprimo el id de la universidad que estoy usando ahora mismo"
-#            print uni.id
+            print "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            print "imprimo el id de la universidad que estoy usando ahora mismo"
+            print uni.id
             
             if (info=="basic") or (info=="doc"):
                 try: 
                     newinfo = InfoGeneral.objects.get(id=commentid)
-#                    #search_fields = (category)
-#                    print "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
-#                    print "Se supone que ha buscado"
                     if rec_qualification:
                         newinfo.qualification = newcomment
                         newinfo.username=request.user.username
@@ -1510,7 +1530,6 @@ def uninfo(request, uni_name, type_info):
                         newinfo.username=request.user.username
                     
                     newinfo.save()
-#                    print "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"
 
                 except InfoGeneral.DoesNotExist:
                     print "No hay informacion con ese id"
@@ -1521,9 +1540,15 @@ def uninfo(request, uni_name, type_info):
                     print "No hay informacion con ese id"
             
             elif (info=="subjects"):
+            
+                print "info es subjects!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
                 try: 
                     newinfo = Subjects.objects.get(id=commentid)
-
+                    
+                    print "Encontrado el id del comentario en la base de datos"
+                    print newinfo.id
+                    print "Imprimimos el newcomment!!!!"
+                    print newcomment
                     if rec_subname:
                         newinfo.subname = newcomment
                         newinfo.username=request.user.username

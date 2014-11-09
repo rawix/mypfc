@@ -31,7 +31,11 @@
       <h3>Precios:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.prices}}
+          <li><p>
+          {% ifequal i.prices empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.prices}}
               <!-- Information about de comment -->
               <!--<input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -45,6 +49,7 @@
               <!-- The new comment 
               <textarea id="prices" class="form-control" name="new_prices" style ="display:none" row="3" col="5"> {{i.prices}} </textarea>
               <button id="prices2" style ="display:none" class="btn btn-sm btn-primary" value="prices" name="button" type="submit"> Guardar </button>        -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -54,7 +59,11 @@
       <h3>Zona universitaria:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.uniarea}}
+          <li><p>
+          {% ifequal i.uniarea empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.uniarea}}
               <!-- Information about de comment 
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -68,6 +77,7 @@
               <!-- The new comment 
               <textarea id="uniarea" class="form-control" name="new_uniarea" style ="display:none" row="3" col="5"> {{i.uniarea}} </textarea>
               <button id="uniarea2" style ="display:none" class="btn btn-sm btn-primary" value="uniarea" name="button" type="submit"> Guardar </button>        -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -77,7 +87,11 @@
       <h3>Vida estudiantil:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.studentlife}}
+          <li><p>
+          {% ifequal i.studentlife empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.studentlife}}
               <!-- Information about de comment 
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -91,6 +105,7 @@
               <!-- The new comment 
               <textarea id="studentlife" class="form-control" name="new_studentlife" style ="display:none" row="3" col="5"> {{i.studentlife}} </textarea>
               <button id="studentlife2" style ="display:none" class="btn btn-sm btn-primary" value="studentlife" name="button" type="submit"> Guardar </button>         -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -100,7 +115,11 @@
       <h3>Turismo:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.turism}}  
+          <li><p> 
+          {% ifequal i.turism empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.turism}} 
               <!-- Information about de comment 
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -114,6 +133,7 @@
               <!-- The new comment 
               <textarea id="turism" class="form-control" name="new_turism" style ="display:none" row="3" col="5"> {{i.turism}} </textarea>
               <button id="turism2" style ="display:none" class="btn btn-sm btn-primary" value="turism" name="button" type="submit"> Guardar </button>         -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -123,7 +143,11 @@
       <h3>Fiestas:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.party}}
+          <li><p>
+          {% ifequal i.party empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.party}}
               <!-- Information about de comment 
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -137,6 +161,7 @@
               <!-- The new comment 
               <textarea id="party" class="form-control" name="new_party" style ="display:none" row="3" col="5"> {{i.party}} </textarea>
               <button id="party2" style ="display:none" class="btn btn-sm btn-primary" value="party" name="button" type="submit"> Guardar </button>         -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -146,7 +171,11 @@
       <h3>Cultura de la ciudad:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.culture}}
+          <li><p>
+          {% ifequal i.culture empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.culture}}
               <!-- Information about de comment
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -160,6 +189,7 @@
               <!-- The new comment 
               <textarea id="culture" class="form-control" name="new_culture" style ="display:none" row="3" col="5"> {{i.culture}} </textarea>
               <button id="culture2" style ="display:none" class="btn btn-sm btn-primary" value="culture" name="button" type="submit"> Guardar </button>              -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -169,7 +199,11 @@
       <h3>Delincuencia de la ciudad:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.crime}}  
+          <li><p> 
+          {% ifequal i.crime empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.crime}} 
               <!-- Information about de comment 
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -183,6 +217,7 @@
               <!-- The new comment 
               <textarea id="crime" class="form-control" name="new_crime" style ="display:none" row="3" col="5"> {{i.crime}} </textarea>
               <button id="crime2" style ="display:none" class="btn btn-sm btn-primary" value="crime" name="button" type="submit"> Guardar </button>            -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -192,7 +227,11 @@
       <h3>Compras en la ciudad:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.shopping}}
+          <li><p>
+          {% ifequal i.shopping empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.shopping}}
               <!-- Information about de comment 
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -206,6 +245,7 @@
               <!-- The new comment 
               <textarea id="shopping" class="form-control" name="new_shopping" style ="display:none" row="3" col="5"> {{i.shopping}} </textarea>
               <button id="shopping2" style ="display:none" class="btn btn-sm btn-primary" value="shopping" name="button" type="submit"> Guardar </button>        -->
+          {% endifequal %}    
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -215,7 +255,11 @@
       <h3>Vida de los erasmus:</h3>
       <ul>
         {% for i in city_data %}
-          <li><p>{{i.erasmuslife}}
+          <li><p>
+          {% ifequal i.erasmuslife empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.erasmuslife}}
               <!-- Information about de comment 
               <input type="hidden" name="commentid" value="{{i.id}}">
               <input type="hidden" name="info" value="{{info}}">
@@ -229,6 +273,7 @@
               <!-- The new comment 
               <textarea id="erasmuslife" class="form-control" name="new_erasmuslife" style ="display:none" row="3" col="5"> {{i.erasmuslife}} </textarea>
               <button id="erasmuslife2" style ="display:none" class="btn btn-sm btn-primary" value="erasmuslife" name="button" type="submit"> Guardar </button>             -->
+          {% endifequal %}
           </p></li>
         {% empty %}
           <li><p>Lo siento, pero no hay nada escrito.</p></li>
@@ -295,9 +340,11 @@
 
     <ul>
     {% for i in subj_data %}
-      <li>
-          <p><strong>Créditos de la asignatura</strong>: {{i.credits}}
-              
+          <li><p><strong>Créditos de la asignatura</strong>: 
+          {% ifequal i.credits empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.credits}}              
             <!-- Information about de comment 
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -311,10 +358,13 @@
             <!-- The new comment 
             <textarea id="credits" class="form-control" name="new_credits" style ="display:none" row="3" col="5"> {{i.credits}} </textarea>
             <button id="credits2" style ="display:none" class="btn btn-sm btn-primary" value="credits" name="button" type="submit"> Guardar </button> -->
-          
-          </p>
-          <p><strong>Asignatura por convenio</strong>: {{i.subnameout1}}
-              
+          {% endifequal %}
+          </p></li>
+          <li><p><strong>Asignatura por convenio</strong>: 
+          {% ifequal i.subnameout1 empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.subnameout1}}                    
             <!-- Information about de comment 
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -328,9 +378,13 @@
             <!-- The new comment 
             <textarea id="subnameout1" class="form-control" name="new_subnameout1" style ="display:none" row="3" col="5"> {{i.subnameout1}} </textarea>
             <button id="subnameout12" style ="display:none" class="btn btn-sm btn-primary" value="subnameout1" name="button" type="submit"> Guardar </button>           -->
-          
-          </p>
-          <p><strong>Asignatura por convenio</strong>: {{i.subnameout2}}
+          {% endifequal %}
+          </p></li>
+          <li><p><strong>Asignatura por convenio</strong>:
+          {% ifequal i.subnameout2 empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.subnameout2}} 
             <!-- Information about de comment 
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -344,8 +398,13 @@
             <!-- The new comment 
             <textarea id="subnameout2" class="form-control" name="new_subnameout" style ="display:none" row="3" col="5"> {{i.subnameout2}} </textarea>
             <button id="subnameout22" style ="display:none" class="btn btn-sm btn-primary" value="subnameout2" name="button" type="submit"> Guardar </button>   -->
-          </p>
-          <p><strong>Asignatura por convenio</strong>: {{i.subnameout3}}
+          {% endifequal %}  
+          </p></li>
+          <li><p><strong>Asignatura por convenio</strong>:
+          {% ifequal i.subnameout3 empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.subnameout3}} 
             <!-- Information about de comment 
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -359,9 +418,13 @@
             <!-- The new comment 
             <textarea id="subnameout3" class="form-control" name="new_subnameout3" style ="display:none" row="3" col="5"> {{i.subnameout3}} </textarea>
             <button id="subnameout32" style ="display:none" class="btn btn-sm btn-primary" value="subnameout3" name="button" type="submit"> Guardar </button>-->
-          
-          </p>
-          <p><strong>Trabajos que realizar</strong>: {{i.works}}              
+          {% endifequal %}
+          </p></li>
+          <li><p><strong>Trabajos que realizar</strong>: 
+          {% ifequal i.works empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.works}}             
             <!-- Information about de comment 
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -376,8 +439,13 @@
             <textarea id="text" class="form-control" name="new_works" style ="display:none" row="3" col="5"> {{i.works}} </textarea>
             <button id="text2" style ="display:none" class="btn btn-sm btn-primary" value="works" name="button" type="submit"> Guardar </button>
           -->
-          </p>
-          <p><strong>Prácticas a realizar</strong>: {{i.practices}}
+          {% endifequal %}
+          </p></li>
+          <li><p><strong>Prácticas a realizar</strong>: 
+          {% ifequal i.practices empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.practices}} 
             <!-- Information about de comment 
             <input type="hidden" name="commentid" value="{{i.id}}">
             <input type="hidden" name="info" value="{{info}}">
@@ -391,9 +459,13 @@
             <!-- The new comment 
             <textarea id="text" class="form-control" name="new_practices" style ="display:none" row="3" col="5"> {{i.practices}} </textarea>
             <button id="text2" style ="display:none" class="btn btn-sm btn-primary" value="practices" name="button" type="submit"> Guardar </button>-->
-          
-          </p>
-          <p><strong>Dificultad que presenta respecto a tu universidad de origen</strong>: {{i.difficult}}
+          {% endifequal %}
+          </p></li>
+          <li><p><strong>Dificultad que presenta respecto a tu universidad de origen</strong>: 
+          {% ifequal i.difficult empty %}
+            No hay contenido sobre este tema
+          {% else %}
+            {{i.difficult}}
 
             <!-- Information about de comment 
             <input type="hidden" name="commentid" value="{{i.id}}">
@@ -408,19 +480,18 @@
             <!-- The new comment 
             <textarea id="text" class="form-control" name="new_difficult" style ="display:none" row="3" col="5"> {{i.difficult}} </textarea>
             <button id="text2" style ="display:none" class="btn btn-sm btn-primary" value="difficult" name="button" type="submit"> Guardar </button>-->
-          
-          </p>
-      </li>
+          {% endifequal %}
+          </p></li>
     {% empty %}
       <li><p>Lo siento, pero no hay nada escrito.</p></li>
     {% endfor %}
     </ul> 
 
-    <div class="page-header">
+    <!--<div class="page-header">
       <p>
         <a href="/tuerasmus/uniedit/" class="btn btn-sm btn-primary" type="submit">Agregar asignatura</a>
       </p>
-    </div>
+    </div>-->
             
             
   {% endif %}
