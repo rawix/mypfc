@@ -103,7 +103,7 @@ class Cities(models.Model):
         ordering = ['city']
 
     def __unicode__(self):
-        return self.city;
+        return unicode(self.city);
         
 # ------------------------------------------------------------------------------
 #                 Resis class: Just save the names of the residences
@@ -117,7 +117,7 @@ class Resis(models.Model):
         ordering = ['resi']
 
     def __unicode__(self):
-        return self.resi;
+        return unicode(self.resi);
         
 # ------------------------------------------------------------------------------
 #                 Subjs class: Just save the names of the subjects
@@ -131,7 +131,7 @@ class Subjs(models.Model):
         ordering = ['subj']
 
     def __unicode__(self):
-        return self.subj;
+        return unicode(self.subj);
 
 # ------------------------------------------------------------------------------
 #                               Score class.
@@ -204,8 +204,6 @@ class InfoBasic(models.Model):
     def __unicode__(self):
         return unicode(self.uni);
         
-
-        
 # ------------------------------------------------------------------------------
 #                               InfoStadistic class.
 # ------------------------------------------------------------------------------
@@ -249,9 +247,10 @@ class Subjects(models.Model):
     class Meta:
         ordering = ['subname']
         
-    def __str__(self):
-        return str(self.subname);
-        
+    #def __str__(self):
+    #    return str(self.subname);
+    def __unicode__(self):
+        return unicode(self.subname);    
 # ------------------------------------------------------------------------------
 #                               InfoGeneral class.
 # ------------------------------------------------------------------------------
@@ -314,9 +313,10 @@ class InfoGeneral(models.Model):
         verbose_name_plural = u'General'
         ordering = ['uni']
       
-    def __str__(self):
-        return str(self.uni);
-
+    #def __str__(self):
+    #    return str(self.uni);
+    def __unicode__(self):
+        return unicode(self.uni);
 
 # ------------------------------------------------------------------------------
 #                               Others class.
@@ -346,10 +346,10 @@ class InfoResidence(models.Model):
         ordering = ['uni']
 
     def __unicode__(self):
-        return self.uni;
+        return unicode(self.uni);
         
-    def __str__(self):
-        return self.uni;
+    #def __str__(self):
+    #    return str(self.uni);
 
 # ------------------------------------------------------------------------------
 #                               UserProfile class.
@@ -377,10 +377,10 @@ class UserProfile(models.Model):
     score = models.ForeignKey(Score, null=True, blank=True);
         
     def __unicode__(self):
-        return self.username;
+        return unicode(self.username);
         
-    def __str__(self):
-        return self.username;
+    #def __str__(self):
+    #    return self.username;
         
 # ------------------------------------------------------------------------------
 #                               UsersUniversity class.
@@ -397,8 +397,8 @@ class UsersUniversity(models.Model):
     def __unicode__(self):
         return unicode(self.uni);
         
-    def __str__(self):
-        return self.uni;
+    #def __str__(self):
+    #    return self.uni;
              
 # ------------------------------------------------------------------------------
 #                               City class.
@@ -427,8 +427,8 @@ class City(models.Model):
         ordering = ['cityname']
 
     def __unicode__(self):
-        return self.cityname;
+        return unicode(self.cityname);
         
-    def __str__(self):
-        return self.cityname;
+    #def __str__(self):
+    #    return self.cityname;
 
