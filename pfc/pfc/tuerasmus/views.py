@@ -1565,18 +1565,23 @@ def uniedit(request, uni_name):
                 type_user = str(i.type_user)
 
         print "uni_name: " + str(uni_name)
-
+        
         # With uni_name.id we can get the name
         try:
             uniname = University.objects.get(id=uni_name)
             print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)  
             
             try:
+                print "estoy aqui o no"    
                 item = InfoBasic.objects.get(id=uni_name)
+                print "encontre algo en infoBasic"
                 # If university exits, redirect to university profile
                 url = "/tuerasmus/university/" + uni_name + "/basic"
             except InfoBasic.DoesNotExist:
+                print "no hay nada en infobasic"
                 url = "/tuerasmus/uniedit/" + uni_name + "/basic"
+                print "Redirijo al formulario de las universidades"
+                return HttpResponseRedirect(url)
                 
         except University.DoesNotExist:
             print "No se han encontrado ningun objecto con ese id"  

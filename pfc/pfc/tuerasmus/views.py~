@@ -309,7 +309,6 @@ def edit_profile(request,user):
                 form = ProfileForm(request.POST, request.FILES) 
                 if form.is_valid():
                     # Valid form
-                    nickname = form.cleaned_data['nickname']
                     name = form.cleaned_data['name']
                     lastname = form.cleaned_data['lastname']
                     form_description = form.cleaned_data['description']
@@ -317,12 +316,7 @@ def edit_profile(request,user):
                     
                     tp = UserProfile.objects.all()
                     for u in tp:
-                        if str(u.username) == str(tt):
-                            if not (nickname==""):
-                                nicki = User.objects.get(username=tt)
-                                nicki.username = nickname
-                                nicki.save()
-                                
+                        if str(u.username) == str(tt):                                
                             if not (name==""):
                                 u.name = name
                             if not (lastname==""):
@@ -1571,18 +1565,22 @@ def uniedit(request, uni_name):
                 type_user = str(i.type_user)
 
         print "uni_name: " + str(uni_name)
-
+        
         # With uni_name.id we can get the name
         try:
             uniname = University.objects.get(id=uni_name)
             print "Se encontró el nombre de la universidad!!!!!!: " + str(uniname)  
             
             try:
+                print "estoy aqui o no"    
                 item = InfoBasic.objects.get(id=uni_name)
+                print "encontre algo en infoBasic"
                 # If university exits, redirect to university profile
                 url = "/tuerasmus/university/" + uni_name + "/basic"
             except InfoBasic.DoesNotExist:
+                print "no hay nada en infobasic"
                 url = "/tuerasmus/uniedit/" + uni_name + "/basic"
+                return HttpResponseRedirect(url)
                 
         except University.DoesNotExist:
             print "No se han encontrado ningun objecto con ese id"  

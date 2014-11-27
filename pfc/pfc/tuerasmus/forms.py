@@ -172,8 +172,8 @@ class PlaceForm(forms.Form):
     phone = forms.IntegerField(label="Teléfono de contacto (incluyendo prefijo telefónico)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un teléfono de contacto', 'invalid':u'Introduce el teléfono sin el prefijo'})
     #prefix = forms.IntegerField(label="Prefijo telefónico", widget=forms.TextInput(), error_messages={'required': 'Debes introducir un teléfono de contacto', 'invalid':u'Introduce el prefijo telefónico'})
     city = forms.CharField(label="Ciudad", widget=forms.TextInput(), error_messages={'required':'Debes rellenar este campo'})
-    latitud = forms.DecimalField(label="Coordenadas de latitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
-    longitud = forms.DecimalField(label="Coordenadas de longitud", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de longitud'})
+    latitud = forms.DecimalField(label="Coordenadas de latitud (introduce 3 decimales)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de latitud'})
+    longitud = forms.DecimalField(label="Coordenadas de longitud (introduce 3 decimales)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la coordenada de longitud'})
     image = forms.URLField(label="Imagen (copia la URL de internet)", widget=forms.TextInput(), error_messages={'required': 'Debes introducir la URL de una imagen', 'invalid':u'Introduce una URL válida'}, )
     #image = forms.ImageField(label="Imagen de residencia", error_messages={'required': 'Debes seleccionar una imagen'})
 #----------------------------------------------------------------------------
