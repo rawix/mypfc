@@ -1,7 +1,0 @@
-{% extends "tuerasmus/edit_university.html" %}
-
-{% block uni_form %}
-
-  {{basicform.as_p}}
-
-{% endblock %}
