@@ -140,10 +140,11 @@
                 <h1>¿Qué universidades quieres conocer?</h1>
               </div>
          
-              {% regroup uall by scholarship as scholarship_list %}
+              <!--{% regroup uall by scholarship as scholarship_list %}-->
                  
               <ul>
-                {% for scholarship in scholarship_list %}
+                <!--{% for scholarship in scholarship_list %}-->
+                {% for u in uems %}
                     <li><h3><strong> Beca {{ scholarship.grouper }} </strong></h3>      
                     <ul>
                         {% for item in scholarship.list %}

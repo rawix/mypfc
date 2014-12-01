@@ -663,6 +663,7 @@ def universities(request):
         
             print "el numero de objectos en ue es: " + str(University.objects.all().filter(scholarship="erasmus").count())
             if (University.objects.all().filter(scholarship="erasmus").count())==0:
+                ue = 
                 uniserasmus=False
             else:
                 uniserasmus=True
@@ -685,6 +686,8 @@ def universities(request):
                 uems_ = False
 
             uall = University.objects.all
+            uess = University.objects.all().filter(scholarship="erasmus")
+            umss = University.objects.all().filter(scholarship="mundus")
             
             # Porcentajes de la web:
             
