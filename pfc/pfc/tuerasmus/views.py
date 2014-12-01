@@ -663,7 +663,6 @@ def universities(request):
         
             print "el numero de objectos en ue es: " + str(University.objects.all().filter(scholarship="erasmus").count())
             if (University.objects.all().filter(scholarship="erasmus").count())==0:
-                ue = 
                 uniserasmus=False
             else:
                 uniserasmus=True

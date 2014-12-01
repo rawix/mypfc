@@ -135,7 +135,7 @@ def def_profile(user):
 def home(request, user):
     if request.user.is_authenticated():
         if (request.user.username==user):
-            print "HOME USER: User authenticated: "                   
+            print "HOME USER: User authenticated: " + user                    
             def_profile(user)
             # Return the template
             ctx = {'username': user, 'type_user':g_type_user, 'genero':g_genero, 'path_image':g_path_image, 'description':g_description}
@@ -663,7 +663,6 @@ def universities(request):
         
             print "el numero de objectos en ue es: " + str(University.objects.all().filter(scholarship="erasmus").count())
             if (University.objects.all().filter(scholarship="erasmus").count())==0:
-                ue = 
                 uniserasmus=False
             else:
                 uniserasmus=True
