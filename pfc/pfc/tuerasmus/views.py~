@@ -135,7 +135,7 @@ def def_profile(user):
 def home(request, user):
     if request.user.is_authenticated():
         if (request.user.username==user):
-            print "HOME USER: User authenticated: " + user                    
+            print "HOME USER: User authenticated: "                   
             def_profile(user)
             # Return the template
             ctx = {'username': user, 'type_user':g_type_user, 'genero':g_genero, 'path_image':g_path_image, 'description':g_description}
@@ -686,6 +686,8 @@ def universities(request):
                 uems_ = False
 
             uall = University.objects.all
+            uess = University.objects.all().filter(scholarship="erasmus")
+            umss = University.objects.all().filter(scholarship="mundus")
             
             # Porcentajes de la web:
             
